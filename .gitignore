@@ -1,0 +1,7 @@
+.settings/
+data/backup/index.html
+data/runtime/Cache/
+data/runtime/Data/
+.buildpath
+.project
+data/runtime/Temp/

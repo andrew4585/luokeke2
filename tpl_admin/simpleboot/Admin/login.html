@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>系统后台</title>
+		<meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge" />
+		<meta name="renderer" content="webkit|ie-comp|ie-stand">
+		<meta name="robots" content="noindex,nofollow">
+		<link href="__TMPL__assets/css/interstitial.css" media="screen, projection" rel="stylesheet" type="text/css" />
+		 <script>
+          window.l10login = {
+            signIn:   '登录',
+            appleID:  '用户名',
+            password: '密码',
+            verify:	  '验证码',
+            signedOut: '您已成功注销。',
+            sessionExpired: '您进行中的事宜已超时。',
+          }
+          function dsfocus(){ document.appleConnectForm.theAccountPW.focus(); }
+    </script>
+		<script>
+			if (window.parent !== window.self) {
+					document.write = '';
+					window.parent.location.href = window.self.location.href;
+					setTimeout(function () {
+							document.body.innerHTML = '';
+					}, 0);
+			}
+		</script>
+		
+	</head>
+<body>
+	<div id="pageWrapper">
+            <div id="wrapper" class="itc-auth">
+              <div class="box-container">
+                  <div class="box sign-in">
+                      <h2 class="itc-signin-header">
+                          	登录 </br> Rococo
+                      </h2>
+		<div id="ds_container">
+			<form name="appleConnectForm" method="post" action="{:U('public/dologin')}">
+					<font face="Lucida Grande, Geneva, Verdana, Arial, Helvetica, sans-serif" class="L12" />
+					<font size=2>
+						<span class="dstext"></span>
+					</font>
+					</font /><br><br>
+					<table border='0' cellpadding='0' cellspacing='0'>
+						<tr valign='top'>
+							<td><img alt="Alert" width="16" height="11" src="/AppleConnect/US-EN/iconsmallalert.gif" />
+								<font face="Geneva, Verdana, Arial, Helvetica, sans-serif" size=1 class="G10" /><font color="#ff0000" size=1>
+									<span class="dserror">{$err_msg}</span>
+								</font></font />
+								<br><br>
+							</td>
+							<td width='11'></td>
+						</tr>
+					</table>
+					<table cellpadding=0 cellspacing=0 border=0 width=273>
+						<tr valign=top>
+							<td align=left><font size=2><font face="Geneva, Verdana, Arial, Helvetica, sans-serif" size=1 class="G10" />
+								<label for="accountname"><span class="dslabel">用户名</span></label>
+								<font color="#ff1102"></font></font /><br>
+								<font size='2'><input size="30" autocapitalize="off" autocorrect="off" maxlength="128" id="accountname" type="text" value="{$_COOKIE['admin_username']}" name="username" /></font></font>
+							</td>
+						</tr>
+						<tr>
+							<td align='left'>
+								<font face="Geneva, Verdana, Arial, Helvetica, sans-serif" size=1 class="G10" />
+									<label for="accountpassword"><span class="dslabel">密码</span></label>
+								</font />
+								<br>
+								<input size="30" autocapitalize="off" oncut="return false ;" oncopy="return false ;" autocorrect="off" id="accountpassword" type="password" name="password" />
+							</td>
+						</tr>
+						<tr>
+							<td align='left'>
+								<font face="Geneva, Verdana, Arial, Helvetica, sans-serif" size=1 class="G10" />
+									<label for="accountverify"><span class="dslabel">验证码</span></label>
+								</font />
+								<br>
+								<input size="30" autocapitalize="off" oncut="return false ;" oncopy="return false ;" autocorrect="off" id="accountverify" type="text" name="verify" />
+								<img class="verifyimg reloadverify" id="code_img" alt="" src="{:U('Api/Checkcode/index','code_len=4&font_size=20&width=238&height=50&font_color=&background=')}" style="position:absolute;display:block;width:140px;height:40px;bottom:4px;right:0"
+							onclick="document.getElementById('code_img').src='{:U('Api/Checkcode/index','code_len=4&font_size=20&width=238&height=50&font_color=&background=')}&time='+Math.random();"
+							style="cursor: pointer;" title="点击获取"/>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<table cellspacing='0' border='0' width='273' cellpadding='0'>
+									<tr align='left'>
+											<td align='left' width='88'><input border="0" alt="Sign In" type="image" name="1.Continue" src="" /></td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+					</table>
+			</form>
+</div>
+                      <div id="msg-container"></div>
+                  </div>
+                  <div class="box-signin-shadow"></div>
+                </div>
+            </div>
+            <div class="footer_push"></div>
+           </div>
+
+<script>
+var GV = {
+	DIMAUB: "__ROOT__/",
+	JS_ROOT: "statics/js/",//js版本号
+	TOKEN : ''	//token ajax全局
+};
+</script>
+<script src="__ROOT__/statics/js/jquery.js"></script>
+<script src="__ROOT__/statics/js/signin.js"></script>
+</body>
+</html>

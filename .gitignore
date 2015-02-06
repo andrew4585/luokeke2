@@ -3,4 +3,5 @@ data/backup/index.html
 data/runtime/
 .buildpath
 .project
+index.php
 

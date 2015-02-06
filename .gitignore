@@ -1,7 +1,6 @@
 .settings/
 data/backup/index.html
-data/runtime/Cache/
-data/runtime/Data/
+data/runtime/
 .buildpath
 .project
-data/runtime/Temp/
+

@@ -5,17 +5,12 @@
 		<ul class="nav nav-tabs">
 	        <li class="active"><a href="#A" data-toggle="tab">网站信息</a></li>
 	        <li><a href="#B" data-toggle="tab">SEO设置</a></li>
-	        <li><a href="#C" data-toggle="tab">URL设置</a></li>
-	        <li><a href="{:U('route/index')}" >URL美化</a></li>
-	        <li><a href="#D" data-toggle="tab">用户同步</a></li>
-	        <li><a href="#E" data-toggle="tab">评论设置</a></li>
-	        <li><a href="#F" data-toggle="tab">用户名过滤</a></li>
 	    </ul>
 		
 		<form class="J_ajaxForms" name="myform" id="myform" action="{:u('setting/site_post')}" method="post">
 		 <fieldset>
 		<div class="tabbable">
-        <div class="tab-content">
+        <div class="tab-content"> 
           <div class="tab-pane active" id="A">
             <table cellpadding="2" cellspacing="2" class="table_form" width="100%">
 				<tbody>
@@ -32,52 +27,8 @@
 						<td><input type="text" class="input" name="options[site_host]" value="{$site_host}"><span class="must_red">*</span></td>
 					</tr>
 					<tr>
-						<td>安装路径：</td>
-						<td><input type="text" class="input" name="options[site_root]" value="{$site_root}"><span class="must_red">*&nbsp;&nbsp;如安装在根目录请填“/”</span></td>
-					</tr>
-					<tr>
-						<td>模版方案：</td>
-						<td>
-							<select name="options[site_tpl]" class="normal_select" >
-								<foreach name="templates" item="vo">
-									<php>$tpl_selected=$site_tpl==$vo?"selected":"";</php>
-									<option value="{$vo}" {$tpl_selected}>{$vo}</option>
-								</foreach>
-							</select>
-						</td>
-					</tr>
-					<tr>
-						<td>开启手机模板：</td>
-						<td>
-							<php>$mobile_tpl_enabled_checked=empty($mobile_tpl_enabled)?'':'checked';</php>
-							<label class="checkbox inline">
-								<input type="checkbox" name="options[mobile_tpl_enabled]" {$mobile_tpl_enabled_checked} value="1"/>
-							</label>
-						</td>
-					</tr>
-					<tr>
-						<td>后台风格：</td>
-						<td>
-							<select name="options[site_adminstyle]" class="normal_select" >
-								<foreach name="adminstyles" item="vo">
-									<php>$adminstyle_selected=$site_adminstyle==$vo?"selected":"";</php>
-									<option value="{$vo}" {$adminstyle_selected}>{$vo}</option>
-								</foreach>
-							</select>
-						</td>
-					</tr>
-					<tr>
 						<td>备案信息：</td>
 						<td><input type="text" class="input" name="options[site_icp]" value="{$site_icp}"></td>
-					</tr>
-					<tr>
-						<td>站长邮箱：</td>
-						<td><input type="text" class="input" name="options[site_admin_email]" value="{$site_admin_email}"></td>
-					</tr>
-					
-					<tr>
-						<td>统计代码：</td>
-						<td><textarea name="options[site_tongji]" rows="5" cols="57">{$site_tongji}</textarea></td>
 					</tr>
 					<tr>
 						<td>版权信息：</td>
@@ -101,77 +52,6 @@
 								<tr>
 									<td>SEO描述:</td>
 									<td><textarea name="options[site_seo_description]" rows="5" cols="57">{$site_seo_description}</textarea></td>
-								</tr>
-							</tbody>
-						</table>
-          </div>
-          <div class="tab-pane" id="C">
-            <table cellpadding="2" cellspacing="2" class="table_form" width="100%">
-							<tbody>
-								<tr>
-									<td width="180">url模式：</td>
-									<td>
-										<php>$urlmodes=array(
-											"0"=>"普通模式",
-											"1"=>"PATHINFO模式",
-											"2"=>"REWRITE模式"
-										);</php>
-										<select name="options[urlmode]"  class="normal_select">
-											<foreach name="urlmodes" item="vo">
-												<php>$urlmode_selected=$key==$urlmode?"selected":"";</php>
-												<option value="{$key}" {$urlmode_selected}>{$vo}</option>
-											</foreach>
-										</select>
-										<span class="must_red">*&nbsp;&nbsp;如果你开启的是REWRITE模式，请确保服务器支持REWRITE；</span>
-									</td>
-								</tr>
-								<tr>
-									<td>URL伪静态后缀：</td>
-									<td><input type="text" class="input" name="options[html_suffix]" value="{$html_suffix}"><span class="must_red">&nbsp;&nbsp;普通模式不支持</span></td>
-								</tr>
-							</tbody>
-						</table>
-          </div>
-          <div class="tab-pane" id="D">
-            <table cellpadding="0" cellspacing="0" class="table_form" width="100%">
-							<tbody>
-								<tr>
-									<td width="200">开启Ucenter:</td>
-									<td>
-										<php>$ucenter_enabled_checked=empty($ucenter_enabled)?"":"checked";</php>
-										<input type="checkbox" class="J_check" name="options[ucenter_enabled]" value="1" {$ucenter_enabled_checked}>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-          </div>
-          <div class="tab-pane" id="E">
-            <table cellpadding="0" cellspacing="0" class="table_form" width="100%">
-							<tbody>
-								<tr>
-									<td width="200">评论审核:</td>
-									<td>
-										<php>$comment_need_checked=empty($comment_need_check)?"":"checked";</php>
-										<input type="checkbox" class="J_check" name="options[comment_need_check]" value="1" {$comment_need_checked}>
-									</td>
-								</tr>
-								<tr>
-									<td width="200">评论时间间隔:</td>
-									<td>
-										<input type="text" name="options[comment_time_interval]" value="{$comment_time_interval|default=60}">
-									</td>
-								</tr>
-							</tbody>
-						</table>
-          </div>
-          <div class="tab-pane" id="F">
-            <table cellpadding="0" cellspacing="0" class="table_form" width="100%">
-							<tbody>
-								<tr>
-									<td width="200">特殊用户名:</td>
-									<td>
-										<textarea name="cmf_settings[banned_usernames]" rows="5" cols="57">{$cmf_settings.banned_usernames}</textarea>
-									</td>
 								</tr>
 							</tbody>
 						</table>

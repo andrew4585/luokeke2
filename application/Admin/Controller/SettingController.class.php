@@ -26,9 +26,7 @@ class SettingController extends AdminbaseController{
 			$this->assign((array)json_decode($option['option_value']));
 			$this->assign("option_id",$option['option_id']);
 		}
-		
 		$this->assign("cmf_settings",json_decode($cmf_settings,true));
-		
 		
 		$this->display();
 	}

@@ -1,6 +1,7 @@
 .settings/
 data/backup/index.html
 data/runtime/
+data/conf/
 .buildpath
 .project
 index.php

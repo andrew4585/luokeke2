@@ -4,12 +4,18 @@
  * 验证码处理
  */
 namespace Api\Controller;
+
+use Think\Verify;
+
 use Think\Controller;
 class CheckcodeController extends Controller {
 
     public function index() {
-        import("Checkcode");
-        $checkcode = new \Checkcode();
+        import("Verify");
+        //$checkcode = new \Checkcode();
+        $verify = new Verify();
+        $verify->entry(1);
+        /*
         if (isset($_GET['code_len']) && intval($_GET['code_len']))
             $checkcode->code_len = intval($_GET['code_len']);
         if ($checkcode->code_len > 8 || $checkcode->code_len < 2) {
@@ -50,6 +56,7 @@ class CheckcodeController extends Controller {
         }
         $verify[$type] = $checkcode->get_code();
         session("_verify_",$verify);
+        */
     }
 
 }

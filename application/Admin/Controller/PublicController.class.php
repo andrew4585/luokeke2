@@ -3,6 +3,8 @@
 /**
  */
 namespace Admin\Controller;
+use Think\Verify;
+
 use Common\Controller\AdminbaseController;
 class PublicController extends AdminbaseController {
 
@@ -43,7 +45,7 @@ class PublicController extends AdminbaseController {
     		$this->err_msg = L('CAPTCHA_REQUIRED');
     	}
     	//验证码
-    	if($_SESSION['_verify_']['verify']!=strtolower($verrify)){
+    	if(!$this->check_verify($verrify)){
     		$this->err_msg = L('CAPTCHA_NOT_RIGHT');
     	}
     	if(!empty($this->err_msg)){
@@ -75,5 +77,12 @@ class PublicController extends AdminbaseController {
     	$this->display(":login");
     }
 
+    /**
+     * 检测验证码
+     */
+    function check_verify($code, $id = 1){
+    	$verify = new Verify();
+    	return $verify->check($code, $id);
+    }
 }
 

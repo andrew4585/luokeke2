@@ -8,7 +8,6 @@ use Think\Verify;
 use Common\Controller\AdminbaseController;
 class PublicController extends AdminbaseController {
 
-	private $err_msg;
     function _initialize() {}
     
     //后台登陆界面

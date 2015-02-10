@@ -9,6 +9,8 @@ use Common\Controller\AppframeController;
 
 class AdminbaseController extends AppframeController {
 	
+	public  $err_msg='';
+	
 	public function __construct() {
 		$admintpl_path=C("SP_ADMIN_TMPL_PATH").C("SP_ADMIN_DEFAULT_THEME")."/";
 		C("TMPL_ACTION_SUCCESS",$admintpl_path.C("SP_ADMIN_TMPL_ACTION_SUCCESS"));

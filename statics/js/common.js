@@ -177,35 +177,9 @@
                     },
                     success: function (data, statusText, xhr, $form) {
                         var text = btn.text();
-
                         //按钮文案、状态修改
-                        btn.removeClass('disabled').text(text.replace('中...', '')).parent().find('span').remove();
-                        if (data.state === 'success') {
-                            $('<span class="tips_success">' + data.info + '</span>').appendTo(btn.parent()).fadeIn('slow').delay(1000).fadeOut(function () {
-                            });
-                        } else if (data.state === 'fail') {
-                            $('<span class="tips_error">' + data.info + '</span>').appendTo(btn.parent()).fadeIn('fast');
-                            btn.removeProp('disabled').removeClass('disabled');
-                        }
-                        
-                        if (data.referer) {
-                            //返回带跳转地址
-                            if(window.parent.art){
-                                //iframe弹出页
-                                window.parent.location.href = data.referer;
-                            }else{
-                                window.location.href = data.referer;
-                            }
-                        } else {
-                        	if (data.state === 'success') {
-                        		if(window.parent.art){
-                                    reloadPage(window.parent);
-                                }else{
-                                    //刷新当前页
-                                    reloadPage(window);
-                                }
-                        	}
-                        }
+                        btn.removeClass('disabled').prop('disabled',false).text(text.replace('中...', '')).parent().find('span').remove();
+                        ajax_alert(data);
                         
                     }
                 });
@@ -746,4 +720,46 @@ function open_map_dialog(url,title,options,callback){
 	            art.dialog.open(url, params);
 	        });
 	
+}
+
+function ajax_alert(data){
+	var content='';
+	if (data.state === 'success') {
+		Wind.use("artDialog",function(){
+	        art.dialog({
+	            id:'success',
+	            icon: 'succeed',
+	            time:3,
+	            fixed: true,
+	            lock: true,
+	            background:"#CCCCCC",
+	            opacity:0.2,
+	            content: data.info,
+	            okVal: '确定',
+	            ok: function(){
+	            	if (data.url) {
+                        window.location.href = data.url;
+	                } else {
+                        reloadPage(window);
+	                }
+	            }
+	        });
+	    });
+		
+    } else if (data.state === 'fail') {
+    	content = "<div style='color:red'>"+data.info+"</div>";
+    	Wind.use("artDialog",function(){
+            art.dialog({
+                id:'error',
+                icon: 'error',
+                fixed: true,
+                lock: true,
+                background:"#CCCCCC",
+                opacity:0.2,
+                content: content,
+                cancelVal: '确定',
+                cancel: true
+            });
+        });
+    }
 }

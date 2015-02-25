@@ -2,18 +2,18 @@
 <body class="J_scroll_fixed">
 <div class="wrap jj">
   <div class="common-form">
-    <form method="post" class="form-horizontal J_ajaxForm" action="{:U('nav/edit_post')}">
+    <form method="post" class="form-horizontal J_ajaxForm" action="{:U('Nav1/edit_post')}">
       <input type="hidden" class="input" name="id" value="{$id}">
       <div class="table_list">
         <table cellpadding="2" cellspacing="2" class="table_form" width="100%">
           <tbody>
           	<tr>
-              <td width="180">菜单分类:</td>
+              <td width="180">站点:</td>
               <td>
               	<select name="cid" id="navcid_select" class="normal_select">
               		<foreach name="navcats" item="vo">
-              			<php>$navcid_selected=$navcid==$vo['navcid']?"selected":"";</php>
-		             	<option value="{$vo.navcid}" {$navcid_selected}>{$vo.name}</option>
+              			<php>$navcid_selected=$navcid==$vo['id']?"selected":"";</php>
+		             	<option value="{$vo.id}" {$navcid_selected}>{$vo.site_name}</option>
               		</foreach>
               	</select>
 			  </td>
@@ -40,18 +40,14 @@
 				<input type="radio" name="nav" id="selecturl">
               	<select name="href" id="selecthref" class="normal_select">
                   <option disabled="disabled">默认</option>
-                  <option value="home">&nbsp;&nbsp;&nbsp;&nbsp;首页</option>
+                  <option value="{:U('Portal/Index/index')}">&nbsp;&nbsp;&nbsp;&nbsp;首页</option>
                   <foreach name="navs" item="vo">
 	            	<option disabled="disabled">{$vo.name}</option>
 	            	<foreach name="vo['items']" item="voo">
-	            		<option value='{$voo.rule}'>&nbsp;&nbsp;&nbsp;&nbsp;{$voo.label}</option>
+	            		<option value='{$voo.href}'>&nbsp;&nbsp;&nbsp;&nbsp;{$voo.label}</option>
 	            	</foreach>
 	              </foreach>
                 </select>
-                <!-- 
-              	<textarea readonly="readonly" rows="5" cols="57" id="href_input">{$href}</textarea>
-              	<input type="hidden" name="href" id="u_input" value='{$hrefold}' />
-              	 -->
               </td>
             </tr>
             <tr>
@@ -60,19 +56,6 @@
               	<select name="target">
               		<option value="">默认方式</option>
               		<option value="_blank">新窗口打开</option>
-              	</select>
-			  </td>
-            </tr>
-            <tr>
-              <td>图标:</td>
-              <td><input type="text" class="input" name="icon" value="{$icon}"></td>
-            </tr>
-            <tr>
-              <td>显示:</td>
-              <td>
-              	<select name="status" class="normal_select">
-              		<option value="1">显示</option>
-              		<option value="0">隐藏</option>
               	</select>
 			  </td>
             </tr>

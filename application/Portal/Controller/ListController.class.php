@@ -17,16 +17,18 @@ class ListController extends HomeBaseController {
 	}
 	
 	public function nav_index(){
-		$navcatname="文章分类";
-		$datas=sp_get_terms("field:term_id,name");
-		$navrule=array(
-				"action"=>"List/index",
-				"param"=>array(
-						"id"=>"term_id"
-				),
-				"label"=>"name");
-		exit(sp_get_nav4admin($navcatname,$datas,$navrule));
 		
+		$nav_arr = array(
+				"name"	=> "a",
+				"items" => array(
+							0 =>array(	"label" => "a1",
+										"href"	=> "http://localhost/luokeke2/"
+									),
+							),
+				
+				
+				);
+		exit(json_encode($nav_arr));
 	}
 	
 }

@@ -2,15 +2,15 @@
 <body class="J_scroll_fixed">
 <div class="wrap J_check_wrap">
   <ul class="nav nav-tabs">
-     <li class="active"><a href="{:U('nav/index')}">前台菜单</a></li>
-     <li><a href="{:U('nav/add',array('cid'=>$navcid))}">添加菜单</a></li>
+     <li class="active"><a href="{:U('nav1/index')}">前台菜单</a></li>
+     <li><a href="{:U('nav1/add',array('cid'=>$navcid))}">添加菜单</a></li>
   </ul>
   
-  <form class="well form-search" id="mainform" action="{:U('nav/index')}" method="post" >
+  <form class="well form-search" id="mainform" action="{:U('nav1/index')}" method="post" >
 	  <select id="navcid_select" name="cid" class="normal_select">
 		  		<foreach name="navcats" item="vo">
-		  			<php>$navcid_selected=$navcid==$vo['navcid']?"selected":"";</php>
-		             <option value="{$vo.navcid}" {$navcid_selected}>{$vo.name}</option>
+		  			<php>$navcid_selected=$navcid==$vo['id']?"selected":"";</php>
+		             <option value="{$vo.id}" {$navcid_selected}>{$vo.site_name}</option>
 		        </foreach>
 		  	</select>
 	</form>
@@ -22,7 +22,7 @@
           <tr>
             <th width="80">排序</th>
             <th width="100">ID</th>
-            <th>菜单英文名称</th>
+            <th>菜单名称</th>
             <th width="80">状态</th>
             <th width="200">管理操作</th>
           </tr>

@@ -36,7 +36,6 @@ define("RUNTIME_PATH", SITE_PATH . "/data/runtime/");
 define("SIMPLEWIND_CMF_VERSION", 'X1.5.0 beta');
 
 define("THINKCMF_CORE_TAGLIBS", 'cx,Common\Lib\Taglib\TagLibSpadmin,Common\Lib\Taglib\TagLibHome');
-
 if(function_exists('saeAutoLoader') || isset($_SERVER['HTTP_BAE_ENV_APPID'])){
 	
 }else{

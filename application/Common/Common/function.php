@@ -484,37 +484,6 @@ function insertMes($from, $to, $content, $targetid, $mestype){
 }
 
 
-/**
- * 
- * @param unknown_type $navcatname
- * @param unknown_type $datas
- * @param unknown_type $navrule
- * @return string
- */
-function sp_get_nav4admin($navcatname,$datas,$navrule){
-	$nav['name']=$navcatname;
-	$nav['urlrule']=$navrule;
-	foreach($datas as $t){
-		$urlrule=array();
-		$group=strtolower(MODULE_NAME)==strtolower(C("DEFAULT_MODULE"))?"":MODULE_NAME."/";
-		$action=$group.$navrule['action'];
-		$urlrule['action']=MODULE_NAME."/".$navrule['action'];
-		$urlrule['param']=array();
-		if(isset($navrule['param'])){
-			foreach ($navrule['param'] as $key=>$val){
-				$urlrule['param'][$key]=$t[$val];
-			}
-		}
-		
-		$nav['items'][]=array(
-				"label"=>$t[$navrule['label']],
-				"url"=>U($action,$urlrule['param']),
-				"rule"=>serialize($urlrule)
-		);
-	}
-	return json_encode($nav);
-}
-
 function sp_get_apphome_tpl($tplname,$default_tplname,$default_theme=""){
 	$theme      =    C('SP_DEFAULT_THEME');
 	if(C('TMPL_DETECT_THEME')){// 自动侦测模板主题

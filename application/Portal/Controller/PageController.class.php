@@ -15,14 +15,16 @@ class PageController extends HomeBaseController{
 	}
 	
 	public function nav_index(){
-		$navcatname="页面";
-		$datas=sp_sql_pages("field:id,post_title;");
-		$navrule=array(
-				"action"=>"Page/index",
-				"param"=>array(
-						"id"=>"id"
-				),
-				"label"=>"post_title");
-		exit( sp_get_nav4admin($navcatname,$datas,$navrule) );
+		$nav_arr = array(
+				"name"	=> "b",
+				"items" => array(
+							0 =>array(	"label" => "b1",
+										"href"	=> "http://localhost/luokeke2/"
+									),
+							),
+				
+				
+				);
+		exit(json_encode($nav_arr));
 	}
 }

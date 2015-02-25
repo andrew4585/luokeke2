@@ -219,19 +219,9 @@
                         return true;
                     },
                     ok: function () {
-                    	
-                        $.getJSON(href).done(function (data) {
-                            if (data.state === 'success') {
-                                if (data.referer) {
-                                    location.href = data.referer;
-                                } else {
-                                    reloadPage(window);
-                                }
-                            } else if (data.state === 'fail') {
-                                //art.dialog.alert(data.info);
-                            	alert(data.info);//暂时处理方案
-                            }
-                        });
+                    	$.get(href,function(data){
+                    		ajax_alert(data);
+                    	});
                     },
                     cancelVal: '关闭',
                     cancel: true

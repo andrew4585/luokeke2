@@ -36,8 +36,8 @@
 	        		<td>{$item.id}</td>
 	        		<td>{$item.site_name}</td>
 	        		<td>{$category[$item['cate_id']]}</td>
-	        		<td>{$item.site_url}</td>
-	        		<td><a href="#">编辑</a>&nbsp;&nbsp;<a href="#">删除</a></td>
+	        		<td><if condition="$item.cate_id eq 2">{$item.site_url}</if></td>
+	        		<td><a href="{:U('Site/edit')}/id/{$item.id}">编辑</a>&nbsp;&nbsp;<a href="{:U('Site/delete')}/id/{$item.id}" class="J_ajax_del">删除</a></td>
 	        	</tr>
 	        </foreach>
         </tbody>

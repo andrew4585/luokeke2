@@ -2,7 +2,7 @@
   'SP_DEFAULT_THEME' => 'simplebootx',
   'DEFAULT_THEME' => NULL,
   'SP_ADMIN_STYLE' => NULL,
-  'URL_MODEL' => 1,
+  'URL_MODEL' => 2,
   'URL_HTML_SUFFIX' => NULL,
   'UCENTER_ENABLED' => 0,
   'COMMENT_NEED_CHECK' => 0,

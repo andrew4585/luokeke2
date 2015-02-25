@@ -71,17 +71,12 @@
         var e = window.event || event;
         if (e.keyCode == 116) {
             e.keyCode = 0;
-
-            var $doc = $(parent.window.document),
-                id = $doc.find('#B_history .current').attr('data-id'),
-                iframe = $doc.find('#iframe_' + id);
-            try{
-                if (iframe[0].contentWindow) {
-                    //common.js
-                    reloadPage(iframe[0].contentWindow);
-                }
-            }catch(err){}
-            //!ie
+            $("#refresh_wrapper", window.parent.document).click();
+            var $current_iframe=$("#content iframe:visible",window.parent.document);
+            $loading=$("#loading",window.parent.document);
+        	$loading.show();
+        	//$current_iframe.attr("src",$current_iframe.attr("src"));
+        	$current_iframe[0].contentWindow.location.reload();
             return false;
         }
 

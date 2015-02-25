@@ -1,0 +1,60 @@
+<admintpl file="header"/>
+<style>
+.category{height:40px;}
+.category label{display: inline;vertical-align: middle;height:30px;padding:0 10px;}
+.category input[type=radio]{margin:0 3px 3px 0;}
+</style>
+<body class="J_scroll_fixed">
+<div class="wrap jj">
+  <ul class="nav nav-tabs">
+     <li><a href="{:U('Site/index')}">站点列表</a></li>
+     <li class="active"><a href="#">添加站点</a></li>
+  </ul>
+  <div class="common-form">
+    <form method="post" class="form-horizontal J_ajaxForm" action="{:U('Site/add')}">
+      <div class="table_list">
+        <table cellpadding="2" cellspacing="2" class="table_form" width="100%">
+          <tbody>
+          	<tr>
+              <td>站点名称:</td>
+              <td><input type="text" class="input" name="site_name" value=""><span class="must_red">*</span></td>
+            </tr>
+          	<tr>
+              <td width="180">站点分类:</td>
+              <td class="category">
+             		<foreach name="category" item="vo" key="k">
+             			<php>$checked=$k==1?"checked":""</php>
+	             		<label><input type="radio" value="{$k}" name="cate_id" {$checked}/>{$vo}</label>
+             		</foreach>
+			  </td>
+            </tr>
+            <tr id="url" style="display:none">
+              <td>url链接:</td>
+              <td><input type="text" class="input" name="site_url" value=""><span class="must_red">*</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="form-actions">
+            <button type="submit" class="btn btn-primary btn_submit J_ajax_submit_btn">添加</button>
+            <a class="btn" href="__URL__">返回</a>
+      </div>
+    </form>
+  </div>
+</div>
+<script src="__ROOT__/statics/js/common.js"></script>
+<script>
+$(function(){
+	$("input[name='cate_id']").click(function(){
+		var cate_id = $(this).val();
+		if(cate_id==1){
+			$("#url").hide();
+		}else if(cate_id==2){
+			$("#url").show();
+		}
+	});
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,61 @@
+<admintpl file="header"/>
+<body class="J_scroll_fixed">
+<div class="wrap J_check_wrap">
+  <ul class="nav nav-tabs">
+     <li class="active"><a href="#">站点列表</a></li>
+     <li><a href="{:U('Site/add')}">添加站点</a></li>
+  </ul>
+  
+  <form class="well form-search" id="mainform" action="{:U('Site/index')}" method="post" >
+	  <select id="navcid_select" name="cid" class="normal_select">
+	  			<option value="0">所有</option>
+		  		<foreach name="category" item="vo" key="k">
+		  			<php>$navcid_selected=$cid==$k?"selected":"";</php>
+		             <option value="{$k}" {$navcid_selected}>{$vo}</option>
+		        </foreach>
+		  	</select>
+	</form>
+  <form class="J_ajaxForm" action="{:U('Site/listorders')}" method="post" >
+  	
+    <div class="table_list">
+      <table width="100%" class="table table-hover">
+        <thead>
+          <tr>
+            <th width="80">排序</th>
+            <th width="100">ID</th>
+            <th>站点名称</th>
+            <th>站点类型</th>
+            <th>url链接</th>
+            <th width="200">管理操作</th>
+          </tr>
+        </thead>
+        <tbody>
+        	<foreach name="list" item="item">
+	        	<tr>
+	        		<td><input name='listorders[{$item.id}]' type='text' size='3' value='{$item.listorder}' class='input input-order'></td>
+	        		<td>{$item.id}</td>
+	        		<td>{$item.site_name}</td>
+	        		<td>{$category[$item['cate_id']]}</td>
+	        		<td>{$item.site_url}</td>
+	        		<td><a href="#">编辑</a>&nbsp;&nbsp;<a href="#">删除</a></td>
+	        	</tr>
+	        </foreach>
+        </tbody>
+        
+      </table>
+    </div>
+     <div class="form-actions">
+            <button type="submit" class="btn btn-primary btn_submit J_ajax_submit_btn">排序</button>
+      </div>
+  </form>
+</div>
+<script src="__ROOT__/statics/js/common.js"></script>
+<script>
+$(function(){
+	$("#navcid_select").change(function(){
+		$("#mainform").submit();
+	});
+});
+</script>
+</body>
+</html>

@@ -22,7 +22,7 @@ class ListController extends HomeBaseController {
 				"name"	=> "a",
 				"items" => array(
 							0 =>array(	"label" => "a1",
-										"href"	=> "http://localhost/luokeke2/"
+										"href"	=> "http://localhost/luokeke2/1"
 									),
 							),
 				

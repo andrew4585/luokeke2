@@ -19,7 +19,7 @@ class PageController extends HomeBaseController{
 				"name"	=> "b",
 				"items" => array(
 							0 =>array(	"label" => "b1",
-										"href"	=> "http://localhost/luokeke2/"
+										"href"	=> "http://localhost/luokeke2/2"
 									),
 							),
 				

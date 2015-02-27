@@ -48,7 +48,7 @@ class Nav1Controller extends AdminbaseController {
 				<td><input name='listorders[\$id]' type='text' size='3' value='\$listorder' class='input input-order'></td>
 				<td>\$id</td>
 				<td >\$spacer\$label</td>
-			    <td>\$status</td>
+				<td>\$english</td>
 				<td>\$str_manage</td>
 			</tr>";
 		$categorys = $tree->get_tree(0, $str);

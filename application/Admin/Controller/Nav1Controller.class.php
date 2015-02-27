@@ -93,7 +93,6 @@ class Nav1Controller extends AdminbaseController {
 			
 			
 		$cats=$this->navcat->select();
-		$select = $this->_select();
 		$this->assign("navcats",$cats);
 		$this->assign('navs', $this->_select());
 		$this->assign("navcid",$cid);
@@ -145,7 +144,7 @@ class Nav1Controller extends AdminbaseController {
 		$tree->nbsp = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
 		$parentid= I("get.parentid");
 		foreach ($result as $r) {
-			$r['str_manage'] = '<a href="' . U("Menu/add", array("parentid" => $r['id'], "menuid" => $_GET['menuid'])) . '">添加子菜单</a> | <a href="' . U("Menu/edit", array("id" => $r['id'], "menuid" => $_GET['menuid'])) . '">修改</a> | <a class="J_ajax_del" href="' . U("Menu/delete", array("id" => $r['id'], "menuid" => $_GET["menuid"])) . '">删除</a> ';
+			$r['str_manage'] = '';
 			$r['status'] = $r['status'] ? "显示" : "隐藏";
 			$r['selected'] = $r['id']==$parentid?"selected":"";
 			$array[] = $r;
@@ -168,23 +167,8 @@ class Nav1Controller extends AdminbaseController {
 		$this->assign("navcats",$cats);
 			
 		$nav=$this->nav->where("id=$id")->find();
-		$nav['hrefold'] = stripslashes($nav['href']);
-		$href = unserialize($nav['hrefold']);
-		if(empty($href)){
-			if($nav['hrefold'] == "home"){
-				$href = __ROOT__."/";
-			}else{
-				$href = $nav['hrefold'];
-			}
-		}else{
-			$default_app = strtolower(C("DEFAULT_GROUP"));
-			$href = U($href['action'],$href['param']);
-			$g = C("VAR_GROUP");
-			$href = preg_replace("/\/$default_app\//", "/",$href);
-			$href = preg_replace("/$g=$default_app&/", "",$href);
-		}
+		$nav['hrefold'] = $nav['href'];
 			
-		$nav['href'] = $href;
 		$this->assign($nav);
 		$this->assign('navs', $this->_select());
 		$this->assign("navcid",$cid);
@@ -210,7 +194,7 @@ class Nav1Controller extends AdminbaseController {
 			$data['href']=htmlspecialchars_decode($data['href']);
 			if ($this->nav->create($data)) {
 				if ($this->nav->save() !== false) {
-					$this->success("保存成功！", U("Nav1/index"));
+					$this->success("保存成功！", U("Nav1/edit",array("id"=>$data['id'])));
 				} else {
 					$this->error("保存失败！");
 				}
@@ -274,5 +258,107 @@ class Nav1Controller extends AdminbaseController {
 		}
 		return $navs;
 	}
+	//-------------------------------电梯菜单 start------------------------------------
+	//显示
+	public function dianti(){
+		$this->nav = D("NavDianti");
+		if(empty($_REQUEST['cid'])){
+			$cid=session("nav_site_id");
+			if(empty($cid)){
+				$navcat=$this->navcat->order("listorder")->find();
+				$cid=$navcat['id'];
+			}
+		}else{
+			$cid=$_REQUEST['cid'];
+		}
+		session("nav_site_id",$cid);
+		$result = $this->nav->where("cid=$cid")->order(array("listorder" => "ASC"))->select();
+		
+		$cats=$this->navcat->order("listorder")->select();
+		$this->assign("list",$result);
+		$this->assign("navcats",$cats);
+		$this->assign("navcid",$cid);
+		
+		$this->display();
+	}
+	//添加
+	public function dianti_add(){
+		$this->nav = D("NavDianti");
+		if(IS_POST){
+			$data=I("post.");
+			$data['href']=htmlspecialchars_decode($data['href']);
+			if ($this->nav->create($data)) {
+				$result=$this->nav->add();
+				if ($result) {
+					session("nav_site_id",$data['cid']);
+					$this->success("添加成功！", U("Nav1/dianti"));
+				} else {
+					$this->error("添加失败！");
+				}
+			} else {
+				$this->error($this->nav->getError());
+			}
+		}else{
+			$cid = $_REQUEST['cid']? $_REQUEST['cid'] :session("nav_site_id");
+			$cats=$this->navcat->select();
+			$this->assign("navcats",$cats);
+			$this->assign('navs', $this->_select());
+			$this->assign("navcid",$cid);
+			$this->display();
+		}
+	}
+	//编辑
+	public function dianti_edit(){
+		$this->nav = D("NavDianti");
+		if(IS_POST){
+			$data=I("post.");
+			$data['href']=htmlspecialchars_decode($data['href']);
+			if ($this->nav->create($data)) {
+				if ($this->nav->save() !== false) {
+					$this->success("保存成功！", U("Nav1/dianti_edit",array("id"=>$data['id'])));
+				} else {
+					$this->error("保存失败！");
+				}
+			} else {
+				$this->error($this->nav->getError());
+			}
+		}else{
+			$cid = $_REQUEST['cid']? $_REQUEST['cid'] :session("nav_site_id");
+			$id=intval(I("get.id"));
+			
+			$cats=$this->navcat->select();
+			$this->assign("navcats",$cats);
+				
+			$nav=$this->nav->where("id=$id")->find();
+			$nav['hrefold'] =$nav['href'];
+				
+			$this->assign($nav);
+			$this->assign('navs', $this->_select());
+			$this->assign("navcid",$cid);
+			$this->display();
+		}
+		
+	}
+	//删除
+	public function dianti_delete(){
+		$this->nav = D("NavDianti");
+		$id = intval(I("get.id"));;
+		if ($this->nav->delete($id)!==false) {
+			$this->success("删除菜单成功！");
+		} else {
+			$this->error("删除失败！");
+		}
+	}
 	
+	//排序
+	public function dianti_listorders() {
+		$this->nav = D("NavDianti");
+		$status = parent::_listorders($this->nav);
+		if ($status) {
+			$this->success("排序更新成功！");
+		} else {
+			$this->error("排序更新失败！");
+		}
+	}
+	//-------------------------------电梯菜单 end--------------------------------------
 }

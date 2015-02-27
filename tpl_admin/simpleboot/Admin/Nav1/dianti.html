@@ -1,0 +1,58 @@
+<admintpl file="header"/>
+<body class="J_scroll_fixed">
+<div class="wrap J_check_wrap">
+  <ul class="nav nav-tabs">
+     <li class="active"><a href="{:U('Nav1/dianti')}">前台菜单</a></li>
+     <li><a href="{:U('Nav1/dianti_add',array('cid'=>$navcid))}">添加菜单</a></li>
+  </ul>
+  
+  <form class="well form-search" id="mainform" action="{:U('Nav1/dianti')}" method="post" >
+	  <select id="navcid_select" name="cid" class="normal_select">
+		  		<foreach name="navcats" item="vo">
+		  			<php>$navcid_selected=$navcid==$vo['id']?"selected":"";</php>
+		             <option value="{$vo.id}" {$navcid_selected}>{$vo.site_name}</option>
+		        </foreach>
+		  	</select>
+	</form>
+  <form class="J_ajaxForm" action="{:U('Nav1/dianti_listorders')}" method="post" >
+  	
+    <div class="table_list">
+      <table width="100%" class="table table-hover">
+        <thead>
+          <tr>
+            <th width="80">排序</th>
+            <th width="100">ID</th>
+            <th>菜单名称</th>
+            <th>英文名称</th>
+            <th width="200">管理操作</th>
+          </tr>
+        </thead>
+        <foreach name="list" item="item">
+        <tr>
+        	<td><input name="listorders[{$item.id}]" type='text' size='3' value='{$item.listorder}' class='input input-order'></td>
+			<td>{$item.id}</td>
+			<td>{$item.label}</td>
+		    <td>{$item.english}</td>
+			<td>
+				<a href="{:U('Nav1/dianti_edit')}/id/{$item.id}">修改</a> | 
+				<a class="J_ajax_del" href="{:U('Nav1/dianti_delete')}/id/{$item.id}">删除</a> 
+			</td>
+        </tr>
+        </foreach>
+      </table>
+    </div>
+     <div class="form-actions">
+          <button type="submit" class="btn btn-primary btn_submit J_ajax_submit_btn">排序</button>
+      </div>
+  </form>
+</div>
+<script src="__ROOT__/statics/js/common.js"></script>
+<script>
+$(function(){
+	$("#navcid_select").change(function(){
+		$("#mainform").submit();
+	});
+});
+</script>
+</body>
+</html>

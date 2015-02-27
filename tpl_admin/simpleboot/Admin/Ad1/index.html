@@ -1,0 +1,108 @@
+<admintpl file="header" />
+<body class="J_scroll_fixed">
+<div class="wrap J_check_wrap">
+  <ul class="nav nav-tabs">
+     <li class="active"><a href="{:U('ad1/index')}">所有广告</a></li>
+     <li><a href="{:U('ad1/add')}">添加广告</a></li>
+  </ul>
+
+	<form class="well form-search" method="post" id="cid_form" >
+    <div class="search_type cc mb10">
+      <div class="mb10">
+		  <!--类别-->
+        <select class="select_2" name="cid"style="width:160px;" id="">
+          <option value=''>全部类别</option>
+          <foreach name="categorys" item="vo">
+          	<php>$cid_select=$vo['cid']===$ad_cid?"selected":"";</php>
+          	<option value="{$vo.cid}" {$cid_select}>{$vo.cat_name}</option>
+          </foreach>
+        </select>
+             <!-- 站点-->
+		  <select class="select_2" name="id" style="width:160px">
+			  <option value=''>全部站点</option>
+			  <foreach name="list" item="vo">
+				  <php>$id_select=$vo['id']===$site_cid?"selected":"";</php>
+				  <option value="{$vo.id}" {$id_select}>{$vo.site_name}</option>
+			  </foreach>
+		  </select>
+		  <input type="submit" class="btn" value="搜索">
+      </div>
+    </div>
+  </form>
+
+  <form class="J_ajaxForm" action="" method="post">
+    <div class="table_list">
+    	<php>
+        		$status=array("1"=>"显示","0"=>"隐藏");
+        </php>
+      <table width="100%" class="table table-hover">
+        <thead>
+	          <tr>
+	            <th width="16"><label><input type="checkbox" class="J_check_all" data-direction="x" data-checklist="J_check_x"></label></th>
+	            <th width="50">排序</th>
+	            <th width="100">ID</th>
+	            <th>名称</th>
+	            <th>描述</th>
+	            <th>链接</th>
+	            <th>图片</th>
+	            <th width="45">状态</th>
+	            <th width="120">操作</th>
+	          </tr>
+        </thead>
+        	<foreach name="slides" item="vo">
+	        	<tr>
+		            <td><input type="checkbox" class="J_check" data-yid="J_check_y" data-xid="J_check_x" name="ids[]" value="{$vo.ad_id}"></td>
+		            <td><input name='listorders[{$vo.ad_id}]' class="input input-order mr5"  type='text' size='3' value='{$vo.listorder}'></td>
+		            <td>{$vo.ad_id}</td>
+		            <td>{$vo.ad_name}</td>
+    	            <td><php> $ad_des = mb_substr($vo['ad_des'], 0, 48, 'utf-8'); echo $ad_des;</php></td>
+                    <td>{$vo.ad_url}</td>
+
+                    <td>
+	                    <php>
+	                    if(!empty($vo['ad_pic'])){
+	                    </php>
+	                    <a href="{:sp_get_asset_upload_path($vo['ad_pic'])}" target="_blank">查看</a>
+	                    <php>}</php>
+                    </td>
+                    <td>{$status[$vo['ad_status']]}</td>
+		            <td>
+		            	<a href="{:U('ad1/edit',array('id'=>$vo['ad_id']))}">修改</a>|
+		            	<a href="{:U('ad1/delete',array('id'=>$vo['ad_id']))}" class="J_ajax_del" >删除</a>
+					</td>
+	          	</tr>
+          </foreach>
+          </table>
+      <div class="p10"><div class="pages">  </div> </div>
+     
+    </div>
+    <div class="form-actions">
+            <label class="checkbox inline" for="check_all"><input type="checkbox" class="J_check_all" data-direction="y" data-checklist="J_check_y" id="check_all">全选</label>  
+	        <button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('ad1/listorders')}">排序</button>
+	        <button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('ad1/toggle',array('display'=>1))}" data-subcheck="true" >显示</button>
+        	<button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('ad1/toggle',array('hide'=>1))}" data-subcheck="true" >隐藏</button>
+	        <button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:U('ad1/delete')}" data-subcheck="true" >删除</button>
+      </div>
+  </form>
+</div>
+<script src="__ROOT__/statics/js/common.js?"></script>
+<script>
+setCookie('refersh_time', 0);
+function refersh_window() {
+    var refersh_time = getCookie('refersh_time');
+    if (refersh_time == 1) {
+        window.location.reload();
+    }
+}
+setInterval(function(){
+	refersh_window()
+}, 3000);
+$(function () {
+	$("#selected_cid").change(function(){
+		$("#cid_form").submit();
+	});
+});
+
+</script>
+</body>
+</html>

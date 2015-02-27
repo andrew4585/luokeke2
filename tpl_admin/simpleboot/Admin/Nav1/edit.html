@@ -1,6 +1,11 @@
 <admintpl file="header"/>
 <body class="J_scroll_fixed">
 <div class="wrap jj">
+  <ul class="nav nav-tabs">
+     <li><a href="{:U('Nav1/index')}">前台菜单</a></li>
+     <li><a href="{:U('Nav1/add')}">添加菜单</a></li>
+     <li class="active"><a href="#">编辑菜单</a></li>
+  </ul>
   <div class="common-form">
     <form method="post" class="form-horizontal J_ajaxForm" action="{:U('Nav1/edit_post')}">
       <input type="hidden" class="input" name="id" value="{$id}">
@@ -53,7 +58,7 @@
             <tr>
               <td>打开方式:</td>
               <td>
-              	<select name="target">
+              	<select name="target" id="target">
               		<option value="">默认方式</option>
               		<option value="_blank">新窗口打开</option>
               	</select>
@@ -91,6 +96,9 @@ $(function(){
 		checkChange(1);
 		$('#outlink_input').val('{$hrefold}');
 	}
+	
+	var target = $("#target option[value='"+'{$target}'+"']").attr("selected","selected");
+	
 	
 	function checkChange(i){
 		if(i==1){

@@ -28,10 +28,15 @@
  * @param string $suffix 截断显示字符
  * @return string
  */
-function msubstr($str, $start=0, $length, $charset="utf-8", $suffix=true) {
-    if(function_exists("mb_substr"))
+function msubstr($str, $start=0, $length, $charset="utf-8", $suffix='...') {
+	$total = 0;
+    if(function_exists("mb_substr")){
+    	$total = mb_strlen($str,$charset);
+    	if($total<=$length)  return $str;
         $slice = mb_substr($str, $start, $length, $charset);
-    elseif(function_exists('iconv_substr')) {
+    }elseif(function_exists('iconv_substr')) {
+    	$total = iconv_strlen($str,$charset);
+    	if($total<=$length)  return $str;
         $slice = iconv_substr($str,$start,$length,$charset);
         if(false === $slice) {
             $slice = '';
@@ -42,9 +47,11 @@ function msubstr($str, $start=0, $length, $charset="utf-8", $suffix=true) {
         $re['gbk']    = "/[\x01-\x7f]|[\x81-\xfe][\x40-\xfe]/";
         $re['big5']   = "/[\x01-\x7f]|[\x81-\xfe]([\x40-\x7e]|\xa1-\xfe])/";
         preg_match_all($re[$charset], $str, $match);
+        $total = count($match[0]);
+        if($total<=$length)  return $str;
         $slice = join("",array_slice($match[0], $start, $length));
     }
-    return $suffix ? $slice.'...' : $slice;
+    return $suffix ? $slice.$suffix : $slice;
 }
 
 /**

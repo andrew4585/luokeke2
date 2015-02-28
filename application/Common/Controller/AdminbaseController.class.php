@@ -142,7 +142,21 @@ class AdminbaseController extends AppframeController {
         }
         return true;
     }
-
+	
+    /**
+     * 修改状态，显示/隐藏
+     */
+    protected function _status($model){
+    	if (!is_object($model)) {
+    		return false;
+    	}
+    	$pk = $model->getPk(); //获取主键名称
+    	$id = $_GET['id'];
+    	$data['status'] = $_GET['status'];
+    	$model->where(array($pk => $id))->save($data);
+    	return true;
+    }
+    
     protected function page($Total_Size = 1, $Page_Size = 0, $Current_Page = 1, $listRows = 6, $PageParam = '', $PageLink = '', $Static = FALSE) {
         import('Page');
         if ($Page_Size == 0) {

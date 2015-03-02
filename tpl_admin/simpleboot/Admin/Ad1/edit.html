@@ -1,7 +1,4 @@
 <admintpl file="header"/>
-<script type="text/javascript">
-    var catid = "12";
-</script>
 <style type="text/css">
 .col-auto {
 	overflow: hidden;
@@ -39,6 +36,11 @@ body fieldset legend {
 </head>
 <body class="J_scroll_fixed">
 <div class="wrap J_check_wrap">
+<ul class="nav nav-tabs">
+     <li><a href="{:U('Ad1/index')}">所有广告</a></li>
+     <li><a href="{:U('Ad1/add')}">添加广告</a></li>
+     <li class="active"><a href="#">编辑广告</a></li>
+  </ul>
   <form name="myform" id="myform" action="{:U('ad1/edit_post')}" method="post" class="form-horizontal J_ajaxForms" enctype="multipart/form-data">
   <div class="col-right">
     <div class="table_full">
@@ -48,7 +50,7 @@ body fieldset legend {
         </tr>
         <tr>
           <td>
-          	<div  style="text-align: center;"><input type='hidden' name='ad_pic' id='thumb' value='{$slide_pic}'>
+          	<div  style="text-align: center;"><input type='hidden' name='ad_pic' id='thumb' value='{$ad_pic}'>
 			<a href='javascript:void(0);' onclick="flashupload('thumb_images', '附件上传','thumb',thumb_images,'1,jpg|jpeg|gif|png|bmp,1,,,1','','','');return false;">
 				<if condition="empty($ad_pic)">
 					<img src="__ROOT__/statics/images/icon/upload-pic.png" id='thumb_preview' width='135' height='113' style='cursor:hand' />
@@ -72,7 +74,6 @@ body fieldset legend {
 			  <th width="80">站点</th>
 			  <td>
 			  <select name="site_cid" class="normal_select">
-				  <option value="0">全部站点</option>
 				  <foreach name="list" item="vo">
 					  <php>$id_selected=$site_cid==$vo['id']?"selected":"";</php>
 					  <option value="{$vo.id}" {$id_selected}>{$vo.site_name}</option>
@@ -82,10 +83,9 @@ body fieldset legend {
 		  </tr>
 
             <tr>
-              <th width="80">栏目</th>
+              <th width="80">类别</th>
               <td>
               	<select name="ad_cid" class="normal_select">
-                  <option value="0">默认分类</option>
                   <foreach name="categorys" item="vo">
                   	<php>$cid_selected=$ad_cid==$vo['cid']?"selected":"";</php>
                   	<option value="{$vo.cid}" {$cid_selected}>{$vo.cat_name}</option>
@@ -111,14 +111,6 @@ body fieldset legend {
               <th width="80">描述</th>
               <td><input type='text' name='ad_des'  value='{$ad_des}' style='width:400px' class='input  input_hd J_title_color'></td>
             </tr>
-             <tr>
-              <th width="80">内容</th>
-              <td>
-              	<textarea name='ad_content' id='description' style='width:98%;height:200px;'>{$ad_content}</textarea>
-              </td>
-            </tr>
-            
-                        
         </tbody>
       </table>
     </div>
@@ -198,9 +190,9 @@ $(function () {
 					}
 	            },
 	            //验证规则
-	            rules: {'slide_name':{required:1}},
+	            rules: {'ad_name':{required:1}},
 	            //验证未通过提示消息
-	            messages: {'slide_name':{required:'请输入名称'}},
+	            messages: {'ad_name':{required:'请输入名称'}},
 	            //给未通过验证的元素加效果,闪烁等
 	            highlight: false,
 	            //是否在获取焦点时验证

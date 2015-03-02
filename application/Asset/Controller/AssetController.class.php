@@ -4,6 +4,9 @@
  * 附件上传
  */
 namespace Asset\Controller;
+
+use Think\Log;
+
 use Common\Controller\AdminbaseController;
 class AssetController extends AdminbaseController {
 
@@ -21,7 +24,6 @@ class AssetController extends AdminbaseController {
      */
     public function swfupload() {
         if (IS_POST) {
-			
             //上传处理类
             $config=array(
             		'rootPath' => './'.C("UPLOADPATH"),
@@ -43,7 +45,11 @@ class AssetController extends AdminbaseController {
                 }else{
                 	$url=C("TMPL_PARSE_STRING.__UPLOAD__").$first['savename'];
                 }
-                
+                //裁剪图片
+                import("Resizeimage",UTIl);
+                $resize=new \Resizeimage();
+                $resize->initAttribute($config['rootPath'], 200, 200, 2);
+                $cutimg=$resize->resize($first['savename']);
 				echo "1," . $url.",".'1,'.$first['name'];
 				exit;
             } else {

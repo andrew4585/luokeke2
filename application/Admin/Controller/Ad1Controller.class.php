@@ -14,19 +14,9 @@ class Ad1Controller extends AdminbaseController{
 		$this->site_obj = D("Common/Site");
 	}
 	function index(){
-		$cates=array(
-				array("cid"=>"0","cat_name"=>"默认分类"),
-		);
-    	$categorys=$this->ad1cat_obj->field("cid,cat_name")->where("cat_status!=0")->select();
-		$list=$this->site_obj->field("id,site_name")->where("cate_id!=2")->select();
-//		echo $this->site_obj->getlastsql();
-//		echo $this->ad1cat_obj->getlastsql();
-		if($categorys){
-			$categorys=array_merge($cates,$categorys);
-		}else{
-			$categorys=$cates;
-		}
-	   $this->assign("categorys",$categorys);
+    	$categorys=$this->ad1cat_obj->field("cid,cat_name")->select();
+		$list=$this->site_obj->field("id,site_name")->select();
+	    $this->assign("categorys",$categorys);
 		$where="";
 		$id=0;
 		if(isset($_POST['cid']) && $_POST['cid']!=""){
@@ -40,7 +30,7 @@ class Ad1Controller extends AdminbaseController{
 		$this->assign("list",$list);
     	$this->assign("ad_cid",$cid);
 		$this->assign("site_cid",$id);
-		$slides=$this->ad1_obj->where($where)->order("listorder ASC")->select();
+		$slides=$this->ad1_obj->relation(true)->where($where)->order("listorder ASC")->select();
 		$this->assign('slides',$slides);
 		$this->display();
 	}
@@ -48,15 +38,12 @@ class Ad1Controller extends AdminbaseController{
 		//获取广告的分类
 		$categorys=$this->ad1cat_obj->field("cid,cat_name")->where("cat_status!=0")->select();
 		//获取分站名称
-		$list=$this->site_obj->field("id,site_name")->where("cate_id!=2")->select();
+		$list=$this->site_obj->field("id,site_name")->select();
 		$this->assign("list",$list);
 		$this->assign("categorys",$categorys);
 		$this->display();
 	}
 
-	/**
-	 *
-     */
 	function add_post(){
 		if(IS_POST){
 			if ($this->ad1_obj->create()) {
@@ -81,7 +68,7 @@ class Ad1Controller extends AdminbaseController{
 	}
 	function edit(){
 		$categorys=$this->ad1cat_obj->field("cid,cat_name")->where("cat_status!=0")->select();
-		$list=$this->site_obj->field("id,site_name")->where("cate_id!=2")->select();
+		$list=$this->site_obj->field("id,site_name")->select();
 //         dump($list);
 		$id= intval(I("get.id"));
 		$slide=$this->ad1_obj->where("ad_id=$id")->find();
@@ -154,6 +141,16 @@ class Ad1Controller extends AdminbaseController{
 			$this->success("排序更新成功！");
 		} else {
 			$this->error("排序更新失败！");
+		}
+	}
+	
+	//修改状态
+	public function status(){
+		$status = parent::_status($this->ad1_obj);
+		if ($status) {
+			echo "success";
+		} else {
+			echo "fail";
 		}
 	}
 	

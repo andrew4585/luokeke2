@@ -3,7 +3,7 @@
 <div class="wrap jj">
    <ul class="nav nav-tabs">
      <li class="active"><a href="{:U('ad1cat/index')}">广告类别</a></li>
-     <li><a href="{:U('ad1cat/add')}">添加广告类别 </a></li>
+     <li><a href="{:U('ad1cat/add')}">添加类别 </a></li>
   </ul>
   <div class="common-form">
     <form method="post" class="J_ajaxForm" action="{:U('term/listorders')}">
@@ -19,13 +19,6 @@
 	          </tr>
 	        </thead>
 	        <tbody>
-	        	<tr>
-		            <td>0</td>
-		            <td></td>
-		            <td></td>
-		            <td></td>
-		            <td>不允许修改</td>
-	          </tr>
 	        	<foreach name="ad1cat" item="vo">
 	        	<tr>
 		            <td>{$vo.cid}</td>

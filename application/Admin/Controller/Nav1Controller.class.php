@@ -3,6 +3,8 @@
  * navication(菜单管理)
  */
 namespace Admin\Controller;
+use Think\Log;
+
 use Common\Controller\AdminbaseController;
 class Nav1Controller extends AdminbaseController {
 	

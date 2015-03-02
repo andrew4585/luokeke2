@@ -1,7 +1,4 @@
 <admintpl file="header"/>
-<script type="text/javascript">
-    var catid = "12";
-</script>
 <style type="text/css">
 .col-auto {
 	overflow: hidden;
@@ -62,7 +59,6 @@ body fieldset legend {
 				  </div>
 			  </td>
 		  </tr>
-
 	  </table>
     </div>
   </div>
@@ -73,7 +69,6 @@ body fieldset legend {
 		  <th width="80">站点</th>
 			  <td>
 				  <select name="site_cid" class="normal_select">
-					  <option value="0">默认主站</option>
 					  <foreach name="list" item="vo">
 						  <option value="{$vo.id}">{$vo.site_name}</option>
 					  </foreach>
@@ -81,10 +76,9 @@ body fieldset legend {
 			  </td>
 		  </tr>
 		  <tr>
-              <th width="80">分类</th>
+              <th width="80">类别</th>
               <td>
               	<select name="ad_cid" class="normal_select">
-                  <option value="0">默认类别</option>
                   <foreach name="categorys" item="vo">
                   	<option value="{$vo.cid}">{$vo.cat_name}</option>
                   </foreach>
@@ -108,13 +102,6 @@ body fieldset legend {
               <th width="80">描述</th>
               <td><input type='text' name='ad_des'  value='' style='width:400px' class='input  input_hd J_title_color'></td>
             </tr>
-             <tr>
-              <th width="80">内容</th>
-              <td>
-              	<textarea name='ad_content' id='description' style='width:98%;height:200px;'></textarea>
-              </td>
-            </tr>
-
 
 		  <!--<tr>-->
 			  <!--<th width="80">图集 </th>-->
@@ -207,9 +194,9 @@ $(function () {
 					}
 	            },
 	            //验证规则
-	            rules: {'slide_name':{required:1}},
+	            rules: {'ad_name':{required:1}},
 	            //验证未通过提示消息
-	            messages: {'slide_name':{required:'请输入名称'}},
+	            messages: {'ad_name':{required:'请输入名称'}},
 	            //给未通过验证的元素加效果,闪烁等
 	            highlight: false,
 	            //是否在获取焦点时验证

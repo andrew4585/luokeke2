@@ -11,7 +11,7 @@ if(file_exists("data/conf/config.php")){
 }
 $configs= array(
 		"LOAD_EXT_FILE"=>"extend",
-		'UPLOADPATH' => 'data/upload/',
+		'UPLOADPATH' => 'data/upload/temp/',
 		//'SHOW_ERROR_MSG'        =>  true,    // 显示错误信息
 		'SHOW_PAGE_TRACE'		=> false,
 		'TMPL_STRIP_SPACE'		=> true,// 是否去除模板文件里面的html空格与换行
@@ -74,7 +74,7 @@ $configs= array(
 		
 		'TMPL_PARSE_STRING'=>array(
 			'/Public/upload'=>'/data/upload',
-			'__UPLOAD__' => __ROOT__.'/data/upload/',
+			'__UPLOAD__' => __ROOT__.'/data/upload/temp/',
 			'__STATICS__' => __ROOT__.'/statics/',
 		)
 );

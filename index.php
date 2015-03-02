@@ -26,6 +26,8 @@ define('SITE_PATH', "./");
 define('APP_PATH', SITE_PATH . 'application/');
 //项目相对路径，不可更改
 define('SPAPP_PATH',   SITE_PATH.'simplewind/');
+//通用类库路径
+define("UTIl",SPAPP_PATH.'/Lib/Util');
 //
 define('SPAPP',   './application/');
 //项目资源目录，不可更改

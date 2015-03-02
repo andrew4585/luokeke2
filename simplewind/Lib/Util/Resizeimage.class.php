@@ -1,4 +1,6 @@
 <?php
+use Think\Log;
+
 class Resizeimage
 {
     //图片类型

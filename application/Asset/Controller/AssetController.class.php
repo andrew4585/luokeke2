@@ -12,11 +12,11 @@ class AssetController extends AdminbaseController {
 
 
     function _initialize() {
-    	$adminid=sp_get_current_admin_id();
-    	$userid=sp_get_current_userid();
-    	if(empty($adminid) && empty($userid)){
-    		exit("非法上传！");
-    	}
+//     	$adminid=sp_get_current_admin_id();
+//     	$userid=sp_get_current_userid();
+//     	if(empty($adminid) && empty($userid)){
+//     		exit("非法上传！");
+//     	}
     }
 
     /**

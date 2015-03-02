@@ -699,7 +699,7 @@ function sp_file_read($file){
 }
 
 function sp_asset_relative_url($asset_url){
-	return str_replace(C("TMPL_PARSE_STRING.__UPLOAD__"), "", $asset_url);
+	return str_replace(__ROOT__, ".", $asset_url);
 }
 
 function sp_content_page($content,$pagetpl='{first}{prev}{liststart}{list}{listend}{next}{last}'){

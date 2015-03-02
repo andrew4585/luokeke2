@@ -55,7 +55,7 @@ body fieldset legend {
 				<if condition="empty($ad_pic)">
 					<img src="__ROOT__/statics/images/icon/upload-pic.png" id='thumb_preview' width='135' height='113' style='cursor:hand' />
 				<else/>
-					<img src="{:sp_get_asset_upload_path($ad_pic)}" id='thumb_preview' width='135' height='113' style='cursor:hand;height:113px;' />
+					<img src="__ROOT__/{$ad_pic}" id='thumb_preview' width='135' height='113' style='cursor:hand;height:113px;' />
 				</if>
 				
 			</a>

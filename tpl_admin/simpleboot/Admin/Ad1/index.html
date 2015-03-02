@@ -60,7 +60,7 @@
     	            <td>{$vo.ad_des|msubstr=0,10}</td>
                     <td>
 	                    <notempty name="vo['ad_pic']">
-	                    <a href="{:sp_get_asset_upload_path($vo['ad_pic'])}" target="_blank"><img src="{:sp_get_asset_upload_path($vo['ad_pic'])}" style="height:80px;"/></a>
+	                    <a href="__ROOT__/{$vo['ad_pic']}" target="_blank"><img src="__ROOT__/{$vo['ad_pic']}" style="height:80px;"/></a>
 	                    </notempty>
                     </td>
                     <td>

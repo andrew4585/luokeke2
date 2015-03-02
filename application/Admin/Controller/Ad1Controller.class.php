@@ -1,5 +1,7 @@
 <?php
 namespace Admin\Controller;
+use Think\Log;
+
 use Common\Controller\AdminbaseController;
 class Ad1Controller extends AdminbaseController{
 	
@@ -47,18 +49,23 @@ class Ad1Controller extends AdminbaseController{
 	function add_post(){
 		if(IS_POST){
 			if ($this->ad1_obj->create()) {
-				$_POST['ad_pic']=sp_asset_relative_url($_POST['ad_pic']);
-				/*
-				 * 裁剪图片
-				 */
-//				import("@.ORG.Resizeimage");
-//				$resize=new Resizeimage();
-//				$resize->initAttribute("", 200, 200, 2);
-//				$resize->setSize(200, 200);
-//				$cutimg=$resize->resize($_POST['ad_pic']);
+				//图片存储的文件夹
+				$folder			= "ad";
+				$pic			= sp_asset_relative_url($_POST['ad_pic']);
+				$ad_pic		 	= str_replace("temp", $folder, $pic);
+				$ad_thumb		= str_replace("temp", "temp/thumb", $pic);
+				$ad_cut_pic 	= str_replace("temp", $folder."/thumb",$pic);
+				rename($pic,$ad_pic);
+				rename($ad_thumb,$ad_cut_pic);
+				
+				$_POST['ad_pic']		= $ad_pic;
+				$_POST['ad_cut_pic']	= $ad_cut_pic;
+				
 				if ($this->ad1_obj->add($_POST)!==false) {
 					$this->success("添加成功！", U("ad1/index"));
 				} else {
+					unlink($pic);
+					unlink($ad_thumb);
 					$this->error("添加失败！");
 				}
 			} else {
@@ -81,10 +88,27 @@ class Ad1Controller extends AdminbaseController{
 	function edit_post(){
 		if(IS_POST){
 			if ($this->ad1_obj->create()) {
-				$_POST['ad_pic']=sp_asset_relative_url($_POST['ad_pic']);
+				//图片存储的文件夹
+				$folder				 = "ad";
+				$pic			= sp_asset_relative_url($_POST['ad_pic']);
+				$ad_pic		 	= str_replace("temp", $folder, $pic);
+				$ad_thumb		= str_replace("temp", "temp/thumb", $pic);
+				$ad_cut_pic 	= str_replace("temp", $folder."/thumb",$pic);
+				if(!file_exists($ad_pic)){
+					rename($pic,$ad_pic);
+					$_POST['ad_pic']	= $ad_pic;
+				}
+				
+				if(!file_exists($ad_cut_pic)){
+					rename($ad_thumb,$ad_cut_pic);
+					$_POST['ad_cut_pic']= $ad_cut_pic;
+				}
+				
 				if ($this->ad1_obj->save($_POST)!==false) {
 					$this->success("保存成功！", U("ad1/index"));
 				} else {
+					unlink($_POST['ad_pic']);
+					unlink($_POST['ad_cut_pic']);
 					$this->error("保存失败！");
 				}
 			} else {

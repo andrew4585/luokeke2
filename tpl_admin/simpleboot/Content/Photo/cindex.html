@@ -2,8 +2,8 @@
 <body class="J_scroll_fixed">
 <div class="wrap jj">
    <ul class="nav nav-tabs">
-     <li class="active"><a href="{:U('ad1cat/index')}">广告类别</a></li>
-     <li><a href="{:U('ad1cat/add')}">添加类别 </a></li>
+     <li class="active"><a href="{:U('Photo/cindex')}">作品类别</a></li>
+     <li><a href="{:U('Photo/cadd')}">添加类别 </a></li>
   </ul>
   <div class="common-form">
       <div class="table_list">
@@ -18,15 +18,15 @@
 	          </tr>
 	        </thead>
 	        <tbody>
-	        	<foreach name="ad1cat" item="vo">
+	        	<foreach name="category" item="vo">
 	        	<tr>
-		            <td>{$vo.cid}</td>
+		            <td>{$vo.id}</td>
 		            <td>{$vo.cat_name}</td>
 		            <td>{$vo.cat_idname}</td>
 		            <td>{$vo.cat_remark}</td>
 		            <td>
-		            	<a href="{:U('ad1cat/edit',array('id'=>$vo['cid']))}" >修改</a>|
-			            <a href="{:U('ad1cat/delete',array('id'=>$vo['cid']))}" class="J_ajax_del" >删除</a>
+		            	<a href="{:U('Photo/cedit',array('id'=>$vo['id']))}" >修改</a>|
+			            <a href="{:U('Photo/cdelete',array('id'=>$vo['id']))}" class="J_ajax_del" >删除</a>
 			        </td>
 	          	</tr>
 	          	</foreach>

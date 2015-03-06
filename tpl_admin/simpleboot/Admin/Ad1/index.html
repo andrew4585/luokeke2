@@ -8,7 +8,7 @@
      <li class="active"><a href="{:U('Ad1/index')}">所有广告</a></li>
      <li><a href="{:U('Ad1/add')}">添加广告</a></li>
   </ul>
-	<form class="well form-search" method="post" id="cid_form" >
+	<form class="well form-search" method="get" id="cid_form" >
     <div class="search_type cc mb10">
       <div class="mb10">
 		  <!--类别-->
@@ -77,7 +77,7 @@
 	          	</tr>
           </foreach>
           </table>
-      <div class="p10"><div class="pages">  </div> </div>
+      <div class="p10"><div class="pagination">{$page}</div></div>
      
     </div>
     <div class="form-actions">
@@ -86,14 +86,12 @@
        	<button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('Ad1/toggle',array('hide'=>1))}" data-subcheck="true" >隐藏</button>
         <button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:U('Ad1/delete')}" data-subcheck="true" >删除</button>
       </div>
+  
   </form>
 </div>
 <script src="__ROOT__/statics/js/common.js?"></script>
 <script>
 $(function () {
-	$("#selected_cid").change(function(){
-		$("#cid_form").submit();
-	});
 	$(".status").click(function(){
 		var obj   = $(this);
 		var id    = obj.attr("data-id");

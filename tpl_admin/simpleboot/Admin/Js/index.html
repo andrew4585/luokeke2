@@ -5,8 +5,8 @@
 <body class="J_scroll_fixed">
 <div class="wrap J_check_wrap">
   <ul class="nav nav-tabs">
-     <li class="active"><a href="{:U('Js/index')}">js列表</a></li>
-     <li><a href="{:U('Js/add')}">添加js</a></li>
+     <li class="active"><a href="{:U('Js/index')}">Js应用列表</a></li>
+     <li><a href="{:U('Js/add')}">添加js应用</a></li>
   </ul>
   <form class="J_ajaxForm" action="{:U('Js/listorders')}" method="post" >
   	
@@ -17,6 +17,7 @@
             <th width="80">排序</th>
             <th width="100">ID</th>
             <th>Js名称</th>
+            <th>描述</th>
             <th>状态</th>
             <th width="200">管理操作</th>
           </tr>
@@ -26,6 +27,7 @@
         		<td><input name="listorders[{$item.id}]" type='text' size='3' value='{$item.listorder}' class='input input-order'></td>
 				<td>{$item.id}</td>
 				<td>{$item.js_name}</td>
+				<td>{$item.desc}</td>
 			    <td>
 			    	<if condition="$item.status eq 1">
 			    		<font class="status" color="#1DCCAA" title="显示" data-id="{$item.id}">√</font>
@@ -40,6 +42,7 @@
         	</tr>
         </foreach>
       </table>
+      <div class="pagination">{$page}</div>
     </div>
      <div class="form-actions">
             <button type="submit" class="btn btn-primary btn_submit J_ajax_submit_btn">排序</button>

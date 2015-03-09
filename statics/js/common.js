@@ -709,7 +709,7 @@ function open_map_dialog(url,title,options,callback){
 
 function ajax_alert(data){
 	var content='';
-	if (data.state === 'success') {
+	if (data.state) {
 		Wind.use("artDialog",function(){
 	        art.dialog({
 	            id:'success',
@@ -731,7 +731,7 @@ function ajax_alert(data){
 	        });
 	    });
 		
-    } else if (data.state === 'fail') {
+    } else{
     	content = "<div style='color:red'>"+data.info+"</div>";
     	Wind.use("artDialog",function(){
             art.dialog({

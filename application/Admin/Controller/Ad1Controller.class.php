@@ -19,26 +19,21 @@ class Ad1Controller extends AdminbaseController{
     	$categorys=$this->ad1cat_obj->field("cid,cat_name")->select();
 		$list=$this->site_obj->field("id,site_name")->select();
 	    $this->assign("categorys",$categorys);
-		$where	= "";
+		$where	= "1=1";
 		$id		= 0;
-		$param	= "";
 		if(isset($_GET['cid']) && $_GET['cid']!=""){
 			$cid=$_GET['cid'];
-			$where="ad_cid=$cid";
+			$where.=" and ad_cid=$cid";
 		}
 		if(isset($_GET['id']) && $_GET['id']!=""){
 			$id=$_GET['id'];
-			$where="site_cid=$id";
+			$where.=" and site_cid=$id";
 		}
-		dump($_GET);
 		$this->assign("list",$list);
     	$this->assign("ad_cid",$cid);
 		$this->assign("site_cid",$id);
 		$count=$this->ad1_obj->where($where)->count();
-		$page = $this->page($count,2);
-		if(empty($_GET['p'])){
-			$page->__set("List_Page", 1);
-		}
+		$page = $this->page($count,1);
 		$slides=$this->ad1_obj->relation(true)->where($where)
 							->order("listorder ASC")
 							->limit($page->firstRow,$page->listRows)->select();

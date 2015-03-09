@@ -5,6 +5,8 @@
  */
 //定义是后台
 namespace Common\Controller;
+use Think\Log;
+
 use Common\Controller\AppframeController;
 
 class AdminbaseController extends AppframeController {
@@ -198,6 +200,50 @@ class AdminbaseController extends AppframeController {
         return $find;
     }
 
+    /**
+     * 获取站点列表
+     * @return array siteList 站点列表
+     */
+    public function getSite(){
+    	$db	  = D("Common/Site");
+    	$list = $db->field("id,site_name")->order("listorder")->select();
+    	return $list;
+    }
+    
+    /**
+     * 获取类别列表
+     * @param class $model 类别模型
+     */
+    public function getCategory($model){
+    	try{
+    		return $model->field("id,cat_name")->order("listorder")->select();
+    	}catch (\Exception $e){
+    		Log::record("AdminbaseController-getCategory:".$e->getMessage());
+    	}
+    }
+    
+    /**
+     * 转移上传图片路径
+     * @param string $desDir 目标文件夹
+     * @param string $image  图片原地址
+     * @return string $desc  图片地址
+     */
+    public function removeUploadImage($desDir,$image){
+    	//源文件路径
+    	$pic			= sp_asset_relative_url($image);
+    	//缩略图原路径
+    	$thumb		    = str_replace("temp", "temp/thumb", $pic);
+    	//目标路径
+    	$desc		 	= str_replace("temp", $desDir, $pic);
+    	//缩略图目标路径
+    	$descThumb 		= str_replace("temp", $desDir."/thumb",$pic);
+    	
+    	if(!file_exists($desc))		rename($pic,$desc);
+    	if(!file_exists($descThumb))rename($thumb,$descThumb);
+    	
+    	return $desc;
+    }
+    
     private function check_access($uid){
     	
     	//如果用户角色是1，则无需判断

@@ -3,123 +3,72 @@ namespace Content\Controller;
 use Common\Controller\AdminbaseController;
 class PhotoController extends AdminbaseController {
 	
-	protected $model_photo_category;
-	protected $model_photo;
-	protected $model_site;
+	protected $model_cate;
+	protected $model_obj;
+	protected $imgFolder;
 	
 	function _initialize() {
 		parent::_initialize();
-		$this->model_photo_category = D("PhotoCat");
-		$this->model_photo 			= D("Photo");
-		$this->model_site			= D("Common/Site");
+		$this->imgFolder	= "Photo";
+		$this->model_cate	= D("PhotoCat");
+		$this->model_obj	= D("Photo");
 	}
+	
+	//公共参数
+	function commonParam(){
+		//分类列表
+		$this->assign("categorys",$this->getCategory($this->model_cate));
+		//站点列表
+		$this->assign("siteList",$this->getSite());
+	}
+	
 	function index(){
-		
-		$categorys=$this->model_photo_category->field("id,cat_name")->select();
-		$this->assign("categorys",$categorys);
-		
-		$list=$this->site_obj->field("id,site_name")->select();
-		$where="";
-		$id=0;
-		if(isset($_POST['cid']) && $_POST['cid']!=""){
-			$cid=$_POST['cid'];
-			$where="ad_cid=$cid";
-		}
-		if(isset($_POST['id']) && $_POST['id']!=""){
-			$id=$_POST['id'];
-			$where="site_cid=$id";
-		}
-		$this->assign("list",$list);
-		$this->assign("ad_cid",$cid);
-		$this->assign("site_cid",$id);
-		$slides=$this->ad1_obj->relation(true)->where($where)->order("listorder ASC")->select();
-		$this->assign('slides',$slides);
+		//列表数据
+		$this->_lists();
+		$this->commonParam();
 		$this->display();
-		
-		
-// 		$this->_lists();
-// 		$this->_getTree();
-// 		$this->display();
 	}
 	
 	function add(){
-		$this->_getTree();
-		$term_id = intval(I("get.term"));
-		$term=$this->terms_obj->where("term_id=$term_id")->find();
-		$this->assign("author","1");
-		$this->assign("term",$term);
-		$this->display();
-	}
-	
-	function add_post(){
-		$this->_getTree();
-		if (IS_POST) {
-			if(!empty($_POST['photos_alt']) && !empty($_POST['photos_url'])){
-				foreach ($_POST['photos_url'] as $key=>$url){
-					$photourl=sp_asset_relative_url($url);
-					$_POST['smeta']['photo'][]=array("url"=>$photourl,"alt"=>$_POST['photos_alt'][$key]);
-				}
-			}
-			$_POST['smeta']['thumb'] = sp_asset_relative_url($_POST['smeta']['thumb']);
-			 
-			$_POST['post']['post_date']=date("Y-m-d H:i:s",time());
-			$_POST['post']['smeta']=json_encode($_POST['smeta']);
-			$_POST['post']['post_author']=get_current_admin_id();
-			$result=$this->posts_obj->add($_POST['post']);
+		if(IS_POST){
+			$_POST['post_date']= strtotime($_POST['post_date']);
+			$_POST['post_content']=htmlspecialchars($_POST['post_content']);
+			$_POST['post_pic'] = $this->removeUploadImage($this->imgFolder, $_POST['post_pic']);
+			$result=$this->model_obj->add($_POST);
 			if ($result) {
-				//
-				$_POST['term']['object_id']=$result;
-				$result=$this->terms_relationship->add($_POST['term']);
-				if ($result) {
-					$this->success("添加成功！");
-				}else{
-					$this->error("归类失败！");
-				}
+				$this->success("添加成功！");
 			} else {
 				$this->error("添加失败！");
 			}
-			 
+		}else{
+			$this->commonParam();
+			$this->display();
 		}
 	}
 	
 	public function edit(){
-		$id=  intval(I("get.id"));
-		$term_id = intval(I("get.term"));
-		if(empty($term_id)){
-			$term_id = M('TermRelationships')->where("object_id=$id")->getField('term_id'); 
-		}
-		$term=$this->terms_obj->where("term_id=$term_id")->find();
-		$post=$this->posts_obj->where("id=$id")->find();
-		$this->assign("post",$post);
-		$this->assign("smeta",json_decode($post['smeta'],true));
-		$this->assign("term",$term);
-		$this->display();
-	}
-	
-	public function edit_post(){
-		if (IS_POST) {
-			if(!empty($_POST['photos_alt']) && !empty($_POST['photos_url'])){
-				foreach ($_POST['photos_url'] as $key=>$url){
-					$photourl=sp_asset_relative_url($url);
-					$_POST['smeta']['photo'][]=array("url"=>$photourl,"alt"=>$_POST['photos_alt'][$key]);
-				}
-			}
-			$_POST['smeta']['thumb'] = sp_asset_relative_url($_POST['smeta']['thumb']);
-			$_POST['post']['smeta']=json_encode($_POST['smeta']);
-			unset($_POST['post']['post_author']);
-			$result=$this->posts_obj->save($_POST['post']);
-			//echo($this->posts_obj->getLastSql());die;
-			if ($result!==false) {
-				$this->success("保存成功！");
+		if(IS_POST){
+			$_POST['post_date']= strtotime($_POST['post_date']);
+			$_POST['post_content']=htmlspecialchars($_POST['post_content']);
+			$_POST['post_pic'] = $this->removeUploadImage($this->imgFolder, $_POST['post_pic']);
+			$result=$this->model_obj->save($_POST);
+			if ($result) {
+				$this->success("编辑成功！");
 			} else {
-				$this->error("保存失败！");
+				$this->error("编辑失败！");
 			}
+		}else{
+			$id=  $_REQUEST['id'];
+			$info = $this->model_obj->where("id=$id")->find();
+			$this->assign($info);
+			$this->commonParam();
+			$this->display();
 		}
 	}
 	
 	//排序
 	public function listorders() {
-		$status = parent::_listorders($this->terms_relationship);
+		$status = parent::_listorders($this->model_obj);
 		if ($status) {
 			$this->success("排序更新成功！");
 		} else {
@@ -127,119 +76,63 @@ class PhotoController extends AdminbaseController {
 		}
 	}
 	
-	private  function _lists($status=1){
-		$term_id=0;
-		if(!empty($_REQUEST["term"])){
-			$term_id=intval($_REQUEST["term"]);
-			$term=$this->terms_obj->where("term_id=$term_id")->find();
-			$this->assign("term",$term);
-			$_GET['term']=$term_id;
-		}
-		
-		$where_ands=empty($term_id)?array("a.status=$status"):array("a.term_id = $term_id and a.status=$status");
-		
+	private  function _lists(){
+		//status=1,表示文章未删除，0表示文章已删除
+		$where_ands =array("status=1");
+		//istop:首页置顶，recommended：推荐，listorder：排序，post_date:发布时间
+		$order		="istop desc,recommended desc,listorder ASC,post_date DESC";
 		$fields=array(
-				'start_time'=> array("field"=>"post_date","operator"=>">"),
-				'end_time'  => array("field"=>"post_date","operator"=>"<"),
-				'keyword'  => array("field"=>"post_title","operator"=>"like"),
+				'site_id'	=> array("field"=>'site_id','operator'=>'=','type'=>'int'),
+				'cid'		=> array("field"=>'cid','operator'=>'=','type'=>'int'),
+				'start_time'=> array("field"=>"post_date","operator"=>">=",'type'=>'time'),
+				'end_time'  => array("field"=>"post_date","operator"=>"<=",'type'=>'time'),
+				'keyword'   => array("field"=>"post_title","operator"=>"like",'type'=>'string'),
 		);
-		if(IS_POST){
-			
-			foreach ($fields as $param =>$val){
-				if (isset($_POST[$param]) && !empty($_POST[$param])) {
-					$operator=$val['operator'];
-					$field   =$val['field'];
-					$get=$_POST[$param];
-					$_GET[$param]=$get;
-					if($operator=="like"){
-						$get="%$get%";
-					}
-					array_push($where_ands, "$field $operator '$get'");
+		foreach ($fields as $param =>$val){
+			if (!empty($_REQUEST[$param])) {
+				
+				$operator=$val['operator'];		//操作
+				$type	 =$val['type'];			//参数类型
+				$field   =$val['field'];		//字段名
+				$get	 =$_REQUEST[$param];	//数据
+				if($operator=="like"){
+					$get="'%$get%'";
+				}elseif ($type=='time'){
+					$get=strtotime($get);
+				}elseif ($type=='string'){
+					$get="'$get'";
 				}
-			}
-		}else{
-			foreach ($fields as $param =>$val){
-				if (isset($_GET[$param]) && !empty($_GET[$param])) {
-					$operator=$val['operator'];
-					$field   =$val['field'];
-					$get=$_GET[$param];
-					if($operator=="like"){
-						$get="%$get%";
-					}
-					array_push($where_ands, "$field $operator '$get'");
-				}
+				array_push($where_ands, "$field $operator $get");
 			}
 		}
-		
 		$where= join(" and ", $where_ands);
 			
-			
-		$count=$this->terms_relationship
-		->alias("a")
-		->join(C ( 'DB_PREFIX' )."posts b ON a.object_id = b.id")
-		->where($where)
-		->count();
+		$count=$this->model_obj->where($where)->count();
 			
 		$page = $this->page($count, 20);
 			
-			
-		$posts=$this->terms_relationship
-		->alias("a")
-		->join(C ( 'DB_PREFIX' )."posts b ON a.object_id = b.id")
-		->where($where)
-		->limit($page->firstRow . ',' . $page->listRows)
-		->order("a.listorder ASC,b.post_modified DESC")->select();
-		$users_obj = M("Users");
-		$users_data=$users_obj->field("id,user_login")->where("user_status=1")->select();
-		$users=array();
-		foreach ($users_data as $u){
-			$users[$u['id']]=$u;
-		}
-		$this->assign("users",$users);
+		$list =$this->model_obj ->relation(true)->where($where)
+								->limit($page->firstRow, $page->listRows)
+								->order($order)->select();
 		$this->assign("Page", $page->show('Admin'));
-		$this->assign("current_page",$page->GetCurrentPage());
-		unset($_GET[C('VAR_URL_PARAMS')]);
-		$this->assign("formget",$_GET);
-		$this->assign("posts",$posts);
-	}
-	
-	private function _getTree(){
-		$term_id=empty($_REQUEST['term'])?0:intval($_REQUEST['term']);
-		$result = $this->terms_obj->order(array("listorder"=>"asc"))->select();
-		
-		$tree = new \Tree();
-		$tree->icon = array('&nbsp;&nbsp;&nbsp;│ ', '&nbsp;&nbsp;&nbsp;├─ ', '&nbsp;&nbsp;&nbsp;└─ ');
-		$tree->nbsp = '&nbsp;&nbsp;&nbsp;';
-		foreach ($result as $r) {
-			$r['str_manage'] = '<a href="' . U("AdminTerm/add", array("parent" => $r['term_id'])) . '">添加子类</a> | <a href="' . U("AdminTerm/edit", array("id" => $r['term_id'])) . '">修改</a> | <a class="J_ajax_del" href="' . U("AdminTerm/delete", array("id" => $r['term_id'])) . '">删除</a> ';
-			$r['visit'] = "<a href='#'>访问</a>";
-			$r['taxonomys'] = $this->taxonomys[$r['taxonomy']];
-			$r['id']=$r['term_id'];
-			$r['parentid']=$r['parent'];
-			$r['selected']=$term_id==$r['term_id']?"selected":"";
-			$array[] = $r;
-		}
-		
-		$tree->init($array);
-		$str="<option value='\$id' \$selected>\$spacer\$name</option>";
-		$taxonomys = $tree->get_tree(0, $str);
-		$this->assign("taxonomys", $taxonomys);
+		$this->assign("formget",$_REQUEST);
+		$this->assign("list",$list);
 	}
 	
 	function delete(){
-		if(isset($_GET['tid'])){
-			$tid = intval(I("get.tid"));
+		if(isset($_GET['id'])){
+			$id = intval(I("get.id"));
 			$data['status']=0;
-			if ($this->terms_relationship->where("tid=$tid")->save($data)) {
+			if ($this->model_obj->where("id=$id")->save($data)) {
 				$this->success("删除成功！");
 			} else {
 				$this->error("删除失败！");
 			}
 		}
 		if(isset($_POST['ids'])){
-			$tids=join(",",$_POST['ids']);
+			$ids=join(",",$_POST['ids']);
 			$data['status']=0;
-			if ($this->terms_relationship->where("tid in ($tids)")->save($data)) {
+			if ($this->model_obj->where("id in ($ids)")->save($data)) {
 				$this->success("删除成功！");
 			} else {
 				$this->error("删除失败！");
@@ -247,193 +140,80 @@ class PhotoController extends AdminbaseController {
 		}
 	}
 	
-	function check(){
-		if(isset($_POST['ids']) && $_GET["check"]){
-			$data["post_status"]=1;
-			
-			$tids=join(",",$_POST['ids']);
-			$objectids=$this->terms_relationship->field("object_id")->where("tid in ($tids)")->select();
-			$ids=array();
-			foreach ($objectids as $id){
-				$ids[]=$id["object_id"];
-			}
-			$ids=join(",", $ids);
-			if ( $this->posts_obj->where("id in ($ids)")->save($data)!==false) {
-				$this->success("审核成功！");
-			} else {
-				$this->error("审核失败！");
-			}
-		}
-		if(isset($_POST['ids']) && $_GET["uncheck"]){
-			
-			$data["post_status"]=0;
-			$tids=join(",",$_POST['ids']);
-			$objectids=$this->terms_relationship->field("object_id")->where("tid in ($tids)")->select();
-			$ids=array();
-			foreach ($objectids as $id){
-				$ids[]=$id["object_id"];
-			}
-			$ids=join(",", $ids);
-			if ( $this->posts_obj->where("id in ($ids)")->save($data)) {
-				$this->success("取消审核成功！");
-			} else {
-				$this->error("取消审核失败！");
-			}
-		}
-	}
-	
+	//置顶操作
 	function top(){
+		//批量置顶
 		if(isset($_POST['ids']) && $_GET["top"]){
 			$data["istop"]=1;
-				
-			$tids=join(",",$_POST['ids']);
-			$objectids=$this->terms_relationship->field("object_id")->where("tid in ($tids)")->select();
-			$ids=array();
-			foreach ($objectids as $id){
-				$ids[]=$id["object_id"];
-			}
-			$ids=join(",", $ids);
-			if ( $this->posts_obj->where("id in ($ids)")->save($data)!==false) {
+			$ids=join(",", $_POST['ids']);
+			if ( $this->model_obj->where("id in ($ids)")->save($data)) {
 				$this->success("置顶成功！");
 			} else {
 				$this->error("置顶失败！");
 			}
 		}
+		//批量取消置顶
 		if(isset($_POST['ids']) && $_GET["untop"]){
-				
 			$data["istop"]=0;
-			$tids=join(",",$_POST['ids']);
-			$objectids=$this->terms_relationship->field("object_id")->where("tid in ($tids)")->select();
-			$ids=array();
-			foreach ($objectids as $id){
-				$ids[]=$id["object_id"];
-			}
-			$ids=join(",", $ids);
-			if ( $this->posts_obj->where("id in ($ids)")->save($data)) {
+			$ids=join(",", $_POST['ids']);
+			if ( $this->model_obj->where("id in ($ids)")->save($data)) {
 				$this->success("取消置顶成功！");
 			} else {
 				$this->error("取消置顶失败！");
 			}
 		}
+		//单个置顶/取消置顶
+		if(isset($_GET['id'])){
+	    	$data['istop'] = $_GET['istop'];
+	    	$result=$this->model_obj->where(array("id" => $_GET['id']))->save($data);
+			if ($result) {
+				$this->success("success");
+			} else {
+				$this->error("fail");
+			}
+		}
+    	
 	}
-	
+	//推荐操作
 	function recommend(){
+		//批量推荐
 		if(isset($_POST['ids']) && $_GET["recommend"]){
 			$data["recommended"]=1;
-	
-			$tids=join(",",$_POST['ids']);
-			$objectids=$this->terms_relationship->field("object_id")->where("tid in ($tids)")->select();
-			$ids=array();
-			foreach ($objectids as $id){
-				$ids[]=$id["object_id"];
-			}
-			$ids=join(",", $ids);
-			if ( $this->posts_obj->where("id in ($ids)")->save($data)!==false) {
-				$this->success("推荐成功！");
+			$ids=join(",", $_POST['ids']);
+			if ( $this->model_obj->where("id in ($ids)")->save($data)) {
+				$this->success("置顶成功！");
 			} else {
-				$this->error("推荐失败！");
+				$this->error("置顶失败！");
 			}
 		}
+		//批量取消推荐
 		if(isset($_POST['ids']) && $_GET["unrecommend"]){
-	
 			$data["recommended"]=0;
-			$tids=join(",",$_POST['ids']);
-			$objectids=$this->terms_relationship->field("object_id")->where("tid in ($tids)")->select();
-			$ids=array();
-			foreach ($objectids as $id){
-				$ids[]=$id["object_id"];
-			}
-			$ids=join(",", $ids);
-			if ( $this->posts_obj->where("id in ($ids)")->save($data)) {
-				$this->success("取消推荐成功！");
+			$ids=join(",", $_POST['ids']);
+			if ( $this->model_obj->where("id in ($ids)")->save($data)) {
+				$this->success("取消置顶成功！");
 			} else {
-				$this->error("取消推荐失败！");
+				$this->error("取消置顶失败！");
 			}
 		}
-	}
-	
-	
-	
-	
-	function move(){
-		if(IS_POST){
-			if(isset($_GET['ids']) && isset($_POST['term_id'])){
-				$tids=$_GET['ids'];
-				if ( $this->terms_relationship->where("tid in ($tids)")->save($_POST)) {
-					$this->success("移动成功！");
-				} else {
-					$this->error("移动失败！");
-				}
-			}
-		}else{
-			$parentid = intval(I("get.parent"));
-			$tree = new \PathTree();
-			$tree->icon = array('&nbsp;&nbsp;&nbsp;│ ', '&nbsp;&nbsp;&nbsp;├─ ', '&nbsp;&nbsp;&nbsp;└─ ');
-			$tree->nbsp = '---';
-			$result =$this->terms_obj->order(array("path"=>"asc"))->select();
-			$tree->init($result);
-			$tree=$tree->get_tree();
-			$this->assign("terms",$tree);
-			
-			$this->display();
-		}
-	}
-	
-	function recyclebin(){
-		$this->_lists(0);
-		$this->_getTree();
-		$this->display();
-	}
-	
-	function clean(){
-		if(isset($_POST['ids'])){
-			$ids = implode(",", $_POST['ids']);
-			$tids= implode(",", array_keys($_POST['ids']));
-			$data=array("post_status"=>"0");
-			$status=$this->terms_relationship->where("tid in ($tids)")->delete();
-			if($status!==false){
-				$status=$this->posts_obj->where("id in ($ids)")->delete();
-			}
-			
-			if ($status!==false) {
-				$this->success("删除成功！");
-			} else {
-				$this->error("删除失败！");
-			}
-		}else{
-			if(isset($_GET['id'])){
-				$id = intval(I("get.id"));
-				$tid = intval(I("get.tid"));
-				$status=$this->terms_relationship->where("tid = $tid")->delete();
-				if($status!==false){
-					$status=$this->posts_obj->where("id=$id")->delete();
-				}
-				if ($status!==false) {
-					$this->success("删除成功！");
-				} else {
-					$this->error("删除失败！");
-				}
-			}
-		}
-	}
-	
-	function restore(){
+		//单个推荐/取消推荐
 		if(isset($_GET['id'])){
-			$id = intval(I("get.id"));
-			$data=array("tid"=>$id,"status"=>"1");
-			if ($this->terms_relationship->save($data)) {
-				$this->success("还原成功！");
+	    	$data['recommended'] = $_GET['recommended'];
+	    	$result=$this->model_obj->where(array("id" => $_GET['id']))->save($data);
+			if ($result) {
+				$this->success("success");
 			} else {
-				$this->error("还原失败！");
+				$this->error("fail");
 			}
 		}
 	}
+	
 	
 	//--------------------------------------------category--------------------------------
 	
 	//分类列表
 	function cindex(){
-		$cats=$this->model_photo_category->select();
+		$cats=$this->model_cate->order("listorder")->select();
 		$this->assign("category",$cats);
 		$this->display();
 	}
@@ -458,18 +238,18 @@ class PhotoController extends AdminbaseController {
 	//编辑分类
 	function cedit(){
 		if(IS_POST){
-			if ($this->model_photo_category->create()) {
-				if ($this->model_photo_category->save()!==false) {
+			if ($this->model_cate->create()) {
+				if ($this->model_cate->save()!==false) {
 					$this->success("保存成功！", U("Photo/cindex"));
 				} else {
 					$this->error("保存失败！");
 				}
 			} else {
-				$this->error($this->model_photo_category->getError());
+				$this->error($this->model_cate->getError());
 			}
 		}else{
 			$id= intval(I("get.id"));
-			$ad1cat=$this->model_photo_category->where("id=$id")->find();
+			$ad1cat=$this->model_cate->where("id=$id")->find();
 			$this->assign($ad1cat);
 			$this->display();
 		}
@@ -479,11 +259,20 @@ class PhotoController extends AdminbaseController {
 	//删除分类
 	function cdelete(){
 		$id = intval(I("get.id"));
-		if ($this->model_photo_category->delete($id)!==false) {
+		if ($this->model_cate->delete($id)!==false) {
 			$this->success("删除成功！");
 		} else {
 			$this->error("删除失败！");
 		}
 	}
 	
+	//分类排序
+	function clistorders(){
+		$status = parent::_listorders($this->model_cate);
+		if ($status) {
+			$this->success("排序更新成功！");
+		} else {
+			$this->error("排序更新失败！");
+		}
+	}
 }

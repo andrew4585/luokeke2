@@ -6,10 +6,12 @@
      <li><a href="{:U('Photo/cadd')}">添加类别 </a></li>
   </ul>
   <div class="common-form">
+  	<form class="J_ajaxForm" action="" method="post">
       <div class="table_list">
 	    <table width="100%" class="table table-hover">
 	        <thead>
 	          <tr>
+	            <th width="50">排序</th>
 	            <th width="50">ID</th>
 	            <th>分类名称</th>
 	            <th>分类标识</th>
@@ -20,6 +22,7 @@
 	        <tbody>
 	        	<foreach name="category" item="vo">
 	        	<tr>
+		            <td><input name='listorders[{$vo.id}]' class="input input-order"  type='text' size='3' value='{$vo.listorder}'></td>
 		            <td>{$vo.id}</td>
 		            <td>{$vo.cat_name}</td>
 		            <td>{$vo.cat_idname}</td>
@@ -33,6 +36,10 @@
 			</tbody>
 	      </table>
   		</div>
+  		<div class="form-actions">
+        <button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('Photo/clistorders')}">排序</button>
+      </div>
+  </form>
   </div>
 </div>
 <script src="__ROOT__/statics/js/common.js?"></script>

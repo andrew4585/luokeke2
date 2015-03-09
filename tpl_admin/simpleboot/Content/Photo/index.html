@@ -1,21 +1,35 @@
 <admintpl file="header" />
+<style>
+	.recommended,.istop{cursor:pointer;font-size:15px;}
+</style>
 <body class="J_scroll_fixed">
 <div class="wrap J_check_wrap">
   <ul class="nav nav-tabs">
-     <li class="active"><a href="javascript:;">所有文章</a></li>
-     <li><a href="{:U('AdminPost/add',array('term'=>empty($term['term_id'])?'':$term['term_id']))}"  target="_self">添加文章</a></li>
+     <li class="active"><a href="javascript:;">所有作品</a></li>
+     <li><a href="{:U('Photo/add')}"  target="_self">添加作品</a></li>
   </ul>
-  <form class="well form-search" method="post" action="{:u('AdminPost/index')}">
+  <form class="well form-search" method="post" action="{:u('Photo/index')}">
     <div class="search_type cc mb10">
       <div class="mb10"> 
-        <span class="mr20">分类：
-        <select class="select_2" name="term">
-          	<option value='0' >全部</option>
-          	{$taxonomys}
+          <!--类别-->
+        <select class="select_2" name="cid"style="width:160px;" id="">
+          <option value=''>全部类别</option>
+          <foreach name="categorys" item="vo">
+          	<php>$cid_select=$vo['id']==$formget['cid']?"selected":"";</php>
+          	<option value="{$vo.id}" {$cid_select}>{$vo.cat_name}</option>
+          </foreach>
         </select>
+             <!-- 站点-->
+		  <select class="select_2" name="site_id" style="width:160px">
+			  <option value=''>全部站点</option>
+			  <foreach name="siteList" item="vo">
+				  <php>$id_select=$vo['id']==$formget['site_id']?"selected":"";</php>
+				  <option value="{$vo.id}" {$id_select}>{$vo.site_name}</option>
+			  </foreach>
+		  </select>
         &nbsp;&nbsp;时间：
-        <input type="text" name="start_time" class="input length_2 J_date" value="{$formget.start_time|default=''}" style="width:80px;" autocomplete="off">-<input type="text" class="input length_2 J_date" name="end_time" value="{$formget.end_time}" style="width:80px;" autocomplete="off">
-        
+        <input type="text" name="start_time" class="input length_2 J_date" value="{$formget.start_time|default=''}" style="width:100px;" autocomplete="off"> -
+        <input type="text" class="input length_2 J_date" name="end_time" value="{$formget.end_time}" style="width:100px;" autocomplete="off">
         <!-- 
         <select class="select_2" name="searchtype" style="width:70px;">
           <option value='0' >标题</option>
@@ -38,45 +52,46 @@
 	            <th>ID</th>
 	            <th>标题</th>
 	            <th width="45">点击量</th>
-                <th width="50">摘要</th>
                 <th width="50">缩略图</th>
-	            <th width="80">发布人</th>
 	            <th width="120"><span>发布时间</span></th>
-	            <th width="45">状态</th>
+	            <th width="80">首页置顶</th>
+	            <th width="80">推荐</th>
 	            <th width="120">操作</th>
 	          </tr>
         </thead>
-        	<php>
-        		$status=array("1"=>"已审核","0"=>"未审核");
-        		$top_status=array("1"=>"已置顶","0"=>"未置顶");
-        		$recommend_status=array("1"=>"已推荐","0"=>"未推荐");
-        	</php>
-        	<foreach name="posts" item="vo">
+        	<foreach name="list" item="vo">
 	        	<tr>
-		            <td><input type="checkbox" class="J_check" data-yid="J_check_y" data-xid="J_check_x" name="ids[]" value="{$vo.tid}" ></td>
-		            <td><input name='listorders[{$vo.tid}]' class="input input-order"  type='text' size='3' value='{$vo.listorder}'></td>
-		            <td><a>{$vo.tid}</a></td>
+		            <td><input type="checkbox" class="J_check" data-yid="J_check_y" data-xid="J_check_x" name="ids[]" value="{$vo.id}" ></td>
+		            <td><input name='listorders[{$vo.id}]' class="input input-order"  type='text' size='3' value='{$vo.listorder}'></td>
+		            <td><a>{$vo.id}</a></td>
 		            <td>
-		            	<a href="{:U('portal/article/index',array('id'=>$vo['tid']))}" target="_blank">
+		            	<a href="{:U('portal/article/index',array('id'=>$vo['tid']))}" target="_blank" title="{$vo.post_excerpt}">
 		            		<span>{$vo.post_title}</span>
 		            	</a>
 		            </td>
 		            <td>{$vo.post_hits}</td>
-                    <td><php> $excerpt_status = empty($vo['post_excerpt'])?"未填写":'已填写';</php>{$excerpt_status}
-                    </td>
     	            <td>
-    	            <php>$smeta=json_decode($vo['smeta'],true);</php>
-    	            	<if condition="!empty($smeta['thumb'])"> 
-    	            		<a href="{:sp_get_asset_upload_path($smeta['thumb'])}" target='_blank'>查看</a>
-						</if>
+    	            	<a href="#"  onclick="image_priview('__ROOT__/{$vo.post_pic}');"><img src="__ROOT__/{$vo.post_pic}" style="width:200px;"/></a>
     	            </td>
-		            <td>{$users[$vo['post_author']]['user_login']}</td>
-		            <td>{$vo.post_date}</td>
-		            <td>{$status[$vo['post_status']]}<br>{$top_status[$vo['istop']]}<br>{$recommend_status[$vo['recommended']]}</td>
+		            <td>{$vo.post_date|date="Y-m-d H:i:s",###}</td>
+		            <td align="center">
+		            	<if condition="$vo.istop eq 1">
+			    		<font class="istop" color="#1DCCAA" title="置顶" data-id="{$vo.id}">√</font>
+				    	<else/>
+				    		<font class="istop" color="red" title="未置顶" data-id="{$vo.id}">×</font>
+				    	</if>
+		            </td>
+		            <td align="center">
+		            	<if condition="$vo.recommended eq 1">
+			    		<font class="recommended" color="#1DCCAA" title="推荐" data-id="{$vo.id}">√</font>
+				    	<else/>
+				    		<font class="recommended" color="red" title="未推荐" data-id="{$vo.id}">×</font>
+				    	</if>
+		            </td>
 		            <td>
 		            	<a href="javascript:open_iframe_dialog('{:u('comment/commentadmin/index',array('post_id'=>$vo['id']))}','评论列表')">查看评论</a> |
-		            	<a href="{:U('AdminPost/edit',array('term'=>empty($term['term_id'])?'':$term['term_id'],'id'=>$vo['id']))}">修改</a>|
-		            	<a href="{:U('AdminPost/delete',array('term'=>empty($term['term_id'])?'':$term['term_id'],'tid'=>$vo['tid']))}" class="J_ajax_del" >删除</a>
+		            	<a href="{:U('Photo/edit')}/id/{$vo.id}">修改</a>|
+		            	<a href="{:U('Photo/delete')}/id/{$vo.id}" class="J_ajax_del" >删除</a>
 					</td>
 	          	</tr>
           </foreach>
@@ -85,64 +100,60 @@
      
     </div>
     <div class="form-actions">
-        <label class="checkbox inline" for="check_all"><input type="checkbox" class="J_check_all" data-direction="y" data-checklist="J_check_y" id="check_all">全选</label>                
-        <button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('AdminPost/listorders')}">排序</button>
-        <button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('AdminPost/check',array('check'=>1))}" data-subcheck="true" >审核</button>
-        <button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('AdminPost/check',array('uncheck'=>1))}" data-subcheck="true" >取消审核</button>
-        <button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('AdminPost/top',array('top'=>1))}" data-subcheck="true" >置顶</button>
-        <button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('AdminPost/top',array('untop'=>1))}" data-subcheck="true" >取消置顶</button>
-        <button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('AdminPost/recommend',array('recommend'=>1))}" data-subcheck="true" >推荐</button>
-        <button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('AdminPost/recommend',array('unrecommend'=>1))}" data-subcheck="true" >取消推荐</button>
-        <button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('AdminPost/delete')}" data-subcheck="true" data-msg="你确定删除吗？">删除</button>
-        <button class="btn btn-primary" type="button" id="J_Content_remove">批量移动</button>
+        <button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('Photo/listorders')}">排序</button>
+        <button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('Photo/top',array('top'=>1))}" data-subcheck="true" >首页置顶</button>
+        <button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('Photo/top',array('untop'=>1))}" data-subcheck="true" >取消置顶</button>
+        <button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('Photo/recommend',array('recommend'=>1))}" data-subcheck="true" >推荐</button>
+        <button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('Photo/recommend',array('unrecommend'=>1))}" data-subcheck="true" >取消推荐</button>
+        <button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('Photo/delete')}" data-subcheck="true" data-msg="你确定删除吗？">删除</button>
       </div>
   </form>
 </div>
 <script src="__ROOT__/statics/js/common.js"></script>
+<script type="text/javascript" src="__ROOT__/statics/js/content_addtop.js"></script>
 <script>
-
-function refersh_window() {
-    var refersh_time = getCookie('refersh_time');
-    if (refersh_time == 1) {
-        window.location="{:u('AdminPost/index',$formget)}";
-    }
-}
-setInterval(function(){
-	refersh_window();
-}, 2000);
 $(function () {
-	setCookie("refersh_time",0);
-    Wind.use('ajaxForm','artDialog','iframeTools', function () {
-        //批量移动
-        $('#J_Content_remove').click(function (e) {
-            var str = 0;
-            var id = tag = '';
-            $("input[name='ids[]']").each(function () {
-                if ($(this).attr('checked')) {
-                    str = 1;
-                    id += tag + $(this).val();
-                    tag = ',';
-                }
-            });
-            if (str == 0) {
-				art.dialog.through({
-					id:'error',
-					icon: 'error',
-					content: '您没有勾选信息，无法进行操作！',
-					cancelVal: '关闭',
-					cancel: true
-				});
-                return false;
-            }
-            var $this = $(this);
-            art.dialog.open("__ROOT__/index.php?g=portal&m=AdminPost&a=move&ids=" + id, {
-                title: "批量移动",
-                width:"80%"
-            });
-        });
-    });
+	$(".istop").click(function(){
+		var obj   = $(this);
+		var id    = obj.attr("data-id");
+		var href  = "{:U('Content/Photo/top')}";
+		var color = obj.attr("color");
+		var title = color=='red'?"置顶":"未置顶";
+		var status= color=='red'?"1":"0";
+		var html  = color=='red'?"√":"×";
+			color = color=='red'?"#1DCCAA":"red";
+		
+		$.get(href,{id:id,istop:status},function(data){
+			if(data.status){
+				obj.attr("color",color);
+				obj.attr("title",title);
+				obj.html(html);
+			}else{
+				alert(data.info);
+			}
+		});
+	});
+	$(".recommended").click(function(){
+		var obj   = $(this);
+		var id    = obj.attr("data-id");
+		var href  = "{:U('Content/Photo/recommend')}";
+		var color = obj.attr("color");
+		var title = color=='red'?"推荐":"未推荐";
+		var status= color=='red'?"1":"0";
+		var html  = color=='red'?"√":"×";
+			color = color=='red'?"#1DCCAA":"red";
+		
+		$.get(href,{id:id,recommended:status},function(data){
+			if(data.status){
+				obj.attr("color",color);
+				obj.attr("title",title);
+				obj.html(html);
+			}else{
+				alert(data.info);
+			}
+		});
+	});
 });
-
 
 </script>
 </body>

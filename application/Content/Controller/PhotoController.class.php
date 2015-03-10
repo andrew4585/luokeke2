@@ -1,6 +1,10 @@
 <?php
 namespace Content\Controller;
 use Common\Controller\AdminbaseController;
+/**
+ * 作品
+ * @author duostec
+ */
 class PhotoController extends AdminbaseController {
 	
 	protected $model_cate;

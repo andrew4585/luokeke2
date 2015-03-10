@@ -6,9 +6,9 @@
 <div class="wrap J_check_wrap">
   <ul class="nav nav-tabs">
      <li class="active"><a href="javascript:;">所有客照</a></li>
-     <li><a href="{:U('PTheme/add')}"  target="_self">添加客照</a></li>
+     <li><a href="{:U('PCustom/add')}"  target="_self">添加客照</a></li>
   </ul>
-  <form class="well form-search" method="post" action="{:u('PTheme/index')}">
+  <form class="well form-search" method="post" action="{:u('PCustom/index')}">
     <div class="search_type cc mb10">
       <div class="mb10"> 
              <!-- 站点-->
@@ -82,8 +82,8 @@
 		            </td>
 		            <td>
 		            	<a href="javascript:open_iframe_dialog('{:u('comment/commentadmin/index',array('post_id'=>$vo['id']))}','评论列表')">查看评论</a> |
-		            	<a href="{:U('PTheme/edit')}/id/{$vo.id}">修改</a>|
-		            	<a href="{:U('PTheme/delete')}/id/{$vo.id}" class="J_ajax_del" >删除</a>
+		            	<a href="{:U('PCustom/edit')}/id/{$vo.id}">修改</a>|
+		            	<a href="{:U('PCustom/delete')}/id/{$vo.id}" class="J_ajax_del" >删除</a>
 					</td>
 	          	</tr>
           </foreach>
@@ -92,12 +92,12 @@
      
     </div>
     <div class="form-actions">
-        <button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('PTheme/listorders')}">排序</button>
-        <button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('PTheme/top',array('top'=>1))}" data-subcheck="true" >首页置顶</button>
-        <button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('PTheme/top',array('untop'=>1))}" data-subcheck="true" >取消置顶</button>
-        <button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('PTheme/recommend',array('recommend'=>1))}" data-subcheck="true" >推荐</button>
-        <button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('PTheme/recommend',array('unrecommend'=>1))}" data-subcheck="true" >取消推荐</button>
-        <button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('PTheme/delete')}" data-subcheck="true" data-msg="你确定删除吗？">删除</button>
+        <button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('PCustom/listorders')}">排序</button>
+        <button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('PCustom/top',array('top'=>1))}" data-subcheck="true" >首页置顶</button>
+        <button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('PCustom/top',array('untop'=>1))}" data-subcheck="true" >取消置顶</button>
+        <button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('PCustom/recommend',array('recommend'=>1))}" data-subcheck="true" >推荐</button>
+        <button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('PCustom/recommend',array('unrecommend'=>1))}" data-subcheck="true" >取消推荐</button>
+        <button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('PCustom/delete')}" data-subcheck="true" data-msg="你确定删除吗？">删除</button>
       </div>
   </form>
 </div>
@@ -108,7 +108,7 @@ $(function () {
 	$(".istop").click(function(){
 		var obj   = $(this);
 		var id    = obj.attr("data-id");
-		var href  = "{:U('Content/PTheme/top')}";
+		var href  = "{:U('Content/PCustom/top')}";
 		var color = obj.attr("color");
 		var title = color=='red'?"置顶":"未置顶";
 		var status= color=='red'?"1":"0";
@@ -128,11 +128,11 @@ $(function () {
 	$(".recommended").click(function(){
 		var obj   = $(this);
 		var id    = obj.attr("data-id");
-		var href  = "{:U('Content/PTheme/recommend')}";
+		var href  = "{:U('Content/PCustom/recommend')}";
 		var color = obj.attr("color");
 		var title = color=='red'?"推荐":"未推荐";
 		var status= color=='red'?"1":"0";
-		var html  = color=='red'?"√":"×";
+		var html  = color=='red '?"√":"×";
 			color = color=='red'?"#1DCCAA":"red";
 		
 		$.get(href,{id:id,recommended:status},function(data){

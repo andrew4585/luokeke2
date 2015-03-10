@@ -37,11 +37,11 @@ body fieldset legend {
 <body class="J_scroll_fixed">
 <div class="wrap J_check_wrap">
   <ul class="nav nav-tabs">
-     <li><a href="{:U('PTheme/index')}">所有主题</a></li>
-     <li><a href="{:U('PTheme/add')}"  target="_self">添加主题</a></li>
-     <li class="active"><a href="#"  target="_self">编辑作品</a></li>
+     <li><a href="{:U('PCustom/index')}">所有客照</a></li>
+     <li><a href="{:U('PCustom/add')}"  target="_self">添加客照</a></li>
+     <li class="active"><a href="#"  target="_self">编辑客照</a></li>
   </ul>
-  <form name="myform" id="myform" action="{:u('PTheme/edit')}" method="post" class="form-horizontal J_ajaxForms" enctype="multipart/form-data">
+  <form name="myform" id="myform" action="{:u('PCustom/edit')}" method="post" class="form-horizontal J_ajaxForms" enctype="multipart/form-data">
   <div class="col-right">
     <div class="table_full">
       <table width="100%">
@@ -127,7 +127,7 @@ body fieldset legend {
   </div>
   <div class="form-actions">
         <button class="btn btn-primary btn_submit J_ajax_submit_btn"type="submit">提交</button>
-        <a class="btn" href="{:U('PTheme/index')}">返回</a>
+        <a class="btn" href="{:U('PCustom/index')}">返回</a>
   </div>
  </form>
 </div>
@@ -227,7 +227,7 @@ $(function () {
 											},{
 												name: '返回列表页',
 												callback:function(){
-													location="{:U('PTheme/index')}";
+													location="{:U('PCustom/index')}";
 													return true;
 												}
 											}

@@ -32,6 +32,14 @@ class PCustomController extends AdminbaseController {
 	
 	function add(){
 		if(IS_POST){
+			if(!empty($_POST['photos_alt']) && !empty($_POST['photos_url'])){
+				foreach ($_POST['photos_url'] as $key=>$url){
+					$photourl=$this->removeUploadImage($this->imgFolder,$url);
+					$_POST['smeta']['photo'][]=array("url"=>$photourl,"alt"=>$_POST['photos_alt'][$key]);
+				}
+			}
+			$_POST['smeta']['photo']=list_sort_by($_POST['smeta']['photo'],"alt");
+			$_POST['smeta']=json_encode($_POST['smeta']);
 			$_POST['post_date']= strtotime($_POST['post_date']);
 			$_POST['post_content']=htmlspecialchars($_POST['post_content']);
 			$_POST['post_pic'] = $this->removeUploadImage($this->imgFolder, $_POST['post_pic']);
@@ -49,6 +57,14 @@ class PCustomController extends AdminbaseController {
 	
 	public function edit(){
 		if(IS_POST){
+			if(!empty($_POST['photos_alt']) && !empty($_POST['photos_url'])){
+				foreach ($_POST['photos_url'] as $key=>$url){
+					$photourl=$this->removeUploadImage($this->imgFolder,$url);
+					$_POST['smeta']['photo'][]=array("url"=>$photourl,"alt"=>$_POST['photos_alt'][$key]);
+				}
+			}
+			$_POST['smeta']['photo']=list_sort_by($_POST['smeta']['photo'],"alt");
+			$_POST['smeta']=json_encode($_POST['smeta']);
 			$_POST['post_date']= strtotime($_POST['post_date']);
 			$_POST['post_content']=htmlspecialchars($_POST['post_content']);
 			$_POST['post_pic'] = $this->removeUploadImage($this->imgFolder, $_POST['post_pic']);
@@ -60,8 +76,12 @@ class PCustomController extends AdminbaseController {
 			}
 		}else{
 			$id=  $_REQUEST['id'];
+			if(empty($id)){
+				$this->redirect("PCustom/index");
+			}
 			$info = $this->model_obj->where("id=$id")->find();
 			$this->assign($info);
+			$this->assign("smeta",json_decode($info['smeta'],true));
 			$this->commonParam();
 			$this->display();
 		}
@@ -111,7 +131,7 @@ class PCustomController extends AdminbaseController {
 			
 		$page = $this->page($count, 20);
 			
-		$list =$this->model_obj ->where($where)
+		$list =$this->model_obj ->relation(true)->where($where)
 								->limit($page->firstRow, $page->listRows)
 								->order($order)->select();
 		$this->assign("Page", $page->show('Admin'));

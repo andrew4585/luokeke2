@@ -60,6 +60,9 @@ class PLastestController extends AdminbaseController {
 			}
 		}else{
 			$id=  $_REQUEST['id'];
+			if(empty($id)){
+				$this->redirect("PLastest/index");
+			}
 			$info = $this->model_obj->where("id=$id")->find();
 			$this->assign($info);
 			$this->commonParam();

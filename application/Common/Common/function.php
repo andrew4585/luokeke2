@@ -699,6 +699,7 @@ function sp_file_read($file){
 }
 
 function sp_asset_relative_url($asset_url){
+	$asset_url=str_replace("./", "", $asset_url);
 	return str_replace(__ROOT__, ".", $asset_url);
 }
 

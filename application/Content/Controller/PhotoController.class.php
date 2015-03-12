@@ -225,8 +225,8 @@ class PhotoController extends AdminbaseController {
 	//添加分类
 	public function cadd() {
 		if(IS_POST){
-			if ($this->model_photo_category->create()) {
-				if ($this->model_photo_category->add()!==false) {
+			if ($this->model_cate->create()) {
+				if ($this->model_cate->add()!==false) {
 					$this->success("添加成功！", U("Photo/cindex"));
 				} else {
 					$this->error("添加失败！");

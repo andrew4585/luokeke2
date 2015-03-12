@@ -232,7 +232,7 @@ class PhotoController extends AdminbaseController {
 					$this->error("添加失败！");
 				}
 			} else {
-				$this->error($this->model_photo_category->getError());
+				$this->error($this->model_cate->getError());
 			}
 		}else{
 			$this->display();

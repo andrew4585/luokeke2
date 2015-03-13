@@ -37,11 +37,11 @@ body fieldset legend {
 <body class="J_scroll_fixed">
 <div class="wrap J_check_wrap">
   <ul class="nav nav-tabs">
-     <li><a href="{:U('Photo/index')}">所有作品</a></li>
-     <li><a href="{:U('Photo/add')}"  target="_self">添加作品</a></li>
-     <li class="active"><a href="#"  target="_self">编辑作品</a></li>
+     <li><a href="{:U($controlName.'/index')}">所有{$cname}</a></li>
+     <li><a href="{:U($controlName.'/add')}"  target="_self">添加{$cname}</a></li>
+     <li class="active"><a href="#"  target="_self">编辑{$cname}</a></li>
   </ul>
-  <form name="myform" id="myform" action="{:u('Photo/edit')}" method="post" class="form-horizontal J_ajaxForms" enctype="multipart/form-data">
+  <form name="myform" id="myform" action="{:u($controlName.'/edit')}" method="post" class="form-horizontal J_ajaxForms" enctype="multipart/form-data">
   <div class="col-right">
     <div class="table_full">
       <table width="100%">
@@ -78,16 +78,6 @@ body fieldset legend {
               	<input type="hidden" name="id" value="{$id}"/>
               </td>
             </tr>
-            <tr>
-            <th width="80">站点</th>
-			  <td>
-				  <select name="site_id" class="normal_select">
-					  <foreach name="siteList" item="vo">
-						  <option value="{$vo.id}" <if condition="$site_id eq $vo['id']">selected</if>>{$vo.site_name}</option>
-					  </foreach>
-				  </select>
-			  </td>
-		  </tr>
 		  <tr>
               <th width="80">类别</th>
               <td>
@@ -98,10 +88,20 @@ body fieldset legend {
                 </select>
               </td>
             </tr>
-            <tr>
-              <th width="80">摘要 </th>
-              <td><textarea name='post_excerpt' id='description'  style='width:98%;height:50px;' placeholder='请填写摘要'>{$post_excerpt}</textarea> </td>
-            </tr>
+             <tr>
+            <th>出租价格</th>
+            <td>
+            	<input type="text" style="width:400px;" name="rent" id="rent" value="{$rent|intval}"  class="input input_hd J_title_color" placeholder="请输入出租价格" onkeyup="strlen_verify(this, 'title_len', 7)" />
+            	<span class="must_red">*</span>
+            </td>
+          </tr>
+          <tr>
+            <th>出售价格</th>
+            <td>
+            	<input type="text" style="width:400px;" name="sale_price" id="sale_price" value="{$sale_price|intval}"  class="input input_hd J_title_color" placeholder="请输入出售价格" onkeyup="strlen_verify(this, 'title_len', 7)" />
+            	<span class="must_red">*</span>
+            </td>
+          </tr>
             <tr>
               <th width="80">内容</th>
               <td>
@@ -137,7 +137,7 @@ body fieldset legend {
   </div>
   <div class="form-actions">
         <button class="btn btn-primary btn_submit J_ajax_submit_btn"type="submit">提交</button>
-        <a class="btn" href="{:U('Photo/index')}">返回</a>
+        <a class="btn" href="{:U($controlName.'/index')}">返回</a>
   </div>
  </form>
 </div>
@@ -198,9 +198,9 @@ $(function () {
 					}
 	            },
 	            //验证规则
-	            rules: {'post_title':{required:1},'post_pic':{required:1}},
+	            rules: {'post_title':{required:1},'post_pic':{required:1},'rent':{required:1},'sale_price':{required:1}},
 	            //验证未通过提示消息
-	            messages: {'post_title':{required:'请输入标题'},'post_pic':{required:'请选择封面图片'}},
+	            messages: {'post_title':{required:'请输入标题'},'post_pic':{required:'请选择封面图片'},'rent':{required:'请填写出租价格'},'sale_price':{required:'请填写出售价格'}},
 	            //给未通过验证的元素加效果,闪烁等
 	            highlight: false,
 	            //是否在获取焦点时验证
@@ -237,7 +237,7 @@ $(function () {
 											},{
 												name: '返回列表页',
 												callback:function(){
-													location="{:U('Photo/index')}";
+													location="{:U($controlName.'/index')}";
 													return true;
 												}
 											}

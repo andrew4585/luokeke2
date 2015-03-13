@@ -57,6 +57,8 @@ class DressController extends AdminbaseController {
 	}
 	
 	public function _edit(){
+		$id=  $_REQUEST['id'];
+		if(empty($id)) $this->error("The dress's id is lost!");
 		if(IS_POST){
 			$_POST['post_date']= strtotime($_POST['post_date']);
 			$_POST['post_content']=htmlspecialchars($_POST['post_content']);
@@ -68,7 +70,7 @@ class DressController extends AdminbaseController {
 				$this->error("编辑失败！");
 			}
 		}else{
-			$id=  $_REQUEST['id'];
+			
 			$info = $this->model_obj->where("id=$id")->find();
 			$this->assign($info);
 			$this->commonParam();
@@ -128,7 +130,7 @@ class DressController extends AdminbaseController {
 		$this->assign("list",$list);
 	}
 	
-	function _delete(){
+	function delete(){
 		if(isset($_GET['id'])){
 			$id = intval(I("get.id"));
 			$data['status']=0;

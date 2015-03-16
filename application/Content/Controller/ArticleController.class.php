@@ -136,8 +136,7 @@ class ArticleController extends AdminbaseController{
 	//置顶操作
 	function top(){
 		//批量置顶
-		if(isset($_POST['ids']) && $_GET["top"]){
-			$data["istop"]=1;
+		if(isset($_POST['ids']) && $_GET["top"]){			$data["istop"]=1;
 			$ids=join(",", $_POST['ids']);
 			if ( $this->model_obj->where("id in ($ids)")->save($data)) {
 				$this->success("置顶成功！");

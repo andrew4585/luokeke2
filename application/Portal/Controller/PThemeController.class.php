@@ -1,20 +1,21 @@
 <?php
 namespace Portal\Controller;
 use Common\Controller\HomeBaseController;
-class ArticleController extends HomeBaseController {
-	
+class PThemeController extends HomeBaseController {
+
 	public function nav_index(){
-		$m 			= M('article_cat');
+		$m 			= M('ptheme');
 		$msg 		= $m->where()->select();
 		$item 		= array();
 		foreach ($msg as $key=>$value){
 			$item[] = array(
-						"label" => "{$value['cat_name']}",
-						"href" => "Portal/Article/list/{$value['id']}"
+						"label" => "{$value['post_title']}",
+						"href" => "Portal/PTheme/list/{$value['id']}"
 					);
 		}
-		$nav_arr['name'] 	= "婚嫁分类";
+		$nav_arr['name'] 	= "主题作品";
 		$nav_arr['items'] 	= $item;
 		exit(json_encode($nav_arr));
+		
 	}
 }

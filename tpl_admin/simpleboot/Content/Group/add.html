@@ -37,10 +37,10 @@ body fieldset legend {
 <body class="J_scroll_fixed">
 <div class="wrap J_check_wrap">
   <ul class="nav nav-tabs">
-     <li><a href="{:U('Photo/index')}">所有作品</a></li>
-     <li class="active"><a href="{:U('Photo/add')}"  target="_self">添加作品</a></li>
+     <li><a href="{:U('Group/index')}">所有团购</a></li>
+     <li class="active"><a href="{:U('Group/add')}"  target="_self">添加团购</a></li>
   </ul>
-  <form name="myform" id="myform" action="{:u('Photo/add')}" method="post" class="form-horizontal J_ajaxForms" enctype="multipart/form-data">
+  <form name="myform" id="myform" action="{:u('Group/add')}" method="post" class="form-horizontal J_ajaxForms" enctype="multipart/form-data">
   <div class="col-right">
     <div class="table_full">
       <table width="100%">
@@ -77,14 +77,6 @@ body fieldset legend {
               </td>
             </tr>
             <tr>
-            <th width="80">站点</th>
-			  <td>
-				  <select name="site_id" class="normal_select">
-					  <foreach name="siteList" item="vo">
-						  <option value="{$vo.id}">{$vo.site_name}</option>
-					  </foreach>
-				  </select>
-			  </td>
 		  </tr>
 		  <tr>
               <th width="80">类别</th>
@@ -97,20 +89,15 @@ body fieldset legend {
               </td>
             </tr>
             <tr>
+              <th width="80">编辑 </th>
+              <td><input type="text" style="width:120px;" name="post_author" id="title" value=""  class="input input_hd J_title_color" placeholder="请输入编辑人" onkeyup="strlen_verify(this, 'title_len', 160)" />
+              	<span class="must_red">*</span></td>
+            </tr>
+            <tr>
               <th width="80">摘要 </th>
               <td><textarea name='post_excerpt' id='description'  style='width:98%;height:50px;' placeholder='请填写摘要'></textarea> </td>
             </tr>
             <tr>
-              <th width="80">相册图集 </th>
-              <td>
-				<fieldset class="blue pad-10">
-		        <legend>图片列表</legend>
-		        <ul id="photos" class="picList"></ul>
-				</fieldset>
-				<div class="bk10"></div>
-				<a href='javascript:void(0);' onclick="javascript:flashupload('albums_images', '图片上传','photos',change_images,'10,gif|jpg|jpeg|png|bmp,0','','','')" class="btn">选择图片 </a> </td>
-            </tr>
-            <!-- <tr>
               <th width="80">内容</th>
               <td>
               <script type="text/plain" id="content" name="post_content"></script>
@@ -121,21 +108,31 @@ body fieldset legend {
                 <script type="text/javascript"  src="__ROOT__/statics/ueditor/ueditor.config.js"></script>
                 <script type="text/javascript"  src="__ROOT__/statics/ueditor/ueditor.all.min.js"></script>
 				</td>
-            </tr> -->
+            </tr>
             <tr>
               <th width="80">链接地址 </th>
               <td><input type="text" name="post_url" class="input input_hd J_title_color" placeholder="填写链接地址后，作品内容将无效" style="width:400px;"/> </td>
             </tr>
             
-
-            
+            <!-- 内容隐藏
+            <tr>
+              <th width="80">相册图集 </th>
+              <td>
+				<fieldset class="blue pad-10">
+		        <legend>图片列表</legend>
+		        <ul id="s" class="picList"></ul>
+				</fieldset>
+				<div class="bk10"></div>
+				<a href='javascript:void(0);' onclick="javascript:flashupload('albums_images', '图片上传','s',change_images,'10,gif|jpg|jpeg|png|bmp,0','','','')" class="btn">选择图片 </a> </td>
+            </tr>
+             -->
         </tbody>
       </table>
     </div>
   </div>
   <div class="form-actions">
         <button class="btn btn-primary btn_submit J_ajax_submit_btn"type="submit">提交</button>
-        <a class="btn" href="{:U('Photo/index')}">返回</a>
+        <a class="btn" href="{:U('Group/index')}">返回</a>
   </div>
  </form>
 </div>
@@ -235,7 +232,7 @@ $(function () {
 											},{
 												name: '返回列表页',
 												callback:function(){
-													location="{:U('Photo/index')}";
+													location="{:U('Group/index')}";
 													return true;
 												}
 											}

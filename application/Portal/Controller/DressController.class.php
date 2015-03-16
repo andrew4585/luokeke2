@@ -1,19 +1,19 @@
 <?php
 namespace Portal\Controller;
 use Common\Controller\HomeBaseController;
-class ArticleController extends HomeBaseController {
-	
+class DressController extends HomeBaseController {
+
 	public function nav_index(){
-		$m 			= M('article_cat');
+		$m 			= M('dress_cat');
 		$msg 		= $m->where()->select();
-		$item 		= array();
+		$item = array();
 		foreach ($msg as $key=>$value){
 			$item[] = array(
-						"label" => "{$value['cat_name']}",
-						"href" => "Portal/Article/list/{$value['id']}"
-					);
+					"label" => "{$value['cat_name']}",
+					"href" => "Portal/Dress/list/{$value['id']}"
+							);
 		}
-		$nav_arr['name'] 	= "婚嫁分类";
+		$nav_arr['name'] 	= "婚纱礼服分类";
 		$nav_arr['items'] 	= $item;
 		exit(json_encode($nav_arr));
 	}

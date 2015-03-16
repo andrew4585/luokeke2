@@ -37,10 +37,11 @@ body fieldset legend {
 <body class="J_scroll_fixed">
 <div class="wrap J_check_wrap">
   <ul class="nav nav-tabs">
-     <li><a href="{:U('Photo/index')}">所有作品</a></li>
-     <li class="active"><a href="{:U('Photo/add')}"  target="_self">添加作品</a></li>
+     <li><a href="{:U('Article/index')}">所有文章</a></li>
+     <li><a href="{:U('Article/add')}"  target="_self">添加文章</a></li>
+     <li class="active"><a href="#"  target="_self">编辑文章</a></li>
   </ul>
-  <form name="myform" id="myform" action="{:u('Photo/add')}" method="post" class="form-horizontal J_ajaxForms" enctype="multipart/form-data">
+  <form name="myform" id="myform" action="{:u('Article/edit')}" method="post" class="form-horizontal J_ajaxForms" enctype="multipart/form-data">
   <div class="col-right">
     <div class="table_full">
       <table width="100%">
@@ -49,9 +50,9 @@ body fieldset legend {
         </tr>
         <tr>
           <td>
-          	<div  style="text-align: center;"><input type='hidden' name='post_pic' id='thumb' value=''>
+          	<div  style="text-align: center;"><input type='hidden' name='post_pic' id='thumb' value='{$post_pic}'>
 			<a href='javascript:void(0);' onclick="flashupload('thumb_images', '附件上传','thumb',thumb_images,'1,jpg|jpeg|gif|png|bmp,1,,,1','','','');return false;">
-			<img src='__ROOT__/statics/images/icon/upload-pic.png' id='thumb_preview' width='135' height='113' style='cursor:hand' /></a>
+			<img src='__ROOT__/{$post_pic}' id='thumb_preview' width='135' height='113' style='cursor:hand' /></a>
 			<!-- <input type="button" class="btn" onclick="crop_cut_thumb($('#thumb').val());return false;" value="裁减图片">  -->
             <input type="button"  class="btn" onclick="$('#thumb_preview').attr('src','__ROOT__/statics/images/icon/upload-pic.png');$('#thumb').val('');return false;" value="取消图片">
             </div>
@@ -61,7 +62,7 @@ body fieldset legend {
           <td><b style="top:5px;">发布时间</b></td>
         </tr>
         <tr>
-          <td style="padding:8px;"><input type="text" name="post_date" id="updatetime" value="{:date('Y-m-d H:i:s',time())}" size="15" class="input length_3 J_datetime "></td>
+          <td style="padding:8px;"><input type="text" name="post_date" id="updatetime" value="{:date('Y-m-d H:i:s',$post_date)}" size="15" class="input length_3 J_datetime "></td>
         </tr>
       </table>
     </div>
@@ -72,34 +73,50 @@ body fieldset legend {
       		<tr>
               <th width="80">标题 </th>
               <td>
-              	<input type="text" style="width:400px;" name="post_title" id="title" value=""  class="input input_hd J_title_color" placeholder="请输入标题" onkeyup="strlen_verify(this, 'title_len', 160)" />
+              	<input type="text" style="width:400px;" name="post_title" id="title" value="{$post_title}"  class="input input_hd J_title_color" placeholder="请输入标题" onkeyup="strlen_verify(this, 'title_len', 160)" />
               	<span class="must_red">*</span>
+              	<input type="hidden" name="id" value="{$id}"/>
               </td>
             </tr>
             <tr>
-            <th width="80">站点</th>
-			  <td>
-				  <select name="site_id" class="normal_select">
-					  <foreach name="siteList" item="vo">
-						  <option value="{$vo.id}">{$vo.site_name}</option>
-					  </foreach>
-				  </select>
-			  </td>
 		  </tr>
 		  <tr>
               <th width="80">类别</th>
               <td>
               	<select name="cid" class="normal_select">
                   <foreach name="categorys" item="vo">
-                  	<option value="{$vo.id}">{$vo.cat_name}</option>
+                  	<option value="{$vo.id}" <if condition="$cid eq $vo['id']">selected</if>>{$vo.cat_name}</option>
                   </foreach>
                 </select>
               </td>
             </tr>
             <tr>
-              <th width="80">摘要 </th>
-              <td><textarea name='post_excerpt' id='description'  style='width:98%;height:50px;' placeholder='请填写摘要'></textarea> </td>
+              <th width="80">编辑 </th>
+              <td><input type="text" style="width:120px;" name="post_author" id="title" value=""  class="input input_hd J_title_color" placeholder="请输入编辑人" onkeyup="strlen_verify(this, 'title_len', 160)" />
+              	<span class="must_red">*</span></td>
             </tr>
+            <tr>
+              <th width="80">摘要 </th>
+              <td><textarea name='post_excerpt' id='description'  style='width:98%;height:50px;' placeholder='请填写摘要'>{$post_excerpt}</textarea> </td>
+            </tr>
+            <tr>
+              <th width="80">内容</th>
+              <td>
+              <script type="text/plain" id="content" name="post_content">{$post_content|htmlspecialchars_decode}</script>
+                <script type="text/javascript">
+                //编辑器路径定义
+                var editorURL = GV.DIMAUB;
+                </script>
+                <script type="text/javascript"  src="__ROOT__/statics/ueditor/ueditor.config.js"></script>
+                <script type="text/javascript"  src="__ROOT__/statics/ueditor/ueditor.all.min.js"></script>
+				</td>
+            </tr>
+            <tr>
+              <th width="80">链接地址 </th>
+              <td><input type="text" name="post_url" value="{$post_url}" class="input input_hd J_title_color" placeholder="填写链接地址后，作品内容将无效" style="width:400px;"/> </td>
+            </tr>
+            
+            <!-- 内容隐藏
             <tr>
               <th width="80">相册图集 </th>
               <td>
@@ -110,32 +127,14 @@ body fieldset legend {
 				<div class="bk10"></div>
 				<a href='javascript:void(0);' onclick="javascript:flashupload('albums_images', '图片上传','photos',change_images,'10,gif|jpg|jpeg|png|bmp,0','','','')" class="btn">选择图片 </a> </td>
             </tr>
-            <!-- <tr>
-              <th width="80">内容</th>
-              <td>
-              <script type="text/plain" id="content" name="post_content"></script>
-                <script type="text/javascript">
-                //编辑器路径定义
-                var editorURL = GV.DIMAUB;
-                </script>
-                <script type="text/javascript"  src="__ROOT__/statics/ueditor/ueditor.config.js"></script>
-                <script type="text/javascript"  src="__ROOT__/statics/ueditor/ueditor.all.min.js"></script>
-				</td>
-            </tr> -->
-            <tr>
-              <th width="80">链接地址 </th>
-              <td><input type="text" name="post_url" class="input input_hd J_title_color" placeholder="填写链接地址后，作品内容将无效" style="width:400px;"/> </td>
-            </tr>
-            
-
-            
+             -->
         </tbody>
       </table>
     </div>
   </div>
   <div class="form-actions">
         <button class="btn btn-primary btn_submit J_ajax_submit_btn"type="submit">提交</button>
-        <a class="btn" href="{:U('Photo/index')}">返回</a>
+        <a class="btn" href="{:U('Article/index')}">返回</a>
   </div>
  </form>
 </div>
@@ -226,7 +225,7 @@ $(function () {
 								        content: data.info,
 										button:[
 											{
-												name: '继续添加？',
+												name: '继续编辑？',
 												callback:function(){
 													reloadPage(window);
 													return true;
@@ -235,7 +234,7 @@ $(function () {
 											},{
 												name: '返回列表页',
 												callback:function(){
-													location="{:U('Photo/index')}";
+													location="{:U('Article/index')}";
 													return true;
 												}
 											}

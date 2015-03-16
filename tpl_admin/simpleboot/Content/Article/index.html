@@ -1,0 +1,155 @@
+<admintpl file="header" />
+<style>
+	.recommended,.istop{cursor:pointer;font-size:15px;}
+</style>
+<body class="J_scroll_fixed">
+<div class="wrap J_check_wrap">
+  <ul class="nav nav-tabs">
+     <li class="active"><a href="javascript:;">所有文章</a></li>
+     <li><a href="{:U('Article/add')}"  target="_self">添加文章</a></li>
+  </ul>
+  <form class="well form-search" method="post" action="{:u('Article/index')}">
+    <div class="search_type cc mb10">
+      <div class="mb10"> 
+          <!--类别-->
+        <select class="select_2" name="cid"style="width:160px;" id="">
+          <option value=''>全部类别</option>
+          <foreach name="categorys" item="vo">
+          	<php>$cid_select=$vo['id']==$formget['cid']?"selected":"";</php>
+          	<option value="{$vo.id}" {$cid_select}>{$vo.cat_name}</option>
+          </foreach>
+        </select>
+             <!-- 站点-->
+        &nbsp;&nbsp;时间：
+        <input type="text" name="start_time" class="input length_2 J_date" value="{$formget.start_time|default=''}" style="width:100px;" autocomplete="off"> -
+        <input type="text" class="input length_2 J_date" name="end_time" value="{$formget.end_time}" style="width:100px;" autocomplete="off">
+        <!-- 
+        <select class="select_2" name="searchtype" style="width:70px;">
+          <option value='0' >标题</option>
+        </select>
+         -->
+               &nbsp; &nbsp;关键字：
+        <input type="text" class="input length_2" name="keyword" style="width:200px;" value="{$formget.keyword}" placeholder="请输入关键字...">
+        <input type="submit" class="btn" value="搜索"/>
+        </span>
+      </div>
+    </div>
+  </form>
+  <form class="J_ajaxForm" action="" method="post">
+    <div class="table_list">
+      <table width="100%" class="table table-hover">
+        <thead>
+	          <tr>
+	            <th width="16"><label><input type="checkbox" class="J_check_all" data-direction="x" data-checklist="J_check_x"></label></th>
+	            <th width="50">排序</th>
+	            <th>ID</th>
+	            <th>标题</th>
+	            <th width="80">类别</th>
+	            <th width="45">点击量</th>
+                <th width="50">缩略图</th>
+	            <th width="120"><span>发布时间</span></th>
+	            <th width="80">首页置顶</th>
+	            <th width="80">推荐</th>
+	            <th width="120">操作</th>
+	          </tr>
+        </thead>
+        	<foreach name="list" item="vo">
+	        	<tr>
+		            <td><input type="checkbox" class="J_check" data-yid="J_check_y" data-xid="J_check_x" name="ids[]" value="{$vo.id}" ></td>
+		            <td><input name='listorders[{$vo.id}]' class="input input-order"  type='text' size='3' value='{$vo.listorder}'></td>
+		            <td><a>{$vo.id}</a></td>
+		            <td>
+		            	<a href="{:U('portal/article/index',array('id'=>$vo['tid']))}" target="_blank" title="{$vo.post_excerpt}">
+		            		<span>{$vo.post_title}</span>
+		            	</a>
+		            </td>
+		            <td>{$vo.cat.cat_name}</td>
+		            <td>{$vo.post_hits}</td>
+    	            <td>
+    	            	<a href="#"  onclick="image_priview('__ROOT__/{$vo.post_pic}');"><img src="__ROOT__/{$vo.post_pic}" style="width:200px;"/></a>
+    	            </td>
+		            <td>{$vo.post_date|date="Y-m-d H:i:s",###}</td>
+		            <td align="center">
+		            	<if condition="$vo.istop eq 1">
+			    		<font class="istop" color="#1DCCAA" title="置顶" data-id="{$vo.id}">√</font>
+				    	<else/>
+				    		<font class="istop" color="red" title="未置顶" data-id="{$vo.id}">×</font>
+				    	</if>
+		            </td>
+		            <td align="center">
+		            	<if condition="$vo.recommended eq 1">
+			    		<font class="recommended" color="#1DCCAA" title="推荐" data-id="{$vo.id}">√</font>
+				    	<else/>
+				    		<font class="recommended" color="red" title="未推荐" data-id="{$vo.id}">×</font>
+				    	</if>
+		            </td>
+		            <td>
+		            	<a href="javascript:open_iframe_dialog('{:u('comment/commentadmin/index',array('post_id'=>$vo['id']))}','评论列表')">查看评论</a> |
+		            	<a href="{:U('Article/edit')}/id/{$vo.id}">修改</a>|
+		            	<a href="{:U('Article/delete')}/id/{$vo.id}" class="J_ajax_del" >删除</a>
+					</td>
+	          	</tr>
+          </foreach>
+          </table>
+          <div class="pagination">{$Page}</div>
+     
+    </div>
+    <div class="form-actions">
+        <button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('Article/listorders')}">排序</button>
+        <button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('Article/top',array('top'=>1))}" data-subcheck="true" >首页置顶</button>
+        <button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('Article/top',array('untop'=>1))}" data-subcheck="true" >取消置顶</button>
+        <button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('Article/recommend',array('recommend'=>1))}" data-subcheck="true" >推荐</button>
+        <button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('Article/recommend',array('unrecommend'=>1))}" data-subcheck="true" >取消推荐</button>
+        <button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('Article/delete')}" data-subcheck="true" data-msg="你确定删除吗？">删除</button>
+      </div>
+  </form>
+</div>
+<script src="__ROOT__/statics/js/common.js"></script>
+<script type="text/javascript" src="__ROOT__/statics/js/content_addtop.js"></script>
+<script>
+$(function () {
+	$(".istop").click(function(){
+		var obj   = $(this);
+		var id    = obj.attr("data-id");
+		var href  = "{:U('Content/Article/top')}";
+		var color = obj.attr("color");
+		var title = color=='red'?"置顶":"未置顶";
+		var status= color=='red'?"1":"0";
+		var html  = color=='red'?"√":"×";
+			color = color=='red'?"#1DCCAA":"red";
+		
+		$.get(href,{id:id,istop:status},function(data){
+			if(data.status){
+				obj.attr("color",color);
+				obj.attr("title",title);
+				obj.html(html);
+			}else{
+				alert(data.info);
+			}
+		});
+	});
+	$(".recommended").click(function(){
+		var obj   = $(this);
+		var id    = obj.attr("data-id");
+		var href  = "{:U('Content/Article/recommend')}";
+		var color = obj.attr("color");
+		var title = color=='red'?"推荐":"未推荐";
+		var status= color=='red'?"1":"0";
+		var html  = color=='red'?"√":"×";
+			color = color=='red'?"#1DCCAA":"red";
+		
+		$.get(href,{id:id,recommended:status},function(data){
+			if(data.status){
+				obj.attr("color",color);
+				obj.attr("title",title);
+				obj.html(html);
+			}else{
+				alert(data.info);
+			}
+		});
+	});
+});
+
+</script>
+</body>
+</html>

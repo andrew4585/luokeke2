@@ -1,5 +1,10 @@
 <?php
 return array(
 		"List/nav_index",
-		"Page/nav_index",
+		"Photo/nav_index",
+		"PTheme/nav_index",
+		"Article/nav_index",
+		"Dress/nav_index",
+		"Group/nav_index",
+		"PLastest/nav_index",
 );

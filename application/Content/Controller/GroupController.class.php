@@ -85,7 +85,7 @@ class GroupController extends AdminbaseController{
 			$id=  $_REQUEST['id'];
 			$info = $this->model_obj->where("id=$id")->find();
 			$this->assign($info);
-			$this->commonParam();
+// 			$this->commonParam();
 			$this->display();
 		}
 	}

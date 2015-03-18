@@ -395,11 +395,11 @@ function sp_get_menu($id="main",$effected_id="mainmenu",$filetpl="<span class='f
 function _sp_get_menu_datas($id){
 	$nav_obj= M("Nav");
 	if($id=="main"){
-		$navcat_obj= M("NavCat");
-		$main=$navcat_obj->where("active=1")->find();
-		$id=$main['navcid'];
+		$navcat_obj= M("Site");
+		$main=$navcat_obj->order("listorder")->find();
+		$id=$main['id'];
 	}
-	$navs= $nav_obj->where("cid=$id and status=1")->order(array("listorder" => "ASC"))->select();
+	$navs= $nav_obj->where("cid=$id ")->order(array("listorder" => "ASC"))->select();
 	foreach ($navs as $key=>$nav){
 		$href=htmlspecialchars_decode($nav['href']);
 		$hrefold=$href;

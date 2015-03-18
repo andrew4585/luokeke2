@@ -2,10 +2,10 @@
 namespace Content\Controller;
 use Common\Controller\AdminbaseController;
 /**
- * 作品
+ * 最新活动
  * @author duostec
  */
-class PhotoController extends AdminbaseController {
+class ActiveController extends AdminbaseController {
 	
 	protected $model_cate;
 	protected $model_obj;
@@ -13,36 +13,19 @@ class PhotoController extends AdminbaseController {
 	
 	function _initialize() {
 		parent::_initialize();
-		$this->imgFolder	= "Photo";
-		$this->model_cate	= D("PhotoCat");
-		$this->model_obj	= D("Photo");
+		$this->imgFolder	= "Active";
+		$this->model_obj	= D("Active");
 	}
 	
-	//公共参数
-	function commonParam(){
-		//分类列表
-		$this->assign("categorys",$this->getCategory($this->model_cate));
-		//站点列表
-		$this->assign("siteList",$this->getSite());
-	}
 	
 	function index(){
 		//列表数据
 		$this->_lists();
-		$this->commonParam();
 		$this->display();
 	}
 	
 	function add(){
 		if(IS_POST){
-			if(!empty($_POST['photos_alt']) && !empty($_POST['photos_url'])){
-				foreach ($_POST['photos_url'] as $key=>$url){
-					$photourl=$this->removeUploadImage($this->imgFolder,$url);
-					$_POST['smeta']['photo'][]=array("url"=>$photourl,"alt"=>$_POST['photos_alt'][$key]);
-				}
-			}
-			$_POST['smeta']['photo']=list_sort_by($_POST['smeta']['photo'],"alt");
-			$_POST['smeta']=json_encode($_POST['smeta']);
 			$_POST['post_date']= strtotime($_POST['post_date']);
 			$_POST['post_content']=htmlspecialchars($_POST['post_content']);
 			$_POST['post_pic'] = $this->removeUploadImage($this->imgFolder, $_POST['post_pic']);
@@ -53,21 +36,12 @@ class PhotoController extends AdminbaseController {
 				$this->error("添加失败！");
 			}
 		}else{
-			$this->commonParam();
 			$this->display();
 		}
 	}
 	
 	public function edit(){
 		if(IS_POST){
-			if(!empty($_POST['photos_alt']) && !empty($_POST['photos_url'])){
-				foreach ($_POST['photos_url'] as $key=>$url){
-					$photourl=$this->removeUploadImage($this->imgFolder,$url);
-					$_POST['smeta']['photo'][]=array("url"=>$photourl,"alt"=>$_POST['photos_alt'][$key]);
-				}
-			}
-			$_POST['smeta']['photo']=list_sort_by($_POST['smeta']['photo'],"alt");
-			$_POST['smeta']=json_encode($_POST['smeta']);
 			$_POST['post_date']= strtotime($_POST['post_date']);
 			$_POST['post_content']=htmlspecialchars($_POST['post_content']);
 			$_POST['post_pic'] = $this->removeUploadImage($this->imgFolder, $_POST['post_pic']);
@@ -81,8 +55,6 @@ class PhotoController extends AdminbaseController {
 			$id=  $_REQUEST['id'];
 			$info = $this->model_obj->where("id=$id")->find();
 			$this->assign($info);
-			$this->assign("smeta",json_decode($info['smeta'],true));
-			$this->commonParam();
 			$this->display();
 		}
 	}
@@ -103,8 +75,6 @@ class PhotoController extends AdminbaseController {
 		//istop:首页置顶，recommended：推荐，listorder：排序，post_date:发布时间
 		$order		="istop desc,recommended desc,listorder ASC,post_date DESC";
 		$fields=array(
-				'site_id'	=> array("field"=>'site_id','operator'=>'=','type'=>'int'),
-				'cid'		=> array("field"=>'cid','operator'=>'=','type'=>'int'),
 				'start_time'=> array("field"=>"post_date","operator"=>">=",'type'=>'time'),
 				'end_time'  => array("field"=>"post_date","operator"=>"<=",'type'=>'time'),
 				'keyword'   => array("field"=>"post_title","operator"=>"like",'type'=>'string'),
@@ -132,7 +102,7 @@ class PhotoController extends AdminbaseController {
 			
 		$page = $this->page($count, 20);
 			
-		$list =$this->model_obj ->relation(true)->where($where)
+		$list =$this->model_obj ->where($where)
 								->limit($page->firstRow, $page->listRows)
 								->order($order)->select();
 		$this->assign("Page", $page->show('Admin'));
@@ -226,74 +196,6 @@ class PhotoController extends AdminbaseController {
 			} else {
 				$this->error("fail");
 			}
-		}
-	}
-	
-	
-	//--------------------------------------------category--------------------------------
-	
-	//分类列表
-	function cindex(){
-		$cats=$this->model_cate->order("listorder")->select();
-		$this->assign("category",$cats);
-		$this->display();
-	}
-	
-	//添加分类
-	public function cadd() {
-		if(IS_POST){
-			if ($this->model_cate->create()) {
-				if ($this->model_cate->add()!==false) {
-					$this->success("添加成功！", U("Photo/cindex"));
-				} else {
-					$this->error("添加失败！");
-				}
-			} else {
-				$this->error($this->model_cate->getError());
-			}
-		}else{
-			$this->display();
-		}
-	}
-	
-	//编辑分类
-	function cedit(){
-		if(IS_POST){
-			if ($this->model_cate->create()) {
-				if ($this->model_cate->save()!==false) {
-					$this->success("保存成功！", U("Photo/cindex"));
-				} else {
-					$this->error("保存失败！");
-				}
-			} else {
-				$this->error($this->model_cate->getError());
-			}
-		}else{
-			$id= intval(I("get.id"));
-			$ad1cat=$this->model_cate->where("id=$id")->find();
-			$this->assign($ad1cat);
-			$this->display();
-		}
-		
-	}
-	
-	//删除分类
-	function cdelete(){
-		$id = intval(I("get.id"));
-		if ($this->model_cate->delete($id)!==false) {
-			$this->success("删除成功！");
-		} else {
-			$this->error("删除失败！");
-		}
-	}
-	
-	//分类排序
-	function clistorders(){
-		$status = parent::_listorders($this->model_cate);
-		if ($status) {
-			$this->success("排序更新成功！");
-		} else {
-			$this->error("排序更新失败！");
 		}
 	}
 }

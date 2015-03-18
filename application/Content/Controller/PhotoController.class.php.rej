@@ -1,9 +1,0 @@
-diff a/application/Content/Controller/PhotoController.class.php b/application/Content/Controller/PhotoController.class.php	(rejected hunks)
-@@ -226,6 +226,7 @@
- 	public function cadd() {
- 		if(IS_POST){
- 			if ($this->model_cate->create()) {
-+				if ($this->model_cate->add()!==false) {
- 					$this->success("添加成功！", U("Photo/cindex"));
- 				} else {
- 					$this->error("添加失败！");

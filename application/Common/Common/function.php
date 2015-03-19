@@ -700,7 +700,12 @@ function sp_file_read($file){
 
 function sp_asset_relative_url($asset_url){
 	$asset_url=str_replace("./", "", $asset_url);
-	return str_replace(__ROOT__, ".", $asset_url);
+	if(__ROOT__==""){
+		return ".".$asset_url;
+	}else{
+		return str_replace(__ROOT__, ".", $asset_url);
+	}
+	
 }
 
 function sp_content_page($content,$pagetpl='{first}{prev}{liststart}{list}{listend}{next}{last}'){

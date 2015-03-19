@@ -48,7 +48,7 @@ function flashupload(uploadid, name, textareaid, funcName, args, module, catid, 
     var setting = '/module/' + module + '/catid/' + catid ;
     Wind.use("artDialog","iframeTools",function(){
         //alert(GV.DIMAUB+'/Asset/Asset/swfupload/' + args + setting);
-        art.dialog.open(GV.DIMAUB+'/Asset/Asset/swfupload/' + args + setting, {
+        art.dialog.open(GV.DIMAUB+'Asset/Asset/swfupload/' + args + setting, {
         title: name,
         id: uploadid,
         width: '650px',

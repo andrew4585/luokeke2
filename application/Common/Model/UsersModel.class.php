@@ -6,13 +6,12 @@ class UsersModel extends CommonModel
 	
 	protected $_validate = array(
 			//array(验证字段,验证规则,错误提示,验证条件,附加规则,验证时间)
-			array('user_login', 'require', '用户名称不能为空！', 1, 'regex', CommonModel:: MODEL_INSERT  ),
+			array('user_login', 'require', '用户名称不能为空！', 1, 'regex', CommonModel:: MODEL_BOTH ),
 			array('user_pass', 'require', '密码不能为空！', 1, 'regex', CommonModel:: MODEL_INSERT ),
-			array('user_login', 'require', '用户名称不能为空！', 0, 'regex', CommonModel:: MODEL_UPDATE  ),
 			array('user_pass', 'require', '密码不能为空！', 0, 'regex', CommonModel:: MODEL_UPDATE  ),
 			array('user_login','','用户名已经存在！',0,'unique',CommonModel:: MODEL_BOTH ), // 验证user_login字段是否唯一
-			array('user_email','','邮箱帐号已经存在！',0,'unique',CommonModel:: MODEL_BOTH ), // 验证user_email字段是否唯一
-			array('user_email','email','邮箱格式不正确！',0,'',CommonModel:: MODEL_BOTH ), // 验证user_email字段格式是否正确
+			array('user_phone','','该手机号已经存在！',0,'unique',CommonModel:: MODEL_BOTH ), // 验证user_phone字段是否唯一
+			array('user_phone','','手机格式不正确！',0,'#^13[d]{9}$|14^[0-9]d{8}|^15[0-9]d{8}$|^18[0-9]d{8}$#',CommonModel:: MODEL_BOTH ), // 验证user_phone字段格式是否正确
 	);
 	
 	//用于获取时间，格式为2012-02-03 12:12:12,注意,方法不能为private

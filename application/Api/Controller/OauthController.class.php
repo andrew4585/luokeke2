@@ -156,6 +156,7 @@ class OauthController extends HomeBaseController {
 		if($need_register){
 			//本地用户中创建对应一条数据
 			$new_user_data = array(
+					'user_login' => $user_info['name'],
 					'user_nicename' => $user_info['name'],
 					'avatar' => $user_info['head'],
 					'last_login_time' => date("Y-m-d H:i:s"),

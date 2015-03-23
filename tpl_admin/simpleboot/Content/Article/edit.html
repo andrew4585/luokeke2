@@ -52,7 +52,7 @@ body fieldset legend {
           <td>
           	<div  style="text-align: center;"><input type='hidden' name='post_pic' id='thumb' value='{$post_pic}'>
 			<a href='javascript:void(0);' onclick="flashupload('thumb_images', '附件上传','thumb',thumb_images,'1,jpg|jpeg|gif|png|bmp,1,,,1','','','');return false;">
-			<img src='__ROOT__/{$post_pic}' id='thumb_preview' width='135' height='113' style='cursor:hand' /></a>
+			<img src='__ROOT__{$post_pic}' id='thumb_preview' width='135' height='113' style='cursor:hand' /></a>
 			<!-- <input type="button" class="btn" onclick="crop_cut_thumb($('#thumb').val());return false;" value="裁减图片">  -->
             <input type="button"  class="btn" onclick="$('#thumb_preview').attr('src','__ROOT__/statics/images/icon/upload-pic.png');$('#thumb').val('');return false;" value="取消图片">
             </div>

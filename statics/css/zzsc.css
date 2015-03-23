@@ -1,0 +1,44 @@
+/*reset css*/
+/**{margin:0;padding:0;list-style:none;border:none;}*/
+/*body{height:2000px;background:#555;font-family:'microsoft yahei';}*/
+/*main css*/
+
+.izl-rmenu{position:absolute; /*right:50%;*/ margin-right:532px; padding-bottom:73px; background:url(../img/r_b.png) 0px bottom no-repeat; z-index:999; }
+.izl-rmenu .btn{width:72px; height:73px; margin-bottom:1px; cursor:pointer; position:relative;}
+.izl-rmenu .btn-qq{background:url(../img/r_qq.png) 0px 0px no-repeat; background-color:#6da9de;}
+.izl-rmenu .btn-qq:hover{background-color:#488bc7;}
+.izl-rmenu a.btn-qq,.izl-rmenu a.btn-qq:visited{background:url(../img/r_qq.png) 0px 0px no-repeat; background-color:#6da9de; text-decoration:none; display:block;}
+.izl-rmenu .btn-wx{background:url(../img/r_wx.png) 0px 0px no-repeat; background-color:#78c340;}
+.izl-rmenu .btn-wx:hover{background-color:#58a81c;}
+.izl-rmenu .btn-wx .pic{position:absolute; right:-160px; top:0px; display:none;width:160px;height:160px;}
+
+.izl-rmenu .btn-wo{background:url(../img/r_weibo.png) 0px 0px no-repeat; background-color:#78c340;}
+.izl-rmenu .btn-wo:hover{background-color:#58a81c;}
+.izl-rmenu .btn-wo .pic{position:absolute; right:-160px; top:0px; display:none;width:160px;height:160px;}
+
+.izl-rmenu .btn-phone{background:url(../img/r_phone.png) 0px 0px no-repeat; background-color:#fbb01f;}
+.izl-rmenu .btn-phone:hover{background-color:#ff811b;}
+.izl-rmenu .btn-phone .phone{background-color:#ff811b; position:absolute; width:160px; right:-160px; top:0px; line-height:73px; color:#FFF; font-size:18px; text-align:center; display:none;}
+.izl-rmenu .btn-top{background:url(../img/r_top.png) 0px 0px no-repeat; background-color:#666666; display:none;}
+.izl-rmenu .btn-top:hover{background-color:#444;}
+/**/
+
+div.floatCtro{ width:120px; height:400px; position:absolute; right:0; top:0; z-index:100}
+div.floatCtro p{width:120px; text-align:center; height:70px; line-height:58px; font-family:'微软雅黑'; font-size:16px; color:#000; margin:0; padding:0; cursor:pointer; background:#F7F8F8;border-bottom:solid 1px #8A8A8A;}
+div.floatCtro a{ display:inline-block;width:120px; height:60px;  background:#fff; color:#000;  vertical-align:middle; cursor:pointer;}
+div.floatCtro p span{ display:block; width:120px; height:44px; line-height:6px;  font-family:'微软雅黑'; font-size:9px;  text-align:center;color:#797979;margin-top:-8px;}
+div.floatCtro a span{ display:block; width:120px; height:44px; line-height:6px;  font-family:'微软雅黑'; font-size:12px;  text-align:center;}
+div.floatCtro a:hover{ background:#FFFFFF; color:#000; zoom:1;}
+div.floatCtro p:hover{ background:#FFFFFF; color:#000;}
+div.floatCtro p.cur{ background:#FFFFFF; color:#000;}
+
+
+
+div.floatleft{ width:70px; height:400px; position:absolute; right:10; top:0; z-index:100}
+div.floatleft p{width:70px; text-align:center; height:40px; line-height:40px; font-family:'微软雅黑'; font-size:14px; color:#676767; margin:0; padding:0; cursor:pointer; background:#fff;}
+div.floatleft a{ display:inline-block;width:60px; height:60px;  background:#fff; color:#000;  vertical-align:middle; cursor:pointer;}
+div.floatleft a span{ display:block; width:60px; height:44px; line-height:6px;  font-family:'微软雅黑'; font-size:14px;  text-align:center;}
+div.floatleft a:hover{ background:#000; color:#fff; zoom:1;}
+div.floatleft p:hover{ background:#C4C4C4; color:#fff;}
+div.floatleft p.cur{ background:#C4C4C4; color:#fff;}
+

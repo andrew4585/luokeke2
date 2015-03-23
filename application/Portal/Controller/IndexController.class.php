@@ -7,7 +7,6 @@ use Common\Controller\HomeBaseController;
 class IndexController extends HomeBaseController {
 	
 	protected $siteId ;			//站点编号
-
 	
 	public function __construct(){
 		parent::__construct();
@@ -22,7 +21,19 @@ class IndexController extends HomeBaseController {
 			$this->assign("home_head",$this->_getAd("home_head"));
 			//首页中部轮播
 			$this->assign("home_middle",$this->_getAd("home_middle"));
-			
+			//最新活动
+			$this->assign("active",$this->getHomeContent("Active"));
+			//主题作品
+			$this->assign("ptheme",$this->getHomeContent("Ptheme",true));
+			//团购套系
+			//后台尚未完成
+// 			$this->assign("group",$this->getHomeContent("Group",true));
+			//客照
+			$this->assign("pcustom",$this->getHomeContent("Pcustom",true));
+			//婚纱礼服
+			$this->assign("dress",$this->getHomeContent("Dress",false,array("rent","sale_price")));
+			//好评
+// 			$this->assign("good",$this->getHomeContent("Good",false,array("head_image","post_excerpt")));
 		}catch (\Exception $e){
 			$this->error($e->getMessage());
 		}
@@ -31,11 +42,50 @@ class IndexController extends HomeBaseController {
 	
     /**
      * 获得首页推荐内容
-     * @param string $model_class 模型名（对应数据库表名）
+     * @param string  $model_class 模型名（对应数据库表名）
+     * @param bool 	  $siteCharge  是否根据站点判断,默认为false
+     * @param array	  $extra	       额外字段,自带字段：id,post_pic,post_title,post_url
      */
-    public function getHomeContent($model_class){
-    	$model	= D($model_class);
-    	
+    public function getHomeContent($model_class,$siteCharge=false,$extra=array()){
+    	$model		= D($model_class);
+    	$fieldArr	= array("id","post_pic","post_title","post_url");
+    	//istop:置顶，status：是否显示
+    	$whereArr	= array("istop=1","status=1",);
+    	if($siteCharge){
+    		array_push($whereArr, "site_id=$this->siteId");
+    	}
+    	if(!empty($extra)){
+    		$fieldArr = array_merge($fieldArr,$extra);
+    	}
+    	$where		= join(" and ",$whereArr);
+    	$field		= join(",",$fieldArr);
+    	$data		= $model->field($field)->where($where)->order("listorder")->limit(0,30)->select();
+    	return $data;
+    }
+    
+    /**
+     * 二级首页推荐信息
+     * @param string  $model_class 模型名（对应数据库表名）
+     * @param bool 	  $siteCharge  是否根据站点判断,默认为false
+     * @param array	  $extra	       额外字段,自带字段：id,post_pic,post_title,post_url
+     * @param int	  $limitNumber 数据条数，默认：20条
+     * <br/>@适用范围：含有recommended字段
+     */
+    public function getRecommended($model_class,$siteCharge=false,$extra=array(),$limitNumber=20){
+    	$model		= D($model_class);
+    	$fieldArr	= array("id","post_pic","post_title","post_url");
+    	//istop:置顶，status：是否显示
+    	$whereArr	= array("status=1");
+    	if($siteCharge){
+    		array_push($whereArr, "site_id=$this->siteId");
+    	}
+    	if(!empty($extra)){
+    		$fieldArr = array_merge($fieldArr,$extra);
+    	}
+    	$where		= join(" and ",$whereArr);
+    	$field		= join(",",$fieldArr);
+    	$data		= $model->field($field)->where($where)->order("recommended desc,listorder")->limit(0,$limitNumber)->select();
+    	return $data;
     }
     
     /**
@@ -86,5 +136,3 @@ class IndexController extends HomeBaseController {
     	}
     }
 }
-
-

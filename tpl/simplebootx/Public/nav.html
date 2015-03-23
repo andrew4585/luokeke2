@@ -1,62 +1,187 @@
-{:hook('body_start')}
-<div class="navbar navbar-fixed-top">
-   <div class="navbar-inner">
-     <div class="container">
-       <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-         <span class="icon-bar"></span>
-         <span class="icon-bar"></span>
-         <span class="icon-bar"></span>
-       </a>
-       <a class="brand" href="__ROOT__/"><img src="__TMPL__Public/images/logo.png"/></a>
-       <div class="nav-collapse collapse" id="main-menu">
-       	<?php
-			$effected_id="";
-		  	$filetpl="<a href='\$href' target='\$target'>\$label</a>";
-		  	$foldertpl="<a href='\$href' target='\$target' class='dropdown-toggle' data-toggle='dropdown'>\$label <b class='caret'></b></a>";
-		  	$ul_class="dropdown-menu" ;
-		  	$li_class="" ;
-		  	$style="nav";
-		  	$showlevel=6;
-		  	$dropdown='dropdown';
-		  	echo sp_get_menu("main",$effected_id,$filetpl,$foldertpl,$ul_class,$li_class,$style,$showlevel,$dropdown);
-		?>
-		
-		<ul class="nav pull-right" id="main-menu-left">
-			<li class="dropdown">
-			<if condition="sp_is_user_login()">
-	            <a class="dropdown-toggle user" data-toggle="dropdown" href="#">
-	            <if condition="empty($user['avatar'])">
-	            <img src="__TMPL__/Public/images/headicon.png" class="headicon"/>
-	            <else/>
-	            <img src="{:sp_get_user_avatar_url($user['avatar'])}" class="headicon"/>
-	            </if>
-	            {$user.user_nicename}<b class="caret"></b></a>
-	            <ul class="dropdown-menu pull-right">
-	               <li><a href="{:u('user/center/index')}"><i class="fa fa-user"></i> &nbsp;个人中心</a></li>
-	               <li class="divider"></li>
-	               <li><a href="{:u('user/index/logout')}"><i class="fa fa-sign-out"></i> &nbsp;退出</a></li>
-	            </ul>
-	        <else/>
-	            <a class="dropdown-toggle user" data-toggle="dropdown" href="#">
-	           		<img src="__TMPL__/Public/images/headicon.png" class="headicon"/>登录<b class="caret"></b>
-	            </a>
-	            <ul class="dropdown-menu pull-right">
-	               <li><a href="{:U('api/oauth/login',array('type'=>'sina'))}"><i class="fa fa-weibo"></i> &nbsp;微博登录</a></li>
-	               <li><a href="{:U('api/oauth/login',array('type'=>'qq'))}"><i class="fa fa-qq"></i> &nbsp;QQ登录</a></li>
-	               <li><a href="{:u('user/login/index')}"><i class="fa fa-sign-in"></i> &nbsp;登录</a></li>
-	               <li class="divider"></li>
-	               <li><a href="{:u('user/register/index')}"><i class="fa fa-user"></i> &nbsp;注册</a></li>
-	            </ul>
-	        </if>
-          	</li>
-		</ul>
-		<div class="pull-right">
-        	<form method="post" class="form-inline" action="{:U('portal/search/index')}" style="margin:18px 0;">
-				 <input type="text" class="" placeholder="Search" name="keyword" value="{:I('get.keyword')}"/>
-				 <input type="submit" class="btn btn-info" value="Go" style="margin:0"/>
-			</form>
+<div class="head">
+	<div class="menu">
+		<!--顶部导航-->
+		<div class="top">
+			<div class="toper">
+				<!--<b>新娘咨询热线：4000-999-136</b>-->
+                      <div class="head_top"></div>
+				<script type="text/javascript">
+					$(function() {
+						var as = $("a");
+						as.each(function() {
+							var href = $(this).attr("href");
+							if (href == "#" || href == "javascript:;") {} else {
+								$(this).attr("target", "_blank");
+							}
+						});
+					})
+				</script>
+				<div class="tr">
+					<b><img src="http://www.iaviva.com/theme/bg/bg74.gif" alt="洛可可摄影" /></b>
+					<i class="mouth"><img src="http://www.iaviva.com/theme/bg/t0.gif" alt="洛可可摄影" /><img src="http://www.iaviva.com/theme/bg/t2.gif" alt="洛可可摄影" /></i><i class="day"><img src="http://www.iaviva.com/theme/bg/t02.gif" alt="洛可可摄影" /><img src="http://www.iaviva.com/theme/bg/t08.gif" alt="洛可可摄影" /></i>
+					<b><img src="http://www.iaviva.com/theme/bg/bg75.gif" alt="洛可可摄影" /></b>
+					<i class="humanNumber"><img src="http://www.iaviva.com/theme/bg/t6.gif" alt="洛可可摄影" /><img src="http://www.iaviva.com/theme/bg/t6.gif" alt="洛可可摄影" /><img src="http://www.iaviva.com/theme/bg/t6.gif" alt="洛可可摄影" /><img src="http://www.iaviva.com/theme/bg/t7.gif" alt="洛可可摄影" /><img src="http://www.iaviva.com/theme/bg/t1.gif" alt="洛可可摄影" /><img src="http://www.iaviva.com/theme/bg/t7.gif" alt="洛可可摄影" /><img src="http://www.iaviva.com/theme/bg/t5.gif" alt="洛可可摄影" /></i>
+					<b><img src="http://www.iaviva.com/theme/bg/bg76.gif" alt="洛可可摄影" /></b>
+
+					<span><a href="javascript:;" title="洛可可摄影提醒您注意天气变化" class="tip" id="img_title1"><img src="http://www.iaviva.com/theme/weather/晴.gif" alt="洛可可摄影提醒您注意天气变化" /></a></span>
+					<strong><a href="javascript:;" title="洛可可摄影提醒您注意天气变化" class="tip" id="temp1"><em id="low"></em>~<small id="high"></small></a></strong>
+					<b style="padding:0;"><a href="javascript:;" title="洛可可摄影提醒您注意天气变化" id="temp2" class="tip welcome2"></a></b>
+					<script type="text/javascript">
+						function reqWeaData() {
+							$.post("http://www.iaviva.com/wea.ashx", {
+								Action: "get"
+							}, function(data, textStatus) {
+								if (textStatus == "success") {
+									var wjson = eval("(" + data + ")");
+									setWeaData(wjson);
+								}
+							});
+						}
+
+						function setWeaData(wjson) {
+							if (!wjson.weatherinfo) {
+								return;
+							}
+							var allStr = '2015年02月28日\n' + wjson.weatherinfo.weather;
+							var photo = wjson.weatherinfo.weather;
+							var photos = photo.split("转");
+							$("#img_title1").attr("title", allStr);
+							$("#img_title1 img").attr("src", "http://www.iaviva.com/theme/weather/" + photos[0] + ".gif");
+							$("#temp1").attr("title", allStr);
+							$("#temp2").attr("title", allStr);
+							$("#temp3").attr("title", allStr);
+							var s = wjson.weatherinfo.temp1;
+							var e = wjson.weatherinfo.temp2;
+							$("#low").html(e);
+							$("#high").html(s);
+						}
+						$(function() {
+							reqWeaData();
+						});
+					</script>
+				</div>
+			</div>
 		</div>
-       </div>
-     </div>
-   </div>
- </div>
+
+		<!--头部导航-->
+		<div class="head_nav">
+			<div class="logo">
+				<img src="__STATICS__images/tpl/logo.png" width="280" height="60">
+			</div>
+                 <!--分站-->
+			<ul class="nav_c">
+				<li class="drop"><a class="main down" href="#url"><font>大连站</font></a>
+
+					<div class="box_c">
+						<div class="box_c_title"><a href="#">三亚站</a>
+						</div>
+						<div class="box_c_title"><a href="#">巴厘岛</a>
+						</div>
+					</div>
+				</li>
+			</ul>
+			<script type="text/javascript">
+				$(function () {
+					var nav_cLi = $(".head_nav .nav_c li");
+					var left = $(".nav_c").offset().left+50;
+					nav_cLi.mouseenter(function() {
+						$(this).find(".box_c").css("left",left+"px");
+						$(this).find("a").addClass("current");
+						$(this).find(".box_c").stop().slideDown();
+					})
+					nav_cLi.mouseleave(function() {
+						$(this).find("a").removeClass("current");
+						$(this).find(".box_c").stop().slideUp();
+					})
+
+
+				})
+
+			</script>
+			<!--导航条-->
+				<ul class="nav">
+					<li>
+					<a href="" ><span>关于洛可可</span><font>ABOUT US</font></a>
+							<div class="box">
+								<a href="">于洛可可</a>
+								<a href="">于洛可可</a>
+								<a href="">于洛可可</a>
+								<a href="">于洛可可</a>
+								<a href="">于洛可可</a>
+								<a href="">于洛可可</a>
+							</div>
+					</li>
+					<li>
+					   <a href="" ><span>作品欣赏</span><font>SHOW CASE</font></a>
+							<div class="box">
+								<a href="">于洛可可</a>
+							</div>
+
+					</li>
+					<li>
+					<a href="" ><span>客片欣赏</span><font>WORKS</font></a>
+							<div class="box">
+								<a href="">于洛可可</a>
+								<a href="">于洛可可</a>
+							</div>
+
+
+					</li>
+					<li>
+						<a href="" ><span>婚纱礼服</span><font>WEDDING DRESS</font></a>
+							<div class="box">
+								<a href="">于洛可可</a>
+								<a href="">于洛可可</a>
+								<a href="">于洛可可</a>
+							</div>
+
+
+					</li>
+					<li>
+					<a href="" ><span>婚嫁资讯</span><font>NEWS</font></a>
+							<div class="box">
+								<a href="">于洛可可</a>
+								<a href="">于洛可可</a>
+								<a href="">于洛可可</a>
+								<a href="">于洛可可</a>
+							</div>
+
+					</li>
+
+					<li>
+					<a href=""><span>可可之星</span><font>ROCOCO STRA</font></a>
+							<div class="box">
+								<a href="">于洛可可</a>
+								<a href="">于洛可可</a>
+								<a href="">于洛可可</a>
+								<a href="">于洛可可</a>
+								<a href="">于洛可可</a>
+							</div>
+					</li>
+
+				</ul>
+			</div>
+
+			<!---->
+		<script type="text/javascript">
+			$(function () {
+				var navLi=$(".head_nav .nav li");
+				navLi.mouseenter(function () {
+					var size 	= $(this).find(".box a").size();
+					var navLeft = $(this).find("a").offset().left-(size-1)*(90)/2+30;
+					$(this).find(".box").css("padding-left",navLeft+"px");
+					$(this).find("a").addClass("current");
+					$(this).find(".box").stop().slideDown();
+				})
+				navLi.mouseleave(function(){
+					$(this).find("a").removeClass("current");
+					$(this).find(".box").stop().slideUp();
+				})
+
+			})
+		</script>
+
+
+	</div>
+	<div class="clears"></div>
+</div>

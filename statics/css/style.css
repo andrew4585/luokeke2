@@ -1,0 +1,93 @@
+
+/*首页动态js效果css*/
+
+*{margin:0;padding:0;-webkit-text-size-adjust:none;border:0;list-style:none;}
+body{overflow-x:hidden;}
+
+/* wrap */
+.wrap{width:976px;height:740px;position:relative;margin:0 auto;}
+.scroll{position:relative;overflow:hidden;}
+.scroll ul{position:absolute;width:20000px;}
+.scroll ul li{float:left;}
+.bpic,ins.nm{position:absolute;top:0;left:50%;margin-left:-960px;width:1920px;text-align:center;}
+ins.nm{height:89px;top:630px;filter:alpha(opacity=60);opacity:0.6; }
+.b1{width:900px;height:76px;position:absolute;top:640px;left:37px;z-index:1; border-bottom: 1px solid #C4C4C4}
+.b1 li,.b1 li ins{width:145px;height:6px;position:relative;}
+.b1 li{margin-right:6px;cursor:pointer;}
+.b1 li div{display:none;}
+.b1 li img{border:5px solid #fff;width:135px;height:56px;}
+.b1 li.active img{border:none;width:129px;margin:8px;height:50px;}
+.b1 li.active ins{/*background:url(../img/ico_2.gif) no-repeat;*/   height: 6px;background: none repeat scroll 0 0 #fdcd01;position:absolute;display:block;top:70px;left:0;}
+a.arr_l,a.arr_r{background:url(../img/arr.png) no-repeat;width:24px;height:24px;display:block;position:absolute;top:660px;left:10px;z-index:1;cursor:pointer;}
+a.arr_r{left:943px;background-position:right 0;}
+a.arr_l:hover,ul.page li a.p:hover,a.pv:hover{background-position:0 bottom;}
+a.arr_r:hover,ul.page li a.n:hover,a.nv:hover{background-position:right bottom;}
+
+/* 效果CSS开始 */
+#zsgun{position:relative;height:500px; width:1200px; margin:auto;}
+a.hScrollPane_leftarrow{top:200px; cursor:pointer; display:block; width:25px; height:58px; background:url(../img/zsleftbar.gif) no-repeat left top;left:-35px; position:absolute;}
+/*a.hScrollPane_leftarrow:hover{background:url(../img/zsleftbar.gif) no-repeat left -58px;}*/
+a.hScrollPane_rightarrow{ top:200px; cursor:pointer; display:block; width:25px; height:58px; background:url(../img/zsrightbar.gif) no-repeat left top; right:5px; position:absolute;}
+/*a.hScrollPane_rightarrow:hover{background:url(../img/zsrightbar.gif) no-repeat left -58px;}*/
+.hScrollPane_dragbar{width:1200px; position: absolute; height: 24px; /*border-bottom:#83CC32 1px solid; left:-15px;*/ top:460px; z-index:1; padding:0 23px; background: url("../img/gundong.png") no-repeat;}
+.hScrollPane_draghandle{position:absolute; width:30px; height:30px; overflow:hidden; background:url(../img/gunbar.png) no-repeat left top;/*_background:url(../img/gunbar.gif) no-repeat left top;/* bottom:-20px;*/ cursor:pointer; /*margin:0 39px;*/ left:0;}
+#gundiv{ border: 10px solid #F3F3F3 ;width:1180px; position:relative;  float:left; display:inline;height:430px; overflow:hidden;}
+#gundiv ul {height:430px;position: absolute; width:20000em;}
+#gundiv li{ width:290px; height:430px; overflow:hidden; float:left; position:relative;  }
+#gundiv li p{ display:none; height:18px; line-height:18px; text-align:center; overflow:hidden;}
+#gundiv li p a:link,#gundiv li p a:visited{ color: #53711C; font-size: 12px; }
+#gundiv li.zslion p{ display:block;}
+
+
+
+/* 效果CSS结束 */
+#zsgun1{ background:#FFFFFF; position:relative;height:500px; width:1200px; margin:auto;}
+#gundiv1{border: 10px solid #FFFFFF ; background: #ffffff;width:1180px; position:relative;  float:left; display:inline;height:420px; overflow:hidden;}
+#gundiv1 ul {height:420px;position: absolute; width:20000em;}
+#gundiv1 li{ width:280px; height:430px; overflow:hidden; float:left;position:relative; border: 5px solid #f4f4f4 ;background: #f4f4f4}
+#gundiv1 li p{ display:none; height:18px; line-height:18px; text-align:center; overflow:hidden;}
+#gundiv1 li p a:link,#gundiv li p a:visited{ color: #53711C; font-size: 12px; }
+#gundiv1 li.zslion p{ display:block;}
+.title_i{  height:90px}
+.title_momeny{ width: 100px; float: left;height: 50px; margin: 16px 6px 6px;}
+.title_true{ width: 73px; float: right;height: 55px;  margin: 16px 0px 0px;}
+.title_momeny .s_001{font-size: 24px;color: #939394;}
+.title_momeny .s_002{padding: 6px}
+
+/* 效果CSS结束 */
+#zsgun2{ background:#FFFFFF; position:relative;height:500px; width:1200px; margin:auto;}
+#gundiv2{  border: 10px solid #F3F3F3 ;width:1180px; position:relative; float:left; display:inline;height:420px; overflow:hidden;}
+#gundiv2 ul {height:420px;position: absolute; width:20000em;}
+#gundiv2 li{ width:290px; height:420px; overflow:hidden; float:left; position:relative;}
+#gundiv2 li p{ display:none; height:18px; line-height:18px; text-align:center; overflow:hidden;}
+#gundiv2 li p a:link,#gundiv li p a:visited{ color: #53711C; font-size: 12px; }
+#gundiv2 li.zslion p{ display:block;}
+
+/* 效果CSS结束 */
+#zsgun3{ background:#FFFFFF; position:relative;height:500px; width:1200px; margin:auto;}
+#gundiv3{border: 10px solid #FFFFFF ; width:1180px; position:relative;  float:left; display:inline;height:420px; overflow:hidden;}
+#gundiv3 ul {height:420px;position: absolute; width:20000em;}
+#gundiv3 li{ width:290px; height:420px; overflow:hidden; float:left; position:relative;}
+#gundiv3 li p{ display:none; height:18px; line-height:18px; text-align:center; overflow:hidden;}
+#gundiv3 li p a:link,#gundiv li p a:visited{ color: #53711C; font-size: 12px; }
+#gundiv3 li.zslion p{ display:block;}
+
+/*鼠标悬停*/
+.clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
+.clearfix{display:inline-table;}/* Hides from IE-mac \*/
+*html .clearfix{height:1%;}
+.clearfix{display:block;}/* End hide from IE-mac */
+*+html .clearfix{min-height:1%;}
+/* section */
+
+.container2{background:#F3F3F3;}
+.container2 ul li{float:left;margin-right:6px; display:inline;width:290px;height:430px;overflow:hidden;position:relative;}
+.container2 ul li .photo{width:290px;height:430px;overflow:hidden;}
+.container2 .rsp{width:290px;height:430px;overflow:hidden;position: absolute;top:0px;left:0px;background: url("../img/n08.png") repeat scroll 0 0 rgba(0, 0, 0, 0);}
+.container2 .text{position:absolute;width:290px;height:430px;top:0px;overflow:hidden;}
+.container2 .text h3{width:290px;margin-top:240px;height:50px;text-align:center;color:#FFFFFF;font-size:15px;}
+.container2 .text a{text-decoration:none}
+.container2 .text div{text-align:center;color:#FFFFFF;font-size:18px;margin-top: 80px;}
+
+
+

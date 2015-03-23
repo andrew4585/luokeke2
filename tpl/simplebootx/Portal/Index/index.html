@@ -1,143 +1,1583 @@
 <!DOCTYPE html>
-	<html>
+<html>
 	<head>
-		<title>{$site_seo_title} {$site_name}</title>
-		<meta name="keywords" content="{$site_seo_keywords}" />
-		<meta name="description" content="{$site_seo_description}">
 		<tc_include file="Public:head" />
-		<link href="__TMPL__Public/css/slippry/slippry.css" rel="stylesheet">
-		<style>
-			.caption-wraper{position: absolute;left:50%;bottom:2em;}
-			.caption-wraper .caption{
-			position: relative;left:-50%;
-			background-color: rgba(0, 0, 0, 0.54);
-			padding: 0.4em 1em;
-			color:#fff;
-			-webkit-border-radius: 1.2em;
-			-moz-border-radius: 1.2em;
-			-ms-border-radius: 1.2em;
-			-o-border-radius: 1.2em;
-			border-radius: 1.2em;
-			}
-			@media (max-width: 767px){
-				.sy-box{margin: 12px -20px 0 -20px;}
-				.caption-wraper{left:0;bottom: 0.4em;}
-				.caption-wraper .caption{
-				left: 0;
-				padding: 0.2em 0.4em;
-				font-size: 0.92em;
-				-webkit-border-radius: 0;
-				-moz-border-radius: 0;
-				-ms-border-radius: 0;
-				-o-border-radius: 0;
-				border-radius: 0;}
-			}
-		</style>
 	</head>
-<body class="body-white">
-<tc_include file="Public:nav" />
+<body>
+	<!--头部导航标题js-->
+		<tc_include file="Public:nav"/>
+		<!-- 轮播图-->
+		<div class="banner">
+			<div id="demo01" class="flexslider">
+				<ul class="slides">
+					<li>
+						<div class="img">
+							<img src="img/5.jpg" alt="" />
+						</div>
+					</li>
+					<li>
+						<div class="img">
+							<img src="img/1.jpg" alt="" />
+						</div>
+					</li>
+					<li>
+						<div class="img">
+							<img src="img/5-2.jpg" alt="" />
+						</div>
+					</li>
+				</ul>
+			</div>
+			<!--flexslider end-->
+			<script type="text/javascript" src="js/slider.js"></script>
+			<script type="text/javascript">
+				$(function() {
+					$('#demo01').flexslider({
+						animation: "slide",
+						direction: "horizontal",
+						easing: "swing"
+					});
+				});
+			</script>
+		</div>
+		<!-- 轮播图下面的图片-->
+		<div class="fgx3">
+			<ul id="main_tools">
+				<li>
+					<a href="">
+						<img src="img/kpds_09.png"  />
+					</a>
+				</li>
+				<li>
+					<a href="">
+						<img src="img/kpds_10.png" />
+					</a>
+				</li>
+				<li>
+					<a href="">
+						<img src="img/kpds_05.png" />
+					</a>
+				</li>
+				<li>
+					<a href="">
+						<img src="img/kpds_07.png" />
+					</a>
+				</li>
+			</ul>
+		</div>
+		<!-- 内容  -->
+		<div class="conter">
 
-<php>
-$home_slides=sp_getslide("portal_index");
+			<!--jquery右侧随滚动条浮动导航代码-->
+			<div class="floatCtro">
+				<p>最新活动<br/><span>ROCOCO PHOTO</span></p>
+				<p>作品欣赏<br/><span>ROCOCO PHOTO</span></p>
+				<p>客片欣赏<br/><span>ROCOCO PHOTO</span></p>
+				<p>婚纱礼服<br/><span>ROCOCO PHOTO</span></p>
+				<p>真实评价<br/><span>ROCOCO PHOTO</span></p>
+				<p>婚嫁常识<br/><span>ROCOCO PHOTO</span></p>
+				<p><a>回到顶端<br/><span STYLE="font-size: 14px">TOP▲</span></a></p>
+			</div>
+			<!--<a name="md1" id="md1"></a>-->
 
-$home_slides=empty($home_slides)?$default_home_slides:$home_slides;
-</php>
-<ul id="homeslider" class="unstyled">
-	<foreach name="home_slides" item="vo">
-	<li>
-		<div class="caption-wraper">
-			<div class="caption">{$vo.slide_name}</div>
-		</div>
-		<a href="{$vo.slide_url}"><img src="{:sp_get_asset_upload_path($vo['slide_pic'])}" alt=""></a>
-	</li>
-	</foreach>
-</ul>
-<div class="container">
-	
-	<div>
-		<h1 class="text-center">快速了解ThinkCMF</h1>
-		<h3 class="text-center">Quickly understand the ThinkCMF</h3>
-	</div>
-	<div class="row">
-		<div class="span4">
-			 <h2 class="font-large nospace"><i class="fa fa-bars"></i> MVC分层模式</h2>
-             <p>使用MVC应用程序被分成三个核心部件：模型（M）、视图（V）、控制器（C），他不是一个新的概念，只是ThinkCMF将其发挥到了极致。</p>
-		</div>
-		<div class="span4">
-			 <h2 class="font-large nospace"><i class="fa fa-group"></i> 用户管理</h2>
-             <p>ThinkCMF内置了灵活的用户管理方式，并可直接与第三方站点进行互联互通，如果你愿意甚至可以对单个用户或群体用户的行为进行记录及分享，为您的运营决策提供有效参考数据。</p>
-		</div>
-		<div class="span4">
-			  <h2 class="font-large nospace"><i class="fa fa-cloud"></i> 云端部署</h2>
-              <p>通过驱动的方式可以轻松支持云平台的部署，让你的网站无缝迁移，内置已经支持SAE、BAE，正式版将对云端部署进行进一步优化。</p>
-		</div>
-	</div>
-	
-	<div class="row">
-		<div class="span4">
-			 <h2 class="font-large nospace"><i class="fa fa-heart"></i> 安全策略</h2>
-             <p>提供的稳健的安全策略，包括备份恢复，容错，防治恶意攻击登陆，网页防篡改等多项安全管理功能，保证系统安全，可靠，稳定的运行。</p>
-		</div>
-		<div class="span4">
-			 <h2 class="font-large nospace"><i class="fa fa-cubes"></i> 应用模块化</h2>
-             <p>提出全新的应用模式进行扩展，不管是你开发一个小功能还是一个全新的站点，在ThinkCMF中你只是增加了一个APP，每个独立运行互不影响，便于灵活扩展和二次开发。</p>
-		</div>
-		<div class="span4">
-			  <h2 class="font-large nospace"><i class="fa fa-certificate"></i> 免费开源</h2>
-              <p>代码遵循Apache2开源协议，免费使用，对商业用户也无任何限制。</p>
-		</div>
-	</div>
-	
-	<div>
-		<h1 class="text-center">最新资讯</h1>
-		<h3 class="text-center">Last News</h3>
-	</div>
-	<php>
-		$lastnews=sp_sql_posts("cid:$portal_index_lastnews;field:post_title,post_excerpt,tid,smeta;order:listorder asc;limit:4;"); 
-	</php>
-	<div class="row">
-		<foreach name="lastnews" item="vo">
-		<php>$smeta=json_decode($vo['smeta'],true);</php>
-		<div class="span3">
-			<div class="tc-gridbox">
-				<div class="header">
-					<div class="item-image">
-						<a href="{:leuu('article/index',array('id'=>$vo['tid']))}">
-							<if condition="empty($smeta['thumb'])"> 
-								<img src="__TMPL__Public/images/default_tupian1.png" class="img-responsive" alt="{$vo.post_title}"/>
-							<else /> 
-								<img src="{:sp_get_asset_upload_path($smeta['thumb'])}" class="img-responsive img-thumbnail" alt="{$vo.post_title}" />
-							</if>
-						</a>
+			<!--人气活动内容-->
+			<div id="left"></div>
+
+			<div id="float01" class="cur">
+				<div class="title_01">
+					<div class="a_l1_t">
+						<!--<span><font style="color:#7C7C7D"><</font>洛可可婚纱摄影<font style="color:#7C7C7D">></font>之<font style="color:#F37914 ">最新人气活动</font><font style="color:#7C7C7D">>POPULARA CTIVIES</font></span>-->
+						<div class="title_nav"></div>
+						<h5>
+							<ul>
+								<li><a href="" target="_blank" title="" style="">可可之星做最耀眼的新娘 |</a></li>
+								<li><a href="" target="_blank" title="" style="">积分上分享赢好礼 |</a></li>
+								<li><a href="" target="_blank" title="" style="">好评如潮 |</a></li>
+								<li><a href="" target="_blank" title="" style="">五星级店面，你造吗？ |</a></li>
+								<li><a href="" target="_blank" title="" style="">三月团购活动 2015 有一种腔调，想价你就嫁  </a></li>
+							</ul>
+						</h5>
 					</div>
-					<h3><a href="{:leuu('article/index',array('id'=>$vo['tid']))}">{$vo.post_title}</a></h3>
-					<hr>
 				</div>
-				<div class="body">
-					<p><a href="{:leuu('article/index',array('id'=>$vo['tid']))}">{:msubstr($vo['post_excerpt'],0,32)}</a></p>
+				<div class="con_a001">
+					<div class="al_001"><div class="more"><a href="#">点击查看更多人气活动</a></div></div>
+
+					<div class="xl_001">
+						<ul>
+							<li class="b">
+								<a href="" target="_blank" class="bigImg">
+									<img src="images/2015212179124657046.jpg" width="390" height="535" alt="" />
+									<div class="rsp"></div>
+								</a>
+							</li>
+							<li>
+								<a href="" class="smallImg" target="_blank" title="">
+									<img src="images/2015171745446895511.jpg" width="390" height="267" alt="" />
+									<div class="rsp"></div>
+								</a>
+							</li>
+							<li>
+								<a href="" class="smallImg" target="_blank" title=" ">
+									<img src="images/20152261215294738443.jpg" width="390" height="267" alt=" " />
+									<div class="rsp"></div>
+								</a>
+							</li>
+							<li>
+								<a href="" class="smallImg" target="_blank" title=" ">
+									<img src="images/2015171746244438418.jpg" width="390" height="267" alt=" " />
+									<div class="rsp"></div>
+								</a>
+							</li>
+							<li>
+								<a href="" class="smallImg" target="_blank" title=" ">
+									<img src="images/2015181854408736407.jpg" width="390" height="267" alt=" " />
+									<div class="rsp"></div>
+								</a>
+							</li>
+
+						</ul>
+					</div>
+
+
+					<div class="zl_001">
+						<h5>
+				    	<ul>
+						<li>限时团购</li>
+						<li>洛可可风</li>
+						<li>用客照说话</li>
+	     				<li>婚纱礼服定制</li>
+						<li>洛可可之星</li>
+					    </ul>
+						</h5>
+					</div>
 				</div>
 			</div>
-		</div>
-		</foreach>
-	</div>
-<tc_include file="Public:footer"/>
-</div>
+			<!--查看更多作品-->
+			<!--标题-->
+			<div id="float02">
+				<div class="title_01">
+					<div class="a_l1_t">
+						<!--<span><font style="color:#7C7C7D"><</font>洛可可风,引爆今生<font style="color:#7C7C7D">></font>之<font style="color:#F37914 ">最新主题作品</font><font style="color:#7C7C7D">>ROCOCO PHOTO</font></span>-->
+						<div class="title_nav_01"></div>
+						<h5>
+						<ul>
+							<li><a href="" target="_blank" title="" style="">仲夏之梦 </a></li>
+					     	<li><a href="" target="_blank" title="" style="">克雷思索桥</a></li>
+							<li><a href="" target="_blank" title="" style="">卡普里岛</a></li>
+							<li><a href="" target="_blank" title="" style="">DREAM </a></li>
+							<li><a href="" target="_blank" title="" style="">首次曝光 </a></li>
+							<li><a href="" target="_blank" title="" style="">加州阳光</a></li>
+							<li><a href="" target="_blank" title="" style="">北欧童话</a></li>
+							<li><a href="" target="_blank" title="" style="">艾米的假日 </a></li>
+							<li><a href="" target="_blank" title="" style="">yes i do </a></li>
+							<li><a href="" target="_blank" title="" style="">斯图尔特海滩</a></li>
+							<li><a href="" target="_blank" title="" style="">布查特花园</a></li>
+							<li><a href="" target="_blank" title="" style="">佳期如梦 </a></li>
+						</ul>
+					</h5>
+					</div>
+				</div>
 
-<tc_include file="Public:scripts"/>
-<script src="__TMPL__Public/js/slippry.min.js"></script>
-<script>
-$(function() {
-	var demo1 = $("#homeslider").slippry({
-		transition: 'fade',
-		useCSS: true,
-		captions: false,
-		speed: 1000,
-		pause: 3000,
-		auto: true,
-		preload: 'visible'
-	});
-});
-</script>
-{:hook('footer_end')}
-</body>
+			<!--jQuery带左右按钮及水平滚动拖动条的图片相册特效 -->
+			<div class="con_a002">
+
+				<div class="al_001"><div class="more"><a href="#">点击查看更多作品</a></div></div>
+				<!-- 效果开始-->
+				<div id="zsgun">
+					<a href="#" class="prenext zspre"></a>
+					<a href="#" class="prenext zsnext"></a>
+					<div id="gundiv" class="container2">
+						<ul class="clearfix">
+
+							<li>
+								<div class="photo">
+									<img src="images/2015261051252157382.jpg" alt="" width="290" height="430" />
+								</div>
+								<div class="rsp"></div>
+								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
+								</div>
+
+							</li>
+							<li>
+								<div class="photo">
+									<img src="images/2014102151234350492.jpg" alt="" width="290" height="430" />
+								</div>
+								<div class="rsp"></div>
+								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
+								</div>
+
+							</li>
+							<li>
+								<div class="photo">
+									<img src="images/2014827155723233401.jpg" alt="" width="290" height="430" />
+								</div>
+								<div class="rsp"></div>
+								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
+								</div>
+							</li>
+							<li>
+								<div class="photo">
+									<img src="images/20148271555147898974.jpg" alt="" width="290" height="430" />
+								</div>
+								<div class="rsp"></div>
+								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
+								</div>
+							</li>
+							<li>
+								<div class="photo">
+									<img src="images/2015261051252157382.jpg" alt="" width="290" height="430" />
+								</div>
+								<div class="rsp"></div>
+								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
+								</div>
+							</li>
+							<li>
+								<div class="photo">
+									<img src="images/2015261051252157382.jpg" alt="" width="290" height="430" />
+								</div>
+								<div class="rsp"></div>
+								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
+								</div>
+
+							</li>
+							<li>
+								<div class="photo">
+									<img src="images/2015261051252157382.jpg" alt="" width="290" height="430" />
+								</div>
+								<div class="rsp"></div>
+								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
+								</div>
+							</li>
+							<li>
+								<div class="photo">
+									<img src="images/2015261051252157382.jpg" alt="" width="290" height="430" />
+								</div>
+								<div class="rsp"></div>
+								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
+								</div>
+
+							</li>
+							<li>
+								<div class="photo">
+									<img src="images/2015261051252157382.jpg" alt="" width="290" height="430" />
+								</div>
+								<div class="rsp"></div>
+								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
+								</div>
+							</li>
+							<li>
+								<div class="photo">
+									<img src="images/2015261051252157382.jpg" alt="" width="290" height="430" />
+								</div>
+								<div class="rsp"></div>
+								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
+								</div>
+
+							</li>
+
+						</ul>
+					</div>
+				</div>
+				<!--滚动条js-->
+				<script type="text/javascript" src="js/hScrollPane.js"></script>
+				<script type="text/javascript">
+					$(function() {
+						var glen = $("#gundiv ul li").length;
+						$("#gundiv ul").css("width", 310 * (glen));
+						$("#gundiv li").hover(function() {
+							$("#gundiv li").removeClass("zslion");
+							$(this).addClass("zslion");
+						}, function() {
+							$(this).removeClass("zslion");
+						})
+					});
+					$("#zsgun").hScrollPane({
+						mover: "ul",
+						moverW: function() {
+							return $("#zsgun li").length * 310 - 107;
+						}(),
+						showArrow: true,
+						handleCssAlter: "draghandlealter"
+					});
+				</script>
+				<!--效果结束-->
+			</div>
+			<!--中间轮播图-->
+			<div class="wrap">
+				<div class="bpic" style="opacity:1;">
+					<div>
+						<a href="">
+							<img src="img/1.jpg" height="629" alt="">
+						</a>
+					</div>
+				</div>
+				<!--<a class="arr_l png disabled"></a>-->
+				<div class="b1 scroll">
+					<ul style="left:0px;">
+						<li class="active">
+							<img src="img/01.jpg" width="135" height="56" alt=""><ins></ins>
+							<div>
+								<a href="">
+									<img src="img/1.jpg" height="629" alt="">
+								</a>
+							</div>
+						</li>
+						<li>
+							<img src="img/02.jpg" width="135" height="56" alt=""><ins></ins>
+							<div>
+								<a href="">
+									<img src="img/2.jpg" height="629" alt="">
+								</a>
+							</div>
+						</li>
+						<li>
+							<img src="img/03.jpg" width="135" height="56" alt=""><ins></ins>
+							<div>
+								<a href="">
+									<img src="img/3.jpg" height="629" alt="">
+								</a>
+							</div>
+						</li>
+						<li>
+							<img src="img/04.jpg" width="135" height="56" alt=""><ins></ins>
+							<div>
+								<a href="">
+									<img src="img/4.jpg" height="629" alt="">
+								</a>
+							</div>
+						</li>
+						<li>
+							<img src="img/05.jpg" width="135" height="56" alt=""><ins></ins>
+							<div>
+								<a href="">
+									<img src="img/5.jpg" height="629" alt="">
+								</a>
+							</div>
+						</li>
+						<li>
+							<img src="img/06.jpg" width="135" height="56" alt=""><ins></ins>
+							<div>
+								<a href="">
+									<img src="img/6.jpg" height="629" alt="">
+								</a>
+							</div>
+						</li>
+						<li>
+							<img src="img/04.jpg" width="135" height="56" alt="礼"><ins></ins>
+							<div>
+								<a href="">
+									<img src="img/4.jpg" height="629" alt="">
+								</a>
+							</div>
+						</li>
+						<li>
+							<img src="img/01.jpg" width="135" height="56" alt=""><ins></ins>
+							<div>
+								<a href="">
+									<img src="img/1.jpg" height="629" alt="">
+								</a>
+							</div>
+						</li>
+						<li>
+							<img src="img/02.jpg" width="135" height="56" alt=""><ins></ins>
+							<div>
+								<a href="">
+									<img src="img/2.jpg" height="629" alt="">
+								</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<!--<a class="arr_r png"></a>-->
+				<ins class="nm"></ins>
+				<script src="js/jquery.tools.min.js" type="text/javascript"></script>
+				<script src="js/script.js" type="text/javascript"></script>
+			</div>
+			</div>
+			<!--轮播结束-->
+			<!--人气活动内容2-->
+			<!--标题-->
+			<div style="background: #f3f3f3">
+				<div class="title_01">
+					<div class="a_l1_t">
+						<div class="title_nav_02"></div>
+						<!--<span><font style="color:#7C7C7D"><</font>洛可可风婚纱摄影<font style="color:#7C7C7D">></font>之<font style="color:#F37914 ">限时特惠套系</font><font style="color:#7C7C7D">>ROCOCO SALES</font></span>-->
+						<h5>
+						<ul>
+							<li><a href="" target="_blank" title="" style="">3月想价就嫁4999特惠套装 | </a></li>
+							<li><a href="" target="_blank" title="" style="">3月想价就嫁6999特惠套装 |</a></li>
+							<li><a href="" target="_blank" title="" style="">3月想价就嫁7999特惠套装|</a></li>
+							<li><a href="" target="_blank" title="" style="">3月想价就嫁8999特惠套装 </a></li>
+						</ul>
+					</h5>
+					</div>
+				</div>
+				<div class="con_a003">
+					<div class="al_001"><div class="more"><a href="#">点击查看更多人气活动</a></div></div>
+
+				<!-- 效果开始-->
+					<div id="zsgun1">
+						<a href="#" class="prenext zspre"></a>
+						<a href="#" class="prenext zsnext"></a>
+						<div id="gundiv1" class="container2 ">
+							<ul>
+								<li>
+									<a href="" target="_blank">
+										<img src="images/2015261051252157382_03.jpg" alt="" width="290" height="321" />
+									</a>
+                                    <div class="title_i">
+                                        <div class="title_momeny">
+											<span  class="s_001">￥4999</span></br>
+											<span  class="s_002">50人购买</span>
+
+										</div>
+										<div class="title_true"><img src="img/ico_true_03.png" alt=""/></div>
+
+									</div>
+									<!--<div class="rsp"></div>-->
+									<!--<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>-->
+									<!--</div>-->
+								</li>
+								<li>
+									<a href="" target="_blank">
+										<img src="images/2014102151234350492_03.jpg" alt="" width="290" height="321" />
+									</a>
+
+									<div class="title_i">
+										<div class="title_momeny">
+											<span  class="s_001">￥4999</span></br>
+											<span  class="s_002">50人购买</span>
+
+										</div>
+										<div class="title_true"><img src="img/ico_true_03.png" alt=""/></div>
+
+									</div>
+
+									<!--<div class="rsp"></div>-->
+									<!--<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>-->
+									<!--</div>-->
+								</li>
+								<li>
+									<a href="" target="_blank">
+										<img src="images/2014102151234350492_03.jpg" alt="" width="290" height="321" />
+									</a>
+									<div class="title_i">
+										<div class="title_momeny">
+											<span  class="s_001">￥4999</span></br>
+											<span  class="s_002">50人购买</span>
+
+										</div>
+										<div class="title_true"><img src="img/ico_true_03.png" alt=""/></div>
+
+									</div>
+									<!--<div class="rsp"></div>-->
+									<!--<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>-->
+									<!--</div>-->
+								</li>
+								<li>
+									<a href="" target="_blank">
+										<img src="images/20148271555147898974_03.jpg" alt="" width="290" height="321" />
+									</a>
+									<div class="title_i">
+										<div class="title_momeny">
+											<span  class="s_001">￥4999</span></br>
+											<span  class="s_002">50人购买</span>
+
+										</div>
+										<div class="title_true"><img src="img/ico_true_03.png" alt=""/></div>
+
+									</div>
+									<!--<div class="rsp"></div>-->
+									<!--<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>-->
+									<!--</div>-->
+								</li>
+								<li>
+									<a href="" target="_blank">
+										<img src="images/2015261051252157382.jpg" alt="" width="290" height="321" />
+									</a>
+									<div class="title_i">
+										<div class="title_momeny">
+											<span  class="s_001">￥4999</span></br>
+											<span  class="s_002">50人购买</span>
+
+										</div>
+										<div class="title_true"><img src="img/ico_true_03.png" alt=""/></div>
+
+									</div>
+									<!--<div class="rsp"></div>-->
+									<!--<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>-->
+									<!--</div>-->
+								</li>
+								<li>
+									<a href="" target="_blank">
+										<img src="images/2015261051252157382.jpg" alt="" width="290" height="321" />
+									</a>
+									<div class="title_i">
+										<div class="title_momeny">
+											<span  class="s_001">￥4999</span></br>
+											<span  class="s_002">50人购买</span>
+
+										</div>
+										<div class="title_true"><img src="img/ico_true_03.png" alt=""/></div>
+
+									</div>
+									<!--<div class="rsp"></div>-->
+									<!--<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>-->
+									<!--</div>-->
+								</li>
+								<li>
+									<a href="" target="_blank">
+										<img src="images/2015261051252157382.jpg" alt="" width="290" height="321" />
+									</a>
+									<div class="title_i">
+										<div class="title_momeny">
+											<span  class="s_001">￥4999</span></br>
+											<span  class="s_002">50人购买</span>
+
+										</div>
+										<div class="title_true"><img src="img/ico_true_03.png" alt=""/></div>
+
+									</div>
+									<!--<div class="rsp"></div>-->
+									<!--<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>-->
+									<!--</div>-->
+								</li>
+								<li>
+									<a href="" target="_blank">
+										<img src="images/2015261051252157382.jpg" alt="" width="290" height="321" />
+									</a>
+									<div class="title_i">
+										<div class="title_momeny">
+											<span  class="s_001">￥4999</span></br>
+											<span  class="s_002">50人购买</span>
+
+										</div>
+										<div class="title_true"><img src="img/ico_true_03.png" alt=""/></div>
+
+									</div>
+									<!--<div class="rsp"></div>-->
+									<!--<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>-->
+									<!--</div>-->
+								</li>
+								<li>
+									<a href="" target="_blank">
+										<img src="images/2015261051252157382.jpg" alt="" width="290" height="321" />
+									</a>
+									<div class="title_i">
+										<div class="title_momeny">
+											<span  class="s_001">￥4999</span></br>
+											<span  class="s_002">50人购买</span>
+
+										</div>
+										<div class="title_true"><img src="img/ico_true_03.png" alt=""/></div>
+
+									</div>
+									<!--<div class="rsp"></div>-->
+									<!--<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>-->
+									<!--</div>-->
+								</li>
+								<li>
+									<a href="" target="_blank">
+										<img src="images/2015261051252157382.jpg" alt="" width="290" height="321" />
+									</a>
+									<div class="title_i">
+										<div class="title_momeny">
+											<span  class="s_001">￥4999</span></br>
+											<span  class="s_002">50人购买</span>
+
+										</div>
+										<div class="title_true"><img src="img/ico_true_03.png" alt=""/></div>
+
+									</div>
+									<!--<div class="rsp"></div>-->
+									<!--<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>-->
+									<!--</div>-->
+								</li>
+							</ul>
+						</div>
+					</div>
+					<script type="text/javascript">
+						$(function() {
+							var glen = $("#gundiv1 ul li").length;
+							$("#gundiv1 ul").css("width", 310 * (glen));
+							$("#gundiv1 li").hover(function() {
+								$("#gundiv1 li").removeClass("zslion");
+								$(this).addClass("zslion");
+							}, function() {
+								$(this).removeClass("zslion");
+							})
+						});
+						$("#zsgun1").hScrollPane({
+							mover: "ul",
+							moverW: function() {
+								return $("#zsgun1 li").length * 310 - 107;
+							}(),
+							showArrow: true,
+							handleCssAlter: "draghandlealter"
+						});
+					</script>
+				</div>
+			</div>
+			<!--查看更多作品2-->
+			<div id="float03">
+				<div class="title_01">
+					<div class="a_l1_t">
+						<div class="title_nav_03"></div>
+						<!--<span><font style="color:#7C7C7D"><</font>洛可可风婚纱摄影<font style="color:#7C7C7D">></font>之<font style="color:#F37914 ">用真是客照说话</font><font style="color:#7C7C7D">>ROCOCO PHOTO</font></span>-->
+						<h5>
+						<ul>
+							<li><a href="" target="_blank" title="" style="">最美的客照引发全名热议 | </a></li>
+							<li><a href="" target="_blank" title="" style="">回归婚纱摄影的本质 |</a></li>
+							<li><a href="" target="_blank" title="" style="">用色彩铺垫用光影诉说|</a></li>
+							<li><a href="" target="_blank" title="" style="">我们很骄傲，因为我们用客照说话 </a></li>
+
+						</ul>
+					</h5>
+					</div>
+				</div>
+
+			<div class="con_a004">
+				<div class="al_001"><div class="more"><a href="#">点击查看更多作品</a></div></div>
+
+				<!-- 效果开始-->
+				<div id="zsgun2">
+					<a href="#" class="prenext zspre"></a>
+					<a href="#" class="prenext zsnext"></a>
+
+					<div id="gundiv2" class="container2">
+						<ul>
+							<li>
+								<a href="" target="_blank">
+									<img src="images/2015261051252157382.jpg" alt="" width="290" height="429" />
+								</a>
+								<div class="rsp"></div>
+								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
+								</div>
+							</li>
+							<li>
+								<a href="" target="_blank">
+									<img src="images/2014102151234350492.jpg" alt="" width="290" height="429" />
+								</a>
+								<div class="rsp"></div>
+								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
+								</div>
+							</li>
+							<li>
+								<a href="" target="_blank">
+									<img src="images/2014827155723233401.jpg" alt="" width="290" height="429" />
+								</a>
+								<div class="rsp"></div>
+								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
+								</div>
+							</li>
+							<li>
+								<a href="" target="_blank">
+									<img src="images/20148271555147898974.jpg" alt="" width="290" height="429" />
+								</a>
+								<div class="rsp"></div>
+								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
+								</div>
+							</li>
+							<li>
+								<a href="" target="_blank">
+									<img src="images/2015261051252157382.jpg" alt="" width="290" height="429" />
+								</a>
+								<div class="rsp"></div>
+								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
+								</div>
+							</li>
+							<li>
+								<a href="" target="_blank">
+									<img src="images/2015261051252157382.jpg" alt="" width="290" height="429" />
+								</a>
+								<div class="rsp"></div>
+								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
+								</div>
+							</li>
+							<li>
+								<a href="" target="_blank">
+									<img src="images/2015261051252157382.jpg" alt="" width="290" height="429" />
+								</a>
+								<div class="rsp"></div>
+								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
+								</div>
+							</li>
+							<li>
+								<a href="" target="_blank">
+									<img src="images/2015261051252157382.jpg" alt="" width="290" height="429" />
+								</a>
+								<div class="rsp"></div>
+								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
+								</div>
+							</li>
+							<li>
+								<a href="" target="_blank">
+									<img src="images/2015261051252157382.jpg" alt="" width="290" height="429" />
+								</a>
+								<div class="rsp"></div>
+								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
+								</div>
+							</li>
+							<li>
+								<a href="" target="_blank">
+									<img src="images/2015261051252157382.jpg" alt="" width="290" height="429" />
+								</a>
+								<div class="rsp"></div>
+								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+				<script type="text/javascript">
+					$(function() {
+						var glen = $("#gundiv2 ul li").length;
+						$("#gundiv2 ul").css("width", 310 * (glen));
+						$("#gundiv2 li").hover(function() {
+							$("#gundiv2 li").removeClass("zslion");
+							$(this).addClass("zslion");
+						}, function() {
+							$(this).removeClass("zslion");
+						})
+					});
+					$("#zsgun2").hScrollPane({
+						mover: "ul",
+						moverW: function() {
+							return $("#zsgun2 li").length * 310 - 107;
+						}(),
+						showArrow: true,
+						handleCssAlter: "draghandlealter"
+					});
+				</script>
+			</div>
+			<!--广告位置-->
+			<div class="ad_001">
+				<div class="ad_001_img01">
+					<img src="img/n11-1.jpg" width="585" height="404" alt="" />
+				</div>
+				<div class="ad_001_img02">
+					<img src="img/n11.jpg" width="585" height="404" alt="" />
+				</div>
+
+			</div>
+			</div>
+			<!--广告结束-->
+			<!--更多婚纱礼服-->
+
+			<div style="background: #f3f3f3">
+			<div id="float04">
+				<div class="title_01">
+					<div class="a_l1_t">
+						<div class="title_nav_04"></div>
+						<!--<span><font style="color:#7C7C7D"><</font>洛可可风婚纱摄影<font style="color:#7C7C7D">></font>之<font style="color:#F37914 ">婚纱礼服制定</font><font style="color:#7C7C7D">>ROCOCO RRASIE</font></span>-->
+						<h5>
+						<ul>
+							<li><a href="" target="_blank" title="" style="">全新婚纱1000元3件起 | </a></li>
+							<li><a href="" target="_blank" title="" style="">颠覆传统，一件婚纱只租4次 |</a></li>
+							<li><a href="" target="_blank" title="" style="">比价格，比款式，比时尚，比质量 |</a></li>
+							<li><a href="" target="_blank" title="" style="">我们是大牌，但我们不耍大牌 </a></li>
+						</ul>
+					</h5>
+					</div>
+				</div>
+
+			<div class="con_a005">
+				<div class="al_001"><div class="more"><a href="#">点击查看更多作品</a></div></div>
+				<!-- 效果开始-->
+				<div id="zsgun3">
+					<a href="#" class="prenext zspre"></a>
+					<a href="#" class="prenext zsnext"></a>
+
+					<div id="gundiv3" class="container2">
+						<ul>
+							<li>
+								<a href="" target="_blank">
+									<img src="images/2015261051252157382.jpg" alt="" width="290" height="429" />
+								</a>
+								<div class="rsp"></div>
+								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
+								</div>
+							</li>
+							<li>
+								<a href="" target="_blank">
+									<img src="images/2014102151234350492.jpg" alt="" width="290" height="429" />
+								</a>
+								<div class="rsp"></div>
+								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
+								</div>
+							</li>
+							<li>
+								<a href="" target="_blank">
+									<img src="images/2014827155723233401.jpg" alt="" width="290" height="429" />
+								</a>
+								<div class="rsp"></div>
+								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
+								</div>
+							</li>
+							<li>
+								<a href="" target="_blank">
+									<img src="images/20148271555147898974.jpg" alt="" width="290" height="429" />
+								</a>
+								<div class="rsp"></div>
+								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
+								</div>
+							</li>
+							<li>
+								<a href="" target="_blank">
+									<img src="images/2015261051252157382.jpg" alt="" width="290" height="429" />
+								</a>
+								<div class="rsp"></div>
+								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
+								</div>
+							</li>
+							<li>
+								<a href="" target="_blank">
+									<img src="images/2015261051252157382.jpg" alt="" width="290" height="429" />
+								</a>
+								<div class="rsp"></div>
+								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
+								</div>
+							</li>
+							<li>
+								<a href="" target="_blank">
+									<img src="images/2015261051252157382.jpg" alt="" width="290" height="429" />
+								</a>
+								<div class="rsp"></div>
+								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
+								</div>
+							</li>
+							<li>
+								<a href="" target="_blank">
+									<img src="images/2015261051252157382.jpg" alt="" width="290" height="429" />
+								</a>
+								<div class="rsp"></div>
+								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
+								</div>
+							</li>
+							<li>
+								<a href="" target="_blank">
+									<img src="images/2015261051252157382.jpg" alt="" width="290" height="429" />
+								</a>
+								<div class="rsp"></div>
+								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
+								</div>
+							</li>
+							<li>
+								<a href="" target="_blank">
+									<img src="images/2015261051252157382.jpg" alt="" width="290" height="429" />
+								</a>
+								<div class="rsp"></div>
+								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<script type="text/javascript">
+					$(function() {
+						var glen = $("#gundiv3 ul li").length;
+						$("#gundiv3 ul").css("width", 310 * (glen));
+						$("#gundiv3 li").hover(function() {
+							$("#gundiv3 li").removeClass("zslion");
+							$(this).addClass("zslion");
+						}, function() {
+							$(this).removeClass("zslion");
+						})
+					});
+					$("#zsgun3").hScrollPane({
+						mover: "ul",
+						moverW: function() {
+							return $("#zsgun3 li").length * 310 - 107;
+						}(),
+						showArrow: true,
+						handleCssAlter: "draghandlealter"
+					});
+				</script>
+			</div>
+			</div>
+			</div>
+			<!--更多好评-->
+			<div id="float05">
+				<div class="title_01">
+					<div class="a_l1_t">
+						<div class="title_nav_05"></div>
+						<!--<span><font style="color:#7C7C7D"><</font>洛可可风婚纱摄影<font style="color:#7C7C7D">></font>之<font style="color:#F37914 ">看看好评如潮</font><font style="color:#7C7C7D">>ROCOCO RRASIE</font></span>-->
+						<h5>
+						<ul>
+							<li><a href="" target="_blank" title="" style="">我说不如大家怎么说 |</a></li>
+							<li><a href="" target="_blank" title="" style="">有实力就是任性|</a></li>
+							<li><a href="" target="_blank" title="" style="">一切为客户着想，一切为客户负责 |</a></li>
+							<li><a href="" target="_blank" title="" style="">你有权对不满意拒绝买单 ！</a></li>
+						</ul>
+					</h5>
+
+					</div>
+				</div>
+
+			<div class="con_a006">
+				<div class="al_001"><div class="more"><a href="#">点击查看更多作品</a></div></div>
+				<!--评价-->
+
+				<div class="stbox05box">
+					<h4></h4>
+					<p>
+						<ul>
+							<li>
+								<a rel="group" href="http://localhost/luokeke_html/images/201412171350495498011.png">
+									<img alt="" src="images/example/a1.png" /><ins><p>最长情的陪伴，你是我永远的依靠@洛可可...</p></ins>
+								</a>
+							</li>
+							<li>
+								<a rel="group" href="http://localhost/luokeke_html/images/20141119955393249521.png">
+									<img alt="" src="images/example/a1.png" /><ins><p>祝贺朋友的婚纱照出炉了~！非常感谢@洛可可...</p></ins>
+								</a>
+							</li>
+							<li>
+								<a rel="group" href="http://localhost/luokeke_html/images/201411161339312743875.png">
+									<img alt="" src="images/example/a1.png" /><ins><p>婚纱照的样片出来咯，好美丽的说。谢谢化妆...</p></ins>
+								</a>
+							</li>
+							<li>
+								<a rel="group" href="http://localhost/luokeke_html/images/201411161328395107309.jpg">
+									<img alt="" src="images/example/a1.png" /><ins><p>时间过的很快，转眼到了婚期，在结婚之前必...</p></ins>
+								</a>
+							</li>
+							<li>
+								<a rel="group" href="http://localhost/luokeke_html/images/20141130931438021295.png">
+									<img alt="" src="images/example/a1.png" /><ins><p>祝贺朋友的婚纱照出炉了~！非常感谢@洛可可...</p></ins>
+								</a>
+							</li>
+							<li>
+								<a rel="group" href="http://localhost/luokeke_html/images/20141217134912109415.png">
+									<img alt="" src="images/example/a1.png" /><ins><p>祝贺朋友的婚纱照出炉了~！非常感谢@洛可可...</p></ins>
+								</a>
+							</li>
+							<li>
+								<a rel="group" href="http://localhost/luokeke_html/images/201412171352355008707.png">
+									<img alt="" src="images/example/a1.png" /><ins><p>祝贺朋友的婚纱照出炉了~！非常感谢@洛可可...</p></ins>
+								</a>
+							</li>
+							<li>
+								<a rel="group" href="http://localhost/luokeke_html/images/201412171350495498011.png">
+									<img alt="" src="images/example/a1.png" /><ins><p>祝贺朋友的婚纱照出炉了~！非常感谢@洛可可...</p></ins>
+								</a>
+							</li>
+							<li>
+								<a rel="group" href="http://localhost/luokeke_html/images/201412171350495498011.png">
+									<img alt="" src="images/example/a1.png" /><ins><p>祝贺朋友的婚纱照出炉了~！非常感谢@洛可可...</p></ins>
+								</a>
+							</li>
+							<li>
+								<a rel="group" href="http://localhost/luokeke_html/images/201412171350495498011.png">
+									<img alt="" src="images/example/a1.png" /><ins><p>祝贺朋友的婚纱照出炉了~！非常感谢@洛可可...</p></ins>
+								</a>
+							</li>
+							<li>
+								<a rel="group" href="http://localhost/luokeke_html/images/201412171350495498011.png">
+									<img alt="" src="images/example/a1.png" /><ins><p>祝贺朋友的婚纱照出炉了~！非常感谢@洛可可...</p></ins>
+								</a>
+							</li>
+							<li>
+								<a rel="group" href="http://localhost/luokeke_html/images/201412171350495498011.png">
+									<img alt="" src="images/example/a1.png" /><ins><p>祝贺朋友的婚纱照出炉了~！非常感谢@洛可可...</p></ins>
+								</a>
+							</li>
+							<li>
+								<a rel="group" href="http://localhost/luokeke_html/images/201412171350495498011.png">
+									<img alt="" src="images/example/a1.png" /><ins><p>最长情的陪伴，你是我永远的依靠@洛可可...</p></ins>
+								</a>
+							</li>
+							<li>
+								<a rel="group" href="http://localhost/luokeke_html/images/20141119955393249521.png">
+									<img alt="" src="images/example/a1.png" /><ins><p>祝贺朋友的婚纱照出炉了~！非常感谢@洛可可...</p></ins>
+								</a>
+							</li>
+							<li>
+								<a rel="group" href="http://localhost/luokeke_html/images/201411161339312743875.png">
+									<img alt="" src="images/example/a1.png" /><ins><p>婚纱照的样片出来咯，好美丽的说。谢谢化妆...</p></ins>
+								</a>
+							</li>
+							<li>
+								<a rel="group" href="http://localhost/luokeke_html/images/201411161328395107309.jpg">
+									<img alt="" src="images/example/a1.png" /><ins><p>时间过的很快，转眼到了婚期，在结婚之前必...</p></ins>
+								</a>
+							</li>
+							<li>
+								<a rel="group" href="http://localhost/luokeke_html/images/20141130931438021295.png">
+									<img alt="" src="images/example/a1.png" /><ins><p>祝贺朋友的婚纱照出炉了~！非常感谢@洛可可...</p></ins>
+								</a>
+							</li>
+							<li>
+								<a rel="group" href="http://localhost/luokeke_html/images/20141217134912109415.png">
+									<img alt="" src="images/example/a1.png" /><ins><p>祝贺朋友的婚纱照出炉了~！非常感谢@洛可可...</p></ins>
+								</a>
+							</li>
+							<li>
+								<a rel="group" href="http://localhost/luokeke_html/images/201412171352355008707.png">
+									<img alt="" src="images/example/a1.png" /><ins><p>祝贺朋友的婚纱照出炉了~！非常感谢@洛可可...</p></ins>
+								</a>
+							</li>
+							<li>
+								<a rel="group" href="http://localhost/luokeke_html/images/201412171350495498011.png">
+									<img alt="" src="images/example/a1.png" /><ins><p>祝贺朋友的婚纱照出炉了~！非常感谢@洛可可...</p></ins>
+								</a>
+							</li>
+							<li>
+								<a rel="group" href="http://localhost/luokeke_html/images/201412171350495498011.png">
+									<img alt="" src="images/example/a1.png" /><ins><p>祝贺朋友的婚纱照出炉了~！非常感谢@洛可可...</p></ins>
+								</a>
+							</li>
+							<li>
+								<a rel="group" href="http://localhost/luokeke_html/images/201412171350495498011.png">
+									<img alt="" src="images/example/a1.png" /><ins><p>祝贺朋友的婚纱照出炉了~！非常感谢@洛可可...</p></ins>
+								</a>
+							</li>
+							<li>
+								<a rel="group" href="http://localhost/luokeke_html/images/201412171350495498011.png">
+									<img alt="" src="images/example/a1.png" /><ins><p>祝贺朋友的婚纱照出炉了~！非常感谢@洛可可...</p></ins>
+								</a>
+							</li>
+							<li>
+								<a rel="group" href="http://localhost/luokeke_html/images/201412171350495498011.png">
+									<img alt="" src="images/example/a1.png" /><ins><p>祝贺朋友的婚纱照出炉了~！非常感谢@洛可可...</p></ins>
+								</a>
+							</li>
+							<li>
+								<a rel="group" href="http://localhost/luokeke_html/images/201412171350495498011.png">
+									<img alt="" src="images/example/a1.png" /><ins><p>最长情的陪伴，你是我永远的依靠@洛可可...</p></ins>
+								</a>
+							</li>
+							<li>
+								<a rel="group" href="http://localhost/luokeke_html/images/20141119955393249521.png">
+									<img alt="" src="images/example/a1.png" /><ins><p>祝贺朋友的婚纱照出炉了~！非常感谢@洛可可...</p></ins>
+								</a>
+							</li>
+							<li>
+								<a rel="group" href="http://localhost/luokeke_html/images/201411161339312743875.png">
+									<img alt="" src="images/example/a1.png" /><ins><p>婚纱照的样片出来咯，好美丽的说。谢谢化妆...</p></ins>
+								</a>
+							</li>
+							<li>
+								<a rel="group" href="http://localhost/luokeke_html/images/201411161328395107309.jpg">
+									<img alt="" src="images/example/a1.png" /><ins><p>时间过的很快，转眼到了婚期，在结婚之前必...</p></ins>
+								</a>
+							</li>
+							<li>
+								<a rel="group" href="http://localhost/luokeke_html/images/201412171350495498011.png">
+									<img alt="" src="images/example/a1.png" /><ins><p>祝贺朋友的婚纱照出炉了~！非常感谢@洛可可...</p></ins>
+								</a>
+							</li>
+							<li>
+								<a rel="group" href="http://localhost/luokeke_html/images/201412171350495498011.png">
+									<img alt="" src="images/example/a1.png" /><ins><p>最长情的陪伴，你是我永远的依靠@洛可可...</p></ins>
+								</a>
+							</li>
+
+						</ul>
+					</p>
+				</div>
+				<!--弹出框的js-->
+				<script type="text/javascript" src="js/jquery.fancybox-1.3.1.pack.js"></script>
+				<script type="text/javascript">
+					$(function() {
+						$("#demo1").fancybox({
+							'transitionIn': 'elastic',
+							'transitionOut': 'elastic',
+							'titlePosition': 'inside'
+						});
+						$("a[rel=group]").fancybox({
+							'titlePosition': 'over',
+							'cyclic': true,
+							'titleFormat': function(title, currentArray, currentIndex, currentOpts) {
+								return '<span id="fancybox-title-over">' + (currentIndex + 1) + ' / ' + currentArray.length + (title.length ? ' &nbsp; ' + title : '') + '</span>';
+							}
+						});
+						$("#showdiv").fancybox({
+							'centerOnScroll': true
+						});
+						$("#ajax").fancybox({
+							'width': 400
+						});
+						$("#iframe").fancybox({
+							'width': '75%',
+							'height': '75%',
+							'autoScale': false
+						});
+						$("#swf").fancybox({
+							'autoScale': false
+						});
+						$("#modal").fancybox({
+							'modal': false,
+							'overlayShow': true,
+							'hideOnOverlayClick': false,
+							'hideOnContentClick': false,
+							'enableEscapeButton': false,
+							'showCloseButton': false,
+							'centerOnScroll': true,
+							'autoScale': false,
+							'width': 540,
+							'height': 360
+						});
+					});
+				</script>
+				<!--评价结束-->
+			</div>
+			</div>
+			<!--婚嫁常识-->
+			<div id="float06">
+				<div class="title_01">
+					<div class="a_l1_t">
+						<div class="title_nav_06"></div>
+						<!--<span><font style="color:#7C7C7D"><</font>洛可可风婚纱摄影<font style="color:#7C7C7D">></font>之<font style="color:#F37914 ">婚嫁常识</font><font style="color:#7C7C7D">>ROCOCO RRASIE</font></span>-->
+						<h5>
+						<ul>
+							<li><a href="" target="_blank" title="" style="">最新活动 |</a></li>
+							<li><a href="" target="_blank" title="" style="">结婚那些事儿|</a></li>
+							<li><a href="" target="_blank" title="" style="">结婚资讯 |</a></li>
+							<li><a href="" target="_blank" title="" style="">婚纱摄影 |</a></li>
+							<li><a href="" target="_blank" title="" style="">新娘美容 |</a></li>
+							<li><a href="" target="_blank" title="" style="">可可微刊 |</a></li>
+							<li><a href="" target="_blank" title="" style="">结婚用品 |</a></li>
+							<li><a href="" target="_blank" title="" style="">结婚习俗 |</a></li>
+							<li><a href="" target="_blank" title="" style="">时尚婚礼</a></li>
+							<li style="border:none;"><a href="" target="_blank" title="" style=""></a></li>
+						</ul>
+					</h5>
+
+					</div>
+				</div>
+			</div>
+			<!--切换导航js-->
+			<!--<script language="javascript" src="js/huan.js"></script>-->
+			<div class="con_a007">
+				<!--导航条切换内容-->
+
+				<script language="javascript" src="js/huan.js"></script>
+
+				<div class="huan">
+				<div class="huan_title">
+				    <div id="huan_1" class="huan_bt" onmousemove="star_show(this);"><a href="" target="_blank"><div class="menu_more">最新活动</div></a></div>
+				    <div id="huan_2" class="huan_bt" onmousemove="star_show(this);"><a href="" target="_blank"><div class="menu_more">可可微刊</div></a></div>
+				    <div id="huan_3" class="huan_bt" onmousemove="star_show(this);"><a href="" target="_blank"><div class="menu_more">新娘常识</div></a></div>
+				    <div id="huan_4" class="huan_bt" onmousemove="star_show(this);"><a href="" target="_blank"><div class="menu_more">婚庆礼仪</div></a></div>
+					<div id="huan_5" class="huan_bt" onmousemove="star_show(this);"><a href="" target="_blank"><div class="menu_more">婚纱摄影</div></a></div>
+				</div>
+					<div id="level_1" class="huan_cen">
+						<dl>
+							<dt><a href="" target="_blank">LATEST ACTIVITY 最新活动</a></dt>
+
+							<ul>
+								<li>
+									<a href="" target="_blank" title="">
+										<img src="images/bn_1.jpg" alt="" height="92" width="92">
+										<div class="nr"><b>[爱在大连]-教你如何装扮自己</b><span>POST TIME</span><i>: </i><small>2015-1-20  10：50：50</small>
+											<div class="clear"></div>
+											<p>国人爱子总是内敛拧巴，尤其是父亲与孩子之间。与西方亲子关系朋友化相比，中国父亲和子女之间的互动，身教大于言传，...</p>
+										</div>
+									</a>
+								</li>
+								<li>
+									<a href="" target="_blank" title="">
+										<img src="images/bn_2.jpg" alt="" height="92" width="92">
+										<div class="nr"><b>[爱在大连]-教你如何装扮自己</b><span>POST TIME</span><i>: </i><small>2015-1-20  10：50：50</small>
+											<div class="clear"></div>
+											<p>粽礼寻TA别忘了端午的爱情故事端午节里，人们可以尽情地赛龙舟、采艾草、吃粽子，可是千万别忘了还有一件事值得我们细...</p>
+										</div>
+									</a>
+								</li>
+								<li>
+									<a href="" target="_blank" title="">
+										<img src="images/bn_1.jpg" alt="" height="92" width="92">
+										<div class="nr"><b>[爱在大连]-教你如何装扮自己</b><span>POST TIME</span><i>: </i><small>2015-1-20  10：50：50</small>
+											<div class="clear"></div>
+											<p>大儿童宣言六一过大节城市里隐藏着这样一群人他们在不同的地方生活却怀抱着一种态度地铁当云霄飞车穿上直排轮就是现代...</p>
+										</div>
+									</a>
+								</li>
+								<li>
+									<a href="" target="_blank" title="">
+										<img src="images/bn_2.jpg" alt="" height="92" width="92">
+										<div class="nr"><b>[爱在大连]-教你如何装扮自己</b><span>POST TIME</span><i>: </i><small>2015-1-20  10：50：50</small>
+											<div class="clear"></div>
+											<p>继承者们：长大后回过头才发现她柔软她固执对待人生总有说不出的小心谨慎她有改不掉的絮叨以爱之名对你的人生指手画脚...</p>
+										</div>
+									</a>
+								</li>
+								<li>
+									<a href="" target="_blank" title="">
+										<img src="images/bn_1.jpg" alt="" height="92" width="92">
+										<div class="nr"><b>[爱在大连]-教你如何装扮自己</b><span>POST TIME</span><i>: </i><small>2015-1-20  10：50：50</small>
+											<div class="clear"></div>
+											<p>敬告青年青年立业成家是社会稳定和发展的根本，婚姻重要性不言而喻。拍婚纱照作为婚姻的前阵，必先改革。在此，薇拉倡...</p>
+										</div>
+									</a>
+								</li>
+								<li>
+									<a href="" target="_blank" title="">
+										<img src="images/bn_2.jpg" alt="" height="92" width="92">
+										<div class="nr"><b>[爱在大连]-教你如何装扮自己</b><span>POST TIME</span><i>: </i><small>2015-1-20  10：50：50</small>
+											<div class="clear"></div>
+											<p>这这是薇拉的一张结婚照人物自然裂开嘴角，娓娓幸福；构图依据人景搭配，安然和谐；色调均匀晕开泛光，质感呈现。每一...</p>
+										</div>
+									</a>
+								</li>
+							</ul>
+
+						</dl>
+					</div>
+					<div id="level_2" class="huan_cen">
+						<dl>
+							<dt><a href="" target="_blank">LATEST ACTIVITY 可可微刊</a></dt>
+							<ul>
+								<li>
+									<a href="" target="_blank" title="">
+										<img src="images/20140613111805185.jpg" alt="" height="92" width="92">
+										<div class="nr"><b>[爱在大连]-教你如何装扮自己</b><span>POST TIME</span><i>: </i><small>2015-1-20  10：50：50</small>
+											<div class="clear"></div>
+											<p>粽礼寻TA别忘了端午的爱情故事端午节里，人们可以尽情地赛龙舟、采艾草、吃粽子，可是千万别忘了还有一件事值得我们细...</p>
+										</div>
+									</a>
+								</li>
+								<li>
+									<a href="" target="_blank" title="">
+										<img src="images/201406091140594059.jpg" alt="" height="92" width="92">
+										<div class="nr"><b>[爱在大连]-教你如何装扮自己</b><span>POST TIME</span><i>: </i><small>2015-1-20  10：50：50</small>
+											<div class="clear"></div>
+											<p>国人爱子总是内敛拧巴，尤其是父亲与孩子之间。与西方亲子关系朋友化相比，中国父亲和子女之间的互动，身教大于言传，...</p>
+										</div>
+									</a>
+								</li>
+								<li>
+									<a href="" target="_blank" title="">
+										<img src="images/201406091038523852.jpg" alt="" height="92" width="92">
+										<div class="nr"><b>[爱在大连]-教你如何装扮自己</b><span>POST TIME</span><i>: </i><small>2015-1-20  10：50：50</small>
+											<div class="clear"></div>
+											<p>大儿童宣言六一过大节城市里隐藏着这样一群人他们在不同的地方生活却怀抱着一种态度地铁当云霄飞车穿上直排轮就是现代...</p>
+										</div>
+									</a>
+								</li>
+								<li>
+									<a href="" target="_blank" title="">
+										<img src="images/201406091149304930.jpg" alt="" height="92" width="92">
+										<div class="nr"><b>[爱在大连]-教你如何装扮自己</b><span>POST TIME</span><i>: </i><small>2015-1-20  10：50：50</small>
+											<div class="clear"></div>
+											<p>继承者们：长大后回过头才发现她柔软她固执对待人生总有说不出的小心谨慎她有改不掉的絮叨以爱之名对你的人生指手画脚...</p>
+										</div>
+									</a>
+								</li>
+								<li>
+									<a href="" target="_blank" title="">
+										<img src="images/201405040947324732.jpg" alt="" height="92" width="92">
+										<div class="nr"><b>[爱在大连]-教你如何装扮自己</b><span>POST TIME</span><i>: </i><small>2015-1-20  10：50：50</small>
+											<div class="clear"></div>
+											<p>敬告青年青年立业成家是社会稳定和发展的根本，婚姻重要性不言而喻。拍婚纱照作为婚姻的前阵，必先改革。在此，薇拉倡...</p>
+										</div>
+									</a>
+								</li>
+								<li>
+									<a href="" target="_blank" title="">
+										<img src="images/201405040946164616.jpg" alt="" height="92" width="92">
+										<div class="nr"><b>[爱在大连]-教你如何装扮自己</b><span>POST TIME</span><i>: </i><small>2015-1-20  10：50：50</small>
+											<div class="clear"></div>
+											<p>这这是薇拉的一张结婚照人物自然裂开嘴角，娓娓幸福；构图依据人景搭配，安然和谐；色调均匀晕开泛光，质感呈现。每一...</p>
+										</div>
+									</a>
+								</li>
+							</ul>
+						</dl>
+					</div>
+
+					<!--新娘常识-->
+					<div id="level_3" class="huan_cen">
+						<dl>
+							<dt><a href="" target="_blank">LATEST ACTIVITY 新娘常识</a></dt>
+							<ul>
+								<li>
+									<a href="" target="_blank" title="">
+										<img src="images/bn_1.jpg" alt="" height="92" width="92">
+										<div class="nr"><b>[爱在大连]-教你如何装扮自己</b><span>POST TIME</span><i>: </i><small>2015-1-20  10：50：50</small>
+											<div class="clear"></div>
+											<p>国人爱子总是内敛拧巴，尤其是父亲与孩子之间。与西方亲子关系朋友化相比，中国父亲和子女之间的互动，身教大于言传，...</p>
+										</div>
+									</a>
+								</li>
+								<li>
+									<a href="" target="_blank" title="">
+										<img src="images/bn_2.jpg" alt="" height="92" width="92">
+										<div class="nr"><b>[爱在大连]-教你如何装扮自己</b><span>POST TIME</span><i>: </i><small>2015-1-20  10：50：50</small>
+											<div class="clear"></div>
+											<p>粽礼寻TA别忘了端午的爱情故事端午节里，人们可以尽情地赛龙舟、采艾草、吃粽子，可是千万别忘了还有一件事值得我们细...</p>
+										</div>
+									</a>
+								</li>
+								<li>
+									<a href="" target="_blank" title="">
+										<img src="images/bn_1.jpg" alt="" height="92" width="92">
+										<div class="nr"><b>[爱在大连]-教你如何装扮自己</b><span>POST TIME</span><i>: </i><small>2015-1-20  10：50：50</small>
+											<div class="clear"></div>
+											<p>大儿童宣言六一过大节城市里隐藏着这样一群人他们在不同的地方生活却怀抱着一种态度地铁当云霄飞车穿上直排轮就是现代...</p>
+										</div>
+									</a>
+								</li>
+								<li>
+									<a href="" target="_blank" title="">
+										<img src="images/bn_2.jpg" alt="" height="92" width="92">
+										<div class="nr"><b>[爱在大连]-教你如何装扮自己</b><span>POST TIME</span><i>: </i><small>2015-1-20  10：50：50</small>
+											<div class="clear"></div>
+											<p>继承者们：长大后回过头才发现她柔软她固执对待人生总有说不出的小心谨慎她有改不掉的絮叨以爱之名对你的人生指手画脚...</p>
+										</div>
+									</a>
+								</li>
+								<li>
+									<a href="" target="_blank" title="">
+										<img src="images/bn_1.jpg" alt="" height="92" width="92">
+										<div class="nr"><b>[爱在大连]-教你如何装扮自己</b><span>POST TIME</span><i>: </i><small>2015-1-20  10：50：50</small>
+											<div class="clear"></div>
+											<p>敬告青年青年立业成家是社会稳定和发展的根本，婚姻重要性不言而喻。拍婚纱照作为婚姻的前阵，必先改革。在此，薇拉倡...</p>
+										</div>
+									</a>
+								</li>
+								<li>
+									<a href="" target="_blank" title="">
+										<img src="images/bn_2.jpg" alt="" height="92" width="92">
+										<div class="nr"><b>[爱在大连]-教你如何装扮自己</b><span>POST TIME</span><i>: </i><small>2015-1-20  10：50：50</small>
+											<div class="clear"></div>
+											<p>这这是薇拉的一张结婚照人物自然裂开嘴角，娓娓幸福；构图依据人景搭配，安然和谐；色调均匀晕开泛光，质感呈现。每一...</p>
+										</div>
+									</a>
+								</li>
+							</ul>
+						</dl>
+
+					</div>
+
+
+					<!--婚庆礼仪-->
+					<div id="level_4" class="huan_cen">
+
+						<dl>
+							<dt><a href="" target="_blank">LATEST ACTIVITY 婚庆礼仪</a></dt>
+							<ul>
+								<li>
+									<a href="" target="_blank" title="">
+										<img src="images/20140613111805185.jpg" alt="" height="92" width="92">
+										<div class="nr"><b>[爱在大连]-教你如何装扮自己</b><span>POST TIME</span><i>: </i><small>2015-1-20  10：50：50</small>
+											<div class="clear"></div>
+											<p>国人爱子总是内敛拧巴，尤其是父亲与孩子之间。与西方亲子关系朋友化相比，中国父亲和子女之间的互动，身教大于言传，...</p>
+										</div>
+									</a>
+								</li>
+								<li>
+									<a href="" target="_blank" title="">
+										<img src="images/201406091140594059.jpg" alt="" height="92" width="92">
+										<div class="nr"><b>[爱在大连]-教你如何装扮自己</b><span>POST TIME</span><i>: </i><small>2015-1-20  10：50：50</small>
+											<div class="clear"></div>
+											<p>粽礼寻TA别忘了端午的爱情故事端午节里，人们可以尽情地赛龙舟、采艾草、吃粽子，可是千万别忘了还有一件事值得我们细...</p>
+										</div>
+									</a>
+								</li>
+								<li>
+									<a href="" target="_blank" title="">
+										<img src="images/201406091038523852.jpg" alt="" height="92" width="92">
+										<div class="nr"><b>[爱在大连]-教你如何装扮自己</b><span>POST TIME</span><i>: </i><small>2015-1-20  10：50：50</small>
+											<div class="clear"></div>
+											<p>大儿童宣言六一过大节城市里隐藏着这样一群人他们在不同的地方生活却怀抱着一种态度地铁当云霄飞车穿上直排轮就是现代...</p>
+										</div>
+									</a>
+								</li>
+								<li>
+									<a href="" target="_blank" title="">
+										<img src="images/201406091149304930.jpg" alt="" height="92" width="92">
+										<div class="nr"><b>[爱在大连]-教你如何装扮自己</b><span>POST TIME</span><i>: </i><small>2015-1-20  10：50：50</small>
+											<div class="clear"></div>
+											<p>继承者们：长大后回过头才发现她柔软她固执对待人生总有说不出的小心谨慎她有改不掉的絮叨以爱之名对你的人生指手画脚...</p>
+										</div>
+									</a>
+								</li>
+								<li>
+									<a href="" target="_blank" title="">
+										<img src="images/201405040947324732.jpg" alt="" height="92" width="92">
+										<div class="nr"><b>[爱在大连]-教你如何装扮自己</b><span>POST TIME</span><i>: </i><small>2015-1-20  10：50：50</small>
+											<div class="clear"></div>
+											<p>敬告青年青年立业成家是社会稳定和发展的根本，婚姻重要性不言而喻。拍婚纱照作为婚姻的前阵，必先改革。在此，薇拉倡...</p>
+										</div>
+									</a>
+								</li>
+								<li>
+									<a href="" target="_blank" title="">
+										<img src="images/201405040946164616.jpg" alt="" height="92" width="92">
+										<div class="nr"><b>[爱在大连]-教你如何装扮自己</b><span>POST TIME</span><i>: </i><small>2015-1-20  10：50：50</small>
+											<div class="clear"></div>
+											<p>这这是薇拉的一张结婚照人物自然裂开嘴角，娓娓幸福；构图依据人景搭配，安然和谐；色调均匀晕开泛光，质感呈现。每一...</p>
+										</div>
+									</a>
+								</li>
+							</ul>
+
+						</dl>
+
+					</div>
+
+
+					<!--婚纱摄影-->
+					<div id="level_5" class="huan_cen">
+						<dl>
+							<dt><a href="" target="_blank">LATEST ACTIVITY 婚纱摄影</a></dt>
+							<ul>
+								<li>
+									<a href="" target="_blank" title="">
+										<img src="images/bn_1.jpg" alt="" height="92" width="92">
+										<div class="nr"><b>[爱在大连]-教你如何装扮自己</b><span>POST TIME</span><i>: </i><small>2015-1-20  10：50：50</small>
+											<div class="clear"></div>
+											<p>国人爱子总是内敛拧巴，尤其是父亲与孩子之间。与西方亲子关系朋友化相比，中国父亲和子女之间的互动，身教大于言传，...</p>
+										</div>
+									</a>
+								</li>
+								<li>
+									<a href="" target="_blank" title="">
+										<img src="images/bn_2.jpg" alt="" height="92" width="92">
+										<div class="nr"><b>[爱在大连]-教你如何装扮自己</b><span>POST TIME</span><i>: </i><small>2015-1-20  10：50：50</small>
+											<div class="clear"></div>
+											<p>粽礼寻TA别忘了端午的爱情故事端午节里，人们可以尽情地赛龙舟、采艾草、吃粽子，可是千万别忘了还有一件事值得我们细...</p>
+										</div>
+									</a>
+								</li>
+								<li>
+									<a href="" target="_blank" title="">
+										<img src="images/bn_1.jpg" alt="" height="92" width="92">
+										<div class="nr"><b>[爱在大连]-教你如何装扮自己</b><span>POST TIME</span><i>: </i><small>2015-1-20  10：50：50</small>
+											<div class="clear"></div>
+											<p>大儿童宣言六一过大节城市里隐藏着这样一群人他们在不同的地方生活却怀抱着一种态度地铁当云霄飞车穿上直排轮就是现代...</p>
+										</div>
+									</a>
+								</li>
+								<li>
+									<a href="" target="_blank" title="">
+										<img src="images/bn_2.jpg" alt="" height="92" width="92">
+										<div class="nr"><b>[爱在大连]-教你如何装扮自己</b><span>POST TIME</span><i>: </i><small>2015-1-20  10：50：50</small>
+											<div class="clear"></div>
+											<p>继承者们：长大后回过头才发现她柔软她固执对待人生总有说不出的小心谨慎她有改不掉的絮叨以爱之名对你的人生指手画脚...</p>
+										</div>
+									</a>
+								</li>
+								<li>
+									<a href="" target="_blank" title="">
+										<img src="images/bn_1.jpg" alt="" height="92" width="92">
+										<div class="nr"><b>[爱在大连]-教你如何装扮自己</b><span>POST TIME</span><i>: </i><small>2015-1-20  10：50：50</small>
+											<div class="clear"></div>
+											<p>敬告青年青年立业成家是社会稳定和发展的根本，婚姻重要性不言而喻。拍婚纱照作为婚姻的前阵，必先改革。在此，薇拉倡...</p>
+										</div>
+									</a>
+								</li>
+								<li>
+									<a href="" target="_blank" title="">
+										<img src="images/bn_2.jpg" alt="" height="92" width="92">
+										<div class="nr"><b>[爱在大连]-教你如何装扮自己</b><span>POST TIME</span><i>: </i><small>2015-1-20  10：50：50</small>
+											<div class="clear"></div>
+											<p>这这是薇拉的一张结婚照人物自然裂开嘴角，娓娓幸福；构图依据人景搭配，安然和谐；色调均匀晕开泛光，质感呈现。每一...</p>
+										</div>
+									</a>
+								</li>
+							</ul>
+						</dl>
+
+					</div>
+
+
+				</div>
+
+				</div>
+
+
+
+
+				<!--导航条切换内容结束-->
+			</div>
+
+			<!--郑重承诺-->
+			<div class="title_01_1">
+				<div class="a_l1_t">
+					<div class="title_nav_07"></div>
+					<!--<span><font style="color:#7C7C7D"><</font>洛可可风婚纱摄影<font style="color:#7C7C7D">></font>之<font style="color:#F37914 ">郑重承诺</font><font style="color:#7C7C7D">>ROCOCO RRASIE</font></span>-->
+					<!--<div class="c_l">-->
+					   <h5>
+						<ul>
+							<li>洛可可官网,天猫，微信，微博等官方媒体发布的主题作品，均属原创主题作品，未经洛可可授权，任何单位或个人不得转载或使用。</li>
+						</ul>
+					   </h5>
+					<!--</div>-->
+				</div>
+			</div>
+			<div class="con_a008">
+				<!--图片-->
+				<div class="i_001">
+					<img src=" img/ad_01.jpg" width="1200" height="330">
+				</div>
+
+			</div>
+
+			<!--服务承诺-->
+			<div class="title_01_1">
+				<div class="a_l1_t">
+					<div class="title_nav_08"></div>
+					<!--<span><font style="color:#7C7C7D"><</font>洛可可风婚纱摄影<font style="color:#7C7C7D">></font>之<font style="color:#F37914 ">服务承诺</font><font style="color:#7C7C7D">>ROCOCO RRASIE</font></span>-->
+					<!--<div class="c_l">-->
+					 <h5>
+						<ul>
+							<li><a>洛可可官网,天猫，微信，微博等官方媒体发布的主题作品，均属原创主题作品，未经洛可可授权，任何单位或个人不得转载或使用。</a></li>
+						</ul>
+
+					 </h5>
+					<!--</div>-->
+
+
+				</div>
+			</div>
+			<div class="con_a009">
+				<div class="i_002">
+					<div class="img_01">
+						<img src="img/ad_03_01_01.jpg" width="290" height="149" alt="" />
+					</div>
+					<div class="img_02">
+						<img src="img/ad_03_01_02.jpg" width="290" height="149" alt="" />
+					</div>
+					<div class="img_03">
+						<img src="img/ad_03_01_03.jpg" width="290" height="149" alt="" />
+					</div>
+					<div class="img_04">
+						<img src="img/ad_03_01_04.jpg" width="290" height="149" alt="" />
+					</div>
+				</div>
+
+			</div>
+			<!--底部的图片-->
+			<div class="i_003">
+				<img src="img/ad_04_01.jpg" alt="" />
+			</div>
+			<!--@@@@@@@-->
+			<div class="clears"></div>
+		</div>
+		<!--底部-->
+		<div class="flooter">
+			<div class="bottom6">
+				<div class="copyright">
+					<p>版权所有:大连洛可可婚纱摄影有限公司</p>
+					<span>Copyright &#169; 1997-2014 St.Valentine www.shengphoto.com Corporation, All Rights Reserved</span>
+					<font>TAGS:<a href="#"><strong>大连婚纱摄影</strong></a> <a href="#"><strong>三亚婚纱摄影</strong></a>  <a href="#"><strong>青岛婚纱摄影</strong></a> <a href="#"><strong>婚纱摄影</strong></a> <a href="#"><strong>大连婚纱摄影</strong></a> <a href="#"><strong>大连婚纱摄影</strong></a> <strong>大连婚纱摄影</strong> <strong>大连婚纱摄影</strong>&nbsp;
+						</a>
+
+					</font>
+				</div>
+				<div class="links">
+					<p><a href="" title="" target="_blank">大连婚纱摄影</a> | <a href="" title="海南婚纱摄影" target="_blank">海南婚纱摄影</a> | <a href="" title="海南婚纱摄影" target="_blank">海南婚纱摄影</a> |
+						<a href="" title="" target="_blank">青岛婚纱摄影</a> | <a href="" title="海南婚纱摄影" target="_blank">海南婚纱摄影</a> | <a href="" title=" " target="_blank">青岛婚纱摄影 </a> | <a href="" title="海南婚纱摄影" target="_blank">海南婚纱摄影</a> | <a href="" title="" target="_blank">青岛婚纱摄影</a>						| <a href="" title="青岛婚纱摄影" target="_blank">青岛婚纱摄影</a> |
+						<a href="" title="" target="_blank">海南婚纱摄影</a> | <a href="" title=" 海南婚纱摄影" target="_blank"> 海南婚纱摄影</a> | <a href="" title="三亚婚纱摄影칫˾" target="_blank">大连婚纱摄影</a> | <a href="" title="" target="_blank">青岛婚纱摄影</a> | <a href="" title="" target="_blank">青岛婚纱摄影</a>						| <a href="" title="" target="_blank">青岛婚纱摄影</a> | <a href="" title="" target="_blank">大连婚纱摄影</a> | <a href="" title="" target="_blank">大连婚纱摄影</a> | <a href="" title="海南婚纱摄影" target="_blank">海南婚纱摄影</a> |
+						<a href="" title="" target="_blank">三亚婚纱摄影</a> | <a href="" title="海南婚纱摄影" target="_blank">海南婚纱摄影 </a> | <a href="" title="" target="_blank">青岛婚纱摄影</a> |
+						<a href="" title="" target="_blank">长沙婚纱摄影</a> | <a href="" title="海南婚纱摄影" target="_blank">海南婚纱摄影</a> | <a href="" title="" target="_blank">  大连婚纱摄影</a> | <a href="" title="青岛婚纱摄影" target="_blank">青岛婚纱摄影</a> | <a href="" title="青岛婚纱摄影" target="_blank">青岛婚纱摄影</a>						| <a href="" title="" target="_blank">青岛婚纱摄影</a> | <a href="" title="" target="_blank">大连婚纱摄影</a> | <a href="" title="" target="_blank">大连婚纱摄影</a> | <a href="" title="" target="_blank">海南婚纱摄影</a> |
+						<a href="" title="" target="_blank">青岛婚纱摄影</a> | <a href="" title="青岛婚纱摄影" target="_blank">青岛婚纱摄影</a> | <a href="" title="青岛婚纱摄影" target="_blank">青岛婚纱摄影</a> | </p>
+				</div>
+			</div>
+			<div class="clears"></div>
+		</div>
+	</body>
 </html>

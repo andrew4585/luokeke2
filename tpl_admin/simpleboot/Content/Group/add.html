@@ -78,25 +78,44 @@ body fieldset legend {
             </tr>
             <tr>
 		  </tr>
-		  <tr>
-              <th width="80">类别</th>
-              <td>
-              	<select name="cid" class="normal_select">
-                  <foreach name="categorys" item="vo">
-                  	<option value="{$vo.id}">{$vo.cat_name}</option>
-                  </foreach>
-                </select>
-              </td>
-            </tr>
             <tr>
-              <th width="80">编辑 </th>
-              <td><input type="text" style="width:120px;" name="post_author" id="title" value=""  class="input input_hd J_title_color" placeholder="请输入编辑人" onkeyup="strlen_verify(this, 'title_len', 160)" />
-              	<span class="must_red">*</span></td>
-            </tr>
+	            <th>团购价格</th>
+	            <td>
+	            	<input type="text" style="width:200px;" name="post_price" id="post_price" value=""  placeholder="请输入团购价格"  />
+	            	<span class="must_red">*</span>
+	            </td>
+          	</tr>
+          	
+          	<tr>
+	            <th>已团购人次</th>
+	            <td>
+	            	<input type="text" style="width:200px;" name="post_num" id="post_num" value="" placeholder="团购人次" />
+	            	<span class="must_red">*</span>
+	            </td>
+          	</tr>
+          	<tr>
+	            <th>团购限时</th>
+	            <td>
+	            	<input type="text" name="post_start" class="input length_2 J_date" value="{$formget.start_time|default=''}" style="width:100px;" autocomplete="off"> -
+        			<input type="text" class="input length_2 J_date" name="post_deadline" value="{$formget.end_time}" style="width:100px;" autocomplete="off">
+	            	<span class="must_red">*</span>
+	            </td>
+          	</tr>
             <tr>
               <th width="80">摘要 </th>
               <td><textarea name='post_excerpt' id='description'  style='width:98%;height:50px;' placeholder='请填写摘要'></textarea> </td>
             </tr>
+            <tr>
+              <th width="80">相册图集 </th>
+              <td>
+				<fieldset class="blue pad-10">
+		        <legend>图片列表</legend>
+		        <ul id="photos" class="picList"></ul>
+				</fieldset>
+				<div class="bk10"></div>
+				<a href='javascript:void(0);' onclick="javascript:flashupload('albums_images', '图片上传','photos',change_images,'10,gif|jpg|jpeg|png|bmp,0','','','')" class="btn">选择图片 </a> </td>
+            </tr>
+            <!-- 内容
             <tr>
               <th width="80">内容</th>
               <td>
@@ -109,29 +128,19 @@ body fieldset legend {
                 <script type="text/javascript"  src="__ROOT__/statics/ueditor/ueditor.all.min.js"></script>
 				</td>
             </tr>
+             -->
             <tr>
               <th width="80">链接地址 </th>
               <td><input type="text" name="post_url" class="input input_hd J_title_color" placeholder="填写链接地址后，作品内容将无效" style="width:400px;"/> </td>
             </tr>
             
-            <!-- 内容隐藏
-            <tr>
-              <th width="80">相册图集 </th>
-              <td>
-				<fieldset class="blue pad-10">
-		        <legend>图片列表</legend>
-		        <ul id="s" class="picList"></ul>
-				</fieldset>
-				<div class="bk10"></div>
-				<a href='javascript:void(0);' onclick="javascript:flashupload('albums_images', '图片上传','s',change_images,'10,gif|jpg|jpeg|png|bmp,0','','','')" class="btn">选择图片 </a> </td>
-            </tr>
-             -->
+            
         </tbody>
       </table>
     </div>
   </div>
   <div class="form-actions">
-        <button class="btn btn-primary btn_submit J_ajax_submit_btn"type="submit">提交</button>
+        <button class="btn btn-primary btn_submit J_ajax_submit_btn" type="submit">提交</button>
         <a class="btn" href="{:U('Group/index')}">返回</a>
   </div>
  </form>
@@ -141,17 +150,6 @@ body fieldset legend {
 <script type="text/javascript"> 
 $(function () {
 	 Wind.use('validate', 'ajaxForm', 'artDialog', function () {
-			//javascript
-	        
-	            //编辑器
-	            editorcontent = new baidu.editor.ui.Editor();
-	            editorcontent.render( 'content' );
-	            try{editorcontent.sync();}catch(err){};
-	            //增加编辑器验证规则
-	            jQuery.validator.addMethod('editorcontent',function(){
-	                try{editorcontent.sync();}catch(err){};
-	                return editorcontent.hasContents();
-	            });
 	            var form = $('form.J_ajaxForms');
 	        //ie处理placeholder提交问题
 	        if ($.browser.msie) {

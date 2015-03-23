@@ -11,14 +11,6 @@
   <form class="well form-search" method="post" action="{:u('Group/index')}">
     <div class="search_type cc mb10">
       <div class="mb10"> 
-          <!--类别-->
-        <select class="select_2" name="cid"style="width:160px;" id="">
-          <option value=''>全部类别</option>
-          <foreach name="categorys" item="vo">
-          	<php>$cid_select=$vo['id']==$formget['cid']?"selected":"";</php>
-          	<option value="{$vo.id}" {$cid_select}>{$vo.cat_name}</option>
-          </foreach>
-        </select>
              <!-- 站点-->
         &nbsp;&nbsp;时间：
         <input type="text" name="start_time" class="input length_2 J_date" value="{$formget.start_time|default=''}" style="width:100px;" autocomplete="off"> -
@@ -44,8 +36,8 @@
 	            <th width="50">排序</th>
 	            <th>ID</th>
 	            <th>标题</th>
-	            <th width="80">类别</th>
-	            <th width="45">点击量</th>
+	            <th width="80">价格</th>
+	            <th width="80">团购次数</th>
                 <th width="50">缩略图</th>
 	            <th width="120"><span>发布时间</span></th>
 	            <th width="80">首页置顶</th>
@@ -63,8 +55,8 @@
 		            		<span>{$vo.post_title}</span>
 		            	</a>
 		            </td>
-		            <td>{$vo.cat.cat_name}</td>
-		            <td>{$vo.post_hits}</td>
+		            <td>{$vo.post_price}</td>
+		            <td>{$vo.post_num}</td>
     	            <td>
     	            	<a href="#"  onclick="image_priview('__ROOT__/{$vo.post_pic}');"><img src="__ROOT__/{$vo.post_pic}" style="width:200px;"/></a>
     	            </td>

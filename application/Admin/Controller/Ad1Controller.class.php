@@ -33,7 +33,7 @@ class Ad1Controller extends AdminbaseController{
     	$this->assign("ad_cid",$cid);
 		$this->assign("site_cid",$id);
 		$count=$this->ad1_obj->where($where)->count();
-		$page = $this->page($count,1);
+		$page = $this->page($count,20);
 		$slides=$this->ad1_obj->relation(true)->where($where)
 							->order("listorder ASC")
 							->limit($page->firstRow,$page->listRows)->select();

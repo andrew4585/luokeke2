@@ -17,12 +17,19 @@ class IndexController extends HomeBaseController {
     //首页
 	public function index() {
 		try{
+// 			dump($this->_getAd("home_head"));exit;
 			//首页头部轮播
 			$this->assign("home_head",$this->_getAd("home_head"));
 			//首页中部轮播
 			$this->assign("home_middle",$this->_getAd("home_middle"));
 			//最新活动
-			$this->assign("active",$this->getHomeContent("Active"));
+			$active = $this->getHomeContent("Active",false,array(),5);
+			$activeC= count($active);
+			for($i=0;$i<$activeC;$i++){
+				$url = &$active[$i]['post_url'];
+				$url = empty($url)?U('Portal/Active/info/id/'.$active[$i]['id']):$url;
+			}
+			$this->assign("active",$active);
 			//主题作品
 			$this->assign("ptheme",$this->getHomeContent("Ptheme",true));
 			//团购套系
@@ -33,7 +40,7 @@ class IndexController extends HomeBaseController {
 			//婚纱礼服
 			$this->assign("dress",$this->getHomeContent("Dress",false,array("rent","sale_price")));
 			//好评
-// 			$this->assign("good",$this->getHomeContent("Good",false,array("head_image","post_excerpt")));
+			$this->assign("good",$this->getHomeContent("Good",false,array("head_img","post_excerpt")));
 		}catch (\Exception $e){
 			$this->error($e->getMessage());
 		}
@@ -45,8 +52,9 @@ class IndexController extends HomeBaseController {
      * @param string  $model_class 模型名（对应数据库表名）
      * @param bool 	  $siteCharge  是否根据站点判断,默认为false
      * @param array	  $extra	       额外字段,自带字段：id,post_pic,post_title,post_url
+     * @param int	  $limitNumber 数据条数，默认：20条
      */
-    public function getHomeContent($model_class,$siteCharge=false,$extra=array()){
+    public function getHomeContent($model_class,$siteCharge=false,$extra=array(),$limitNumber=20){
     	$model		= D($model_class);
     	$fieldArr	= array("id","post_pic","post_title","post_url");
     	//istop:置顶，status：是否显示
@@ -59,7 +67,7 @@ class IndexController extends HomeBaseController {
     	}
     	$where		= join(" and ",$whereArr);
     	$field		= join(",",$fieldArr);
-    	$data		= $model->field($field)->where($where)->order("listorder")->limit(0,30)->select();
+    	$data		= $model->field($field)->where($where)->order("listorder")->limit(0,$limitNumber)->select();
     	return $data;
     }
     

@@ -1,6 +1,5 @@
 <?php
 return array(
-		"List/nav_index",
 		"Photo/nav_index",
 		"PTheme/nav_index",
 		"Article/nav_index",

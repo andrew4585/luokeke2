@@ -8,7 +8,6 @@ class GroupController extends AdminbaseController{
 	function _initialize() {
 		parent::_initialize();
 		$this->imgFolder	= "Group";
-		$this->model_cate	= D("GroupCat");
 		$this->model_obj	= D("Group");
 	}
 	function index(){
@@ -57,6 +56,14 @@ class GroupController extends AdminbaseController{
 	}
 	function add(){
 		if(IS_POST){
+			if(!empty($_POST['photos_alt']) && !empty($_POST['photos_url'])){
+				foreach ($_POST['photos_url'] as $key=>$url){
+					$photourl=$this->removeUploadImage($this->imgFolder,$url);
+					$_POST['smeta']['photo'][]=array("url"=>$photourl,"alt"=>$_POST['photos_alt'][$key]);
+				}
+			}
+			$_POST['smeta']['photo']=list_sort_by($_POST['smeta']['photo'],"alt");
+			$_POST['smeta']=json_encode($_POST['smeta']);
 			$_POST['post_date']= strtotime($_POST['post_date']);
 			$_POST['post_content']=htmlspecialchars($_POST['post_content']);
 			$_POST['post_pic'] = $this->removeUploadImage($this->imgFolder, $_POST['post_pic']);
@@ -72,6 +79,14 @@ class GroupController extends AdminbaseController{
 	}
 	public function edit(){
 		if(IS_POST){
+			if(!empty($_POST['photos_alt']) && !empty($_POST['photos_url'])){
+				foreach ($_POST['photos_url'] as $key=>$url){
+					$photourl=$this->removeUploadImage($this->imgFolder,$url);
+					$_POST['smeta']['photo'][]=array("url"=>$photourl,"alt"=>$_POST['photos_alt'][$key]);
+				}
+			}
+			$_POST['smeta']['photo']=list_sort_by($_POST['smeta']['photo'],"alt");
+			$_POST['smeta']=json_encode($_POST['smeta']);
 			$_POST['post_date']= strtotime($_POST['post_date']);
 			$_POST['post_content']=htmlspecialchars($_POST['post_content']);
 			$_POST['post_pic'] = $this->removeUploadImage($this->imgFolder, $_POST['post_pic']);
@@ -85,7 +100,7 @@ class GroupController extends AdminbaseController{
 			$id=  $_REQUEST['id'];
 			$info = $this->model_obj->where("id=$id")->find();
 			$this->assign($info);
-// 			$this->commonParam();
+			$this->assign("smeta",json_decode($info['smeta'],true));
 			$this->display();
 		}
 	}
@@ -110,70 +125,72 @@ class GroupController extends AdminbaseController{
 			}
 		}
 	}
-	//--------------------------------------------category--------------------------------
 	
-	//分类列表
-	function cindex(){
-		$cats=$this->model_cate->order("listorder")->select();
-		$this->assign("category",$cats);
-		$this->display();
-	}
-	
-	//添加分类
-	public function cadd() {
-		if(IS_POST){
-			if ($this->model_cate->create()) {
-				if ($this->model_cate->add($_POST)!==false) {
-					$this->success("添加成功！", U("Group/cindex"));
-				} else {
-					$this->error("添加失败！");
-				}
+	//置顶操作
+	function top(){
+		//批量置顶
+		if(isset($_POST['ids']) && $_GET["top"]){
+			$data["istop"]=1;
+			$ids=join(",", $_POST['ids']);
+			if ( $this->model_obj->where("id in ($ids)")->save($data)) {
+				$this->success("置顶成功！");
 			} else {
-				$this->error($this->model_cate->getError());
+				$this->error("置顶失败！");
 			}
-		}else{
-			$this->display();
 		}
-	}
-	
-	//编辑分类
-	function cedit(){
-		if(IS_POST){
-			if ($this->model_cate->create()) {
-				if ($this->model_cate->save($_POST)!==false) {
-					$this->success("保存成功！", U("Group/cindex"));
-				} else {
-					$this->error("保存失败！");
-				}
+		//批量取消置顶
+		if(isset($_POST['ids']) && $_GET["untop"]){
+			$data["istop"]=0;
+			$ids=join(",", $_POST['ids']);
+			if ( $this->model_obj->where("id in ($ids)")->save($data)) {
+				$this->success("取消置顶成功！");
 			} else {
-				$this->error($this->model_cate->getError());
+				$this->error("取消置顶失败！");
 			}
-		}else{
-			$id= intval(I("get.id"));
-			$ad1cat=$this->model_cate->where("id=$id")->find();
-			$this->assign($ad1cat);
-			$this->display();
 		}
-	
-	}
-	
-	//删除分类
-	function cdelete(){
-		$id = intval(I("get.id"));
-		if ($this->model_cate->delete($id)!==false) {
-			$this->success("删除成功！");
-		} else {
-			$this->error("删除失败！");
+		//单个置顶/取消置顶
+		if(isset($_GET['id'])){
+			$data['istop'] = $_GET['istop'];
+			$result=$this->model_obj->where(array("id" => $_GET['id']))->save($data);
+			if ($result) {
+				$this->success("success");
+			} else {
+				$this->error("fail");
+			}
 		}
+		 
 	}
-	
-	//分类排序
-	function clistorders(){
-		$status = parent::_listorders($this->model_cate);
-		if ($status) {
-			$this->success("排序更新成功！");
-		} else {
-			$this->error("排序更新失败！");
+	//推荐操作
+	function recommend(){
+		//批量推荐
+		if(isset($_POST['ids']) && $_GET["recommend"]){
+			$data["recommended"]=1;
+			$ids=join(",", $_POST['ids']);
+			if ( $this->model_obj->where("id in ($ids)")->save($data)) {
+				$this->success("置顶成功！");
+			} else {
+				$this->error("置顶失败！");
+			}
+		}
+		//批量取消推荐
+		if(isset($_POST['ids']) && $_GET["unrecommend"]){
+			$data["recommended"]=0;
+			$ids=join(",", $_POST['ids']);
+			if ( $this->model_obj->where("id in ($ids)")->save($data)) {
+				$this->success("取消置顶成功！");
+			} else {
+				$this->error("取消置顶失败！");
+			}
+		}
+		//单个推荐/取消推荐
+		if(isset($_GET['id'])){
+			$data['recommended'] = $_GET['recommended'];
+			$result=$this->model_obj->where(array("id" => $_GET['id']))->save($data);
+			if ($result) {
+				$this->success("success");
+			} else {
+				$this->error("fail");
+			}
 		}
 	}
 }

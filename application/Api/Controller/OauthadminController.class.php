@@ -12,11 +12,12 @@ class OauthadminController extends AdminbaseController {
 	//设置
 	function setting(){
 		$host=sp_get_host();
-		$callback_uri_root = $host.__ROOT__.'/index.php?g=api&m=oauth&a=callback&type=';
+		//$callback_uri_root = $host.__ROOT__.'/index.php?g=api&m=oauth&a=callback&type=';
+		$callback_uri_root = $host.__ROOT__.'/Api/oauth/callback/type/';
 		$this->assign("callback_uri_root",$callback_uri_root);
 		$this->display();
 	}
-	
+
 	//设置
 	function setting_post(){
 		if($_POST){
@@ -27,7 +28,8 @@ class OauthadminController extends AdminbaseController {
 			
 			$host=sp_get_host();
 			
-			$call_back = $host.__ROOT__.'/index.php?g=api&m=oauth&a=callback&type=';
+			//$call_back = $host.__ROOT__.'/index.php?g=api&m=oauth&a=callback&type=';
+			$callback_uri_root = $host.__ROOT__.'/Api/oauth/callback/type/';
 			$data = array(
 					'THINK_SDK_QQ' => array(
 							'APP_KEY'    => $qq_key,
@@ -40,9 +42,8 @@ class OauthadminController extends AdminbaseController {
 							'CALLBACK'   => $call_back . 'sina',
 					),
 			);
-			
 			$result=sp_set_dynamic_config($data);
-			
+
 			if($result){
 				$this->success("更新成功！");
 			}else{

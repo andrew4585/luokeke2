@@ -40,6 +40,7 @@ class OauthController extends HomeBaseController {
 		if($type == 'tencent'){
 			$extend = array('openid' => I("get.openid"), 'openkey' => I("get.openkey"));
 		}
+		
 		//请妥善保管这里获取到的Token信息，方便以后API调用
 		//调用方法，实例化SDK对象的时候直接作为构造函数的第二个参数传入
 		//如： $qq = ThinkOauth::getInstance('qq', $token);
@@ -156,6 +157,7 @@ class OauthController extends HomeBaseController {
 		if($need_register){
 			//本地用户中创建对应一条数据
 			$new_user_data = array(
+					'user_from' => $type,
 					'user_login' => $user_info['name'],
 					'user_nicename' => $user_info['name'],
 					'avatar' => $user_info['head'],

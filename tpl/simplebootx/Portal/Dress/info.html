@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
+<head>
+	<tc_include file="Public:head_info"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__css/info.css">
+    <link rel="stylesheet" type="text/css" href="__STATICS__css/dress.css">
+    <style>
+    #info-func ul li{
+		display   : block;
+		float     : left;
+		width     : 115px;
+		height    : 30px ;
+		background: #4C4D4F;
+		border-radius        : 4px;
+		behavior: url(css/iecss3.htc);
+        margin-left: 10px;
+        color: #ffffff;
+	}
+    </style>
+</head>
+<body>
+<div class="head">
+    <!--头部导航标题js-->
+	<tc_include file="Public:nav"/>
+	<!-- banner轮播 -->
+	<tc_include file="Public:banner"/>	
+<!--内容-->
+<div class="conter">
+    <!--广告位置-->
+    <div class="border">
+    <div class="details_img"><img src="__ROOT__{$ad_dress.0.ad_pic}" width="980"/> </div>
+    </div>
+    <!--tab 导航 -->
+    <div class="head_tab">
+        <ul class="tab">
+            <li class="on">
+                <a href="{:U('Portal/Dress/list')}/category/1">
+                    <div class="nav_x">
+                        <img src="__STATICS__images/tpl/dress/nav_x_01_03.png"  width="190" height="71">
+                    </div>
+                </a>
+            </li>
+            <li>
+            	<a href="{:U('Portal/Dress/list')}/category/2">
+                <div class="nav_x">
+                    <img src="__STATICS__images/tpl/dress/nav_x_02_03.png"  width="190" height="71">
+                </div>
+
+                </a>
+            </li>
+            <li style="border: none">
+            	<a href="#">
+                <div class="nav_x_1">
+                    <img src="__STATICS__images/tpl/dress/nav_x_03_03.png"  width="272" height="71">
+                </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="main_dd">
+    	
+        <!--详细内容-->
+        <div class="con con-grey">
+        	<img src="__STATICS__images/tpl/grey_bottom.png"/>
+            <div id="info-main">
+            	<!--头内容（标题、摘要、属性）-->
+                <div id="info-head">
+                	<div id="info-title">{$info.post_title}</div>
+                	<div id="info-excerpt">{$info.post_excerpt}</div>
+                	<div id="info-attr">
+                		<ul>
+                			<li>出租价格：{$info.rent|intval}元/件</li>
+                			<li>出售价格：{$info.sale_price|intval}元/件</li>
+                		</ul>
+                	</div>
+                </div>
+                <!--左侧-->
+                <div id="info-left" class="fl">
+                	<div id="info-func">
+                		<ul>
+                			<li>
+                                <div class="info-ico"></div>
+                                <div class="info-lz">喜欢&nbsp;500</div>
+                            </li>
+                			<li>
+                                <div class="info-ico_wo"></div>
+                                <div class="info-lz">分享&nbsp;500</div>
+                            </li>
+                			<li>
+                                <div class="info-ico_pl"></div>
+                                <div class="info-lz">评论&nbsp;500</div>
+                            </li>
+                			<li>
+                                <div class="info-ico_ph"></div>
+                                 <div class="info-lz">装到手机</div>
+                            </li>
+                			<li>
+                                <div class="info-ico_sy"></div>
+                                <div class="info-lz">预约试衣</div>
+                            </li>
+                		</ul>
+                    <div class="post_time">POSTTIME:{$info.post_date|date='Y-m-d',###}</div>
+                	</div>
+
+                    <!--大图片-->
+                    <div class="info-img">
+                    	<foreach name="photo" item="item">
+	                    	<div class="info-img-w">
+	                            <img src="__ROOT__{$item.url}"  width="900" alt=""/>
+	                        </div>
+                    	</foreach>
+                        
+                    </div>
+                </div>
+                <!--右侧-->
+                <tc_include file="Public:right"/>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+ <!--广告位置-->
+<tc_include file="Public:second_page_3"/>
+
+<!--服务承诺-->
+<tc_include file="Public:servePromise"/>
+<!--底部的图片-->
+<div class="i_003">
+    <img src="__STATICS__images/tpl/ad_04_01.jpg" alt="" />
+</div>
+<!--@@@@@@@-->
+<div class="clears"></div>
+</div>
+<!--底部-->
+<tc_include file="Public:footer"/>
+</body>
+</html>

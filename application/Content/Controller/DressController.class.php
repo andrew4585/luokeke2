@@ -40,6 +40,14 @@ class DressController extends AdminbaseController {
 	
 	function _add(){
 		if(IS_POST){
+			if(!empty($_POST['photos_alt']) && !empty($_POST['photos_url'])){
+				foreach ($_POST['photos_url'] as $key=>$url){
+					$photourl=$this->removeUploadImage($this->imgFolder,$url);
+					$_POST['smeta']['photo'][]=array("url"=>$photourl,"alt"=>$_POST['photos_alt'][$key]);
+				}
+			}
+			$_POST['smeta']['photo']=list_sort_by($_POST['smeta']['photo'],"alt");
+			$_POST['smeta']=json_encode($_POST['smeta']);
 			$_POST['category'] = $this->cate_id;
 			$_POST['post_date']= strtotime($_POST['post_date']);
 			$_POST['post_content']=htmlspecialchars($_POST['post_content']);
@@ -60,6 +68,14 @@ class DressController extends AdminbaseController {
 		$id=  $_REQUEST['id'];
 		if(empty($id)) $this->error("The dress's id is lost!");
 		if(IS_POST){
+			if(!empty($_POST['photos_alt']) && !empty($_POST['photos_url'])){
+				foreach ($_POST['photos_url'] as $key=>$url){
+					$photourl=$this->removeUploadImage($this->imgFolder,$url);
+					$_POST['smeta']['photo'][]=array("url"=>$photourl,"alt"=>$_POST['photos_alt'][$key]);
+				}
+			}
+			$_POST['smeta']['photo']=list_sort_by($_POST['smeta']['photo'],"alt");
+			$_POST['smeta']=json_encode($_POST['smeta']);
 			$_POST['post_date']= strtotime($_POST['post_date']);
 			$_POST['post_content']=htmlspecialchars($_POST['post_content']);
 			$_POST['post_pic'] = $this->removeUploadImage($this->imgFolder, $_POST['post_pic']);
@@ -73,6 +89,7 @@ class DressController extends AdminbaseController {
 			
 			$info = $this->model_obj->where("id=$id")->find();
 			$this->assign($info);
+			$this->assign("smeta",json_decode($info['smeta'],true));
 			$this->commonParam();
 			$this->display("Dress/edit");
 		}

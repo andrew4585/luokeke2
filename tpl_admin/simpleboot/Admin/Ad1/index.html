@@ -39,11 +39,10 @@
 	          <tr>
 	            <th width="16"><label><input type="checkbox" class="J_check_all" data-direction="x" data-checklist="J_check_x"></label></th>
 	            <th width="50">排序</th>
-	            <th width="100">ID</th>
+	            <th width="50">ID</th>
 	            <th>名称</th>
 	            <th>站点</th>
 	            <th>类别</th>
-	            <th>描述</th>
 	            <th>图片</th>
 	            <th width="45">状态</th>
 	            <th width="120">操作</th>
@@ -54,10 +53,9 @@
 		            <td><input type="checkbox" class="J_check" data-yid="J_check_y" data-xid="J_check_x" name="ids[]" value="{$vo.ad_id}"></td>
 		            <td><input name='listorders[{$vo.ad_id}]' class="input input-order mr5"  type='text' size='3' value='{$vo.listorder}'></td>
 		            <td>{$vo.ad_id}</td>
-		            <td>{$vo.ad_name}</td>
-		            <td>{$vo.cat.cat_name}</td>
+		            <td title="{$vo.ad_des|msubstr=0,10}">{$vo.ad_name}</td>
 		            <td>{$vo.site.site_name}</td>
-    	            <td>{$vo.ad_des|msubstr=0,10}</td>
+		            <td>{$vo.cat.cat_name}</td>
                     <td>
 	                    <notempty name="vo['ad_pic']">
 	                    <a href="__ROOT__/{$vo['ad_pic']}" target="_blank"><img src="__ROOT__/{$vo['ad_pic']}" style="height:80px;"/></a>

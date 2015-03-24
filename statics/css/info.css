@@ -1,0 +1,151 @@
+/*tab下阴影*/
+.con-grey{
+	background: #E9E9E7;
+	min-height: 200px;
+	width     : 1200px;
+	margin    : 0 auto;
+	margin-top: -14px;
+}
+/*--------详情----------*/
+#info-main{
+	width     : 1152px ;
+	margin    : 24px 24px;
+}
+#info-head{
+	width     : 100%;
+	min-height: 122px;
+	height    : auto;
+}
+/*--------详情（头内容）-----*/
+#info-title{
+	font-size  : 32px;
+	line-height:50px;
+	font-weight: 500;
+}
+/*摘要*/
+#info-excerpt{
+	font-size  : 16px;
+	line-height: 35px;
+	font-family: "宋体";
+	color      : #626262;
+}
+/*属性*/
+#info-attr{
+	font-size : 20px;
+}
+#info-attr ul li{
+	display     : inline;
+	margin-right: 25px;
+	line-height : 35px;
+}
+/*--------详情（左侧展示）------*/
+#info-left{
+	width     : 900px ;
+	float     : left ;
+	border-top: solid 1px #C4C4C4;
+	margin-top: 10px;
+	margin-bottom : 24px;
+}
+/**/
+
+#info-right{ width: 225px; height: 1950px; }
+
+
+/*--------功能按钮-------------*/
+
+
+/*---------公共--------*/
+.clear{
+	clear: both;
+}
+.fl{
+	float: left;
+}
+.fr{
+	float: right
+}
+
+.main_dd{ background: #f6f6f6;}
+#info-func{height: 30px; margin-top: 20px; margin-bottom: 20px;}
+#info-func a{ color: #ffffff}
+.info-img-w{width: 900px;}
+.info-img-h{margin-top: 20px; width: 900px; height: 665px;}
+.info-img-h-l{float: left;padding-top: 15px; padding-left: 17px;}
+.info-img-h-r{float: left;padding-right: 10px; padding-top:15px;}
+.info-content-title{height: 30px; background: #b9b9b9; font-size: 14px;}
+.info-z{height: 30px;margin-top: 5px ; background-color: #ffffff}
+.info-content{margin-top: 4px;}
+.info-content p { font-size: 14px;padding-left: 16px;padding-top: 6px;}
+.info-i{margin-top: 4px; width: 225px; height: 340px;}
+/*ico*/
+.info-ico{width: 25px; height: 20px; float: left;padding: 5px;background: url("../images/tpl/mix_icon.png")no-repeat; }
+.info-ico_wo{width: 25px; height: 20px; float: left;padding: 5px;background: url("../images/tpl/mix_icon.png")no-repeat; background-position: 0px -30px; }
+.info-ico_pl{width: 25px; height: 20px; float: left;padding: 5px;background: url("../images/tpl/mix_icon.png")no-repeat; background-position: 0px -240px;}
+.info-ico_ph{width: 25px; height: 20px; float: left;padding: 5px;background: url("../images/tpl/mix_icon.png")no-repeat; background-position: 0px -60px;}
+.info-ico_sy{width: 25px; height: 20px; float: left;padding: 5px;background: url("../images/tpl/mix_icon.png")no-repeat;  background-position: 0px -93px;}
+
+.info-lz{width: 70px;height: 20px;float: left;padding: 5px;}
+.post_time{float: right;padding: 10px;font-size: 14px;}
+
+/*作品详情页面css*/
+.work_content_login{width: 1200px;  margin: 0 auto ;background: #ffffff}
+.work_login{height: 230px;}
+.work_l{ width: 93px; float: left}
+.work_r{float: left;width: 1055px}
+.work_r_up{height: 56px;width: 1055px}
+.work_r_up ul{ font-size: 14px; padding-top: 30px;}
+.work_r_up ul li{ display: inline; color: #c30625;margin-left: 10px;}
+
+.work_r_up_x{width: 1055px}
+.work_r_up_x ul{ font-size: 14px; padding-top: 10px;}
+.work_r_up_x ul li{ display: inline; color: #c30625;margin-left: 10px;}
+
+.content-zg{height: 146px; border: 1px solid #e7e7e7}
+.input{width: 70px; height: 20px; border-radius: 6px; margin-top: 3px;}
+.work_l_ico{width: 64px; height: 64px;margin-left: 20px;margin-top: 30px;}
+.content-zg-border{border-bottom: 1px solid #e7e7e7;height: 30px;background: #f6f6f6;}
+.content-zg-border-x{border-top: 1px solid #e7e7e7;height: 15px;background: #f6f6f6;}
+.work_list{width: 1200px; height: 100px; margin: 0 auto; margin-top: 15px; background: #ffffff}
+.work_l_ico_x{width: 64px; height: 64px;margin-left: 20px;margin-top: 15px;}
+.work_r_down_x{border: 1px solid #e7e7e7; height: 30px;margin-top: 6px;font-size: 14px;background: #f6f6f6}
+.work_r_down_x p{ margin-top: 3px; }
+/*微信扫一扫*/
+
+.hover_sj li {
+	display:block;
+	position:relative;
+	border-radius:0px;
+	-moz-transition:all 0.3s ease;
+	-webkit-transition:all 0.3s ease;
+	-o-transition:all 0.3s ease;
+}
+.hover_sj li.lihover {
+	border-radius:10px;
+}
+/* tips */
+.hover_sj .tips {
+	position:absolute;
+	top:-53px;
+	left:100px;
+	width:172px;
+	height:200px;
+	visibility:hidden;
+	/*background:url(../images/tipbg.png) no-repeat;*/
+	opacity:0.0;
+	-moz-transition:all 0.5s ease;
+	-webkit-transition:all 0.5s ease;
+	-o-transition:all 0.5s ease;
+	background: #000000;
+}
+.hover_sj .tips .tipscont {
+	width: 150px;
+	margin: 18px;
+}
+.hover_sj .tips .tipscont p{ text-align: center;}
+.hover_sj .hover {
+	visibility:visible;
+	top:-93px;
+	left:150px;
+	opacity:1;
+}
+.text_con{ width: 1030px; height: 96px;}

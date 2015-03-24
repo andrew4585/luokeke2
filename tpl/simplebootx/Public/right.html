@@ -1,0 +1,17 @@
+<div id="info-right" class="fr">
+    <div class="info-right-title">
+    	<foreach name="rightPhoto" item="i">
+	    	<div class="info-content">
+	            <div class="info-content-title"><p>{$i.cat_name}</p></div>
+	            <foreach name="i['list']" item="j">
+	            	<div class="info-z" title="{$j.post_excerpt}"><a href="{:U('Portal/Photo/info')}/id/{$j.id}"><p>{$j.post_title}</p></a></div>
+	            </foreach>
+	        </div>
+    	</foreach>
+    </div>
+    <div class="info-right-image">
+    	<notempty name="info_right">
+        <div class="info-i"><a href="{$info_right.0.ad_url}"><img src="__ROOT__{$info_right.0.ad_pic}" width="225" alt=""/></a></div>
+        </notempty>
+    </div>
+</div>

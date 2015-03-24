@@ -1,0 +1,123 @@
+/*课照首页*/
+.con_1{  width: 1200px;  position:relative;  text-align:center;  margin: 20px auto;  }
+.fl_right,.fl_left{width:80px; height:80px; background:url(../images/tpl/icon-1.png) no-repeat; background:url(../images/tpl/icon-1.png) no-repeat\9; position:absolute; top:70px; z-index:99; cursor:pointer;filter:alpha(opacity=70); opacity:0.7;}
+.fl_right{ background-position:10px -100px; left:44px;top:450px;}
+.fl_left{ background-position:0 0; right:44px;top:450px;}
+.box{ width:1200px; margin:0 auto; position:relative; overflow:hidden; _height:100%;}
+.picbox{ width:1200px; height:180px; overflow:hidden; position:relative;background-color: #c6c6c6;}
+.piclist{ height:180px;position:absolute; left:0px; top:15px;margin: 0 40px;}
+.piclist li{ margin-right:2px; padding:10px; float:left;}
+.swaplist{ position:absolute; left:-3000px; top:15px}
+.og_prev,.og_next{ width:30px; height:50px; background:url(../images/tpl/icon.png) no-repeat; background:url(../images/tpl/icon_ie6.png) no-repeat\9; position:absolute; top:70px; z-index:99; cursor:pointer;filter:alpha(opacity=70); opacity:0.7;}
+.og_prev{ background-position:0 5px; left:4px;}
+.og_next{ background-position:0 -60px; right:4px;}
+.scrolltop{background: #f3f3f3;text-align:center;}
+/*课照详情*/
+.p_info{text-align: center; width: 1200px;margin: 0 auto; padding-top: 20px;}
+.p_info span{font-size: 32px;  font-family: "微软雅黑";}
+.p_info p{font-family: "微软雅黑";font-size: 15px;margin-bottom: 30px;}
+.p_id{width:1200px;text-align: center;margin:0 auto;}
+.pid_1, .pid_2, .pid_3{float: left;}
+.pid_1{margin-right: 5px;}
+.pid_3{margin-top: 10px;}
+/*礼服首页*/
+.xl_001_lf{ border: 8px solid #FFFFFF;}
+.xl_001_lf .b{ height: 576px; width: 599px;}
+.xl_001_lf .b .rsp{height: 576px; width: 599px}
+.xl_001_lf ul li{float:left;display:inline;width:287px;height:287px;overflow:hidden;position:relative;}
+.xl_001_lf .rsp{width:287px;height:287px;overflow:hidden;position: absolute;  background: url("../images/tpl/dress/n_02.png") repeat scroll 0 0 rgba(0, 0, 0, 0);top:0px;left:0px;}
+.xl_001_lf .rsp1{width:287px;height:287px;overflow:hidden;position: absolute;  background: url("../images/tpl/dress/n_03.png") repeat scroll 0 0 rgba(0, 0, 0, 0);top:0px;left:0px;}
+.xl_001_lf .rsp2{width:287px;height:287px;overflow:hidden;position: absolute;  background: url("../images/tpl/dress/n_04.png") repeat scroll 0 0 rgba(0, 0, 0, 0);top:0px;left:0px;}
+.xl_001_lf ul {overflow: hidden;}
+.xl_001_lf ul a.bigImg {float: left;  height: 576px;  margin: 0 2px 0 0;  width: 599px;}
+.xl_001_lf ul a.smallImg {display: inline;  float: left;  height: 287px;  margin: 0 2px 1px;  width: 287px;}
+.al_001{text-align: center; height: 50px; font-size: 16px; padding-top: 20px}
+.al_001 .more { text-align:left;padding-left:35px;width: 230px; height: 30px; margin: 0 auto;background: url("../img/mix_icon.png") no-repeat; background-position: 0px -213px; text-align: left; }
+.al_001 .more a{color: #C4C4C4;}
+/*礼服列表页*/
+.details_img{ height: auto;  width: 980px; margin: 0 auto;}
+.border{ width: 1200px; margin: 0 auto; border-bottom: 1px solid #C4C4C4}
+.dress_photo{ margin: 0 auto;width: 1200px;height: 1600px;}
+.dress_photo ul li{float:left;margin-right:10px;display:inline;width:290px;height:500px;overflow:hidden;position:relative;}
+.dress_photo ul li .photo{width:290px;height:430px;overflow:hidden;}
+.dress_photo .rsp{width:290px;height:430px;overflow:hidden;position: absolute;top:0px;left:0px;background: url("../img/n08.png") repeat scroll 0 0 rgba(0, 0, 0, 0);}
+.dress_photo .text{position:absolute;width:290px;height:430px;top:0px;overflow:hidden;}
+.dress_photo .text h3{width:290px;margin-top:240px;height:50px;text-align:center;color:#FFFFFF;font-size:15px;}
+.dress_photo .text a{text-decoration:none}
+.dress_photo .text div{text-align:center;color:#FFFFFF;font-size:18px;margin-top: 80px;}
+.dress_photo .text_foot{font-size: 16px;}
+.foot_border{width: 1200px ;height: 13px; margin: 0 auto; margin-top: 50px; background: url("../images/tpl/dress/lf_border_03.png")no-repeat center; }
+/* 选项卡示例样式 */
+.head_tab{ width: 1200px; margin: 0 auto;height: 140px;margin-top: 6px ;background: url("../images/tpl/dress/lf_border_03.png");background-repeat:no-repeat;background-position:0px 120px;background-size: 100%}
+.tab li {float: left;width: 33%;  ; border-right: 1px solid #C4C4C4; margin-top: 22px; height: 105px}
+.tab li.on{background: url("../images/tpl/dress/add_01_03.png");background-repeat:no-repeat;background-position:0px 96px;background-size: 100%}
+.nav_x{ width: 190px;height: 71px; margin: 0 auto;}
+.nav_x_1{ width: 272px;height: 71px; margin: 0 auto;}
+.head_tab_kz{ width: 1200px; margin: 0 auto;height: 130px;margin-top: 6px ;background: url("../images/tpl/dress/lf_border_03.png");background-repeat:no-repeat;background-position:0px 120px;background-size: 100%}
+/*分页样式*/
+/*CSS Digg style pagination*/
+DIV.digg {
+    PADDING-RIGHT: 10px; PADDING-LEFT: 10px; PADDING-BOTTOM: 10px; MARGIN: 10px; PADDING-TOP: 10px; TEXT-ALIGN: center
+}
+DIV.digg A {
+    border-color: #aaaadd;
+    border-right: 1px solid #aaaadd;
+    border-style: solid;
+    border-width: 1px;
+    /*color: #000099;*/
+    margin: 2px;
+    padding: 10px 15px;
+    text-decoration: none;
+    background-color: #E8E5E6;
+}
+DIV.digg A:hover {
+    /*BORDER-RIGHT: #000099 1px solid; BORDER-TOP: #000099 1px solid; BORDER-LEFT: #000099 1px solid; COLOR: #000; BORDER-BOTTOM: #000099 1px solid*/
+}
+DIV.digg A:active {
+    BORDER-RIGHT: #000099 1px solid; BORDER-TOP: #000099 1px solid; BORDER-LEFT: #000099 1px solid; COLOR: #000; BORDER-BOTTOM: #000099 1px solid
+}
+DIV.digg SPAN.current {
+    /*border-right: 1px solid #009;*/
+    /*border-width: 1px;*/
+    /*border-style: solid;*/
+    /*border-color: #E8E5E6;*/
+    /*font-weight: bold;*/
+    /*margin: 2px;*/
+    /*color: #FFF;*/
+    /*padding: 10px 15px;*/
+    /*background-color: #E8E5E6;*/
+    background-color: #e8e5e6;
+    border-color: #aaaadd;
+    border-style: solid;
+    border-width: 1px;
+    margin: 2px;
+    padding: 10px 15px;
+    text-decoration: none;
+}
+DIV.digg SPAN.disabled {
+    background-color: #e8e5e6;
+    border-color: #aaaadd;
+    border-style: solid;
+    border-width: 1px;
+    margin: 2px;
+    padding: 10px 15px;
+    text-decoration: none;
+    /*border-right: 1px solid #EEE;*/
+    /*padding: 10px 15px;*/
+    /*border-width: 1px;*/
+    /*border-style: solid;*/
+    /*border-color: #EEE;*/
+    /*margin: 2px;*/
+    /*color: #DDD;*/
+    /*background-color: #E8E5E6;*/
+}
+
+.foot_border_kz {
+    background: url("../images/tpl/dress/lf_border_03.png") no-repeat scroll center center rgba(0, 0, 0, 0);
+    height: 13px;
+    width: 1200px;
+    margin: 0 auto;
+
+
+
+}

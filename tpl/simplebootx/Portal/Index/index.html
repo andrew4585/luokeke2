@@ -60,14 +60,14 @@
 								<if condition="$key eq 0">
 								<li class="b">
 									<a href="{$item.post_url}" target="_blank" class="bigImg">
-										<img src="__ROOT__{$item.post_pic}" width="390" height="535" alt="{$item.post_title}" />
+										<img src="__ROOT__/{$item.post_pic}" width="390" height="535" alt="{$item.post_title}" />
 										<div class="rsp"></div>
 									</a>
 								</li>
 								<else/>
 									<li>
 										<a href="{$item.post_url}" class="smallImg" target="_blank" title="">
-											<img src="__ROOT__{$item.post_pic}" width="390" height="267" alt="{$item.post_title}" />
+											<img src="__ROOT__/{$item.post_pic}" width="390" height="267" alt="{$item.post_title}" />
 											<div class="rsp"></div>
 										</a>
 									</li>
@@ -869,8 +869,8 @@
 						<ul>
 							<foreach name="good" item="item">
 								<li>
-									<a rel="group" href="__ROOT__{$item.post_pic}">
-										<img alt="" src="__ROOT__{$item.head_img}" /><ins><p>{$item.post_excerpt|msubstr=0,20}</p></ins>
+									<a rel="group" href="__ROOT__/{$item.post_pic}">
+										<img alt="" src="__ROOT__/{$item.head_img}" /><ins><p>{$item.post_excerpt|msubstr=0,20}</p></ins>
 									</a>
 								</li>
 							</foreach>

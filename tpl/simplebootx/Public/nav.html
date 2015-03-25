@@ -23,11 +23,13 @@
 					<i class="humanNumber"><img src="http://www.iaviva.com/theme/bg/t6.gif" alt="洛可可摄影" /><img src="http://www.iaviva.com/theme/bg/t6.gif" alt="洛可可摄影" /><img src="http://www.iaviva.com/theme/bg/t6.gif" alt="洛可可摄影" /><img src="http://www.iaviva.com/theme/bg/t7.gif" alt="洛可可摄影" /><img src="http://www.iaviva.com/theme/bg/t1.gif" alt="洛可可摄影" /><img src="http://www.iaviva.com/theme/bg/t7.gif" alt="洛可可摄影" /><img src="http://www.iaviva.com/theme/bg/t5.gif" alt="洛可可摄影" /></i>
 					<b><img src="http://www.iaviva.com/theme/bg/bg76.gif" alt="洛可可摄影" /></b>
 
-					<span><a href="javascript:;" title="洛可可摄影提醒您注意天气变化" class="tip" id="img_title1"><img src="" alt="洛可可摄影提醒您注意天气变化" /></a></span>
+					<span><a href="javascript:;" title="洛可可摄影提醒您注意天气变化" class="tip" id="img_title1"><img src="" alt="" /></a></span>
 					<strong><a href="javascript:;" title="洛可可摄影提醒您注意天气变化" class="tip" id="temp1"><em id="low"></em>~<small id="high"></small></a></strong>
-					<b style="padding:0;"><a href="javascript:;" title="洛可可摄影提醒您注意天气变化" id="temp2" class="tip welcome2"></a></b>
+					<b style="padding:0;"><a href="javascript:;" title="" id="temp2" class="tip welcome2"></a></b>
 					<script type="text/javascript">
-						$.post("http://localhost/demo/index.php", function(data){
+					$(function(){
+						var url = "{:U('portal/index/getWeather')}"; 
+						$.post(url, function(data){
 							var obj = jQuery.parseJSON(data);
 							var photo = obj.weatherinfo.weather;
 							var photos = photo.split("转");
@@ -43,6 +45,8 @@
 							$("#low").html(e);
 							$("#high").html(s);
 						});
+					})
+						
 					</script>
 				</div>
 			</div>
@@ -85,58 +89,19 @@
 			</script>
 			<!--导航条-->
 				<ul class="nav">
+				<volist name="menuData" id="vo" key="k">
 					<li>
-					<a href="" ><span>关于洛可可</span><font>ABOUT US</font></a>
-							
+						<a href="{$vo.href}" ><span>{$vo.label}</span><font>{$vo.english}</font></a>
+						<if condition="$vo['child'] neq NULL">
+						<div class="box">
+							<volist name="vo['child']" id="f">
+							<a href="{$f.href}">{$f.label}</a>
+							</volist>
+						</div>
+						</if>
 					</li>
-					<li>
-					   <a href="" ><span>作品欣赏</span><font>SHOW CASE</font></a>
-							<div class="box">
-								<a href="">于洛可可</a>
-							</div>
-
-					</li>
-					<li>
-					<a href="" ><span>客片欣赏</span><font>WORKS</font></a>
-							<div class="box">
-								<a href="">于洛可可</a>
-								<a href="">于洛可可</a>
-							</div>
-
-
-					</li>
-					<li>
-						<a href="" ><span>婚纱礼服</span><font>WEDDING DRESS</font></a>
-							<div class="box">
-								<a href="">于洛可可</a>
-								<a href="">于洛可可</a>
-								<a href="">于洛可可</a>
-							</div>
-
-
-					</li>
-					<li>
-					<a href="" ><span>婚嫁资讯</span><font>NEWS</font></a>
-							<div class="box">
-								<a href="">于洛可可</a>
-								<a href="">于洛可可</a>
-								<a href="">于洛可可</a>
-								<a href="">于洛可可</a>
-							</div>
-
-					</li>
-
-					<li>
-					<a href=""><span>可可之星</span><font>ROCOCO STRA</font></a>
-							<div class="box">
-								<a href="">于洛可可</a>
-								<a href="">于洛可可</a>
-								<a href="">于洛可可</a>
-								<a href="">于洛可可</a>
-								<a href="">于洛可可</a>
-							</div>
-					</li>
-
+					
+				</volist>
 				</ul>
 			</div>
 
@@ -146,10 +111,12 @@
 				var navLi=$(".head_nav .nav li");
 				navLi.mouseenter(function () {
 					var size 	= $(this).find(".box a").size();
-					var navLeft = $(this).find("a").offset().left-(size-1)*(90)/2+30;
-					$(this).find(".box").css("padding-left",navLeft+"px");
-					$(this).find("a").addClass("current");
-					$(this).find(".box").stop().slideDown();
+					if(size){
+						var navLeft = $(this).find("a").offset().left-(size-1)*(90)/2+30;
+						$(this).find(".box").css("padding-left",navLeft+"px");
+						$(this).find("a").addClass("current");
+						$(this).find(".box").stop().slideDown();
+					}
 				})
 				navLi.mouseleave(function(){
 					$(this).find("a").removeClass("current");

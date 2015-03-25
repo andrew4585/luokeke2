@@ -49,7 +49,8 @@
 				<input type="radio" name="nav" id="selecturl">
               	<select name="href" id="selecthref" class="normal_select">
                   <option disabled="disabled">默认</option>
-                  <option value="{:U('Portal/Index/index')}">&nbsp;&nbsp;&nbsp;&nbsp;首页</option>
+                  <!-- {:U('Portal/Index/index')} -->
+                  <option value="">&nbsp;&nbsp;&nbsp;&nbsp;首页</option>
                   <foreach name="navs" item="vo">
 	            	<option disabled="disabled">{$vo.name}</option>
 	            	<foreach name="vo['items']" item="voo">

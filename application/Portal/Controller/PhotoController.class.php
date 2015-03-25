@@ -10,7 +10,7 @@ class PhotoController extends HomeBaseController {
 		foreach ($msg as $key=>$value){
 			$item[] = array(
 						"label" => "{$value['cat_name']}",
-						"href" => "Portal/Photo/list/{$value['id']}"
+						"href" => U("Portal/Photo/cid/{$value['id']}")
 					);
 		}
 		$nav_arr['name'] 	= "作品分类";

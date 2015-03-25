@@ -53,6 +53,10 @@ class IndexController extends HomeBaseController {
 			
 			//dump($articles);
 			$this->assign("articles",$articles);
+			
+			//广告位
+			$this->assign("promise",$this->_getAd("promise"));
+			$this->assign("servePromise",$this->_getAd("servePromise"));
 		}catch (\Exception $e){
 			$this->error($e->getMessage());
 		}
@@ -155,5 +159,13 @@ class IndexController extends HomeBaseController {
     	}else{
     		cookie("siteid",$site);
     	}
+    }
+    /**
+     * 天气获取
+     */
+    public function getWeather(){
+    	header("Content-type:text/html;charset=utf-8");
+    	$weather = file_get_contents("http://www.weather.com.cn/adat/cityinfo/101070201.html");
+    	echo $weather;
     }
 }

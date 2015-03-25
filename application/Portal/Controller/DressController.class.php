@@ -15,8 +15,7 @@ class DressController extends IndexController {
 	 */
 	public function info(){
 		$id			= I("get.id",0,'intval');
-		$category	= I("get.category",0,'intval');
-		if(empty($id)&&empty($cid)){
+		if(empty($id)){
 			$this->error("参数丢失");
 		}
 		$where		= "id=$id and status=1";
@@ -40,28 +39,6 @@ class DressController extends IndexController {
 		//右侧导航
 		$this->info_right();
 		$this->display();
-	}
-	
-	/**
-	 * 右侧导航作品
-	 */
-	public function info_right(){
-		$model_photo	= D("Photo");
-		$model_pCate	= D("PhotoCat");
-		$cateList		= $model_pCate->field("id,cat_name")->order("listorder")->select();
-		$right			= array();
-		$where			= "recommended=1 and site_id={$this->siteId} and status=1";
-		foreach($cateList as $item){
-			$whereAlias	    = $where." and cid=".$item['id'];
-			$item['list']	= $model_photo	->field("id,post_title,post_excerpt")
-											->where($whereAlias)->order("listorder,post_date desc")
-											->select();
-			array_push($right, $item);
-		}
-		//右侧导航---广告
-		$this->assign("info_right",$this->_getAd("info_right"));
-		//右侧导航---作品列表
-		$this->assign("rightPhoto",$right);		
 	}
 	
 	public function nav_index(){

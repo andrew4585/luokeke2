@@ -26,32 +26,27 @@
 	<tc_include file="Public:banner"/>	
 <!--内容-->
 <div class="conter">
-    <!--广告位置-->
-    <div class="border">
-    <div class="details_img"><img src="__ROOT__/{$ad_dress.0.ad_pic}" width="980"/> </div>
-    </div>
     <!--tab 导航 -->
     <div class="head_tab">
         <ul class="tab">
             <li class="on">
                 <a href="{:U('Portal/Dress/list')}/category/1">
                     <div class="nav_x">
-                        <img src="__STATICS__images/tpl/dress/nav_x_01_03.png"  width="190" height="71">
+                        <img src="__STATICS__images/tpl/photo/nav_01.png" height="71">
                     </div>
                 </a>
             </li>
             <li>
             	<a href="{:U('Portal/Dress/list')}/category/2">
                 <div class="nav_x">
-                    <img src="__STATICS__images/tpl/dress/nav_x_02_03.png"  width="190" height="71">
+                    <img src="__STATICS__images/tpl/photo/nav_02.png" height="71">
                 </div>
-
                 </a>
             </li>
             <li style="border: none">
             	<a href="#">
                 <div class="nav_x_1">
-                    <img src="__STATICS__images/tpl/dress/nav_x_03_03.png"  width="272" height="71">
+                    <img src="__STATICS__images/tpl/photo/nav_03.png" height="71">
                 </div>
                 </a>
             </li>
@@ -63,15 +58,9 @@
         	<img src="__STATICS__images/tpl/grey_bottom.png" style="margin-top:-1px"/>
             <div id="info-main">
             	<!--头内容（标题、摘要、属性）-->
-                <div id="info-head">
-                	<div id="info-title">{$info.post_title}</div>
-                	<div id="info-excerpt">{$info.post_excerpt}</div>
-                	<div id="info-attr">
-                		<ul>
-                			<li>出租价格：{$info.rent|intval}元/件</li>
-                			<li>出售价格：{$info.sale_price|intval}元/件</li>
-                		</ul>
-                	</div>
+                <div id="info-head" style="width:900px;min-height:92px;">
+                	<div id="info-title" align="center">{$info.post_title}</div>
+                	<div id="info-excerpt" align="center">{$info.post_excerpt}</div>
                 </div>
                 <!--左侧-->
                 <div id="info-left" class="fl">

@@ -102,10 +102,10 @@
 .work_login{height: 230px;}
 .work_l{ width: 93px; float: left}
 .work_r{float: left;width: 1055px}
-.work_r_up{height: 56px;width: 1055px}
-.work_r_up ul{ font-size: 14px; padding-top: 30px;}
-.work_r_up ul li{ display: inline; color: #c30625;margin-left: 10px;}
-
+.work_r_up{height: 52px;width: 1055px}
+.work_r_up ul{ font-size: 14px; padding-top: 26px;}
+.work_r_up ul li{ display: inline; color: #c30625;margin-left: 10px;float:left;height:25px;}
+.work_r_up ul li img{cursor: pointer;margin-top:-3px;}
 .work_r_up_x{width: 1055px}
 .work_r_up_x ul{ font-size: 14px; padding-top: 10px;}
 .work_r_up_x ul li{ display: inline; color: #c30625;margin-left: 10px;}
@@ -140,12 +140,13 @@
 	width:172px;
 	height:200px;
 	visibility:hidden;
-	/*background:url(../images/tipbg.png) no-repeat;*/
+	background:url(../images/tipbg.png) no-repeat;
+	background-position: 0px -10px;
 	opacity:0.0;
 	-moz-transition:all 0.5s ease;
 	-webkit-transition:all 0.5s ease;
 	-o-transition:all 0.5s ease;
-	background: #000000;
+/*	background: #000000;*/
 }
 .hover_sj .tips .tipscont {
 	width: 150px;
@@ -158,4 +159,4 @@
 	left:150px;
 	opacity:1;
 }
-.text_con{ width: 1030px; height: 96px;}
+.text_con{ width: 1030px; height: 79px;}

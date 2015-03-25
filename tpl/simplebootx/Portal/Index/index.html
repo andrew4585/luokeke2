@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<tc_include file="Public:head" />
-</head>
+	<head>
+		<tc_include file="Public:head" />
+	</head>
 <body>
 	<!--头部导航标题js-->
 	<tc_include file="Public:nav"/>
@@ -59,14 +59,14 @@
 							<foreach name="active" item="item">
 								<if condition="$key eq 0">
 								<li class="b">
-									<a href="{$item.post_url}" target="_blank" class="bigImg">
+									<a href="{:U('Portal/Active/info')}/id/{$item.id}" target="_blank" class="bigImg">
 										<img src="__ROOT__/{$item.post_pic}" width="390" height="535" alt="{$item.post_title}" />
 										<div class="rsp"></div>
 									</a>
 								</li>
 								<else/>
 									<li>
-										<a href="{$item.post_url}" class="smallImg" target="_blank" title="">
+										<a href="{:U('Portal/Active/info')}/id/{$item.id}" class="smallImg" target="_blank" title="">
 											<img src="__ROOT__/{$item.post_pic}" width="390" height="267" alt="{$item.post_title}" />
 											<div class="rsp"></div>
 										</a>
@@ -116,100 +116,23 @@
 			<!--jQuery带左右按钮及水平滚动拖动条的图片相册特效 -->
 			<div class="con_a002">
 
-				<div class="al_001"><div class="more"><a href="#">点击查看更多作品</a></div></div>
+				<div class="al_001"><div class="more"><a href="{:U('Portal/Ptheme/index')}">点击查看更多作品</a></div></div>
 				<!-- 效果开始-->
 				<div id="zsgun">
 					<a href="#" class="prenext zspre"></a>
 					<a href="#" class="prenext zsnext"></a>
 					<div id="gundiv" class="container2">
 						<ul class="clearfix">
-
+							<foreach name="ptheme" item="item">
 							<li>
 								<div class="photo">
-									<img src="images/2015261051252157382.jpg" alt="" width="290" height="430" />
+									<img src="__ROOT__/{$item.post_pic}" alt="{$item.post_title}" width="290" height="430" />
 								</div>
 								<div class="rsp"></div>
-								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
-								</div>
-
-							</li>
-							<li>
-								<div class="photo">
-									<img src="images/2014102151234350492.jpg" alt="" width="290" height="430" />
-								</div>
-								<div class="rsp"></div>
-								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
-								</div>
-
-							</li>
-							<li>
-								<div class="photo">
-									<img src="images/2014827155723233401.jpg" alt="" width="290" height="430" />
-								</div>
-								<div class="rsp"></div>
-								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
+								<div class="text"><a href="{:U('Portal/Ptheme/info')}/id/{$item.id}"><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>{$item.post_title}</div></a>
 								</div>
 							</li>
-							<li>
-								<div class="photo">
-									<img src="images/20148271555147898974.jpg" alt="" width="290" height="430" />
-								</div>
-								<div class="rsp"></div>
-								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
-								</div>
-							</li>
-							<li>
-								<div class="photo">
-									<img src="images/2015261051252157382.jpg" alt="" width="290" height="430" />
-								</div>
-								<div class="rsp"></div>
-								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
-								</div>
-							</li>
-							<li>
-								<div class="photo">
-									<img src="images/2015261051252157382.jpg" alt="" width="290" height="430" />
-								</div>
-								<div class="rsp"></div>
-								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
-								</div>
-
-							</li>
-							<li>
-								<div class="photo">
-									<img src="images/2015261051252157382.jpg" alt="" width="290" height="430" />
-								</div>
-								<div class="rsp"></div>
-								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
-								</div>
-							</li>
-							<li>
-								<div class="photo">
-									<img src="images/2015261051252157382.jpg" alt="" width="290" height="430" />
-								</div>
-								<div class="rsp"></div>
-								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
-								</div>
-
-							</li>
-							<li>
-								<div class="photo">
-									<img src="images/2015261051252157382.jpg" alt="" width="290" height="430" />
-								</div>
-								<div class="rsp"></div>
-								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
-								</div>
-							</li>
-							<li>
-								<div class="photo">
-									<img src="images/2015261051252157382.jpg" alt="" width="290" height="430" />
-								</div>
-								<div class="rsp"></div>
-								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
-								</div>
-
-							</li>
-
+							</foreach>
 						</ul>
 					</div>
 				</div>
@@ -349,7 +272,7 @@
 					</div>
 				</div>
 				<div class="con_a003">
-					<div class="al_001"><div class="more"><a href="#">点击查看更多人气活动</a></div></div>
+					<div class="al_001"><div class="more"><a href="{:U('Portal/Group/index')}">点击查看更多人气活动</a></div></div>
 
 				<!-- 效果开始-->
 					<div id="zsgun1">
@@ -357,15 +280,15 @@
 						<a href="#" class="prenext zsnext"></a>
 						<div id="gundiv1" class="container2 ">
 							<ul>
+								<foreach name="group" item="item">
 								<li>
-									<a href="" target="_blank">
-										<img src="images/2015261051252157382_03.jpg" alt="" width="290" height="321" />
+									<a href="{:U('Portal/Group/info')}/id/{$item.id}" target="_blank">
+										<img src="__ROOT__/{$item.post_pic}" alt="" width="290" height="321" />
 									</a>
                                     <div class="title_i">
                                         <div class="title_momeny">
-											<span  class="s_001">￥4999</span></br>
-											<span  class="s_002">50人购买</span>
-
+											<span  class="s_001">￥{$item.post_price}</span></br>
+											<span  class="s_002">{$item.post_num}人购买</span>
 										</div>
 										<div class="title_true"><img src="__STATICS__/images/tpl/ico_true_03.png" alt=""/></div>
 
@@ -374,161 +297,7 @@
 									<!--<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>-->
 									<!--</div>-->
 								</li>
-								<li>
-									<a href="" target="_blank">
-										<img src="images/2014102151234350492_03.jpg" alt="" width="290" height="321" />
-									</a>
-
-									<div class="title_i">
-										<div class="title_momeny">
-											<span  class="s_001">￥4999</span></br>
-											<span  class="s_002">50人购买</span>
-
-										</div>
-										<div class="title_true"><img src="__STATICS__/images/tpl/ico_true_03.png" alt=""/></div>
-
-									</div>
-
-									<!--<div class="rsp"></div>-->
-									<!--<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>-->
-									<!--</div>-->
-								</li>
-								<li>
-									<a href="" target="_blank">
-										<img src="images/2014102151234350492_03.jpg" alt="" width="290" height="321" />
-									</a>
-									<div class="title_i">
-										<div class="title_momeny">
-											<span  class="s_001">￥4999</span></br>
-											<span  class="s_002">50人购买</span>
-
-										</div>
-										<div class="title_true"><img src="__STATICS__/images/tpl/ico_true_03.png" alt=""/></div>
-
-									</div>
-									<!--<div class="rsp"></div>-->
-									<!--<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>-->
-									<!--</div>-->
-								</li>
-								<li>
-									<a href="" target="_blank">
-										<img src="images/20148271555147898974_03.jpg" alt="" width="290" height="321" />
-									</a>
-									<div class="title_i">
-										<div class="title_momeny">
-											<span  class="s_001">￥4999</span></br>
-											<span  class="s_002">50人购买</span>
-
-										</div>
-										<div class="title_true"><img src="__STATICS__/images/tpl/ico_true_03.png" alt=""/></div>
-
-									</div>
-									<!--<div class="rsp"></div>-->
-									<!--<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>-->
-									<!--</div>-->
-								</li>
-								<li>
-									<a href="" target="_blank">
-										<img src="images/2015261051252157382.jpg" alt="" width="290" height="321" />
-									</a>
-									<div class="title_i">
-										<div class="title_momeny">
-											<span  class="s_001">￥4999</span></br>
-											<span  class="s_002">50人购买</span>
-
-										</div>
-										<div class="title_true"><img src="__STATICS__/images/tpl/ico_true_03.png" alt=""/></div>
-
-									</div>
-									<!--<div class="rsp"></div>-->
-									<!--<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>-->
-									<!--</div>-->
-								</li>
-								<li>
-									<a href="" target="_blank">
-										<img src="images/2015261051252157382.jpg" alt="" width="290" height="321" />
-									</a>
-									<div class="title_i">
-										<div class="title_momeny">
-											<span  class="s_001">￥4999</span></br>
-											<span  class="s_002">50人购买</span>
-
-										</div>
-										<div class="title_true"><img src="__STATICS__/images/tpl/ico_true_03.png" alt=""/></div>
-
-									</div>
-									<!--<div class="rsp"></div>-->
-									<!--<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>-->
-									<!--</div>-->
-								</li>
-								<li>
-									<a href="" target="_blank">
-										<img src="images/2015261051252157382.jpg" alt="" width="290" height="321" />
-									</a>
-									<div class="title_i">
-										<div class="title_momeny">
-											<span  class="s_001">￥4999</span></br>
-											<span  class="s_002">50人购买</span>
-
-										</div>
-										<div class="title_true"><img src="__STATICS__/images/tpl/ico_true_03.png" alt=""/></div>
-
-									</div>
-									<!--<div class="rsp"></div>-->
-									<!--<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>-->
-									<!--</div>-->
-								</li>
-								<li>
-									<a href="" target="_blank">
-										<img src="images/2015261051252157382.jpg" alt="" width="290" height="321" />
-									</a>
-									<div class="title_i">
-										<div class="title_momeny">
-											<span  class="s_001">￥4999</span></br>
-											<span  class="s_002">50人购买</span>
-
-										</div>
-										<div class="title_true"><img src="__STATICS__/images/tpl/ico_true_03.png" alt=""/></div>
-
-									</div>
-									<!--<div class="rsp"></div>-->
-									<!--<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>-->
-									<!--</div>-->
-								</li>
-								<li>
-									<a href="" target="_blank">
-										<img src="images/2015261051252157382.jpg" alt="" width="290" height="321" />
-									</a>
-									<div class="title_i">
-										<div class="title_momeny">
-											<span  class="s_001">￥4999</span></br>
-											<span  class="s_002">50人购买</span>
-
-										</div>
-										<div class="title_true"><img src="__STATICS__/images/tpl/ico_true_03.png" alt=""/></div>
-
-									</div>
-									<!--<div class="rsp"></div>-->
-									<!--<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>-->
-									<!--</div>-->
-								</li>
-								<li>
-									<a href="" target="_blank">
-										<img src="images/2015261051252157382.jpg" alt="" width="290" height="321" />
-									</a>
-									<div class="title_i">
-										<div class="title_momeny">
-											<span  class="s_001">￥4999</span></br>
-											<span  class="s_002">50人购买</span>
-
-										</div>
-										<div class="title_true"><img src="__STATICS__/images/tpl/ico_true_03.png" alt=""/></div>
-
-									</div>
-									<!--<div class="rsp"></div>-->
-									<!--<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>-->
-									<!--</div>-->
-								</li>
+								</foreach>
 							</ul>
 						</div>
 					</div>
@@ -576,7 +345,7 @@
 				</div>
 
 			<div class="con_a004">
-				<div class="al_001"><div class="more"><a href="#">点击查看更多作品</a></div></div>
+				<div class="al_001"><div class="more"><a href="{:U('Portal/Pcustom/index')}">点击查看更多作品</a></div></div>
 
 				<!-- 效果开始-->
 				<div id="zsgun2">
@@ -585,86 +354,16 @@
 
 					<div id="gundiv2" class="container2">
 						<ul>
+							<foreach name="pcustom" item="item">
 							<li>
-								<a href="" target="_blank">
-									<img src="images/2015261051252157382.jpg" alt="" width="290" height="429" />
+								<a href="{:U('Portal/Group/info')}/id/{$item.id}" target="_blank">
+									<img src="__ROOT__/{$item.post_pic}" alt="{$item.post_title}" width="290" height="429" />
 								</a>
 								<div class="rsp"></div>
-								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
+								<div class="text"><a href="{:U('Portal/Group/info')}/id/{$item.id}"><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>{$item.post_title}</div></a>
 								</div>
 							</li>
-							<li>
-								<a href="" target="_blank">
-									<img src="images/2014102151234350492.jpg" alt="" width="290" height="429" />
-								</a>
-								<div class="rsp"></div>
-								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
-								</div>
-							</li>
-							<li>
-								<a href="" target="_blank">
-									<img src="images/2014827155723233401.jpg" alt="" width="290" height="429" />
-								</a>
-								<div class="rsp"></div>
-								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
-								</div>
-							</li>
-							<li>
-								<a href="" target="_blank">
-									<img src="images/20148271555147898974.jpg" alt="" width="290" height="429" />
-								</a>
-								<div class="rsp"></div>
-								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
-								</div>
-							</li>
-							<li>
-								<a href="" target="_blank">
-									<img src="images/2015261051252157382.jpg" alt="" width="290" height="429" />
-								</a>
-								<div class="rsp"></div>
-								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
-								</div>
-							</li>
-							<li>
-								<a href="" target="_blank">
-									<img src="images/2015261051252157382.jpg" alt="" width="290" height="429" />
-								</a>
-								<div class="rsp"></div>
-								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
-								</div>
-							</li>
-							<li>
-								<a href="" target="_blank">
-									<img src="images/2015261051252157382.jpg" alt="" width="290" height="429" />
-								</a>
-								<div class="rsp"></div>
-								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
-								</div>
-							</li>
-							<li>
-								<a href="" target="_blank">
-									<img src="images/2015261051252157382.jpg" alt="" width="290" height="429" />
-								</a>
-								<div class="rsp"></div>
-								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
-								</div>
-							</li>
-							<li>
-								<a href="" target="_blank">
-									<img src="images/2015261051252157382.jpg" alt="" width="290" height="429" />
-								</a>
-								<div class="rsp"></div>
-								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
-								</div>
-							</li>
-							<li>
-								<a href="" target="_blank">
-									<img src="images/2015261051252157382.jpg" alt="" width="290" height="429" />
-								</a>
-								<div class="rsp"></div>
-								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
-								</div>
-							</li>
+							</foreach>
 						</ul>
 					</div>
 				</div>
@@ -725,94 +424,25 @@
 				</div>
 
 			<div class="con_a005">
-				<div class="al_001"><div class="more"><a href="#">点击查看更多作品</a></div></div>
+				<div class="al_001"><div class="more"><a href="{:U('Portal/Dress/index')}">点击查看更多作品</a></div></div>
 				<!-- 效果开始-->
 				<div id="zsgun3">
 					<a href="#" class="prenext zspre"></a>
 					<a href="#" class="prenext zsnext"></a>
-
 					<div id="gundiv3" class="container2">
 						<ul>
+							<foreach name="dress" item="item">
 							<li>
-								<a href="" target="_blank">
-									<img src="images/2015261051252157382.jpg" alt="" width="290" height="429" />
+							
+								<a href="{:U('Portal/Dress/info')}/id/{$item.id}" target="_blank">
+									<img src="__ROOT__/{$item.post_pic}" alt="" width="290" height="429" />
 								</a>
 								<div class="rsp"></div>
-								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
+								<div class="text"><a href="{:U('Portal/Dress/info')}/id/{$item.id}"><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>{$item.post_title}</div></a>
 								</div>
 							</li>
-							<li>
-								<a href="" target="_blank">
-									<img src="images/2014102151234350492.jpg" alt="" width="290" height="429" />
-								</a>
-								<div class="rsp"></div>
-								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
-								</div>
-							</li>
-							<li>
-								<a href="" target="_blank">
-									<img src="images/2014827155723233401.jpg" alt="" width="290" height="429" />
-								</a>
-								<div class="rsp"></div>
-								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
-								</div>
-							</li>
-							<li>
-								<a href="" target="_blank">
-									<img src="images/20148271555147898974.jpg" alt="" width="290" height="429" />
-								</a>
-								<div class="rsp"></div>
-								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
-								</div>
-							</li>
-							<li>
-								<a href="" target="_blank">
-									<img src="images/2015261051252157382.jpg" alt="" width="290" height="429" />
-								</a>
-								<div class="rsp"></div>
-								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
-								</div>
-							</li>
-							<li>
-								<a href="" target="_blank">
-									<img src="images/2015261051252157382.jpg" alt="" width="290" height="429" />
-								</a>
-								<div class="rsp"></div>
-								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
-								</div>
-							</li>
-							<li>
-								<a href="" target="_blank">
-									<img src="images/2015261051252157382.jpg" alt="" width="290" height="429" />
-								</a>
-								<div class="rsp"></div>
-								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
-								</div>
-							</li>
-							<li>
-								<a href="" target="_blank">
-									<img src="images/2015261051252157382.jpg" alt="" width="290" height="429" />
-								</a>
-								<div class="rsp"></div>
-								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
-								</div>
-							</li>
-							<li>
-								<a href="" target="_blank">
-									<img src="images/2015261051252157382.jpg" alt="" width="290" height="429" />
-								</a>
-								<div class="rsp"></div>
-								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
-								</div>
-							</li>
-							<li>
-								<a href="" target="_blank">
-									<img src="images/2015261051252157382.jpg" alt="" width="290" height="429" />
-								</a>
-								<div class="rsp"></div>
-								<div class="text"><a href=""><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>2015.1月第一季</div></a>
-								</div>
-							</li>
+							</foreach>
+							
 						</ul>
 					</div>
 				</div>
@@ -960,75 +590,38 @@
 
 				<div class="huan">
 				<div class="huan_title">
-				    <div id="huan_1" class="huan_bt" onmousemove="star_show(this);"><a href="" target="_blank"><div class="menu_more">最新活动</div></a></div>
-				    <div id="huan_2" class="huan_bt" onmousemove="star_show(this);"><a href="" target="_blank"><div class="menu_more">可可微刊</div></a></div>
+					<volist name="articles" id="vo" key="k">
+				    <div id="huan_{$k+1}" class="huan_bt" onmousemove="star_show(this);"><a href="" target="_blank"><div class="menu_more">{$vo.cat}</div></a></div>
+				    <!-- <div id="huan_2" class="huan_bt" onmousemove="star_show(this);"><a href="" target="_blank"><div class="menu_more">可可微刊</div></a></div>
 				    <div id="huan_3" class="huan_bt" onmousemove="star_show(this);"><a href="" target="_blank"><div class="menu_more">新娘常识</div></a></div>
 				    <div id="huan_4" class="huan_bt" onmousemove="star_show(this);"><a href="" target="_blank"><div class="menu_more">婚庆礼仪</div></a></div>
-					<div id="huan_5" class="huan_bt" onmousemove="star_show(this);"><a href="" target="_blank"><div class="menu_more">婚纱摄影</div></a></div>
+					<div id="huan_5" class="huan_bt" onmousemove="star_show(this);"><a href="" target="_blank"><div class="menu_more">婚纱摄影</div></a></div> -->
+					</volist>
 				</div>
-					<div id="level_1" class="huan_cen">
+					<volist name="articles" id="item" key="k">
+					<div id="level_{$k+1}" class="huan_cen">
+						
 						<dl>
-							<dt><a href="" target="_blank">LATEST ACTIVITY 最新活动</a></dt>
+							<dt><a href="" target="_blank">LATEST ACTIVITY {$item.cat}</a></dt>
 
 							<ul>
+							<volist name="item['article']" id="f">
 								<li>
 									<a href="" target="_blank" title="">
-										<img src="images/bn_1.jpg" alt="" height="92" width="92">
-										<div class="nr"><b>[爱在大连]-教你如何装扮自己</b><span>POST TIME</span><i>: </i><small>2015-1-20  10：50：50</small>
+										<img src="__ROOT__/{$f.post_pic}" alt="" height="92" width="92">
+										<div class="nr"><b>[爱在大连]-{$f.post_title}</b><span>POST TIME</span><i>: </i><small>{$f.post_date|date="Y-m-d H:i:s",###}</small>
 											<div class="clear"></div>
-											<p>国人爱子总是内敛拧巴，尤其是父亲与孩子之间。与西方亲子关系朋友化相比，中国父亲和子女之间的互动，身教大于言传，...</p>
+											<p>{$f.post_excerpt}...</p>
 										</div>
 									</a>
 								</li>
-								<li>
-									<a href="" target="_blank" title="">
-										<img src="images/bn_2.jpg" alt="" height="92" width="92">
-										<div class="nr"><b>[爱在大连]-教你如何装扮自己</b><span>POST TIME</span><i>: </i><small>2015-1-20  10：50：50</small>
-											<div class="clear"></div>
-											<p>粽礼寻TA别忘了端午的爱情故事端午节里，人们可以尽情地赛龙舟、采艾草、吃粽子，可是千万别忘了还有一件事值得我们细...</p>
-										</div>
-									</a>
-								</li>
-								<li>
-									<a href="" target="_blank" title="">
-										<img src="images/bn_1.jpg" alt="" height="92" width="92">
-										<div class="nr"><b>[爱在大连]-教你如何装扮自己</b><span>POST TIME</span><i>: </i><small>2015-1-20  10：50：50</small>
-											<div class="clear"></div>
-											<p>大儿童宣言六一过大节城市里隐藏着这样一群人他们在不同的地方生活却怀抱着一种态度地铁当云霄飞车穿上直排轮就是现代...</p>
-										</div>
-									</a>
-								</li>
-								<li>
-									<a href="" target="_blank" title="">
-										<img src="images/bn_2.jpg" alt="" height="92" width="92">
-										<div class="nr"><b>[爱在大连]-教你如何装扮自己</b><span>POST TIME</span><i>: </i><small>2015-1-20  10：50：50</small>
-											<div class="clear"></div>
-											<p>继承者们：长大后回过头才发现她柔软她固执对待人生总有说不出的小心谨慎她有改不掉的絮叨以爱之名对你的人生指手画脚...</p>
-										</div>
-									</a>
-								</li>
-								<li>
-									<a href="" target="_blank" title="">
-										<img src="images/bn_1.jpg" alt="" height="92" width="92">
-										<div class="nr"><b>[爱在大连]-教你如何装扮自己</b><span>POST TIME</span><i>: </i><small>2015-1-20  10：50：50</small>
-											<div class="clear"></div>
-											<p>敬告青年青年立业成家是社会稳定和发展的根本，婚姻重要性不言而喻。拍婚纱照作为婚姻的前阵，必先改革。在此，薇拉倡...</p>
-										</div>
-									</a>
-								</li>
-								<li>
-									<a href="" target="_blank" title="">
-										<img src="images/bn_2.jpg" alt="" height="92" width="92">
-										<div class="nr"><b>[爱在大连]-教你如何装扮自己</b><span>POST TIME</span><i>: </i><small>2015-1-20  10：50：50</small>
-											<div class="clear"></div>
-											<p>这这是薇拉的一张结婚照人物自然裂开嘴角，娓娓幸福；构图依据人景搭配，安然和谐；色调均匀晕开泛光，质感呈现。每一...</p>
-										</div>
-									</a>
-								</li>
+								</volist>
 							</ul>
 						</dl>
+						
 					</div>
-					<div id="level_2" class="huan_cen">
+					</volist>
+					<!-- <div id="level_2" class="huan_cen">
 						<dl>
 							<dt><a href="" target="_blank">LATEST ACTIVITY 可可微刊</a></dt>
 							<ul>
@@ -1090,7 +683,7 @@
 						</dl>
 					</div>
 
-					<!--新娘常识-->
+					新娘常识
 					<div id="level_3" class="huan_cen">
 						<dl>
 							<dt><a href="" target="_blank">LATEST ACTIVITY 新娘常识</a></dt>
@@ -1155,7 +748,7 @@
 					</div>
 
 
-					<!--婚庆礼仪-->
+					婚庆礼仪
 					<div id="level_4" class="huan_cen">
 
 						<dl>
@@ -1222,7 +815,7 @@
 					</div>
 
 
-					<!--婚纱摄影-->
+					婚纱摄影
 					<div id="level_5" class="huan_cen">
 						<dl>
 							<dt><a href="" target="_blank">LATEST ACTIVITY 婚纱摄影</a></dt>
@@ -1284,7 +877,7 @@
 							</ul>
 						</dl>
 
-					</div>
+					</div> -->
 
 
 				</div>

@@ -13,7 +13,7 @@ class PCustomController extends AdminbaseController {
 	
 	function _initialize() {
 		parent::_initialize();
-		$this->imgFolder	= "Photo";
+		$this->imgFolder	= "Pcustom";
 		$this->model_obj	= D("Pcustom");
 	}
 	

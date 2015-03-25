@@ -13,7 +13,7 @@ class PThemeController extends AdminbaseController {
 	
 	function _initialize() {
 		parent::_initialize();
-		$this->imgFolder	= "Photo";
+		$this->imgFolder	= "Ptheme";
 		$this->model_obj	= D("Ptheme");
 	}
 	

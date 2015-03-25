@@ -24,23 +24,35 @@ class IndexController extends HomeBaseController {
 			$this->assign("home_middle",$this->_getAd("home_middle"));
 			//最新活动
 			$active = $this->getHomeContent("Active",false,array(),5);
-			$activeC= count($active);
-			for($i=0;$i<$activeC;$i++){
-				$url = &$active[$i]['post_url'];
-				$url = empty($url)?U('Portal/Active/info/id/'.$active[$i]['id']):$url;
-			}
 			$this->assign("active",$active);
 			//主题作品
-			$this->assign("ptheme",$this->getHomeContent("Ptheme",true));
+			$ptheme = $this->getHomeContent("Ptheme",true);
+			$this->assign("ptheme",$ptheme);
 			//团购套系
-			//后台尚未完成
-// 			$this->assign("group",$this->getHomeContent("Group",true));
+			$group = $this->getHomeContent("Group",false,array("post_price","post_num"));
+ 			$this->assign("group",$group);
 			//客照
 			$this->assign("pcustom",$this->getHomeContent("Pcustom",true));
 			//婚纱礼服
 			$this->assign("dress",$this->getHomeContent("Dress",false,array("rent","sale_price")));
 			//好评
 			$this->assign("good",$this->getHomeContent("Good",false,array("head_img","post_excerpt")));
+			//婚嫁常识
+			$article_cat = D("Article_cat");
+			$articleC = $article_cat->limit(0,5)->select();
+			$list = $this->getHomeContent("Article",false,array("post_excerpt","post_date","cid"),6);
+			$articles = array();
+			for ($i=0;$i<count($articleC);$i++){
+				for($j=0;$j<count($list);$j++){
+					if($list[$j]['cid']==$articleC[$i]['id']){
+						$articles[$i]['article'][] 	= $list[$j];					
+					}
+				}
+				$articles[$i][cat] 	= $articleC[$i]['cat_name'];
+			}
+			
+			//dump($articles);
+			$this->assign("articles",$articles);
 		}catch (\Exception $e){
 			$this->error($e->getMessage());
 		}
@@ -107,7 +119,7 @@ class IndexController extends HomeBaseController {
     	$cid	  = $model_cat	->where("cat_idname='$status'")->getField("cid");
     	//广告数据
     	$data	  = $model_ad	->where("site_cid=$this->siteId and ad_cid=$cid")
-    							->order("listorder")->select();
+    							->order("listorder desc")->select();
     	return $data;
     }
     
@@ -118,7 +130,8 @@ class IndexController extends HomeBaseController {
     protected function getMenuData(){
     	$model_nav	= D("Nav");
     	$data		= $model_nav->relation(true)->where("cid=$this->siteId and parentid=0")->select();
-		$this->assign("menuData",$data);    	
+		$this->assign("menuData",$data);
+ 	
     }
     
     /**

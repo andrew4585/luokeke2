@@ -37,6 +37,8 @@ table { border-collapse: collapse; border-spacing: 0; }
 .tr strong {  color: #fff;  float: left;  font-size: 16px;  font-weight: normal;  line-height: 52px;  padding: 0 10px;  }
 .tr strong a {  color: #fff;  }
 .tr span {  float: left;  padding-top: 15px;  }
+.tr strong small {font-size: 24px;}
+.tr strong em {font-size: 24px;}
 /*.menu{ height:87px;background:#fff; overflow:hidden; margin-left:auto; margin-right:auto;}*/
 .f2{ font-size: 16px;}
 

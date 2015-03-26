@@ -345,7 +345,7 @@
 						<h5>
 						<ul>
 							<php>$dressCount = count($dress)-1;</php>
-							<foreach name="pcustom" item="item">
+							<foreach name="dress" item="item">
 								<li><a href="{:U('Portal/Dress/info')}{$item.id}" title="{$item.post_title}" style="">{$item.post_title}<if condition="$dressCount neq $key">|</if></a></li>
 							</foreach>
 						</ul>

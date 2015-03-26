@@ -92,12 +92,12 @@ a.hScrollPane_rightarrow{ top:200px; cursor:pointer; display:block; width:25px; 
 .main_kz{ width:1200px; margin:0 auto; height: 1180px;}
 .mod18{width:1200px;position:relative;}
 .mod18 .btn{position:absolute;cursor:pointer;z-index:99;font-size:50px;font-weight:bold;}
-.mod18 .prev{left:5px;background:url(../images/icon.png) no-repeat; background-position: 0px 43px;}
+.mod18 .prev{left:5px;background:url(../images/tpl/icon.png) no-repeat; background-position: 0px 0px;}
 .mod18 #prevTop,.mod18 #nextTop{top:450px;width:66px;height:66px;}
-.mod18 #prev,.mod18 #next{top:1000px;width:30px;height:90px; }
+.mod18 #prev,.mod18 #next{top:1043px;width:30px;height:43px; }
 .mod18 #prevTop{background:url(../images/tpl/icon-1.png) no-repeat; background-position: 0px -104px}
 .mod18 #nextTop{background:url(../images/tpl/icon-1.png) 0 0 no-repeat;}
-.mod18 .next{right:5px;background:url(../images/icon.png) no-repeat; background-position: 0px -43px;}
+.mod18 .next{right:5px;background:url(../images/tpl/icon.png) no-repeat; background-position: 0px -68px;}
 .mod18 li{float:left;}
 .mod18 .cf li{position:relative;color:#fff;}
 .mod18 .cf a{display:block;width:526px;height:377px;position:absolute;color:#fff;}

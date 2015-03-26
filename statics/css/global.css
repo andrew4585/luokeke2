@@ -78,7 +78,7 @@ table { border-collapse: collapse; border-spacing: 0; }
 #main_tools li img {  border: medium none;height:73px;width:300px;  }
 /*首页标题*/
 .con_a002{padding-bottom: 30px;}
-.con_a004{padding-bottom: 30px; }
+/*.con_a004{padding-bottom: 30px; }*/
 #float05{padding-bottom: 30px;}
 .title_01 { height: 100px;  border-bottom: 1px solid #C4C4C4; padding-top: 30px;}
 .title_nav   {height: 40px;width: 1200px ; background: url("../images/tpl/mix_title.png") no-repeat;}
@@ -105,7 +105,7 @@ table { border-collapse: collapse; border-spacing: 0; }
 .b_ul_t li{ float: left; font-size: 13px; }
 .c_l{ margin: 0 auto ; width: 800px}
 .a_l1_t h5 { text-align: center;  padding: 15px 15px;  line-height: 16px;  height: 16px;  color: #868686;  }
-.a_l1_t h5 a{color: #8b8b8b;font-size: 16px; font-family: "宋体";}
+.a_l1_t h5 a{color: #8b8b8b;font-size: 15px; font-family: "宋体";font-weight: normal;}
 .a_l1_t h5 ul {display: inline-block;  text-align: center;  line-height: 16px;  height: 16px;  color: #868686;  }
 .a_l1_t h5 ul li { display: inline-block;  padding: 0px 6px;  line-height: 16px;  height: 16px; }
 /*banner*/
@@ -159,8 +159,8 @@ table { border-collapse: collapse; border-spacing: 0; }
 .zplist ul li a ins {  background: url("../images/tpl/n08.png") repeat scroll 0 0 rgba(0, 0, 0, 0);  display: block;  height: 429px;  left: -290px;  position: absolute;  top: 0;  width: 245px;  }
 /*广告*/
 .ad_001{ width: 1200px ; height: 440px ;margin: 0 auto;}
-.ad_001_img01{ width: 560px; float: left; padding: 20px;padding-top: 35px}
-.ad_001_img02{width: 560px; float: left;padding: 20px;padding-top: 35px}
+.ad_001_img01{ width: 560px; float: left; padding: 20px;}
+.ad_001_img02{width: 560px; float: left;padding: 20px;}
 /*导航条*/
 .huan_title{ width:1200px; margin: 0 auto;  height: 60px; font-size: 20px; text-align: center;padding: 6px}
 .huan_bt{ float: left; width: 235px;height: 60px;color: #000000;border-right: 1px solid #cacaca; border-bottom: 1px solid #cacaca;}

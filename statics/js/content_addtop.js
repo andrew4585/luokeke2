@@ -241,7 +241,6 @@ function image_priview(img) {
             background:"#CCCCCC",
             opacity:0,
             content: '<img src="' + img + '" />',
-            time: 5
         });
     });
 }

@@ -69,6 +69,43 @@ function flashupload(uploadid, name, textareaid, funcName, args, module, catid, 
     });
 }
 
+/**
+swf上传完回调方法(多图上传)
+uploadid dialog id
+name dialog名称
+textareaid 最后数据返回插入的容器id
+funcName 回调函数
+args 参数
+module 所属模块
+catid 栏目id
+authkey 参数密钥，验证args
+**/
+function flashupload2(uploadid, name, textareaid, funcName, args, module, catid, authkey) {
+    var args = args ? '/args/' + args : '';
+    var setting = '/module/' + module + '/catid/' + catid ;
+    Wind.use("artDialog","iframeTools",function(){
+        //alert(GV.DIMAUB+'/Asset/Asset/swfupload/' + args + setting);
+        art.dialog.open(GV.DIMAUB+'Asset/Asset/swfupload2/' + args + setting, {
+        title: name,
+        id: uploadid,
+        width: '650px',
+        height: '420px',
+        lock: true,
+        fixed: true,
+        background:"#CCCCCC",
+        opacity:0,
+        ok: function() {
+            if (funcName) {
+                funcName.apply(this, [this, textareaid]);
+            } else {
+                submit_ckeditor(this, textareaid);
+            }
+        },
+        cancel: true
+    });
+    });
+}
+
 //多图上传，SWF回调函数
 function change_images(uploadid, returnid) {
     var d = uploadid.iframe.contentWindow;

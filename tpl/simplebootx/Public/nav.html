@@ -11,17 +11,27 @@
 						as.each(function() {
 							var href = $(this).attr("href");
 							if (href == "#" || href == "javascript:;") {} else {
-								$(this).attr("target", "_blank");
+								if(!($(this).attr("target"))){
+									$(this).attr("target", "_blank");
+								}
+								
 							}
 						});
 					})
 				</script>
 				<div class="tr">
-					<b><img src="http://www.iaviva.com/theme/bg/bg74.gif" alt="洛可可摄影" /></b>
-					<i class="mouth"><img src="http://www.iaviva.com/theme/bg/t0.gif" alt="洛可可摄影" /><img src="http://www.iaviva.com/theme/bg/t2.gif" alt="洛可可摄影" /></i><i class="day"><img src="http://www.iaviva.com/theme/bg/t02.gif" alt="洛可可摄影" /><img src="http://www.iaviva.com/theme/bg/t08.gif" alt="洛可可摄影" /></i>
-					<b><img src="http://www.iaviva.com/theme/bg/bg75.gif" alt="洛可可摄影" /></b>
+					<b><img src="__STATICS__/images/bg/bg74.gif" alt="洛可可摄影" /></b>
+					<i class="mouth">
+						<img src="__STATICS__/images/bg/t{$num[0]}.gif" alt="洛可可摄影" />
+						<img src="__STATICS__/images/bg/t{$num[1]}.gif" alt="洛可可摄影" />
+					</i>
+					<i class="day">
+						<img src="__STATICS__/images/bg/t0{$num[2]}.gif" alt="洛可可摄影" />
+						<img src="__STATICS__/images/bg/t0{$num[3]}.gif" alt="洛可可摄影" />
+					</i>
+					<b><img src="__STATICS__/images/bg/bg75.gif" alt="洛可可摄影" /></b>
 					<i class="humanNumber"><img src="http://www.iaviva.com/theme/bg/t6.gif" alt="洛可可摄影" /><img src="http://www.iaviva.com/theme/bg/t6.gif" alt="洛可可摄影" /><img src="http://www.iaviva.com/theme/bg/t6.gif" alt="洛可可摄影" /><img src="http://www.iaviva.com/theme/bg/t7.gif" alt="洛可可摄影" /><img src="http://www.iaviva.com/theme/bg/t1.gif" alt="洛可可摄影" /><img src="http://www.iaviva.com/theme/bg/t7.gif" alt="洛可可摄影" /><img src="http://www.iaviva.com/theme/bg/t5.gif" alt="洛可可摄影" /></i>
-					<b><img src="http://www.iaviva.com/theme/bg/bg76.gif" alt="洛可可摄影" /></b>
+					<b><img src="__STATICS__/images/bg/bg76.gif" alt="洛可可摄影" /></b>
 
 					<span><a href="javascript:;" title="洛可可摄影提醒您注意天气变化" class="tip" id="img_title1"><img src="" alt="" /></a></span>
 					<strong><a href="javascript:;" title="洛可可摄影提醒您注意天气变化" class="tip" id="temp1"><em id="low"></em>~<small id="high"></small></a></strong>
@@ -59,13 +69,17 @@
 			</div>
                  <!--分站-->
 			<ul class="nav_c">
-				<li class="drop"><a class="main down" href="#url"><font>大连站</font></a>
-
+				<li class="drop"><a class="main down" target="_self" href="#url"><font>{$site_name}</font></a>
 					<div class="box_c">
-						<div class="box_c_title"><a href="#">三亚站</a>
-						</div>
-						<div class="box_c_title"><a href="#">巴厘岛</a>
-						</div>
+					
+					<foreach name="siteData" item="item">
+							<if condition="$siteid neq $item['id']">
+							<div class="box_c_title"><a target="_self" href="{:U('Portal/Index/index')}/siteid/{$item.id}">{$item.site_name}</a></div>
+							</if>
+					</foreach>
+					</form>
+						<!-- <div class="box_c_title"><a href="#">巴厘岛</a>
+						</div> -->
 					</div>
 				</li>
 			</ul>

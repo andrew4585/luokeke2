@@ -24,7 +24,7 @@ class DressController extends IndexController {
 			header("location:".$info['post_url']);
 		}
 		//banner
-		$this->assign("home_head",$this->_getAd("home_head"));
+		$this->assign("home_head",$this->_getAd("banner_dress"));
 		//婚纱礼服广告位（专用）
 		$this->assign("ad_dress",$this->_getAd("dress"));
 		//3个摆放在一起的二级页面广告位

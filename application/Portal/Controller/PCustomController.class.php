@@ -25,7 +25,7 @@ class PCustomController extends IndexController {
 			header("location:".$info['post_url']);
 		}
 		//banner
-		$this->assign("home_head",$this->_getAd("home_head"));
+		$this->assign("home_head",$this->_getAd("banner_pcustom"));
 		//3个摆放在一起的二级页面广告位
 		$this->assign("second_page_3",$this->_getAd("second_page_3"));
 		//服务承诺

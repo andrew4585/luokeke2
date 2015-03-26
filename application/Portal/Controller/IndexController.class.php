@@ -12,6 +12,8 @@ class IndexController extends HomeBaseController {
 		parent::__construct();
 		$this->setSiteId();
 		$this->getMenuData();
+		$this->getSiteData();
+		$this->getDate();
 	}
 	
     //首页
@@ -135,8 +137,18 @@ class IndexController extends HomeBaseController {
     	$model_nav	= D("Nav");
     	$data		= $model_nav->relation(true)->where("cid=$this->siteId and parentid=0")->select();
 		$this->assign("menuData",$data);
+		
  	
     }
+    /**
+     *获取站点导航数据 
+     */
+	protected function getSiteData(){
+		$model_site = D("site");
+		$data 		= $model_site->select();
+		$this->assign("siteData",$data);
+		//dump($a)
+	}
     
     /**
      * 设置当前站点编号
@@ -144,12 +156,12 @@ class IndexController extends HomeBaseController {
     protected function setSiteId(){
     	$site = &$this->siteId;
     	$site = I("siteid",0,"intval");
+    	$model_site	= D("Site");		//站点模型
     	//判断用户是否选择站点
     	if(empty($site)){
     		$site = cookie("siteid");
     		//判断cookie中是否保存siteid
     		if(empty($site)){
-				$model_site	= D("Site");		//站点模型
 				$site		= $model_site->order("listorder,id")->getField("id");
     		}
     	}
@@ -158,6 +170,9 @@ class IndexController extends HomeBaseController {
     		$this->error("站点获取失败，请检查后台是否填写站点信息");
     	}else{
     		cookie("siteid",$site);
+    		$site_name	= $model_site->where("id=$site")->getField("site_name");
+    		$this->assign("site_name",$site_name);
+    		$this->assign("siteid",$site);
     	}
     }
     /**
@@ -180,6 +195,15 @@ class IndexController extends HomeBaseController {
     	$this->assign("info_right",$this->_getAd("info_right"));
     	//右侧导航---作品列表
     	$this->assign("rightPhoto",$right);
+    }
+    
+    /**
+     * 获取首页图片日历
+     */
+    private function getDate(){
+		  $date = date("md");
+		  $num = str_split($date,1);
+		  $this->assign("num",$num);
     }
     
  

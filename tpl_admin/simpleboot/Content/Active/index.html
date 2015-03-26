@@ -11,6 +11,14 @@
   <form class="well form-search" method="post" action="{:u('Active/index')}">
     <div class="search_type cc mb10">
       <div class="mb10"> 
+        <!-- 站点-->
+		  <select class="select_2" name="site_id" style="width:160px">
+			  <option value=''>全部站点</option>
+			  <foreach name="siteList" item="vo">
+				  <php>$id_select=$vo['id']==$formget['site_id']?"selected":"";</php>
+				  <option value="{$vo.id}" {$id_select}>{$vo.site_name}</option>
+			  </foreach>
+		  </select>
           <!--类别-->
         &nbsp;&nbsp;时间：
         <input type="text" name="start_time" class="input length_2 J_date" value="{$formget.start_time|default=''}" style="width:100px;" autocomplete="off"> -
@@ -36,6 +44,7 @@
 	            <th width="50">排序</th>
 	            <th>ID</th>
 	            <th>标题</th>
+	            <th>站点</th>
 	            <th width="45">点击量</th>
                 <th width="50">缩略图</th>
 	            <th width="120"><span>发布时间</span></th>
@@ -54,6 +63,7 @@
 		            		<span>{$vo.post_title}</span>
 		            	</a>
 		            </td>
+		            <td>{$vo.site.site_name}</td>
 		            <td>{$vo.post_hits}</td>
     	            <td>
     	            	<a href="#"  onclick="image_priview('__ROOT__/{$vo.post_pic}');"><img src="__ROOT__/{$vo.post_pic}" style="width:200px;"/></a>

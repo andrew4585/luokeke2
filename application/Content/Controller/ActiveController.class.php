@@ -17,10 +17,16 @@ class ActiveController extends AdminbaseController {
 		$this->model_obj	= D("Active");
 	}
 	
+	//公共参数
+	function commonParam(){
+		//站点列表
+		$this->assign("siteList",$this->getSite());
+	}
 	
 	function index(){
 		//列表数据
 		$this->_lists();
+		$this->commonParam();
 		$this->display();
 	}
 	
@@ -36,6 +42,7 @@ class ActiveController extends AdminbaseController {
 				$this->error("添加失败！");
 			}
 		}else{
+			$this->commonParam();
 			$this->display();
 		}
 	}
@@ -55,6 +62,7 @@ class ActiveController extends AdminbaseController {
 			$id=  $_REQUEST['id'];
 			$info = $this->model_obj->where("id=$id")->find();
 			$this->assign($info);
+			$this->commonParam();
 			$this->display();
 		}
 	}
@@ -75,6 +83,7 @@ class ActiveController extends AdminbaseController {
 		//istop:首页置顶，recommended：推荐，listorder：排序，post_date:发布时间
 		$order		="istop desc,recommended desc,listorder ASC,post_date DESC";
 		$fields=array(
+				'site_id'	=> array("field"=>'site_id','operator'=>'=','type'=>'int'),
 				'start_time'=> array("field"=>"post_date","operator"=>">=",'type'=>'time'),
 				'end_time'  => array("field"=>"post_date","operator"=>"<=",'type'=>'time'),
 				'keyword'   => array("field"=>"post_title","operator"=>"like",'type'=>'string'),
@@ -102,7 +111,7 @@ class ActiveController extends AdminbaseController {
 			
 		$page = $this->page($count, 20);
 			
-		$list =$this->model_obj ->where($where)
+		$list =$this->model_obj ->relation(true)->where($where)
 								->limit($page->firstRow, $page->listRows)
 								->order($order)->select();
 		$this->assign("Page", $page->show('Admin'));

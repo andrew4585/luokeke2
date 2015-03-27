@@ -19,10 +19,20 @@ var GV = {
 </script>
 <script type="text/javascript" src="__STATICS__js/wind.js"></script>
 <script>
-function artDialog_alert(content){
+function artDialog_alert(content,icon){
+	var iconStr = '';
+	switch(icon){
+		case 1:
+			iconStr = 'error';break;
+		case 2:
+			iconStr = 'succeed';break;
+		default:
+			iconStr = '';break;
+	}
 	Wind.use("artDialog",function(){
         art.dialog({
             id:'error',
+            icon:iconStr,
             fixed: true,
             lock: true,
             background:"#CCCCCC",

@@ -61,6 +61,8 @@ class DressController extends IndexController {
 		$list = $this->model_dress->where($where)->order($order)->limit($Page->firstRow.','.$Page->listRows)->select();
 		$this->assign('list',$list);// 赋值数据集
 		$this->assign('page',$Page->show("Home"));// 赋值分页输出
+		$this->assign("ad_dress",$this->_getAd("dress"));
+		$this->assign("desc_beautiful",$this->_getAd("desc_beautiful"));
 		//4个摆放在一起的二级页面广告位
 		$this->assign("second_page_4",$this->_getAd("second_page_4"));
 		//服务承诺

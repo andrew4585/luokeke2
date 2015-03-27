@@ -10,7 +10,7 @@ class GroupController extends HomeBaseController {
 		foreach ($msg as $key=>$value){
 			$item[] = array(
 						"label" => "{$value['cat_name']}",
-						"href" => U("Portal/Group/cid/{$value['id']}")
+						"href" => U("Portal/Group/lists/cid/{$value['id']}")
 					);
 		}
 		$nav_arr['name'] 	= "团购分类";

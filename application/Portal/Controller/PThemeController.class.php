@@ -10,7 +10,7 @@ class PThemeController extends HomeBaseController {
 		foreach ($msg as $key=>$value){
 			$item[] = array(
 						"label" => "{$value['post_title']}",
-						"href" => U("Portal/PTheme/cid/{$value['id']}")
+						"href" => U("Portal/PTheme/lists/cid/{$value['id']}")
 						
 					);
 		}

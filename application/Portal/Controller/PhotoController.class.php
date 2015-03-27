@@ -57,7 +57,7 @@ class PhotoController extends IndexController {
 		foreach ($msg as $key=>$value){
 			$item[] = array(
 						"label" => "{$value['cat_name']}",
-						"href" => U("Portal/Photo/cid/{$value['id']}")
+						"href" => U("Portal/Photo/lists/cid/{$value['id']}")
 					);
 		}
 		$nav_arr['name'] 	= "作品分类";

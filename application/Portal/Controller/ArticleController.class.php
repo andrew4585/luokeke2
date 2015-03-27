@@ -10,7 +10,7 @@ class ArticleController extends HomeBaseController {
 		foreach ($msg as $key=>$value){
 			$item[] = array(
 						"label" => "{$value['cat_name']}",
-						"href" => U("Portal/Article/cid/{$value['id']}")
+						"href" => U("Portal/Article/lists/cid/{$value['id']}")
 					);
 		}
 		$nav_arr['name'] 	= "婚嫁分类";

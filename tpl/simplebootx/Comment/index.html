@@ -104,14 +104,15 @@ function commentMore(){
 			var post_id		= $("input[name='post_id']").val();
 			var content		= $("textarea[name='content']").val();
 			if(content==''||content==null){
-				artDialog_alert("请填写评论内容！");
+				artDialog_alert("请填写评论内容！",1);
 				return false;
 			}
 			$.post(url,{post_table:post_table,post_id:post_id,content:content},function(data){
+				alert(data.info);
 				if(data.status){
-					
+					artDialog_alert(data.info,2);
 				}else{
-					alert(data.info);
+					artDialog_alert(data.info,1);
 				}
 			});
 			return false;

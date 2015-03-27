@@ -10,7 +10,7 @@ class PLastestController extends HomeBaseController {
 				"name"	=> "最新推荐客片",
 				"items" => array(
 						0 =>array(	"label" => "{$msg['post_title']}",
-									"href" => U("Portal/PLastest/cid/{$msg['id']}")
+									"href" => U("Portal/PLastest/lists/cid/{$msg['id']}")
 						),
 				),
 		

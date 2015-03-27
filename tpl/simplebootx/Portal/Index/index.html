@@ -45,7 +45,7 @@
 							<ul>
 								<php>$activeCount = count($active)-1;</php>
 								<foreach name="active" item="item">
-									<li><a href="{$item.post_url}" target="_blank" title="{$item.post_title}" style="">{$item.post_title}<if condition="$activeCount neq $key">|</if></a></li>
+									<li><a href="{:U('Portal/Active/info')}/id/{$item.id}" title="{$item.post_title}" style="">{$item.post_title}<if condition="$activeCount neq $key">|</if></a></li>
 								</foreach>
 							</ul>
 						</h5>
@@ -96,18 +96,10 @@
 						<div class="title_nav_01"></div>
 						<h5>
 						<ul>
-							<li><a href="" target="_blank" title="" style="">仲夏之梦 </a></li>
-					     	<li><a href="" target="_blank" title="" style="">克雷思索桥</a></li>
-							<li><a href="" target="_blank" title="" style="">卡普里岛</a></li>
-							<li><a href="" target="_blank" title="" style="">DREAM </a></li>
-							<li><a href="" target="_blank" title="" style="">首次曝光 </a></li>
-							<li><a href="" target="_blank" title="" style="">加州阳光</a></li>
-							<li><a href="" target="_blank" title="" style="">北欧童话</a></li>
-							<li><a href="" target="_blank" title="" style="">艾米的假日 </a></li>
-							<li><a href="" target="_blank" title="" style="">yes i do </a></li>
-							<li><a href="" target="_blank" title="" style="">斯图尔特海滩</a></li>
-							<li><a href="" target="_blank" title="" style="">布查特花园</a></li>
-							<li><a href="" target="_blank" title="" style="">佳期如梦 </a></li>
+							<php>$pthemeCount = count($ptheme)-1;</php>
+							<foreach name="ptheme" item="item">
+								<li><a href="{:U('Portal/PTheme/info')}/id/{$item.id}" title="{$item.post_title}" style="">{$item.post_title}<if condition="$pthemeCount neq $key">|</if></a></li>
+							</foreach>
 						</ul>
 					</h5>
 					</div>
@@ -125,12 +117,13 @@
 						<ul class="clearfix">
 							<foreach name="ptheme" item="item">
 							<li>
+								<a href="{:U('Portal/Ptheme/info')}/id/{$item.id}">
 								<div class="photo">
 									<img src="__ROOT__/{$item.post_pic}" alt="{$item.post_title}" width="290" height="430" />
 								</div>
 								<div class="rsp"></div>
-								<div class="text"><a href="{:U('Portal/Ptheme/info')}/id/{$item.id}"><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>{$item.post_title}</div></a>
-								</div>
+								<div class="text"><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>{$item.post_title}</div></div>
+								</a>
 							</li>
 							</foreach>
 						</ul>
@@ -173,78 +166,16 @@
 				<!--<a class="arr_l png disabled"></a>-->
 				<div class="b1 scroll">
 					<ul style="left:0px;">
-						<li class="active">
-							<img src="__STATICS__/images/tpl/01.jpg" width="135" height="56" alt=""><ins></ins>
-							<div>
-								<a href="">
-									<img src="__STATICS__/images/tpl/1.jpg" height="629" alt="">
-								</a>
-							</div>
-						</li>
+						<foreach name="home_middle" item="item">
 						<li>
-							<img src="__STATICS__/images/tpl/02.jpg" width="135" height="56" alt=""><ins></ins>
+							<img src="__ROOT__{$item.ad_pic}" width="135" height="56" alt=""><ins></ins>
 							<div>
-								<a href="">
-									<img src="__STATICS__/images/tpl/2.jpg" height="629" alt="">
+								<a href="{$item.ad_url}">
+									<img src="__ROOT__{$item.ad_pic}" height="629" alt="">
 								</a>
 							</div>
 						</li>
-						<li>
-							<img src="__STATICS__/images/tpl/03.jpg" width="135" height="56" alt=""><ins></ins>
-							<div>
-								<a href="">
-									<img src="__STATICS__/images/tpl/3.jpg" height="629" alt="">
-								</a>
-							</div>
-						</li>
-						<li>
-							<img src="__STATICS__/images/tpl/04.jpg" width="135" height="56" alt=""><ins></ins>
-							<div>
-								<a href="">
-									<img src="__STATICS__/images/tpl/4.jpg" height="629" alt="">
-								</a>
-							</div>
-						</li>
-						<li>
-							<img src="__STATICS__/images/tpl/05.jpg" width="135" height="56" alt=""><ins></ins>
-							<div>
-								<a href="">
-									<img src="__STATICS__/images/tpl/5.jpg" height="629" alt="">
-								</a>
-							</div>
-						</li>
-						<li>
-							<img src="__STATICS__/images/tpl/06.jpg" width="135" height="56" alt=""><ins></ins>
-							<div>
-								<a href="">
-									<img src="__STATICS__/images/tpl/6.jpg" height="629" alt="">
-								</a>
-							</div>
-						</li>
-						<li>
-							<img src="__STATICS__/images/tpl/04.jpg" width="135" height="56" alt="礼"><ins></ins>
-							<div>
-								<a href="">
-									<img src="__STATICS__/images/tpl/4.jpg" height="629" alt="">
-								</a>
-							</div>
-						</li>
-						<li>
-							<img src="__STATICS__/images/tpl/01.jpg" width="135" height="56" alt=""><ins></ins>
-							<div>
-								<a href="">
-									<img src="__STATICS__/images/tpl/1.jpg" height="629" alt="">
-								</a>
-							</div>
-						</li>
-						<li>
-							<img src="__STATICS__/images/tpl/02.jpg" width="135" height="56" alt=""><ins></ins>
-							<div>
-								<a href="">
-									<img src="__STATICS__/images/tpl/2.jpg" height="629" alt="">
-								</a>
-							</div>
-						</li>
+						</foreach>
 					</ul>
 				</div>
 				<!--<a class="arr_r png"></a>-->
@@ -263,10 +194,10 @@
 						<!--<span><font style="color:#7C7C7D"><</font>洛可可风婚纱摄影<font style="color:#7C7C7D">></font>之<font style="color:#F37914 ">限时特惠套系</font><font style="color:#7C7C7D">>ROCOCO SALES</font></span>-->
 						<h5>
 						<ul>
-							<li><a href="" target="_blank" title="" style="">3月想价就嫁4999特惠套装 | </a></li>
-							<li><a href="" target="_blank" title="" style="">3月想价就嫁6999特惠套装 |</a></li>
-							<li><a href="" target="_blank" title="" style="">3月想价就嫁7999特惠套装|</a></li>
-							<li><a href="" target="_blank" title="" style="">3月想价就嫁8999特惠套装 </a></li>
+							<php>$groupCount = count($group)-1;</php>
+							<foreach name="group" item="item">
+								<li><a href="{:U('Portal/Group/info')}/id/{$item.id}" title="" style="">{$item.post_title}<if condition="$groupCount neq $key">| </if></a></li>
+							</foreach>
 						</ul>
 					</h5>
 					</div>
@@ -322,8 +253,6 @@
 						});
 					</script>
 				</div>
-
-
 				<div class="title_foot_02"></div>
 			</div>
 			<!--查看更多作品2-->
@@ -334,11 +263,10 @@
 						<!--<span><font style="color:#7C7C7D"><</font>洛可可风婚纱摄影<font style="color:#7C7C7D">></font>之<font style="color:#F37914 ">用真是客照说话</font><font style="color:#7C7C7D">>ROCOCO PHOTO</font></span>-->
 						<h5>
 						<ul>
-							<li><a href="" target="_blank" title="" style="">最美的客照引发全名热议 | </a></li>
-							<li><a href="" target="_blank" title="" style="">回归婚纱摄影的本质 |</a></li>
-							<li><a href="" target="_blank" title="" style="">用色彩铺垫用光影诉说|</a></li>
-							<li><a href="" target="_blank" title="" style="">我们很骄傲，因为我们用客照说话 </a></li>
-
+							<php>$pcustomCount = count($pcustom)-1;</php>
+							<foreach name="pcustom" item="item">
+								<li><a href="{:U('Portal/PCustom/info')}{$item.id}" title="{$item.post_title}" style="">{$item.post_title}<if condition="$pcustomCount neq $key">|</if></a></li>
+							</foreach>
 						</ul>
 					</h5>
 					</div>
@@ -356,12 +284,14 @@
 						<ul>
 							<foreach name="pcustom" item="item">
 							<li>
-								<a href="{:U('Portal/Group/info')}/id/{$item.id}" target="_blank">
+								<a href="{:U('Portal/PCustom/info')}/id/{$item.id}" target="_blank">
 									<img src="__ROOT__/{$item.post_pic}" alt="{$item.post_title}" width="290" height="429" />
+									<div class="rsp"></div>
+									<div class="text">
+										<h3>点.击.查.看.更.多<br>SHOW MORE</h3>
+										<div>{$item.post_title}</div>
+									</div>
 								</a>
-								<div class="rsp"></div>
-								<div class="text"><a href="{:U('Portal/Group/info')}/id/{$item.id}"><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>{$item.post_title}</div></a>
-								</div>
 							</li>
 							</foreach>
 						</ul>
@@ -414,10 +344,10 @@
 						<!--<span><font style="color:#7C7C7D"><</font>洛可可风婚纱摄影<font style="color:#7C7C7D">></font>之<font style="color:#F37914 ">婚纱礼服制定</font><font style="color:#7C7C7D">>ROCOCO RRASIE</font></span>-->
 						<h5>
 						<ul>
-							<li><a href="" target="_blank" title="" style="">全新婚纱1000元3件起 | </a></li>
-							<li><a href="" target="_blank" title="" style="">颠覆传统，一件婚纱只租4次 |</a></li>
-							<li><a href="" target="_blank" title="" style="">比价格，比款式，比时尚，比质量 |</a></li>
-							<li><a href="" target="_blank" title="" style="">我们是大牌，但我们不耍大牌 </a></li>
+							<php>$dressCount = count($dress)-1;</php>
+							<foreach name="dress" item="item">
+								<li><a href="{:U('Portal/Dress/info')}{$item.id}" title="{$item.post_title}" style="">{$item.post_title}<if condition="$dressCount neq $key">|</if></a></li>
+							</foreach>
 						</ul>
 					</h5>
 					</div>
@@ -433,13 +363,14 @@
 						<ul>
 							<foreach name="dress" item="item">
 							<li>
-							
 								<a href="{:U('Portal/Dress/info')}/id/{$item.id}" target="_blank">
 									<img src="__ROOT__/{$item.post_pic}" alt="" width="290" height="429" />
+									<div class="rsp"></div>
+									<div class="text">
+										<h3>点.击.查.看.更.多<br>SHOW MORE</h3>
+										<div>{$item.post_title}</div>
+									</div>
 								</a>
-								<div class="rsp"></div>
-								<div class="text"><a href="{:U('Portal/Dress/info')}/id/{$item.id}"><h3>点.击.查.看.更.多<br>SHOW MORE</h3><div>{$item.post_title}</div></a>
-								</div>
 							</li>
 							</foreach>
 							
@@ -479,10 +410,10 @@
 						<!--<span><font style="color:#7C7C7D"><</font>洛可可风婚纱摄影<font style="color:#7C7C7D">></font>之<font style="color:#F37914 ">看看好评如潮</font><font style="color:#7C7C7D">>ROCOCO RRASIE</font></span>-->
 						<h5>
 						<ul>
-							<li><a href="" target="_blank" title="" style="">我说不如大家怎么说 |</a></li>
-							<li><a href="" target="_blank" title="" style="">有实力就是任性|</a></li>
-							<li><a href="" target="_blank" title="" style="">一切为客户着想，一切为客户负责 |</a></li>
-							<li><a href="" target="_blank" title="" style="">你有权对不满意拒绝买单 ！</a></li>
+							<li><a>我说不如大家怎么说 |</a></li>
+							<li><a>有实力就是任性|</a></li>
+							<li><a>一切为客户着想，一切为客户负责 |</a></li>
+							<li><a>你有权对不满意拒绝买单 ！</a></li>
 						</ul>
 					</h5>
 

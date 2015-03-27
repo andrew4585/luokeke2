@@ -7,3 +7,30 @@
 !window.jQuery && document.write('<script src="__STATICS__js/jquery.js"><\/script>');
 </script>
 <script type="text/javascript" src="__STATICS__js/hover.js"></script>
+<link href="__STATICS__js/artDialog/skins/default.css" rel="stylesheet">
+<script>
+//全局变量
+var GV = {
+	HOST:"{$_SERVER['HTTP_HOST']}",
+    DIMAUB: "__ROOT__/",
+    JS_ROOT: "statics/js/",
+    TOKEN: ""
+};
+</script>
+<script type="text/javascript" src="__STATICS__js/wind.js"></script>
+<script>
+function artDialog_alert(content){
+	Wind.use("artDialog",function(){
+        art.dialog({
+            id:'error',
+            fixed: true,
+            lock: true,
+            background:"#CCCCCC",
+            opacity:0.2,
+            content: content,
+            cancelVal: '确定',
+            cancel: true
+        });
+    });
+}
+</script>

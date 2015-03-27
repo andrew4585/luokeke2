@@ -104,10 +104,11 @@
 .work_r{float: left;width: 1055px}
 .work_r_up{height: 52px;width: 1055px}
 .work_r_up ul{ font-size: 14px; padding-top: 26px;}
-.work_r_up ul li{ display: inline; color: #c30625;margin-left: 10px;float:left;height:25px;}
+.work_r_up ul li{ display: inline; float:left;height:25px;margin-left: 10px;}
+.work_r_up ul li a{color: #c30625;}
 .work_r_up ul li img{cursor: pointer;margin-top:-3px;}
 .work_r_up_x{width: 1055px}
-.work_r_up_x ul{ font-size: 14px; padding-top: 10px;}
+.work_r_up_x ul{ font-size: 14px; padding-top: 18px;}
 .work_r_up_x ul li{ display: inline; color: #c30625;margin-left: 10px;}
 
 .content-zg{height: 146px; border: 1px solid #e7e7e7}
@@ -115,10 +116,15 @@
 .work_l_ico{width: 64px; height: 64px;margin-left: 20px;margin-top: 30px;}
 .content-zg-border{border-bottom: 1px solid #e7e7e7;height: 30px;background: #f6f6f6;}
 .content-zg-border-x{border-top: 1px solid #e7e7e7;height: 15px;background: #f6f6f6;}
-.work_list{width: 1200px; height: 100px; margin: 0 auto; margin-top: 15px; background: #ffffff}
-.work_l_ico_x{width: 64px; height: 64px;margin-left: 20px;margin-top: 15px;}
-.work_r_down_x{border: 1px solid #e7e7e7; height: 30px;margin-top: 6px;font-size: 14px;background: #f6f6f6}
-.work_r_down_x p{ margin-top: 3px; }
+.work_list{width: 1200px;overflow:auto; margin: 0 auto; margin-top: 15px; background: #ffffff;padding-bottom:20px;}
+.work_l_ico_x{width: 64px; height: 64px;margin-left: 20px;margin-top: 21px;}
+.work_r_down_x{border: 1px solid #e7e7e7;margin-top: 6px;padding:0 16px;background: #f6f6f6}
+.work_r_down_x p{font-size: 14px; line-height:27px;}
+
+.comment-submit{
+	border-raduis:5px;
+	cursor:pointer;
+}
 /*微信扫一扫*/
 
 .hover_sj li {

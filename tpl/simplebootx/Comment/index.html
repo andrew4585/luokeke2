@@ -1,85 +1,120 @@
 <!--第三方登录/评论-->
-<style>
-.comment-submit{
-	border-raduis:5px;
-	behavior: url(__STATICS__css/iecss3.htc);
-}
-</style>
 <div class="work_content_login" >
     <div class="work_login">
 	   <div class="work_l">
-	      <div class="work_l_ico"><img src="__STATICS__images/tpl/comment/user_default.png" alt=""/></div>
+	      <div class="work_l_ico">
+	      	<empty name="Think.cookie.user.avatar" >
+	      		<img src="__STATICS__images/tpl/comment/user_default.png" alt=""/>
+	      	<else/>
+	      		<img src="{$Think.cookie.user.avatar}" alt=""/>
+	      	</empty>
+	      </div>
 	   </div>
     	<div class="work_r">
 	       <div class="work_r_up">
+	       	   <empty name="Think.cookie.user.avatar" >
 	           <ul>
-	               <li style="margin:0">登录</li>
-	               <li>注册</li>
+	               <li style="margin:0"><a>登录</a></li>
+	               <li><a>注册</a></li>
 	               <li><img src="__STATICS__images/tpl/comment/qq.png" width="25" height="25"></li>
                    <li><img src="__STATICS__images/tpl/comment/wo.png" width="25" height="25"></li>
 	           </ul>
+	           <else/>
+	           	   <li style="margin:0">{$Think.cookie.user_nicename}</li>
+	           </empty>
 	       </div>
 	        <div class="work_r_down">
+	        	<form name="comment-form" action="{:U('Portal/Index/commentAdd')}" method="post">
+	        		<!-- 评论内容所在表 -->
+		        	<input type="hidden" name="post_table" value="{$table}"/>
+		        	<!-- 文章编号 -->
+		        	<input type="hidden" name="post_id" value="{$info.id}"/>
 	            <div class="content-zg">
 	              <div class="content-zg-border"></div>
 	                <div>
-	                    <textarea  class="text_con" rows="" cols=""   ></textarea>
+	                    <textarea  class="text_con" name="content" ></textarea>
 	                </div>
 	                <div class="content-zg-border-x"></div>
 	
 	            </div>
 	            <input type="submit"  class="input comment-submit" value="提交"/>
+	            </form>
 	        </div>
     	</div>
  	</div>
 </div>
    <!--评论列表-->
-   <div class="work_list">
-       <div class="work_l"><div class="work_l_ico_x"><img src="img/rococo_ico_03.png" alt=""/></div></div>
-       <div class="work_r">
-           <div class="work_r_up_x">
-               <ul>
-                   <li>洛可可开心</li>
-                   <li>2015-3-16</li>
-               </ul>
-           </div>
-           <div class="work_r_down_x">
-              <p>婚纱摄影，洛可可婚纱摄影，婚纱摄影，洛可可婚纱摄影，婚纱摄影，洛可可婚纱摄影，婚纱摄影，洛可可婚纱摄影.</p>
-           </div>
-       </div>
+   <div id="commentsList">
+   <foreach name="comments" item="item">
+	   <div class="work_list" data-id="{$item.id}">
+	       <div class="work_l">
+	       		<div class="work_l_ico_x">
+	       			<!-- 头像 -->
+		       		<empty name="item.user.avatar">
+		       			<img src="__STATICS__images/tpl/comment/user_default.png" alt=""/>
+		       		<else/>
+		       			<img src="{:sp_get_user_avatar_url($item.user.avatar)}" alt=""/>
+		       		</empty>
+	       		</div>
+	       	</div>
+	       <div class="work_r">
+	           <div class="work_r_up_x">
+	               <ul>
+	                   <li style="margin:0">{$item.user.user_nicename}</li>
+	                   <li>{$item.createtime|date='Y-m-d',###}</li>
+	               </ul>
+	           </div>
+	           <div class="work_r_down_x">
+	              <p>{$item.content}</p>
+	           </div>
+	          <div class="clear"></div>
+	       </div>
+	   </div>
+   </foreach>
    </div>
-<!--评论列表-->
-<div class="work_list">
-    <div class="work_l"><div class="work_l_ico_x"><img src="img/rococo_ico_03.png" alt=""/></div></div>
-    <div class="work_r">
-        <div class="work_r_up_x">
-            <ul>
-                <li>洛可可开心</li>
-                <li>2015-3-16</li>
-
-            </ul>
-        </div>
-        <div class="work_r_down_x">
-            <p>婚纱摄影，洛可可婚纱摄影，婚纱摄影，洛可可婚纱摄影，婚纱摄影，洛可可婚纱摄影，婚纱摄影，洛可可婚纱摄影.</p>
-
-        </div>
-    </div>
-</div>
-<!--评论列表-->
-<div class="work_list">
-    <div class="work_l"><div class="work_l_ico_x"><img src="img/rococo_ico_03.png" alt=""/></div></div>
-    <div class="work_r">
-        <div class="work_r_up_x">
-            <ul>
-                <li>洛可可开心</li>
-                <li>2015-3-16</li>
-            </ul>
-        </div>
-        <div class="work_r_down_x">
-            <p>婚纱摄影，洛可可婚纱摄影，婚纱摄影，洛可可婚纱摄影，婚纱摄影，洛可可婚纱摄影，婚纱摄影，洛可可婚纱摄影.</p>
-
-        </div>
-    </div>
-</div>
 <!--查看更多-->
-<div class="al_001"><div class="more"><a href="#">点击查看更多</a></div></div>
+<php>$commentCount = count($comments);</php>
+<if condition="$commentCount eq 10">
+<div class="al_001"><div class="more"><a onclick="commentMore()">点击查看更多</a></div></div>
+<script>
+function commentMore(){
+	var post_table  = $("input[name='post_table']").val();
+	var post_id		= $("input[name='post_id']").val();
+	var lastid		= $(".work_list:last").attr("data-id");
+	$.post("{:U('Portal/Index/getCommentList')}",{postTable:post_table,postId:post_id,lastid:lastid},function(data){
+		alert(data.info);
+		if(data.status){
+			if(data.info==''||data.info==null){
+				$(".al_001").html('没有更多评论了^_^');
+			}else{
+				$("#commentsList").append(data.info);
+			}
+		}else{
+			alert(data.info);
+		}
+	})
+}
+</script>
+</if>
+<script>
+	$(function(){
+		$("form[name='comment-form']").submit(function(){
+			var url = $(this).attr('action');
+			var post_table	= $("input[name='post_table']").val();
+			var post_id		= $("input[name='post_id']").val();
+			var content		= $("textarea[name='content']").val();
+			if(content==''||content==null){
+				artDialog_alert("请填写评论内容！");
+				return false;
+			}
+			$.post(url,{post_table:post_table,post_id:post_id,content:content},function(data){
+				if(data.status){
+					
+				}else{
+					alert(data.info);
+				}
+			});
+			return false;
+		});
+	});
+</script>

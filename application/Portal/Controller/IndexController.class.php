@@ -1,5 +1,7 @@
 <?php
 namespace Portal\Controller;
+use Think\Log;
+
 use Common\Controller\HomeBaseController; 
 /**
  * 首页/前台基类
@@ -206,8 +208,6 @@ class IndexController extends HomeBaseController {
 		  $this->assign("num",$num);
     }
     
- 
-    
     /**
      * 天气获取
      */
@@ -216,4 +216,92 @@ class IndexController extends HomeBaseController {
     	$weather = file_get_contents("http://www.weather.com.cn/adat/cityinfo/101070201.html");
     	echo $weather;
     }
+    
+    //-----------------------------评论部分  start--------------------
+    /**
+     * 获取评论列表
+     * @param string postTable   评论内容所在表，不带表前缀
+     * @param int	 postId		   内容编号
+     * @param int    lastid		   上一页，最后评论编号
+     */
+    public function getCommentList($postTable,$postId){
+    	$model_comments = D("Comments");
+    	$postTable		= empty($postTable)?I("post.postTable"):$postTable;
+    	$postId			= empty($postId)?I("post.postId"):$postId;
+    	$lastid			= I("post.lastid",0,'intval');
+    	//参数非空验证
+    	if(empty($postTable)||empty($postId)){
+    		$this->error("参数缺失");
+    	}
+    	
+    	//sql where条件
+    	$where	= "post_table = '$postTable' and post_id = $postId and status=1";
+    	if(!empty($lastid)){
+    		$where	.= " and id<$lastid"; 
+    	}
+    	
+    	$list	= $model_comments->relation(true)->where($where)->order("id desc")->limit(0,10)->select();
+    	//判断是否是ajax调用
+    	if(IS_AJAX){
+    		$tmpl	= $this->createCommentTmpl($list);
+    		$this->success($tmpl);
+    	}else{
+    		$this->assign("comments",$list);
+    	}
+    }
+    
+    /**
+     * 添加评论
+     */
+    public function commentAdd(){
+    	if(IS_POST){
+    		$model_comment = D("Comments");
+    		$_POST['uid']  = cookie("user.id");
+    		if($model_comment->create()){
+    			$result = $model_comment->add($_POST);
+    			if($result){
+    				$this->success("评论成功");
+    			}else{
+    				$this->error("评论失败");
+    			}
+    		}
+    	}else{
+    		$this->error("非法操作");
+    	}
+    }
+    
+    /**
+     * 生成评论的静态页面（字符串）
+     */
+    public function createCommentTmpl($list){
+    	$str = '';
+    	foreach ($list as $item){
+    		$str 	= "<div class='work_list' data-id='{$item['uid']}'>
+					       <div class='work_l'>
+	    						<div class='work_l_ico_x'>";
+    		if(empty($item['user']['avatar'])){
+	    		$str	.="<img src='".C("TMPL_PARSE_STRING.__STATICS__")."images/tpl/comment/user_default.png' alt=''/>";
+    		}else{
+    			$str	.="<img src='".sp_get_user_avatar_url($item['user']['avatar'])."' alt=''/>";
+    		}
+    		$str	.="</div></div>
+					       <div class='work_r'>
+					           <div class='work_r_up_x'>
+					               <ul>
+					                   <li style='margin:0'>".$item['user']['user_nicename']."</li>
+					                   <li>".date('Y-m-d',$item['createtime'])."</li>
+					               </ul>
+					           </div>
+					           <div class='work_r_down_x'>
+					              <p>{$item['content']}</p>
+					           </div>
+					          <div class='clear'></div>
+					       </div>
+					   </div>
+	    				";
+    	}
+    	return $str;
+    }
+    
+    //-----------------------------评论部分  end--------------------
 }

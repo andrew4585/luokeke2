@@ -34,6 +34,9 @@ class PCustomController extends IndexController {
 		$this->assign("desc_beautiful",$this->_getAd("desc_beautiful"));
 		//详细内容
 		$this->assign("info",$info);
+		//评论信息
+		$this->getCommentList("PCustom",$info['id']);
+		$this->assign("table",'PCustom');
 		//图片信息
 		$photo	= json_decode($info['smeta'],true);
 		$this->assign("photo",$photo['photo']);

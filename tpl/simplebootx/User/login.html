@@ -1,75 +1,132 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>{$site_name}</title>
-<meta name="keywords" content="{$site_seo_keywords}" />
-<meta name="description" content="{$site_seo_description}">
-<meta name="author" content="ThinkCMF">
-<tc_include file="Public:head" />
-</head>
-
-<body class="body-white">
-	<tc_include file="Public:nav" />
-
-	<div class="container tc-main">
-		<div class="row">
-			<div class="span6 offset3">
-				<h2 class="text-center">用户登录</h2>
-				<form class="form-horizontal J_ajaxForms" action="{:U('user/login/dologin')}" method="post">
-					<div class="control-group">
-						<label class="control-label" for="input_username">账号</label>
-						<div class="controls">
-							<input type="text" id="input_username" name="username" placeholder="请输入用户名或者邮箱" class="span3">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<tc_include file="Public:head_info"/>
+    	<link rel="stylesheet" type="text/css" href="__STATICS__css/login.css">
+		
+		<style type="text/css">
+		/*ie8下兼容css3 圆角样式*/
+			.reg-all{
+				-moz-border-radius: 10px;
+				-webkit-border-radius: 10px;
+				border-radius: 8px; 
+				height: 30px;
+				position:relative;
+				z-index:2;
+				text-align: center;
+				behavior: url(__STATICS__css/iecss3.htc)
+			}
+		</style>
+		<script type="text/javascript">
+			$(function(){
+				var nav_cLi = $(".log_banner .nav_c li");
+				var left = $(".nav_c").offset().left+310;
+				nav_cLi.mouseenter(function() {
+					$(this).find(".box_c").css("left",left+"px");
+					$(this).find("a").addClass("current");
+					$(this).find(".box_c").stop().slideDown();
+				})
+				nav_cLi.mouseleave(function() {
+					$(this).find("a").removeClass("current");
+					$(this).find(".box_c").stop().slideUp();
+				})
+			})
+			
+			$(function(){
+				$("form[name='logform']").submit(function(){
+					var url = $(this).attr('action');
+					var username 	= $("input[name='username']").val();
+					var password 	= $("input[name='password']").val();
+					$.post(url,{username:username,password:password},function(data){
+						if(data.status){
+							artDialog_alert(data.info);
+							window.history.back(-1);
+						}else{
+							artDialog_alert(data.info);
+						}
+					});
+					return false;
+				})
+			})
+		</script>
+	</head>
+	<body>
+		<div class="log_banner">
+			<div class="logo">
+				<img src="__STATICS__images/tpl/logo.png" width="280" height="60">
+				<img class="lo_line" src="__STATICS__images/tpl/log-1.jpg" height="43"/>
+				<ul class="nav_c">
+					<li class="drop"><a class="main down" target="_self" href="{$siteid}"><font>{$site_name}</font></a>
+						<div class="box_c">
+						
+						<foreach name="siteData" item="item">
+								<if condition="$siteid neq $item['id']">
+								<div class="box_c_title"><a target="_self" href="{$item.id}">{$item.site_name}</a></div>
+								</if>
+						</foreach>
 						</div>
-					</div>
-
-					<div class="control-group">
-						<label class="control-label" for="input_password">密码</label>
-						<div class="controls">
-							<input type="password" id="input_password" name="password" placeholder="请输入密码" class="span3">
-						</div>
-					</div>
-
-					<div class="control-group">
-						<label class="control-label" for="input_verify">验证码</label>
-						<div class="controls">
-							<input type="text" id="input_verify" name="verify"  placeholder="请输入验证码" class="span3">
-							{:sp_verifycode_img('code_len=4&font_size=15&width=100&height=35&charset=1234567890')}
-						</div>
-					</div>
-					<div class="control-group">
-						<label class="control-label" for="input_repassword"></label>
-						<div class="controls">
-							<label class="checkbox persistent"><input type="checkbox" name="terms" value="1">我同意
-								<a href="#">网站内容服务条款</a></label>
-						</div>
-					</div>
-
-					<div class="control-group">
-						<label class="control-label" for="input_repassword"></label>
-						<div class="controls">
-							<button class="btn btn-primary J_ajax_submit_btn" type="submit">确定</button>
-						</div>
-					</div>
-
-					<div class="control-group">
-						<label class="control-label" for="input_repassword"></label>
-						<div class="controls">
-							<ul class="inline">
-								<li><a href="{:U('user/register/index')}">现在注册</a></li>
-								<li><a href="{:U('user/login/forgot_password')}">忘记密码</a></li>
-							</ul>
-						</div>
-					</div>
-				</form>
+					</li>
+				</ul>
 			</div>
 		</div>
+		<div class="clears"></div>
+		<div class="logback">
+			
+			
+			<div class="log-left">
+				<div class="login-1">
+					<img src="__STATICS__images/tpl/login-1.png"/>
+				</div>
+				<div class="code-1">
+					<img src="__STATICS__images/tpl/code-1.jpg"/>
+				</div>
+				<div class="login-3">
+					<img src="__STATICS__images/tpl/log-3.png"/>
+				</div>
+			</div>
 
-		<tc_include file="Public:footer" />
-
-	</div>
-	<!-- /container -->
-
-	<tc_include file="Public:scripts" />
-</body>
+			<div class="login-4">
+				<div class="login-5">
+					<form action="{:U('user/login/dologin')}" name="logform" method="post">
+						<div class="form">
+						<p class="reg-2">用户名/手机号</p><p class="reg-1"><a href="">免费注册>></a></p>
+						<input type="text" name="username" class="line-height"  id="username" value="" />
+						<p class="repass">密码</p>
+						<input type="password" name="password" class="line-height"  id="password" value="" />
+						<div style="clear:both"></div>
+						</div>
+						<div class="qq-log reg-all">
+							<a href="{:U('api/oauth/login',array('type'=>'qq'))}"">QQ登陆</a>
+						</div>
+						<div class="sina-log reg-all">
+							<a href="{:U('api/oauth/login',array('type'=>'sina'))}">新浪微博登陆</a>
+						</div>
+						<div class="sub-log reg-all">
+						
+							<input class="logsub" type="submit" value="登陆" />
+						</div>
+					
+					
+					
+					<div class="for"><a href="">忘记密码>></a></p></div>
+					<img class="icon7" src="__STATICS__images/tpl/icon6.png"/>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="clears"></div>
+		<div class="log-footer">
+			<div class="site_nav">
+				<ul>
+					<li><a href="">关于洛可可&nbsp;&nbsp;|&nbsp;&nbsp;</a></li>
+					<li><a href="">作品欣赏&nbsp;&nbsp;|&nbsp;&nbsp;</a></li>
+					<li><a href="">客片欣赏&nbsp;&nbsp;|&nbsp;&nbsp;</a></li>
+					<li><a href="">婚纱礼服&nbsp;&nbsp;|&nbsp;&nbsp;</a></li>
+					<li><a href="">婚嫁资讯&nbsp;&nbsp;|&nbsp;&nbsp;</a></li>
+					<li><a href="">可可之星</a></li>
+				</ul>
+			</div>
+			<div class="log-copy">Copyright©2004-2014 &nbsp; 洛可可 rococo1999.com 版权所有</div>
+		</div>
+	</body>
 </html>

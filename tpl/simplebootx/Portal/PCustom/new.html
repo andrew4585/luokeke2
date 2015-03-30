@@ -18,14 +18,14 @@
 	    <div class="head_tab">
 	        <ul class="tab">
 	            <li class="on">
-	                <a href="{:U('Portal/Dress/new')}">
+	                <a href="{:U('Portal/PLastest/index')}">
 	                    <div class="nav_x">
 	                        <img src="__STATICS__images/tpl/custom/nav_c_01.png"  width="190" height="71">
 	                    </div>
 	                </a>
 	            </li>
 	            <li>
-	            	<a href="{:U('Portal/Dress/lists')}">
+	            	<a href="{:U('Portal/PCustom/lists')}">
 	                <div class="nav_x">
 	                    <img src="__STATICS__images/tpl/custom/nav_c_02.png"  width="190" height="71">
 	                </div>
@@ -40,15 +40,15 @@
 	            </li>
 	        </ul>
 	    </div>
-	    11
 	    <div id="conter" style="background: #f3f3f3">
 		    <div class="p_info">
 				<div class="empty"></div>
-				<span>艾米的假日</span>
-				<p>这个主题很漂亮，赶紧先分给小伙伴吧，还能获得礼品呢</p>
+				<span>{$info.post_title}</span>
+				<p>{$info.post_excerpt}</p>
 				<ul>
-					<li><img src="__STATICS__images/tpl/custom/nav_c_01.png" alt="汉阳总店3月18日客片精选" /></li>
-					<li><img src="__STATICS__images/tpl/custom/nav_c_01.png" alt="汉阳总店3月18日客片精选" /></li>
+					<foreach name="smeta" item="item">
+					<li><img src="__ROOT__/{$item.url}" alt="{$item.alt}" /></li>
+					</foreach>
 				</ul>
 				<div class="empty"></div>
 				<tc_include file="Public:second_page_3"/>

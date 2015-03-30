@@ -13,7 +13,7 @@ class PLastestController extends AdminbaseController {
 	
 	function _initialize() {
 		parent::_initialize();
-		$this->imgFolder	= "Photo";
+		$this->imgFolder	= "PLastest";
 		$this->model_obj	= D("Plastest");
 	}
 	
@@ -31,9 +31,18 @@ class PLastestController extends AdminbaseController {
 	}
 	
 	function add(){
-		if(IS_POST){
+		if(IS_POST){	
+			if(!empty($_POST['photos_alt']) && !empty($_POST['photos_url'])){
+				foreach ($_POST['photos_url'] as $key=>$url){
+					$photourl=$this->removeUploadImage($this->imgFolder,$url);
+					$_POST['smeta']['photo'][]=array("url"=>$photourl,"alt"=>$_POST['photos_alt'][$key]);
+				}
+			}
+			$_POST['smeta']['photo']=list_sort_by($_POST['smeta']['photo'],"alt");
+			$_POST['smeta']=json_encode($_POST['smeta']);
+			
 			$_POST['post_date']= strtotime($_POST['post_date']);
-			$_POST['post_content']=htmlspecialchars($_POST['post_content']);
+			
 			$_POST['post_pic'] = $this->removeUploadImage($this->imgFolder, $_POST['post_pic']);
 			$result=$this->model_obj->add($_POST);
 			if ($result) {
@@ -49,8 +58,15 @@ class PLastestController extends AdminbaseController {
 	
 	public function edit(){
 		if(IS_POST){
+			if(!empty($_POST['photos_alt']) && !empty($_POST['photos_url'])){
+				foreach ($_POST['photos_url'] as $key=>$url){
+					$photourl=$this->removeUploadImage($this->imgFolder,$url);
+					$_POST['smeta']['photo'][]=array("url"=>$photourl,"alt"=>$_POST['photos_alt'][$key]);
+				}
+			}
+			$_POST['smeta']['photo']=list_sort_by($_POST['smeta']['photo'],"alt");
+			$_POST['smeta']=json_encode($_POST['smeta']);
 			$_POST['post_date']= strtotime($_POST['post_date']);
-			$_POST['post_content']=htmlspecialchars($_POST['post_content']);
 			$_POST['post_pic'] = $this->removeUploadImage($this->imgFolder, $_POST['post_pic']);
 			$result=$this->model_obj->save($_POST);
 			if ($result) {
@@ -65,6 +81,7 @@ class PLastestController extends AdminbaseController {
 			}
 			$info = $this->model_obj->where("id=$id")->find();
 			$this->assign($info);
+			$this->assign("smeta",json_decode($info['smeta'],true));
 			$this->commonParam();
 			$this->display();
 		}

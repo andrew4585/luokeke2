@@ -217,6 +217,32 @@ class IndexController extends HomeBaseController {
     	echo $weather;
     }
     
+    /**
+     * 用户点击“喜欢”按钮
+     * @param object model  数据模型
+     * @return boolean
+     */
+    public function _like($model){
+    	if(IS_AJAX){
+	    	try{
+	    		//喜欢的文章编号
+	    		$id	= I("post.id",0,'intval');
+	    		if(empty($id)) throw new Exception("文章编号丢失");
+	    		$result	= $model->where("id=$id")->setInc("post_like",1);
+	    		if($result){
+	    			$this->success('操作成功');
+	    		}else{
+	    			$this->error('操作失败');
+	    		}
+	    	}catch (\Exception $e){
+	    		$this->error($e->getMessage());
+	    	}
+			
+		}else{
+			alert("非法操作");
+		}
+    }
+    
     //-----------------------------评论部分  start--------------------
     /**
      * 获取评论列表

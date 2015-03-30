@@ -28,11 +28,25 @@
 	<div id="conter" style="background: #f3f3f3">
 		<div id="info">
 			<div id="info-btn">
-				<div id="info-return"></div>
+				<div id="info-return"><a href="{:U('Portal/PCustom/lists')}"><div class="mix_ico info-ico_return"></div>&nbsp;返回客片大赏列表</a></div>
 				<div id="info-page">
-					<div id="info-prev">PREV上一组</div>
-					<div id="info-sep">|</div>
-					<div id="info-next">NEXT下一组</div>
+					<div id="info-prev" <empty name="prev">class="grey"</empty>>
+						<empty name="prev">
+							<div class="mix_ico info-ico_prev" style="margin:0 -7px 0 0"></div>PREV上一组
+						<else/>
+							<a href="{:U('Portal/PCustom/info')}/id/{$prev}">
+							<div class="mix_ico info-ico_prev" style="margin:0 -7px 0 0"></div>PREV上一组</a>
+						</empty>
+					</div>
+					<div id="info-sep" style="font-size:12px;">&nbsp;|&nbsp;</div>
+					<div id="info-next" class="grey" <empty name="next">class="grey"</empty>>
+						<empty name="next">
+							NEXT下一组<div class="mix_ico info-ico_next fr" style="margin:0 0 0 -7px"></div>
+						<else/>
+							<a href="{:U('Portal/PCustom/info')}/id/{$next}">
+								NEXT下一组<div class="mix_ico info-ico_next fr" style="margin:0 0 0 -7px"></div></a>
+						</empty>
+					</div>
 				</div>
 			</div>
 			<!--头内容（标题、摘要、属性）-->
@@ -43,24 +57,42 @@
 	        <div id="info-func" style="width:493px">
 		    		<ul>
 		    			<li style="margin:0">
-		                    <div class="mix_ico info-ico"></div>
-		                    <div class="info-lz">喜欢&nbsp;500</div>
+		                    <div class="mix_ico"></div>
+		                    <div class="info-lz" data-model="PCustom">喜欢&nbsp;<font>{$info.post_like}</font></div>
 		                </li>
 		    			<li>
 		                    <div class="mix_ico info-ico_wo"></div>
-		                    <div class="info-lz">分享&nbsp;500</div>
+		                    <div class="info-lz">分享&nbsp;{$info.post_share}</div>
 		                </li>
-		    			<li>
+		    			<li class="comment-reach">
 		                    <div class="mix_ico info-ico_pl"></div>
-		                    <div class="info-lz">评论&nbsp;500</div>
+		                    <div class="info-lz">评论&nbsp;{$info.comment_count}</div>
 		                </li>
-		    			<li>
+		    			<li class="hover_sj">
 		                    <div class="mix_ico info-ico_ph"></div>
-		                     <div class="info-lz">装到手机</div>
+		                    <div class="info-lz">装到手机</div>
+		                    <div class="tips">
+                                <div class="tipscont">
+                                  <img src="img/code-1.jpg" alt=""/>
+                                    <p>扫一扫微信</p>
+                                    <p>更多" 惊喜 "等着你</p>
+                                </div>
+                            </div>
 		                </li>
 		    		</ul>
+		    		 <!--微信扫一扫-->
+                    <script type="text/javascript">
+                        $(document).ready(function(){
+                        	$(".hover_sj").hover(function(){
+                                $(this).parent().find(".tips").addClass("hover");
+                                $(this).parent().addClass("lihover");
+                            },function(){
+                                $(this).parent().find(".tips").removeClass("hover");
+                                $(this).parent().removeClass("lihover");
+                            });
+                        });
+                    </script>
 	    	</div>
-	    	
     	</div>
            <!--轮播开始-->
 		<div class="main_kz">

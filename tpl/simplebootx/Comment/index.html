@@ -117,5 +117,11 @@ function commentMore(){
 			});
 			return false;
 		});
+		
+		$(".comment-reach").click(function(){
+	        var topVal = $('.work_content_login').offset().top;
+	        $('body,html').animate({scrollTop:topVal},800)
+		});
 	});
+	
 </script>

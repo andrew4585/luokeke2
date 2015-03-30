@@ -19,6 +19,25 @@ var GV = {
 </script>
 <script type="text/javascript" src="__STATICS__js/wind.js"></script>
 <script>
+$(function(){
+	//点击喜欢按钮
+	$(".info-lz").click(function(){
+		var number = $(".info-lz font").html();
+			number = parseInt(number);
+		var id	   = {$info.id};
+		var model  = $(this).attr("data-model");
+		var url	   = "__ROOT__/Portal/"+model+"/ajax_like";
+		$.post(url,{id:id},function(data){
+			if(data.status){
+				$(".info-lz font").html(++number);
+			}else{
+				artDialog_alert(data.info,1);
+			}
+		});
+	});
+		
+});
+
 function artDialog_alert(content,icon){
 	var iconStr = '';
 	switch(icon){

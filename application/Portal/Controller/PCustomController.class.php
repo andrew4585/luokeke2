@@ -24,6 +24,12 @@ class PCustomController extends IndexController {
 		if(!empty($info['post_url'])){
 			header("location:".$info['post_url']);
 		}
+		//上一组
+		$prev	 	= $this->model_pcustom->where("id>$id and status=1")->order("id asc")->getField("id");
+		//下一组
+		$next		= $this->model_pcustom->where("id<$id and status=1")->order("id DESC")->getField("id");
+		$this->assign("prev",$prev);
+		$this->assign("next",$next);
 		//banner
 		$this->assign("home_head",$this->_getAd("banner_pcustom"));
 		//3个摆放在一起的二级页面广告位
@@ -64,6 +70,14 @@ class PCustomController extends IndexController {
 		$this->assign("servePromise",$this->_getAd("servePromise"));
 		$this->display('/PCustom/list');
 	}
+	
+	/**
+	 * 用户点击‘喜欢’按钮
+	 */
+	public function ajax_like(){
+		$this->_like($this->model_pcustom);
+	}
+	
 	public function nav_index(){
 	}
 }

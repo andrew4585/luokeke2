@@ -251,6 +251,7 @@ class IndexController extends HomeBaseController {
      * @param int    lastid		   上一页，最后评论编号
      */
     public function getCommentList($postTable,$postId){
+    	
     	$model_comments = D("Comments");
     	$postTable		= empty($postTable)?I("post.postTable"):$postTable;
     	$postId			= empty($postId)?I("post.postId"):$postId;
@@ -259,7 +260,6 @@ class IndexController extends HomeBaseController {
     	if(empty($postTable)||empty($postId)){
     		$this->error("参数缺失");
     	}
-    	
     	//sql where条件
     	$where	= "post_table = '$postTable' and post_id = $postId and status=1";
     	if(!empty($lastid)){
@@ -282,7 +282,8 @@ class IndexController extends HomeBaseController {
     public function commentAdd(){
     	if(IS_POST){
     		$model_comment = D("Comments");
-    		$_POST['uid']  = cookie("user.id");
+    		$_POST['uid']  = $_SESSION['user']['id'];
+    		$_POST['createtime'] = time();
     		if(empty($_POST['uid'])) $this->error("请登录后评论");
     		if($model_comment->create()){
     			$result = $model_comment->add($_POST);

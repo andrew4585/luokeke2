@@ -3,24 +3,24 @@
     <div class="work_login">
 	   <div class="work_l">
 	      <div class="work_l_ico">
-	      	<empty name="Think.cookie.user.avatar" >
+	      	<empty name="Think.session.user.avatar" >
 	      		<img src="__STATICS__images/tpl/comment/user_default.png" alt=""/>
 	      	<else/>
-	      		<img src="{$Think.cookie.user.avatar}" alt=""/>
+	      		<img src="{$Think.session.user.avatar}" alt=""/>
 	      	</empty>
 	      </div>
 	   </div>
     	<div class="work_r">
 	       <div class="work_r_up">
-	       	   <empty name="Think.cookie.user.avatar" >
+	       	   <empty name="Think.session.user.id" >
 	           <ul>
-	               <li style="margin:0"><a>登录</a></li>
-	               <li><a>注册</a></li>
-	               <li><img src="__STATICS__images/tpl/comment/qq.png" width="25" height="25"></li>
-                   <li><img src="__STATICS__images/tpl/comment/wo.png" width="25" height="25"></li>
+	               <li style="margin:0"><a href="{:U('User/login/index')}?{$url}">登录</a></li>
+	               <li><a href="{:U('User/register/index')}">注册</a></li>
+	               <li><a href="{:U('api/oauth/login',array('type'=>'qq'))}"><img src="__STATICS__images/tpl/comment/qq.png" width="25" height="25"></a></li>
+                   <li><a href="{:U('api/oauth/login',array('type'=>'sina'))}"><img src="__STATICS__images/tpl/comment/wo.png" width="25" height="25"></a></li>
 	           </ul>
 	           <else/>
-	           	   <li style="margin:0">{$Think.cookie.user_nicename}</li>
+	           	   <li style="margin-top:45px;font-size:15px">{$Think.session.user.user_nicename}</li>
 	           </empty>
 	       </div>
 	        <div class="work_r_down">
@@ -82,7 +82,7 @@ function commentMore(){
 	var post_id		= $("input[name='post_id']").val();
 	var lastid		= $(".work_list:last").attr("data-id");
 	$.post("{:U('Portal/Index/getCommentList')}",{postTable:post_table,postId:post_id,lastid:lastid},function(data){
-		alert(data.info);
+		
 		if(data.status){
 			if(data.info==''||data.info==null){
 				$(".al_001").html('没有更多评论了^_^');
@@ -103,12 +103,12 @@ function commentMore(){
 			var post_table	= $("input[name='post_table']").val();
 			var post_id		= $("input[name='post_id']").val();
 			var content		= $("textarea[name='content']").val();
-			if(content==''||content==null){
+			if(content ==''||content == null){
 				artDialog_alert("请填写评论内容！",1);
 				return false;
 			}
 			$.post(url,{post_table:post_table,post_id:post_id,content:content},function(data){
-				alert(data.info);
+				//alert(data.info);
 				if(data.status){
 					artDialog_alert(data.info,2);
 				}else{

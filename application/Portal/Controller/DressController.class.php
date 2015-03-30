@@ -12,23 +12,19 @@ class DressController extends IndexController {
 	/**
 	 * 首页
 	 */
-	public function dindex(){
+	public function index(){
 		
-		//最新礼服定制以及绝美礼服
+		//最新礼服定制
 		//status：是否显示
 		$whereArr	= array("status=1","category=2");
 		$where		= join(" and ",$whereArr);
 		$field		= join(",",$fieldArr);
-		$robe		= $this->model_dress->where($where)->order("recommended desc,listorder")->limit(0,20)->relation(true)->select();
-		$beauty = array();
-		foreach ($robe as $key => $value) {
-			if($value['cat']['cat_name'] == "绝美礼服"){
-				$beauty[] = $value;
-			}
-		}
-		$drobe = array_slice($robe, 0,5);
-		$this->assign("beauty",$beauty);//绝美礼服
+		$drobe		= $this->model_dress->relation(true)->where($where)->order("recommended desc,listorder")->limit(0,5)->select();
 		$this->assign("drobe",$drobe);//礼服
+		//绝美礼服
+		$beauty		=$this->model_dress->where("cid=8")->order("recommended desc,listorder")->limit(0,20)->select();
+		$this->assign("beauty",$beauty);
+		//dump($beauty);
 		//最新婚纱定制
 		$fieldArr	= array("id","post_pic","post_title","post_url");
 		//status：是否显示
@@ -40,7 +36,7 @@ class DressController extends IndexController {
 		//广告位显示
 		$this->assign("promise",$this->_getAd("promise"));
 		$this->assign("servePromise",$this->_getAd("servePromise"));
-		$this->display('/Dress/dress_index');
+		$this->display('/Dress/index');
 	}
 	
 	/**

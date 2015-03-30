@@ -6,6 +6,7 @@
 	margin    : 0 auto;
 	margin-top: -14px;
 }
+
 /*--------详情----------*/
 #info-main{
 	width     : 1152px ;
@@ -46,7 +47,6 @@
 	margin-top: 10px;
 	margin-bottom : 24px;
 }
-/**/
 
 #info-right{ width: 225px; }
 
@@ -73,6 +73,16 @@
 .info-ico_pl{background: url("../images/tpl/mix_icon.png")no-repeat; background-position: 0px -240px;}
 .info-ico_ph{background: url("../images/tpl/mix_icon.png")no-repeat; background-position: 0px -60px;}
 .info-ico_sy{background: url("../images/tpl/mix_icon.png")no-repeat;  background-position: 0px -93px;}
+
+/*------客片详情start-------*/
+#info{
+	background:#FFFFFF;
+	padding:20px 0;
+}
+#info>#info-head,#info>#info-func{
+	width:900px;
+	margin:0 auto;
+}
 /*---------公共--------*/
 .clear{
 	clear: both;

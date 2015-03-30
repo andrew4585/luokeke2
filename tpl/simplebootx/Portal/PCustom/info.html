@@ -4,6 +4,19 @@
 	<tc_include file="Public:head_info"/>
 	<link rel="stylesheet" type="text/css" href="__STATICS__css/info.css">
 	<script type="text/javascript" src="__STATICS__js/jqueryPhoto.js"></script>
+	<style>
+	#info-func ul li {
+	display: block;
+	float: left;
+	width: 115px;
+	height: 30px;
+	background: #4C4D4F;
+	border-radius: 4px;
+	behavior: url(__STATICS__css/iecss3.htc);
+	margin-left: 11px;
+	color: #ffffff;
+	}
+	</style>
 </head>
 <body>
 	<div class="head">
@@ -13,8 +26,46 @@
 	<tc_include file="Public:banner"/>	
 	<!--内容部分	-->
 	<div id="conter" style="background: #f3f3f3">
+		<div id="info">
+			<div id="info-btn">
+				<div id="info-return"></div>
+				<div id="info-page">
+					<div id="info-prev">PREV上一组</div>
+					<div id="info-sep">|</div>
+					<div id="info-next">NEXT下一组</div>
+				</div>
+			</div>
+			<!--头内容（标题、摘要、属性）-->
+	        <div id="info-head" style="width:900px;min-height:92px;">
+	        	<div id="info-title" align="center">{$info.post_title}</div>
+	        	<div id="info-excerpt" align="center">{$info.post_excerpt}</div>
+	        </div>
+	        <div id="info-func" style="width:493px">
+		    		<ul>
+		    			<li style="margin:0">
+		                    <div class="mix_ico info-ico"></div>
+		                    <div class="info-lz">喜欢&nbsp;500</div>
+		                </li>
+		    			<li>
+		                    <div class="mix_ico info-ico_wo"></div>
+		                    <div class="info-lz">分享&nbsp;500</div>
+		                </li>
+		    			<li>
+		                    <div class="mix_ico info-ico_pl"></div>
+		                    <div class="info-lz">评论&nbsp;500</div>
+		                </li>
+		    			<li>
+		                    <div class="mix_ico info-ico_ph"></div>
+		                     <div class="info-lz">装到手机</div>
+		                </li>
+		    		</ul>
+	    	</div>
+	    	
+    	</div>
            <!--轮播开始-->
 		<div class="main_kz">
+		<img src="__STATICS__images/tpl/grey_bottom.png" style="margin:-1px auto 0"/>
+		<img src="__STATICS__images/tpl/grey_bottom.png" style="margin:-18px auto 0"/>
 			<div class="left">
 				<div class="mod18"> <span id="prevTop" class="btn prev"></span> <span id="nextTop" class="btn next"></span>
 					<div id="picBox" class="picBox">

@@ -4,7 +4,8 @@
  */
 namespace User\Controller;
 use Common\Controller\HomeBaseController;
-class RegisterController extends HomeBaseController {
+use Portal\Controller\IndexController;
+class RegisterController extends IndexController {
 	
 	function index(){
 		$this->display(":register");
@@ -19,7 +20,6 @@ class RegisterController extends HomeBaseController {
     			array('password','require','密码不能为空！',1),
     			array('repassword', 'require', '重复密码不能为空！', 1 ),
     			array('repassword','password','确认密码不正确',0,'confirm'),
-    			array('mobile','#^13[d]{9}$|14^[0-9]d{8}|^15[0-9]d{8}$|^18[0-9]d{8}$#','手机号格式不正确！',1), // 验证phone字段格式是否正确
     			 
     	);
     	if($users_model->validate($rules)->create()===false){
@@ -41,6 +41,9 @@ class RegisterController extends HomeBaseController {
     	
     	if(strlen($password) < 5 || strlen($password) > 20){
     		$this->error("密码长度至少5位，最多20位！");
+    	}
+    	if(!preg_match("/^13[0-9]{1}[0-9]{8}$|15[0189]{1}[0-9]{8}$|189[0-9]{8}$/",$mobile)){
+    		$this->error('手机号码格式不正确');
     	}
     	//需要获取到的短信验证码验证规则
     	/* if($messcode != ){

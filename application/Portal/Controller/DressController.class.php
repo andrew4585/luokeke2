@@ -9,6 +9,39 @@ class DressController extends IndexController {
 		parent::__construct();
 		$this->model_dress=D("Dress");
 	}
+	/**
+	 * 首页
+	 */
+	public function dindex(){
+		
+		//最新礼服定制以及绝美礼服
+		//status：是否显示
+		$whereArr	= array("status=1","category=2");
+		$where		= join(" and ",$whereArr);
+		$field		= join(",",$fieldArr);
+		$robe		= $this->model_dress->where($where)->order("recommended desc,listorder")->limit(0,20)->relation(true)->select();
+		$beauty = array();
+		foreach ($robe as $key => $value) {
+			if($value['cat']['cat_name'] == "绝美礼服"){
+				$beauty[] = $value;
+			}
+		}
+		$drobe = array_slice($robe, 0,5);
+		$this->assign("beauty",$beauty);//绝美礼服
+		$this->assign("drobe",$drobe);//礼服
+		//最新婚纱定制
+		$fieldArr	= array("id","post_pic","post_title","post_url");
+		//status：是否显示
+		$whereArr	= array("status=1","category=1");
+		$where		= join(" and ",$whereArr);
+		$field		= join(",",$fieldArr);
+		$dress		= $this->model_dress->field($field)->where($where)->order("recommended desc,listorder")->limit(0,20)->select();
+		$this->assign("dress",$dress);
+		//广告位显示
+		$this->assign("promise",$this->_getAd("promise"));
+		$this->assign("servePromise",$this->_getAd("servePromise"));
+		$this->display('/Dress/dress_index');
+	}
 	
 	/**
 	 * 详细页
@@ -64,7 +97,7 @@ class DressController extends IndexController {
 		$this->assign("ad_dress",$this->_getAd("dress"));
 		$this->assign("desc_beautiful",$this->_getAd("desc_beautiful"));
 		//4个摆放在一起的二级页面广告位
-		$this->assign("second_page_4",$this->_getAd("second_page_4"));
+		$this->assign("second_page_3",$this->_getAd("second_page_3"));
 		//服务承诺
 		$this->assign("servePromise",$this->_getAd("servePromise"));
 		//婚纱礼服广告位（专用）

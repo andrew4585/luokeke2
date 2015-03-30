@@ -105,7 +105,7 @@ table { border-collapse: collapse; border-spacing: 0; }
 .b_ul_t li{ float: left; font-size: 13px; }
 .c_l{ margin: 0 auto ; width: 800px}
 .a_l1_t h5 { text-align: center;  padding: 15px 15px;  line-height: 16px;  height: 16px;  color: #868686;  }
-.a_l1_t h5 a{color: #8b8b8b;font-size: 15px; font-family: "宋体";font-weight: normal;}
+.a_l1_t h5 a{color: #8b8b8b;font-size: 15px; font-family: "宋体";/* font-weight: normal; */}
 .a_l1_t h5 ul {display: inline-block;  text-align: center;  line-height: 16px;  height: 16px;  color: #868686;  }
 .a_l1_t h5 ul li { display: inline-block;  padding: 0px 6px;  line-height: 16px;  height: 16px; }
 /*banner*/

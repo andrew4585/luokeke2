@@ -1,0 +1,263 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<tc_include file="Public:head_info" />
+	<script type="text/javascript" src="__STATICS__js/hScrollPane.js"></script>
+    <link href="__STATICS__css/zzsc.css" rel="stylesheet" type="text/css">
+    <link href="__STATICS__css/dress.css" rel="stylesheet" type="text/css">
+	
+</head>
+<body>
+		<!--头部导航标题js-->
+		<tc_include file="Public:nav"/>
+		<!-- banner轮播 -->
+		<tc_include file="Public:banner"/>
+		<!-- 内容  -->
+		<div class="conter">
+			<div class="title_01">
+		        <div class="a_l1_t">
+		        	<div class="title_nav_04"></div>
+		         <!--<span><font style="color:#7C7C7D"><</font>洛可可婚纱礼服馆<font style="color:#7C7C7D">></font>之<font style="color:#F37914 ">婚纱礼服定制</font><font style="color:#7C7C7D">>POPULARA CTIVIES</font></span>-->
+		            <h5>
+		                <ul>
+		                    <li><a href="" target="_blank" title="" style="">可可之星做最耀眼的新娘 |</a></li>
+		                    <li><a href="" target="_blank" title="" style="">积分上分享赢好礼 |</a></li>
+		                    <li><a href="" target="_blank" title="" style="">好评如潮 |</a></li>
+		                    <li><a href="" target="_blank" title="" style="">五星级店面，你造吗？ |</a></li>
+		                    <li><a href="" target="_blank" title="" style="">三月团购活动 2015 有一种腔调，想价你就嫁  </a></li>
+		                </ul>
+		            </h5>
+		        </div>
+		    </div>
+		    <div class="con_a001">
+		        <div class="al_001"><div class="more">点击查看更多人气活动</div></div>
+		
+		        <div class="xl_001_lf">
+		            <ul>
+		            <foreach name="drobe" item="item">
+		            <if condition="$key eq 0">
+		                <li class="b">
+		                    <a href="{:U('Portal/dress/info')}/id/{$item.id}" target="_blank" class="bigImg">
+		                        <img src="__ROOT__/{$item.post_pic}" width="599" height="576" alt="" />
+		                    </a>
+		                </li>
+		                <else/>
+		                <li>
+		                    <a href="{:U('Portal/dress/info')}/id/{$item.id}" class="smallImg" target="_blank" title="">
+		                        <img src="__ROOT__/{$item.post_pic}" width="287" height="287" alt="" />
+		                        <div class="rsp"></div>
+		                    </a>
+		                </li>
+						</if>
+					</foreach>
+		            </ul>
+		        </div>
+		        <script>
+		            $(function() {
+		                $(".xl_001_lf .b .rsp").hide();
+		                $(".xl_001_lf .b .rsp1").hide();
+		                $(".xl_001_lf .b .rsp2").hide();
+		                $(".xl_001_lf ul li").hover(function() {
+		                    $(this).find(".rsp").stop().fadeTo(500, 0)
+		                    $(this).find(".rsp1").stop().fadeTo(500, 0)
+		                    $(this).find(".rsp2").stop().fadeTo(500, 0)
+		                     $(this).find(".text").stop().animate({left:'0'}, {duration: 500})
+		                }, function() {
+		                    $(this).find(".rsp").stop().fadeTo(500, 1.5)
+		                    $(this).find(".rsp1").stop().fadeTo(500, 1.5)
+		                    $(this).find(".rsp2").stop().fadeTo(500, 1.5)
+		                     $(this).find(".text").stop().animate({left:'318'}, {duration: "fast"})
+		                     $(this).find(".text").animate({left:'-318'}, {duration: 0})
+		                });
+		            });
+		        </script>
+		
+		        <div class="zl_001">
+		            <h5>
+		                <ul>
+		                    <li>限时团购</li>
+		                    <li>洛可可风</li>
+		                    <li>用客照说话</li>
+		                    <li>婚纱礼服定制</li>
+		                    <li>洛可可之星</li>
+		                </ul>
+		            </h5>
+		        </div>
+		    </div>
+		    <div style="background: #f3f3f3;padding-bottom: 30px;" > 
+	        <div class="title_01">
+	            <div class="a_l1_t">
+	            	<div class="title_nav_09"></div>
+	              <!--  <span><font style="color:#7C7C7D"><</font>洛可可风婚纱摄影<font style="color:#7C7C7D">></font>之<font style="color:#F37914 ">婚纱定制</font><font style="color:#7C7C7D">>ROCOCO SALES</font></span>-->
+	                <h5>
+	                    <ul>
+	                        <li><a href="" target="_blank" title="" style="">全新婚纱1000元3件起 | </a></li>
+	                        <li><a href="" target="_blank" title="" style="">颠覆传统，一件婚纱只租4次 |</a></li>
+	                        <li><a href="" target="_blank" title="" style="">比价格，比款式，比时尚，比质量 |</a></li>
+	                        <li><a href="" target="_blank" title="" style="">我们是大牌，但我们不耍大牌 </a></li>
+	                    </ul>
+	                </h5>
+	            </div>
+	        </div>
+	        <div class="con_a003">
+	            <div class="al_001"><div class="more">点击查看更多婚纱礼服</div></div>
+	            <!-- 效果开始-->
+	            <div id="zsgun">
+	                <a href="#" class="prenext zspre"></a>
+	                <a href="#" class="prenext zsnext"></a>
+	                <div id="gundiv1" class="container2">
+	                    <ul>
+	                    <foreach name="dress" item="item">
+	                        <li>
+	                            <a href="{:U('Portal/dress/info')}/id/{$item.id}" target="_blank">
+	                                <img src="__ROOT__/{$item.post_pic}" alt="" width="290" height="429" />
+	                            </a>
+	                            <div class="rsp"></div>
+	                            <div class="text"><a href=""><h3>点.击.查.看.详.情<br>SHOW MORE</h3><div>{$item.post_title}</div></a>
+	                            </div>
+	                        </li>
+            			</foreach>	
+	                    </ul>
+	                </div>
+	            </div>
+	            <script type="text/javascript">
+	                $(function() {
+	                    var glen = $("#gundiv1 ul li").length;
+	                    $("#gundiv1 ul").css("width", 310 * (glen));
+	                    $("#gundiv1 li").hover(function() {
+	                        $("#gundiv1 li").removeClass("zslion");
+	                        $(this).addClass("zslion");
+	                    }, function() {
+	                        $(this).removeClass("zslion");
+	                    })
+	                });
+	                $("#zsgun").hScrollPane({
+	                    mover: "ul",
+	                    moverW: function() {
+	                        return $("#zsgun li").length * 310 - 107;
+	                    }(),
+	                    showArrow: true,
+	                    handleCssAlter: "draghandlealter"
+	                });
+	            </script>
+	        </div>
+	        <div class="title_foot_04"></div>
+    	</div>
+    	<div class="ad_001">
+			<div class="ad_001_img01">
+				<img src="__STATICS__/images/tpl/n11-1.jpg" width="585" height="404" alt="" />
+			</div>
+			<div class="ad_001_img02">
+				<img src="__STATICS__/images/tpl/n11.jpg" width="585" height="404" alt="" />
+			</div>
+
+		</div>
+		<div style="background: #f3f3f3;padding-bottom: 30px;" > 
+		    <div class="title_01">
+		        <div class="a_l1_t">
+		        	<div class="title_nav_10"></div>
+		           <!-- <span><font style="color:#7C7C7D"><</font>洛可可婚纱礼服馆<font style="color:#7C7C7D">></font>之<font style="color:#F37914 ">绝美礼服</font><font style="color:#7C7C7D">>ROCOCO SALES</font></span>-->
+		            <h5>
+		                <ul>
+		                    <li><a href="" target="_blank" title="" style="">3月想价就嫁4999特惠套装 | </a></li>
+		                    <li><a href="" target="_blank" title="" style="">3月想价就嫁6999特惠套装 |</a></li>
+		                    <li><a href="" target="_blank" title="" style="">3月想价就嫁7999特惠套装|</a></li>
+		                    <li><a href="" target="_blank" title="" style="">3月想价就嫁8999特惠套装 </a></li>
+		                </ul>
+		            </h5>
+		        </div>
+		    </div>
+		    <div class="con_a003">
+		        <div class="al_001"><div class="more">点击查看更多婚纱礼服</div></div>
+		        <!-- 效果开始-->
+		        <div id="zsgun1">
+		            <a href="#" class="prenext zspre"></a>
+		            <a href="#" class="prenext zsnext"></a>
+		            <div id="gundiv3" class="container2">
+		                <ul>
+		                	<foreach name="beauty" item="item">
+		                    <li>
+		                        <a href="{:U('Portal/dress/info')}/id/{$item.id}" target="_blank">
+		                            <img src="__ROOT__/{$item.post_pic}" alt="" width="290" height="429" />
+		                        </a>
+		                        <div class="rsp"></div>
+		                        <div class="text"><a href=""><h3>点.击.查.看.详.情<br>SHOW MORE</h3><div>{$item.post_title}</div></a>
+		                        </div>
+		                    </li>
+		                    </foreach>
+		                    
+		                    
+		                    
+		                </ul>
+		            </div>
+		        </div>
+		        <script type="text/javascript">
+		            $(function() {
+		                var glen = $("#gundiv3 ul li").length;
+		                $("#gundiv3 ul").css("width", 310 * (glen));
+		                $("#gundiv3 li").hover(function() {
+		                    $("#gundiv3 li").removeClass("zslion");
+		                    $(this).addClass("zslion");
+		                }, function() {
+		                    $(this).removeClass("zslion");
+		                })
+		            });
+		            $("#zsgun1").hScrollPane({
+		                mover: "ul",
+		                moverW: function() {
+		                    return $("#zsgun1 li").length * 310 - 107;
+		                }(),
+		                showArrow: true,
+		                handleCssAlter: "draghandlealter"
+		            });
+		        </script>
+		    </div>
+		    <div class="title_foot_04"></div> 
+		</div>
+		<!--服务 承诺-->
+		<div class="title_01_1">
+		    <div class="a_l1_t">
+		    		<div class="title_nav_08"></div>
+		       <!-- <span><font style="color:#7C7C7D"><</font>洛可可风婚纱摄影<font style="color:#7C7C7D">></font>之<font style="color:#F37914 ">郑重承诺</font><font style="color:#7C7C7D">>ROCOCO RRASIE</font></span>-->
+		        <h5>
+		            <ul >
+		                <li><a>洛可可官网,天猫，微信，微博等官方媒体发布的主题作品，均属原创主题作品，未经洛可可授权，任何单位或个人不得转载或使用。</a></li>
+		            </ul>
+		        </h5>
+		    </div>
+		</div>
+		<div class="con_a008">
+		    <!--图片-->
+		    <div class="i_001">
+		        <img src=" __STATICS__/images/tpl/ad_01.jpg" width="1200" height="330">
+		    </div>
+		
+		</div>
+		<div class="title_01_1">
+		    <div class="a_l1_t">
+		    		<div class="title_nav_09"></div>
+		     <!--   <span><font style="color:#7C7C7D"><</font>洛可可风婚纱摄影<font style="color:#7C7C7D">></font>之<font style="color:#F37914 ">服务承诺</font><font style="color:#7C7C7D">>ROCOCO RRASIE</font></span>-->
+		        <h5>
+		            <ul>
+		                <li><a>洛可可官网,天猫，微信，微博等官方媒体发布的主题作品，均属原创主题作品，未经洛可可授权，任何单位或个人不得转载或使用。</a></li>
+		            </ul>
+		        </h5>
+		    </div>
+		</div>
+		<div class="con_a009">
+			<div class="i_002">
+				<div class="img_01">
+					<img src="__ROOT__/{$servePromise.0.ad_pic}" alt="" />
+				</div>
+			</div>
+		</div>
+		<!--底部的图片-->
+		<div class="i_003">
+			<img src="__STATICS__/images/tpl/ad_04_01.jpg" alt="" />
+		</div>
+		<!--@@@@@@@-->
+		<div class="clears"></div>
+		</div>
+	<tc_include file="Public:footer"/>
+</body>
+</html>

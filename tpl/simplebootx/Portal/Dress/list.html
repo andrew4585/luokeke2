@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<tc_include file="Public:head_info"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__css/dress.css">
+</head>
+<body>
+	<div class="head">
+    <!--头部导航标题js-->
+	<tc_include file="Public:nav"/>
+	<!-- banner轮播 -->
+	<tc_include file="Public:banner"/>	
+<!--内容-->
+<div class="conter">
+    <!--广告位置-->
+    <div class="border">
+    <div class="details_img"><img src="__ROOT__/{$ad_dress.0.ad_pic}" width="980"/> </div>
+    </div>
+    <!--tab 导航 -->
+	<div class="main">
+	    <div class="head_tab">
+	        <ul class="tab">
+	            <li class="on">
+	                <a href="{:U('Portal/Dress/list')}/category/1">
+	                    <div class="nav_x">
+	                        <img src="__STATICS__images/tpl/dress/nav_x_01_03.png"  width="190" height="71">
+	                    </div>
+	                </a>
+	            </li>
+	            <li>
+	            	<a href="{:U('Portal/Dress/list')}/category/2">
+	                <div class="nav_x">
+	                    <img src="__STATICS__images/tpl/dress/nav_x_02_03.png"  width="190" height="71">
+	                </div>
+	
+	                </a>
+	            </li>
+	            <li style="border: none">
+	            	<a href="#">
+	                <div class="nav_x_1">
+	                    <img src="__STATICS__images/tpl/dress/nav_x_03_03.png"  width="272" height="71">
+	                </div>
+	                </a>
+	            </li>
+	        </ul>
+	    </div>
+	    <div class="con">
+            <!--婚纱制定list-->
+                <div class="dress_photo">
+                    <ul >
+                    	<foreach name="list" item="item">
+                        <li>
+                            <div class="photo">
+                                <img src="__ROOT__/{$item.post_pic}" alt="" width="290" height="425" />
+                            </div>
+                            <div class="rsp"></div>
+                            <div class="text"><a href="{:U('Portal/Dress/info')}/id/{$item.id}"><h3>点.击.查.看.详.情>SHOW MORE</h3></a>
+                            </div>
+                            <div class="text_foot">
+                                <span> 出租价格：{$item.sale_price}元/件</span><br>
+                                <span> 出租价格：{$item.rent}元/件</span>
+                            </div>
+                        </li>
+                        </foreach>
+                    </ul>
+					 
+                    <!--滚动向上-->
+                    <div class="digg" id="roll_top">
+                        <img src="__STATICS__/images/tpl/top_07.png">
+                    </div>
+                    <script type="text/javascript" src="__STATICS__/js/97zzw.js"></script>
+                    <div class="digg">{$page}</div>
+                    
+                </div>
+            </div>
+            <!--礼服制定list-->
+           <!--视频list-->
+    </div>
+    <div class="foot_border_kz" align="center">
+			<img src="__STATICS__images/tpl/grey_bottom.png" style="margin-top:-1px">
+		</div>
+		<!-- 蕴含美态 -->
+		<div class="title_foot_01"></div>
+		<div align="center" style="margin-bottom:40px;">
+			<img src="__ROOT__{$desc_beautiful.0.ad_pic}">
+		</div>
+		<!--广告位置-->
+		<tc_include file="Public:second_page_3"/>
+   </div>
+	<!--服务承诺-->
+	<tc_include file="Public:servePromise"/>
+	<!--底部的图片-->
+	<div class="i_003">
+	    <img src="__STATICS__images/tpl/ad_04_01.jpg" alt="" />
+	</div>
+	<!--@@@@@@@-->
+	<div class="clears"></div>
+	
+</div>
+<!--底部-->
+<tc_include file="Public:footer"/>
+</body>
+</html>

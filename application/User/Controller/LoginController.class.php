@@ -1,6 +1,6 @@
 <?php
 /**
- * 会员注册
+ * 会员登陆
  */
 namespace User\Controller;
 use Common\Controller\HomeBaseController;
@@ -8,7 +8,7 @@ class LoginController extends HomeBaseController {
 	
 	function index(){
 		$this->display(":login");
-	}	
+	}
 	function forgot_password(){
 		$this->display(":forgot_password");
 	}
@@ -129,7 +129,7 @@ hello;
     	}
     	extract($_POST);
     	//用户名或者手机号登陆
-    	$where['user_phone']=$mobile;
+    	$where['user_phone']=$username;
     	$where['user_login']=$username;
     	$where['_logic'] = 'OR';
     	$users_model=M('Users');

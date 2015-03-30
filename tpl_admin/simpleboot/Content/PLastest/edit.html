@@ -93,6 +93,24 @@ body fieldset legend {
               <td><textarea name='post_excerpt' id='description'  style='width:98%;height:50px;' placeholder='请填写摘要'>{$post_excerpt}</textarea> </td>
             </tr>
             <tr>
+              <th width="80">相册图集 </th>
+              <td>
+				<fieldset class="blue pad-10">
+		        <legend>图片列表</legend>
+		        <ul id="photos" class="picList"></ul>
+		        	<foreach name="smeta['photo']" item="vo">
+				        <li id="savedimage{$key}">
+				        	<input type="text" name="photos_url[]" value="__ROOT__/{$vo['url']}" title='双击查看' style="width:310px;" ondblclick="image_priview(this.value);" class="input">
+				        	<input type="text" name="photos_alt[]" title="排序" value="{$vo.alt}" style="width:60px;" class="input" onfocus="if(this.value == this.defaultValue) this.value = ''" onblur="if(this.value.replace(' ','') == '') this.value = this.defaultValue;">
+				        	<a href="javascript:remove_div('savedimage{$key}')">移除</a>
+				        </li>
+			        </foreach>
+				</fieldset>
+				<div class="bk10"></div>
+				<a href='javascript:void(0);' onclick="javascript:flashupload2('albums_images', '图片上传','photos',change_images,'10,gif|jpg|jpeg|png|bmp,0','','','')" class="btn">选择图片 </a> </td>
+            </tr>
+            <!-- 内容
+            <tr>
               <th width="80">内容</th>
               <td>
               <script type="text/plain" id="content" name="post_content">{$post_content|htmlspecialchars_decode}</script>
@@ -104,29 +122,18 @@ body fieldset legend {
                 <script type="text/javascript"  src="__ROOT__/statics/ueditor/ueditor.all.min.js"></script>
 				</td>
             </tr>
+             -->
             <tr>
               <th width="80">链接地址 </th>
-              <td><input type="text" name="post_url" value="{$post_url}" class="input input_hd J_title_color" placeholder="填写链接地址后，内容将无效" style="width:400px;"/> </td>
+              <td><input type="text" name="post_url" value="{$post_url}" class="input input_hd J_title_color" placeholder="填写链接地址后，作品内容将无效" style="width:400px;"/> </td>
             </tr>
             
-            <!-- 内容隐藏
-            <tr>
-              <th width="80">相册图集 </th>
-              <td>
-				<fieldset class="blue pad-10">
-		        <legend>图片列表</legend>
-		        <ul id="photos" class="picList"></ul>
-				</fieldset>
-				<div class="bk10"></div>
-				<a href='javascript:void(0);' onclick="javascript:flashupload('albums_images', '图片上传','photos',change_images,'10,gif|jpg|jpeg|png|bmp,0','','','')" class="btn">选择图片 </a> </td>
-            </tr>
-             -->
         </tbody>
       </table>
     </div>
   </div>
   <div class="form-actions">
-        <button class="btn btn-primary btn_submit J_ajax_submit_btn"type="submit">提交</button>
+        <button class="btn btn-primary btn_submit J_ajax_submit_btn" type="submit">提交</button>
         <a class="btn" href="{:U('PLastest/index')}">返回</a>
   </div>
  </form>
@@ -136,17 +143,6 @@ body fieldset legend {
 <script type="text/javascript"> 
 $(function () {
 	 Wind.use('validate', 'ajaxForm', 'artDialog', function () {
-			//javascript
-	        
-	            //编辑器
-	            editorcontent = new baidu.editor.ui.Editor();
-	            editorcontent.render( 'content' );
-	            try{editorcontent.sync();}catch(err){};
-	            //增加编辑器验证规则
-	            jQuery.validator.addMethod('editorcontent',function(){
-	                try{editorcontent.sync();}catch(err){};
-	                return editorcontent.hasContents();
-	            });
 	            var form = $('form.J_ajaxForms');
 	        //ie处理placeholder提交问题
 	        if ($.browser.msie) {
@@ -218,7 +214,7 @@ $(function () {
 								        content: data.info,
 										button:[
 											{
-												name: '继续编辑？',
+												name: '继续添加？',
 												callback:function(){
 													reloadPage(window);
 													return true;

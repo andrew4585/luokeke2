@@ -3,6 +3,7 @@
 <head>
 	<tc_include file="Public:head_info"/>
     <link rel="stylesheet" type="text/css" href="__STATICS__css/dress.css">
+	
 </head>
 <body>
 	<div class="head">
@@ -20,15 +21,15 @@
 	<div class="main">
 	    <div class="head_tab">
 	        <ul class="tab">
-	            <li class="on">
-	                <a href="{:U('Portal/Dress/list')}/category/1">
+	            <li>
+	                <a href="{:U('Portal/Dress/lists')}/category/1">
 	                    <div class="nav_x">
 	                        <img src="__STATICS__images/tpl/dress/nav_x_01_03.png"  width="190" height="71">
 	                    </div>
 	                </a>
 	            </li>
 	            <li>
-	            	<a href="{:U('Portal/Dress/list')}/category/2">
+	            	<a href="{:U('Portal/Dress/lists')}/category/2">
 	                <div class="nav_x">
 	                    <img src="__STATICS__images/tpl/dress/nav_x_02_03.png"  width="190" height="71">
 	                </div>
@@ -100,4 +101,13 @@
 <!--底部-->
 <tc_include file="Public:footer"/>
 </body>
+<script type="text/javascript">
+		var url = window.location.href;
+		var strs=url.split("/");
+		if(strs[8] == 1){
+			$(".tab li:first").addClass("on");
+		}else if(strs[8] == 2){
+			$(".tab li:eq(1)").addClass("on");
+		}
+	</script>
 </html>

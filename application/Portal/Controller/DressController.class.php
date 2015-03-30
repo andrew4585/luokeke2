@@ -107,7 +107,7 @@ class DressController extends IndexController {
 		foreach ($msg as $key=>$value){
 			$item[] = array(
 					"label" => "{$value['cat_name']}",
-					"href" => U("Portal/Dress/list/category/{$value['id']}")
+					"href" => U("Portal/Dress/lists/category/{$value['id']}")
 					
 							);
 		}

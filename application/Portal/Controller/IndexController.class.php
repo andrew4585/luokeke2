@@ -257,6 +257,7 @@ class IndexController extends HomeBaseController {
     	if(IS_POST){
     		$model_comment = D("Comments");
     		$_POST['uid']  = cookie("user.id");
+    		if(empty($_POST['uid'])) $this->error("请登录后评论");
     		if($model_comment->create()){
     			$result = $model_comment->add($_POST);
     			if($result){

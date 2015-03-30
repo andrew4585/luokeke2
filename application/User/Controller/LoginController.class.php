@@ -4,7 +4,8 @@
  */
 namespace User\Controller;
 use Common\Controller\HomeBaseController;
-class LoginController extends HomeBaseController {
+use Portal\Controller\IndexController;
+class LoginController extends IndexController {
 	
 	function index(){
 		$this->display(":login");

@@ -24,6 +24,8 @@ class PCustomController extends IndexController {
 		if(!empty($info['post_url'])){
 			header("location:".$info['post_url']);
 		}
+		
+		
 		//banner
 		$this->assign("home_head",$this->_getAd("banner_pcustom"));
 		//3个摆放在一起的二级页面广告位
@@ -40,6 +42,9 @@ class PCustomController extends IndexController {
 		//图片信息
 		$photo	= json_decode($info['smeta'],true);
 		$this->assign("photo",$photo['photo']);
+		//获取本页面的url
+		$url = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+		$this->assign("url",$url);
 		$this->display();
 	}
 	public function lists(){

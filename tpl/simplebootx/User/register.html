@@ -40,9 +40,8 @@
 				var repassword	= $("input[name='repassword']").val();
 				var mobile		= $("input[name='mobile']") .val();
 				$.post(url,{username:username,password:password,repassword:repassword,mobile:mobile},function(data){
-					if(data.status){
-						artDialog_alert(data.info);
-						window.history.back(-1);
+					if(data.status){	
+						location.href = data.url;
 					}else{
 						artDialog_alert(data.info);
 					}
@@ -83,23 +82,14 @@
 			<div class="logo">
 				<img src="__STATICS__images/tpl/logo.png" width="280" height="60">
 				<img class="lo_line" src="__STATICS__images/tpl/log-1.jpg" height="43"/>
-				<!-- <ul class="nav_c">
-						<li class="drop"><a class="main down" href="#url" target="_blank"><font>大连站</font></a>
-							<div class="box_c">
-								<div class="box_c_title"><a href="#" class="">三亚站</a>
-								</div>
-								<div class="box_c_title"><a href="#" class="">巴厘岛</a>
-								</div>
-							</div>
-						</li>
-				</ul> -->
+
 				<ul class="nav_c">
-					<li class="drop"><a class="main down" target="_self" href="{$siteid}"><font>{$site_name}</font></a>
+					<li class="drop"><a class="main down" target="_self" href=""><font>{$site_name}</font></a>
 						<div class="box_c">
 						
 						<foreach name="siteData" item="item">
 								<if condition="$siteid neq $item['id']">
-								<div class="box_c_title"><a target="_self" href="{$item.id}">{$item.site_name}</a></div>
+								<div class="box_c_title"><a target="_self" href="">{$item.site_name}</a></div>
 								</if>
 						</foreach>
 						</div>
@@ -144,7 +134,7 @@
 					</div>
 					<div class="reg-6 reg-all">
 					
-					<input type="submit" value="立即注册" />
+					<input type="submit" style="cursor:pointer;" value="立即注册" />
 						
 					</div>
 				</div>

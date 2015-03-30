@@ -33,6 +33,12 @@ class PhotoController extends IndexController {
 		$this->assign("servePromise",$this->_getAd("servePromise"));
 		//详细内容
 		$this->assign("info",$info);
+		//评论信息
+		$this->getCommentList("Photo",$info['id']);
+		$this->assign("table",'Photo');
+		//获取本页面的url
+		$url = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+		$this->assign("url",$url);
 		//图片信息
 		$photo	= json_decode($info['smeta'],true);
 		$this->assign("photo",$photo['photo']);

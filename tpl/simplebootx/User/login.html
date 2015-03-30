@@ -25,22 +25,25 @@
 					$(this).find(".box_c").css("left",left+"px");
 					$(this).find("a").addClass("current");
 					$(this).find(".box_c").stop().slideDown();
-				})
+				});
 				nav_cLi.mouseleave(function() {
 					$(this).find("a").removeClass("current");
 					$(this).find(".box_c").stop().slideUp();
-				})
-			})
+				});
+			});
 			
 			$(function(){
+				var url = window.location.href;
+				var strs=url.split("?");
+				
 				$("form[name='logform']").submit(function(){
 					var url = $(this).attr('action');
 					var username 	= $("input[name='username']").val();
 					var password 	= $("input[name='password']").val();
-					$.post(url,{username:username,password:password},function(data){
+					$.post(url,{username:username,password:password},function(data){					
 						if(data.status){
 							artDialog_alert(data.info);
-							window.history.back(-1);
+							location.href = strs[1];
 						}else{
 							artDialog_alert(data.info);
 						}
@@ -56,12 +59,12 @@
 				<img src="__STATICS__images/tpl/logo.png" width="280" height="60">
 				<img class="lo_line" src="__STATICS__images/tpl/log-1.jpg" height="43"/>
 				<ul class="nav_c">
-					<li class="drop"><a class="main down" target="_self" href="{$siteid}"><font>{$site_name}</font></a>
+					<li class="drop"><a class="main down" target="_self" href=""><font>{$site_name}</font></a>
 						<div class="box_c">
 						
 						<foreach name="siteData" item="item">
 								<if condition="$siteid neq $item['id']">
-								<div class="box_c_title"><a target="_self" href="{$item.id}">{$item.site_name}</a></div>
+								<div class="box_c_title"><a target="_self" href="">{$item.site_name}</a></div>
 								</if>
 						</foreach>
 						</div>
@@ -96,17 +99,14 @@
 						<div style="clear:both"></div>
 						</div>
 						<div class="qq-log reg-all">
-							<a href="{:U('api/oauth/login',array('type'=>'qq'))}"">QQ登陆</a>
+							<a href="{:U('api/oauth/login',array('type'=>'qq'))}">QQ登陆</a>
 						</div>
 						<div class="sina-log reg-all">
 							<a href="{:U('api/oauth/login',array('type'=>'sina'))}">新浪微博登陆</a>
 						</div>
 						<div class="sub-log reg-all">
-						
-							<input class="logsub" type="submit" value="登陆" />
+							<input class="logsub" type="submit" style="cursor:pointer;" value="登陆" />
 						</div>
-					
-					
 					
 					<div class="for"><a href="">忘记密码>></a></p></div>
 					<img class="icon7" src="__STATICS__images/tpl/icon6.png"/>

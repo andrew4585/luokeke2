@@ -51,12 +51,13 @@ class PCustomController extends IndexController {
 		$this->assign("url",$this->_getUri());
 		//生成二维码
 		$this->qrcode();
+		$this->assign("model_table","PCustom");
 		$this->display();
 	}
 	public function lists(){
 		import('Page');// 导入分页类
 		//status=1,表示文章未删除，0表示文章已删除
-		$where_ands =array("status=1");
+		$where_ands =array("status=1","site_id=$this->siteId");
 		$order		="listorder ASC,post_date DESC";
 		$where= join(" and ", $where_ands);
 		

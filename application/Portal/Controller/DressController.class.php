@@ -71,8 +71,11 @@ class DressController extends IndexController {
 		//图片信息
 		$photo	= json_decode($info['smeta'],true);
 		$this->assign("photo",$photo['photo']);
+		//二维码
+		$this->qrcode();
 		//右侧导航
 		$this->info_right();
+		$this->assign("model_table","Dress");
 		$this->display();
 	}
 	/**
@@ -104,8 +107,17 @@ class DressController extends IndexController {
 		$this->assign("servePromise",$this->_getAd("servePromise"));
 		//婚纱礼服广告位（专用）
 		$this->assign("ad_dress",$this->_getAd("dress"));
+		
 		$this->display('/Dress/list');
 	}
+	
+	/**
+	 * 用户点击‘喜欢’按钮
+	 */
+	public function ajax_like(){
+		$this->_like($this->model_dress);
+	}
+	
 	public function nav_index(){
 		$m 			= M('dress_cat');
 		$msg 		= $m->where()->select();

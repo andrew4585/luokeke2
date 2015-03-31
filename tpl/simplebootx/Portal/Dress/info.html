@@ -76,29 +76,9 @@
                 <!--左侧-->
                 <div id="info-left" class="fl">
                 	<div id="info-func">
-                		<ul>
-                			<li style="margin:0">
-                                <div class="mix_ico info-ico"></div>
-                                <div class="info-lz">喜欢&nbsp;500</div>
-                            </li>
-                			<li>
-                                <div class="mix_ico info-ico_wo"></div>
-                                <div class="info-lz">分享&nbsp;500</div>
-                            </li>
-                			<li>
-                                <div class="mix_ico info-ico_pl"></div>
-                                <div class="info-lz">评论&nbsp;500</div>
-                            </li>
-                			<li>
-                                <div class="mix_ico info-ico_ph"></div>
-                                 <div class="info-lz">装到手机</div>
-                            </li>
-                			<li>
-                                <div class="mix_ico info-ico_sy"></div>
-                                <div class="info-lz">预约试衣</div>
-                            </li>
-                		</ul>
-                    <div class="post_time">POSTTIME:{$info.post_date|date='Y-m-d',###}</div>
+                		<php>$orderDress = 1;</php>
+                		<tc_include file="Public:func"/>
+                    	<div class="post_time">POSTTIME:{$info.post_date|date='Y-m-d',###}</div>
                 	</div>
 
                     <!--大图片-->

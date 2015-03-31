@@ -55,45 +55,7 @@
 	        	<div id="info-excerpt" align="center">{$info.post_excerpt}</div>
 	        </div>
 	        <div id="info-func" style="width:493px">
-		    		<ul>
-		    			<li style="margin:0">
-		                    <div class="mix_ico"></div>
-		                    <div class="info-lz info-like" data-model="PCustom">喜欢&nbsp;<font>{$info.post_like}</font></div>
-		                </li>
-		    			<li>
-		                    <div class="mix_ico info-ico_wo"></div>
-		                    <div class="info-lz">分享&nbsp;{$info.post_share}</div>
-		                </li>
-		    			<li class="comment-reach">
-		                    <div class="mix_ico info-ico_pl"></div>
-		                    <div class="info-lz">评论&nbsp;{$info.comment_count}</div>
-		                </li>
-		    			<li class="hover_sj">
-		                    <div class="mix_ico info-ico_ph"></div>
-		                    <div class="info-lz">装到手机</div>
-		                    <div class="tips">
-                                <div class="tipscont">
-                                  	<img id="qrcode" src="__ROOT__/{$qrcode}"/>
-                                  	<img id="qrlogo" src="__STATICS__images/tpl/qrlogo.png"/>
-                                    <p style="margin-top:-35px;">扫一扫微信</p>
-                                    <p>更多" 惊喜 "等着你</p>
-                                    <div id="arrow"></div>
-                                </div>
-                            </div>
-		                </li>
-		    		</ul>
-		    		 <!--微信扫一扫-->
-                    <script type="text/javascript">
-                        $(document).ready(function(){
-                        	$(".hover_sj").hover(function(){
-                                $(".hover_sj").find(".tips").addClass("hover");
-                                $(this).addClass("lihover");
-                            },function(){
-                            	$(".hover_sj").find(".tips").removeClass("hover");
-                                $(this).removeClass("lihover");
-                            });
-                        });
-                    </script>
+		    		<tc_include file="Public:func"/>
 	    	</div>
     	</div>
            <!--轮播开始-->

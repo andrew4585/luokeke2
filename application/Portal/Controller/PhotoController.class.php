@@ -44,7 +44,9 @@ class PhotoController extends IndexController {
 		$this->assign("photo",$photo['photo']);
 		//右侧导航
 		$this->info_right();
-	
+		//二维码
+		$this->qrcode();
+		$this->assign("model_table","Photo");
 		$this->display();
 	}
 	
@@ -54,6 +56,13 @@ class PhotoController extends IndexController {
 	public function getCategory(){
 		$catList	= $this->model_cat->order("listorder")->getField("id",true);
 		$this->assign("cateList",$catList);
+	}
+	
+	/**
+	 * 用户点击‘喜欢’按钮
+	 */
+	public function ajax_like(){
+		$this->_like($this->model_photo);
 	}
 	
 	public function nav_index(){

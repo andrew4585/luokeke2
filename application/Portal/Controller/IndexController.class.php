@@ -288,6 +288,14 @@ class IndexController extends HomeBaseController {
     		if($model_comment->create()){
     			$result = $model_comment->add($_POST);
     			if($result){
+    				$table = $_POST['post_table'];
+    				try{
+    					$model = D($table);
+    					$Cnum = $model->where("id={$_POST['post_id']}")->setInc('comment_count',1);
+    					$this->success($Cnum);
+    				}catch(\Exception $e) {
+    					$this->error($e->getMessage());
+    				}
     				$this->success("评论成功");
     			}else{
     				$this->error("评论失败");

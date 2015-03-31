@@ -12,7 +12,7 @@
 	            <th width="16"><label><input type="checkbox" class="J_check_all" data-direction="x" data-checklist="J_check_x"></label></th>
 	            <th width="50">ID</th>
 	            <th>用户名/姓名</th>
-	            <th>邮箱</th>
+	            <th>手机号</th>
 	            <th width="140">内容</th>
 	            <th width="140"><span>评论时间</span></th>
 	            <th width="50"><span>状态</span></th>
@@ -24,8 +24,8 @@
 	        	<tr>
 		            <td><input type="checkbox" class="J_check" data-yid="J_check_y" data-xid="J_check_x" name="ids[]" value="{$vo.id}" ></td>
 		            <td>{$vo.id}</td>
-		            <td>{$vo.full_name}</td>
-		            <td>{$vo.email}</td>
+		            <td>{$vo.user.user_nicename}</td>
+		            <td>{$vo.user.user_phone}</td>
 		            <td>{$vo.content}</td>
 		            <td>{$vo.createtime}</td>
 		            <td>{$status[$vo['status']]}</td>

@@ -23,6 +23,7 @@ class CommentadminController extends AdminbaseController{
 		$count=$this->comments_model->where($where)->count();
 		$page = $this->page($count, 20);
 		$comments=$this->comments_model
+		->relation(true)
 		->where($where)
 		->limit($page->firstRow . ',' . $page->listRows)
 		->order("createtime DESC")

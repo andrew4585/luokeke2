@@ -1,0 +1,10 @@
+diff a/application/Common/Conf/alias.php b/application/Common/Conf/alias.php	(rejected hunks)
+@@ -25,7 +25,7 @@
+ 	    
+ 	    //è¯„è®ºå¤„ç†ç±»
+ 	    "Comment" => APP_PATH.C("APP_GROUP_PATH")."/Comments/Util/Comment.class.php",
+-	
++		
+ 	    //åˆ†é¡µç±»
+ 	    "Page" => SPAPP_PATH.'Lib/Util/Page.class.php',
+ 	    "phpQuery"=>SPAPP_PATH.'Lib/Extend/phpQuery/phpQuery.php',

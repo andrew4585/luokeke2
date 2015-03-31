@@ -332,4 +332,26 @@ class IndexController extends HomeBaseController {
     }
     
     //-----------------------------评论部分  end--------------------
+    
+    /**
+     * 生成二维码
+     */
+    public function qrcode(){
+    	$url	= $this->_getUri();
+    	$name	= encrypt($url);
+    	$path	= "./data/upload/qrcode/$name.png";
+    	if(!file_exists($path)){
+    		Vendor("phpqrcode.phpqrcode");
+    		\QRcode::png($url,$path,'L',1000,2);
+    	}
+    	$this->assign("qrcode",$path);
+    }
+    
+    /**
+     * 获取当前页面网址
+     */
+    public function _getUri(){
+    	$url = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+    	return $url;
+    }
 }

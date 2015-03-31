@@ -58,7 +58,7 @@
 		    		<ul>
 		    			<li style="margin:0">
 		                    <div class="mix_ico"></div>
-		                    <div class="info-lz" data-model="PCustom">喜欢&nbsp;<font>{$info.post_like}</font></div>
+		                    <div class="info-lz info-like" data-model="PCustom">喜欢&nbsp;<font>{$info.post_like}</font></div>
 		                </li>
 		    			<li>
 		                    <div class="mix_ico info-ico_wo"></div>
@@ -73,9 +73,11 @@
 		                    <div class="info-lz">装到手机</div>
 		                    <div class="tips">
                                 <div class="tipscont">
-                                  <img src="img/code-1.jpg" alt=""/>
-                                    <p>扫一扫微信</p>
+                                  	<img id="qrcode" src="__ROOT__/{$qrcode}"/>
+                                  	<img id="qrlogo" src="__STATICS__images/tpl/qrlogo.png"/>
+                                    <p style="margin-top:-35px;">扫一扫微信</p>
                                     <p>更多" 惊喜 "等着你</p>
+                                    <div id="arrow"></div>
                                 </div>
                             </div>
 		                </li>
@@ -84,11 +86,11 @@
                     <script type="text/javascript">
                         $(document).ready(function(){
                         	$(".hover_sj").hover(function(){
-                                $(this).parent().find(".tips").addClass("hover");
-                                $(this).parent().addClass("lihover");
+                                $(".hover_sj").find(".tips").addClass("hover");
+                                $(this).addClass("lihover");
                             },function(){
-                                $(this).parent().find(".tips").removeClass("hover");
-                                $(this).parent().removeClass("lihover");
+                            	$(".hover_sj").find(".tips").removeClass("hover");
+                                $(this).removeClass("lihover");
                             });
                         });
                     </script>

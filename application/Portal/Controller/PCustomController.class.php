@@ -42,14 +42,15 @@ class PCustomController extends IndexController {
 		//详细内容
 		$this->assign("info",$info);
 		//评论信息
-		$this->getCommentList("PCustom",$info['id']);
-		$this->assign("table",'PCustom');
+		$this->getCommentList("Pcustom",$info['id']);
+		$this->assign("table",'Pcustom');
 		//图片信息
 		$photo	= json_decode($info['smeta'],true);
 		$this->assign("photo",$photo['photo']);
 		//获取本页面的url
-		$url = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
-		$this->assign("url",$url);
+		$this->assign("url",$this->_getUri());
+		//生成二维码
+		$this->qrcode();
 		$this->display();
 	}
 	public function lists(){

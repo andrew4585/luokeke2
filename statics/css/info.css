@@ -178,28 +178,55 @@
 }
 /* tips */
 .hover_sj .tips {
-	position:absolute;
+	position:relative;
 	top:-53px;
 	left:100px;
-	width:172px;
-	height:200px;
+	width:240px;
+	height:280px;
+	padding-top:5px;
 	visibility:hidden;
-	background:url(../images/tpl/tipbg.png) no-repeat;
-	background-position: 0px -10px;
+	z-index:999;
 	opacity:0.0;
 	-moz-transition:all 0.5s ease;
 	-webkit-transition:all 0.5s ease;
 	-o-transition:all 0.5s ease;
-/*	background: #000000;*/
 }
-.hover_sj .tips .tipscont {
-	width: 150px;
-	margin: 18px;
+.hover_sj .tips .tipscont{
+	width:100%;
+	position:absolute;
+	margin-top:10px;
 }
-.hover_sj .tips .tipscont p{ text-align: center;}
+#qrcode{
+	width:213px;
+	height:213px;
+	display:block;
+	margin:0 auto;
+}
+#qrlogo{
+	display: block;
+	position: relative;
+	top: -123px;
+	left: 100px;
+}
+.hover_sj .tips .tipscont p{ 
+	text-align: center;
+	font-size:15px;
+	line-height:21px;
+}
+.tipscont #arrow{
+	display:block;
+	position:relative;
+	width:30px;
+	height:30px;
+	left:-30px;
+	top:-150px;
+	background:url(../images/tpl/mix_icon.png);
+	background-position: 0 -270px;
+}
 .hover_sj .hover {
+	background:#28292E;
 	visibility:visible;
-	top:-93px;
+	top:-123px;
 	left:150px;
 	opacity:1;
 }

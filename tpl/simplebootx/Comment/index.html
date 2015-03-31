@@ -12,16 +12,18 @@
 	   </div>
     	<div class="work_r">
 	       <div class="work_r_up">
-	       	   <empty name="Think.session.user.id" >
+	       	   
 	           <ul>
+	           	<empty name="Think.session.user.id" >
 	               <li style="margin:0"><a href="{:U('User/login/index')}?{$url}">登录</a></li>
 	               <li><a href="{:U('User/register/index')}">注册</a></li>
 	               <li><a href="{:U('api/oauth/login',array('type'=>'qq'))}"><img src="__STATICS__images/tpl/comment/qq.png" width="25" height="25"></a></li>
                    <li><a href="{:U('api/oauth/login',array('type'=>'sina'))}"><img src="__STATICS__images/tpl/comment/wo.png" width="25" height="25"></a></li>
-	           </ul>
-	           <else/>
-	           	   <li style="margin-top:45px;font-size:15px">{$Think.session.user.user_nicename}</li>
+				<else/>
+	           	   <li style="margin-bottom:25px;font-size:15px">{$Think.session.user.user_nicename}</li>
 	           </empty>
+	           </ul>
+	          
 	       </div>
 	        <div class="work_r_down">
 	        	<form name="comment-form" action="{:U('Portal/Index/commentAdd')}" method="post">

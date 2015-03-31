@@ -46,12 +46,14 @@
                     <ul >
                     	<foreach name="list" item="item">
                         <li>
+                        	<a href="{:U('Portal/PCustom/info')}/id/{$item.id}">
                             <div class="photo">
                                 <img src="__ROOT__/{$item.post_pic}" alt="" width="290" height="425" />
                             </div>
                             <div class="rsp"></div>
-                            <div class="text"><a href="{:U('Portal/pcustom/info')}/id/{$item.id}"><h3>{$item.post_title}</h3></a>
+                            <div class="text"><h3>{$item.post_title}</h3>
                             </div>
+                            </a>
                         </li>
                         </foreach>
                     </ul>

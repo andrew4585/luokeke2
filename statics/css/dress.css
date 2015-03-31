@@ -61,9 +61,6 @@ DIV.digg {
 }
 DIV.digg A {
     border-color: #aaaadd;
-    border-right: 1px solid #aaaadd;
-    border-style: solid;
-    border-width: 1px;
     /*color: #000099;*/
     margin: 2px;
     padding: 10px 15px;
@@ -77,39 +74,17 @@ DIV.digg A:active {
     BORDER-RIGHT: #000099 1px solid; BORDER-TOP: #000099 1px solid; BORDER-LEFT: #000099 1px solid; COLOR: #000; BORDER-BOTTOM: #000099 1px solid
 }
 DIV.digg SPAN.current {
-    /*border-right: 1px solid #009;*/
-    /*border-width: 1px;*/
-    /*border-style: solid;*/
-    /*border-color: #E8E5E6;*/
-    /*font-weight: bold;*/
-    /*margin: 2px;*/
-    /*color: #FFF;*/
-    /*padding: 10px 15px;*/
-    /*background-color: #E8E5E6;*/
     background-color: #e8e5e6;
-    border-color: #aaaadd;
-    border-style: solid;
-    border-width: 1px;
     margin: 2px;
     padding: 10px 15px;
     text-decoration: none;
+	font-weight: bold;
 }
 DIV.digg SPAN.disabled {
     background-color: #e8e5e6;
-    border-color: #aaaadd;
-    border-style: solid;
-    border-width: 1px;
     margin: 2px;
     padding: 10px 15px;
     text-decoration: none;
-    /*border-right: 1px solid #EEE;*/
-    /*padding: 10px 15px;*/
-    /*border-width: 1px;*/
-    /*border-style: solid;*/
-    /*border-color: #EEE;*/
-    /*margin: 2px;*/
-    /*color: #DDD;*/
-    /*background-color: #E8E5E6;*/
 }
 
 .foot_border_kz {

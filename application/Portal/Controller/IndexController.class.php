@@ -93,17 +93,17 @@ class IndexController extends HomeBaseController {
     
     /**
      * 二级首页推荐信息
-     * @param string  $model_class 模型名（对应数据库表名）
+     * @param string  $model 	        模型
      * @param bool 	  $siteCharge  是否根据站点判断,默认为false
      * @param array	  $extra	       额外字段,自带字段：id,post_pic,post_title,post_url
+     * @param array	  $extraWhere  查询条件
      * @param int	  $limitNumber 数据条数，默认：20条
      * <br/>@适用范围：含有recommended字段
      */
-    public function getRecommended($model_class,$siteCharge=false,$extra=array(),$limitNumber=20){
-    	$model		= D($model_class);
+    public function getRecommended($model,$siteCharge=false,$extra=array(),$extraWhere=array(),$limitNumber=16){
     	$fieldArr	= array("id","post_pic","post_title","post_url");
     	//istop:置顶，status：是否显示
-    	$whereArr	= array("status=1");
+    	$whereArr	= array_merge($extraWhere,array("status=1"));
     	if($siteCharge){
     		array_push($whereArr, "site_id=$this->siteId");
     	}
@@ -114,6 +114,41 @@ class IndexController extends HomeBaseController {
     	$field		= join(",",$fieldArr);
     	$data		= $model->field($field)->where($where)->order("recommended desc,listorder")->limit(0,$limitNumber)->select();
     	return $data;
+    }
+    
+    
+	/**
+     * 列表数据
+     * @param string  $model 	        模型
+     * @param bool 	  $siteCharge  是否根据站点判断,默认为false
+     * @param array	  $extra	       额外字段,自带字段：id,post_pic,post_title,post_url
+     * @param array	  $extraWhere  查询条件
+     * @param int	  $count	        分页条数，默认：16条
+     */
+    public function _list($model,$siteCharge=false,$extra=array(),$extraWhere=array(),$count=16,$order=''){
+    	$fieldArr	= array("id","post_pic","post_title","post_url");
+    	$whereArr	= array_merge($extraWhere,array("status=1"));
+    	if($siteCharge){
+    		array_push($whereArr, "site_id=$this->siteId");
+    	}
+    	if(!empty($extra)){
+    		$fieldArr = array_merge($fieldArr,$extra);
+    	}
+    	$where		= join(" and ",$whereArr);
+    	$field		= join(",",$fieldArr);
+    	$order		= empty($order)?"listorder ASC,post_date DESC":$order;
+    	// 导入分页类
+    	import('Page');
+    	//总数
+    	$total		= $model->where($where)->count();
+    	$Page       = new \Page($total,$count);
+    	$Page->SetPager('Home', '{first}{prev}&nbsp;{liststart}{list}{listend}&nbsp;{next}{last}', array("listlong" => "6", "first" => "首页", "last" => "尾页", "prev" => " < ", "next" => " > ", "list" => "*", "disabledclass" => ""));
+    	$list 		= $model->field($field)->where($where)
+    						->order($order)
+    						->limit($Page->firstRow.','.$Page->listRows)
+    						->select();
+    	$this->assign("list",$list);
+    	$this->assign('page',$Page->show("Home"));
     }
     
     /**

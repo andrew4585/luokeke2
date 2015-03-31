@@ -102,11 +102,10 @@
 <tc_include file="Public:footer"/>
 </body>
 <script type="text/javascript">
-		var url = window.location.href;
-		var strs=url.split("/");
-		if(strs[8] == 1){
+		var cate = {$Think.get.category};
+		if(cate == 1){
 			$(".tab li:first").addClass("on");
-		}else if(strs[8] == 2){
+		}else if(cate == 2){
 			$(".tab li:eq(1)").addClass("on");
 		}
 	</script>

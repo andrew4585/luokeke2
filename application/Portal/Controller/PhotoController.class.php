@@ -50,6 +50,11 @@ class PhotoController extends IndexController {
 		$this->display();
 	}
 	
+	public function lists(){
+		$this->_list($this->model_photo,true);
+		$this->display("list");
+	}
+	
 	/**
 	 * 获取分类信息
 	 */

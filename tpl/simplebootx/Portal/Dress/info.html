@@ -33,15 +33,15 @@
     <!--tab 导航 -->
     <div class="head_tab">
         <ul class="tab">
-            <li class="on">
-                <a href="{:U('Portal/Dress/list')}/category/1">
+            <li <if condition="$info['category'] eq 1">class="on"</if>>
+                <a href="{:U('Portal/Dress/lists')}/category/1">
                     <div class="nav_x">
                         <img src="__STATICS__images/tpl/dress/nav_x_01_03.png"  width="190" height="71">
                     </div>
                 </a>
             </li>
-            <li>
-            	<a href="{:U('Portal/Dress/list')}/category/2">
+            <li <if condition="$info['category'] eq 2">class="on"</if>>
+            	<a href="{:U('Portal/Dress/lists')}/category/2">
                 <div class="nav_x">
                     <img src="__STATICS__images/tpl/dress/nav_x_02_03.png"  width="190" height="71">
                 </div>

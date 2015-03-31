@@ -86,19 +86,7 @@ class DressController extends IndexController {
 		if(empty($category)){
 			$this->error("参数丢失");
 		}
-		import('Page');// 导入分页类		
-		//status=1,表示文章未删除，0表示文章已删除
-		$where_ands =array("status=1","category={$category}");
-		$order		="listorder ASC,post_date DESC";
-		$where= join(" and ", $where_ands);	
-		
-		$count=$this->model_dress->where($where)->count();
-		//下面分页显示
-		$Page       = new \Page($count,1);
-		$Page->SetPager('Home', '{first}{prev}&nbsp;{liststart}{list}{listend}&nbsp;{next}{last}', array("listlong" => "6", "first" => "首页", "last" => "尾页", "prev" => " < ", "next" => " > ", "list" => "*", "disabledclass" => ""));
-		$list = $this->model_dress->where($where)->order($order)->limit($Page->firstRow.','.$Page->listRows)->select();
-		$this->assign('list',$list);// 赋值数据集
-		$this->assign('page',$Page->show("Home"));// 赋值分页输出
+		$this->_list($this->model_dress,false,array(),array("category={$category}"));
 		$this->assign("ad_dress",$this->_getAd("dress"));
 		$this->assign("desc_beautiful",$this->_getAd("desc_beautiful"));
 		//4个摆放在一起的二级页面广告位
@@ -108,7 +96,7 @@ class DressController extends IndexController {
 		//婚纱礼服广告位（专用）
 		$this->assign("ad_dress",$this->_getAd("dress"));
 		
-		$this->display('/Dress/list');
+		$this->display("list");
 	}
 	
 	/**

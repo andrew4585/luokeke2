@@ -55,26 +55,14 @@ class PCustomController extends IndexController {
 		$this->display();
 	}
 	public function lists(){
-		import('Page');// 导入分页类
-		//status=1,表示文章未删除，0表示文章已删除
-		$where_ands =array("status=1","site_id=$this->siteId");
-		$order		="listorder ASC,post_date DESC";
-		$where= join(" and ", $where_ands);
-		
-		$count=$this->model_pcustom->where($where)->count();
-		//下面分页显示
-		$Page       = new \Page($count,2);
-		$Page->SetPager('Home', '{first}{prev}&nbsp;{liststart}{list}{listend}&nbsp;{next}{last}', array("listlong" => "6", "first" => "首页", "last" => "尾页", "prev" => " < ", "next" => " > ", "list" => "*", "disabledclass" => ""));
-		$list = $this->model_pcustom->where($where)->order($order)->limit($Page->firstRow.','.$Page->listRows)->select();
-		$this->assign('list',$list);// 赋值数据集
-		$this->assign('page',$Page->show("Home"));// 赋值分页输出
+		$this->_list($this->model_pcustom,true,array(),array(),16,"recommended desc,listorder");
 		$this->assign("ad_dress",$this->_getAd("dress"));
 		$this->assign("desc_beautiful",$this->_getAd("desc_beautiful"));
 		//3个摆放在一起的二级页面广告位
 		$this->assign("second_page_3",$this->_getAd("second_page_3"));
 		//服务承诺
 		$this->assign("servePromise",$this->_getAd("servePromise"));
-		$this->display('/PCustom/list');
+		$this->display("list");
 	}
 	
 	/**

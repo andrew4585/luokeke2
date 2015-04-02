@@ -5,7 +5,9 @@
  */
 namespace User\Controller;
 use Common\Controller\MemberbaseController;
-class CenterController extends MemberbaseController {
+use Portal\Controller\IndexController;
+//MemberbaseController
+class CenterController extends IndexController {
 	
 	protected $users_model;
 	function _initialize(){
@@ -17,6 +19,21 @@ class CenterController extends MemberbaseController {
 		$userid=sp_get_current_userid();
 		$user=$this->users_model->where(array("id"=>$userid))->find();
 		$this->assign($user);
-    	$this->display(':center');
+		$this->assign("servePromise",$this->_getAd("servePromise"));
+    	$this->display(':user_account');
+    }
+    public function userrule() {
+    	$userid=sp_get_current_userid();
+    	$user=$this->users_model->where(array("id"=>$userid))->find();
+    	$this->assign($user);
+    	$this->assign("servePromise",$this->_getAd("servePromise"));
+    	$this->display(':userrule');
+    }
+    public function pointlist() {
+    	$userid=sp_get_current_userid();
+    	$user=$this->users_model->where(array("id"=>$userid))->find();
+    	$this->assign($user);
+    	$this->assign("servePromise",$this->_getAd("servePromise"));
+    	$this->display(':pointlist');
     }
 }

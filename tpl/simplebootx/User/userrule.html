@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<tc_include file="Public:head_info"/>
+    <link rel="stylesheet" href="__STATICS__css/user.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__css/fancybox.css" />
+    <style type="text/css">
+        .user_sub{
+            border-radius: 8px;
+            display: block;
+            margin-left: 85px;
+            width: 340px;
+            height: 30px;
+            font-family: Microsoft Yahei;
+            color: #FFF;
+            background: #b5c8df;
+			cursor:pointer;
+
+        }
+    </style>
+</head>
+<body>
+<!--头部导航标题js-->
+<tc_include file="Public:nav"/>
+<!--头部结束-->
+<!--照片墙滑动效果-->
+<tc_include file="Public:userbanner"/>
+<div class="userBody">
+    <tc_include file="Public:usernav"/>
+	<div class="userRight">
+       <h2 class="userInfotitle"><span>我的存钱罐</span></h2>
+        <div class="pigbank">
+            <ul class="usertab">
+               <li class="tags_none"><a href="{:U('user/Center/index')}">我的账户</a></li>
+                <li class="tags_none"><a href="{:U('user/Center/pointlist')}">收支明细</a></li>
+                <li class="tags_at"><a href="{:U('user/Center/userrule')}">存钱规则</a></li>
+                <li class="tags_none"><a href="">转介绍</a></li>
+            </ul>
+            <div class="tag_content">
+
+                <table cellpadding="0" cellspacing="0" class="scoreGrid">
+                    <tbody>
+                        <tr class="tag_th">
+                            <th> 动作名称</th>
+                            <th> 周期范围</th>
+                            <th> 积分</th>
+                            <th> 最多奖励</th>
+                        </tr>
+                        <tr>
+                            <td>网站签到</td>
+                            <td> 每天</td>
+                            <td>0</td>
+                            <td> 0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div> 
+</div>
+<div class="clears"></div>
+<tc_include file="Public:servePromise"/>
+<!--底部的图片-->
+<div class="i_003">
+    <img src="__STATICS__images/tpl/ad_04_01.jpg" alt="" />
+</div>
+<!--@@@@@@@-->
+<div class="clears"></div>
+<!--底部-->
+<tc_include file="Public:footer"/>
+</body>
+</html>

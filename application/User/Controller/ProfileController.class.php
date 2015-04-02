@@ -15,16 +15,19 @@ class ProfileController extends MemberbaseController {
 	
     //编辑用户资料
 	public function edit() {
+		
 		$userid=sp_get_current_userid();
 		$user=$this->users_model->where(array("id"=>$userid))->find();
 		$this->assign($user);
+		$this->assign("servePromise",$this->_getAd("servePromise"));
     	$this->display();
     }
-    
     public function edit_post() {
     	if(IS_POST){
-    		$userid=sp_get_current_userid();
-    		$_POST['id']=$userid;
+    		$userid					= sp_get_current_userid();   		
+    		$_POST['id']			= $userid;
+    		$_POST['user_login'] 	= $_POST['username'];
+    		$_POST['user_phone']	= $_POST['mobile'];
     		if ($this->users_model->create()) {
 				if ($this->users_model->save()!==false) {
 					$user=$this->users_model->find($userid);
@@ -44,6 +47,7 @@ class ProfileController extends MemberbaseController {
     	$userid=sp_get_current_userid();
     	$user=$this->users_model->where(array("id"=>$userid))->find();
     	$this->assign($user);
+    	$this->assign("servePromise",$this->_getAd("servePromise"));
     	$this->display();
     }
     
@@ -179,7 +183,13 @@ class ProfileController extends MemberbaseController {
     		
     	}
     }
-    
+    function usercontact(){
+    	$userid=sp_get_current_userid();
+    	$user=$this->users_model->where(array("id"=>$userid))->find();
+    	$this->assign($user);
+    	$this->assign("servePromise",$this->_getAd("servePromise"));
+    	$this->display();
+    }
     
 }
     

@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<tc_include file="Public:head_info"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__css/dress.css">
+</head>
+<body>
+	<div class="head">
+    <!--头部导航标题js-->
+	<tc_include file="Public:nav"/>
+	<!-- banner轮播 -->
+	<tc_include file="Public:banner"/>	
+<!--内容-->
+<div class="conter">
+	<!--tab 导航 -->
+    <div class="head_tab">
+        <ul class="tab">
+            <li>
+                <a href="{:U('Portal/Photo/lists')}/cid/{$cateList.0}">
+                    <div class="nav_x">
+                        <img src="__STATICS__images/tpl/photo/nav_01.png" height="71">
+                    </div>
+                </a>
+            </li>
+            <li>
+            	<a href="{:U('Portal/Photo/lists')}/cid/{$cateList.1}">
+                <div class="nav_x">
+                    <img src="__STATICS__images/tpl/photo/nav_02.png" height="71">
+                </div>
+                </a>
+            </li>
+            <li style="border: none">
+            	<a href="#">
+                <div class="nav_x_1">
+                    <img src="__STATICS__images/tpl/photo/nav_03.png" height="71">
+                </div>
+                </a>
+            </li>
+        </ul>
+        <img src="__STATICS__images/tpl/grey_bottom.png" style="margin-top:-1px"/>
+    </div>
+	    <div class="con">
+            <!--婚纱制定list-->
+                <div class="dress_photo">
+                    <ul >
+                    	<foreach name="list" item="item">
+                        <li>
+                        	<a href="{:U('Portal/PCustom/info')}/id/{$item.id}">
+                            <div class="photo">
+                                <img src="__ROOT__/{$item.post_pic}" alt="" width="290" height="425" />
+                            </div>
+                            <div class="rsp" style="background: url('__STATICS__images/tpl/n09.png') repeat scroll 0 0 rgba(0, 0, 0, 0);"></div>
+                            <div class="text"><h3 style="margin-top:215px;">{$item.post_title}</h3>
+                            </div>
+                            </a>
+                        </li>
+                        </foreach>
+                    </ul>
+					 
+                    <!--滚动向上-->
+                    <div class="digg" id="roll_top">
+                        <img src="__STATICS__/images/tpl/top_07.png">
+                    </div>
+                    <script type="text/javascript" src="__STATICS__/js/97zzw.js"></script>
+                    <div class="digg">{$page}</div>
+                    
+                </div>
+            </div>
+            <!--礼服制定list-->
+           <!--视频list-->
+    </div>
+    <div class="foot_border_kz" align="center">
+			<img src="__STATICS__images/tpl/grey_bottom.png" style="margin-top:-1px">
+		</div>
+		<!-- 蕴含美态 -->
+		<div class="title_foot_01"></div>
+		<div align="center" style="margin-bottom:40px;">
+			<img src="__ROOT__{$desc_beautiful.0.ad_pic}">
+		</div>
+		<!--广告位置-->
+		<tc_include file="Public:second_page_3"/>
+   </div>
+	<!--服务承诺-->
+	<tc_include file="Public:servePromise"/>
+	<!--底部的图片-->
+	<div class="i_003">
+	    <img src="__STATICS__images/tpl/ad_04_01.jpg" alt="" />
+	</div>
+	<!--@@@@@@@-->
+	<div class="clears"></div>
+	
+</div>
+<!--底部-->
+<tc_include file="Public:footer"/>
+<script type="text/javascript">
+		var cate = {$Think.get.cid};
+		if(cate == {$cateList.0}){
+			$(".tab li:first").addClass("on");
+		}else if(cate == {$cateList.1}){
+			$(".tab li:eq(1)").addClass("on");
+		}
+	</script>
+</body>
+</html>

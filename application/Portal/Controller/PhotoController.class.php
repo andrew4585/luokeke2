@@ -47,11 +47,23 @@ class PhotoController extends IndexController {
 		//二维码
 		$this->qrcode();
 		$this->assign("model_table","Photo");
+		//分类数据
+		$this->getCategory();
 		$this->display();
 	}
 	
 	public function lists(){
-		$this->_list($this->model_photo,true);
+		$cid =&$_GET['cid'];
+		if(empty($cid)){
+			$this->error("非法操作");
+		}
+		$this->_list($this->model_photo,true,array(),array("cid=$cid"));
+		$this->getCategory();
+		$this->assign("desc_beautiful",$this->_getAd("desc_beautiful"));
+		//3个摆放在一起的二级页面广告位
+		$this->assign("second_page_3",$this->_getAd("second_page_3"));
+		//服务承诺
+		$this->assign("servePromise",$this->_getAd("servePromise"));
 		$this->display("list");
 	}
 	

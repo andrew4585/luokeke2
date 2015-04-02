@@ -19,7 +19,7 @@ class GroupController extends AdminbaseController{
 		//status=1,表示文章未删除，0表示文章已删除
 		$where_ands =array("status=1");
 		//listorder：排序，post_date:发布时间
-		$order		="recommended desc,listorder ASC,post_date DESC";
+		$order		="istop desc,recommended desc,listorder ASC,post_date DESC";
 		$fields=array(
 				'start_time'=> array("field"=>"post_date","operator"=>">=",'type'=>'time'),
 				'end_time'  => array("field"=>"post_date","operator"=>"<=",'type'=>'time'),

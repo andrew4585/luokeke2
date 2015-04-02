@@ -41,5 +41,20 @@
          	$(".hover_sj").find(".tips").removeClass("hover");
              $(this).removeClass("lihover");
          });
+     	//点击喜欢按钮
+		$(".info-like").click(function(){
+			var number = $(".info-like font").html();
+				number = parseInt(number);
+			var id	   = {$info.id};
+			var model  = $(this).attr("data-model");
+			var url	   = "__ROOT__/Portal/"+model+"/ajax_like";
+			$.post(url,{id:id},function(data){
+				if(data.status){
+					$(".info-like font").html(++number);
+				}else{
+					artDialog_alert(data.info,1);
+				}
+			});
+		});
      });
  </script>

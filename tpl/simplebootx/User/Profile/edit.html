@@ -18,6 +18,51 @@
 			cursor:pointer;
         }
     </style>
+    <script type="text/javascript">
+       $(function(){
+            $("#input-user").blur(function(){
+                var url         = $(".user_form").attr('action');
+                var Show        = $(this).parent().next();
+                var username 	= $("input[name='user_login']").val();
+                $.post(url,{user_login:username},function(data){
+                    if(data.status){
+                        Show.removeClass("onError").addClass("onShow").text();
+                    }else{
+                        //alert(data.info);
+                        Show.removeClass("onShow").addClass("onError").text("用户名为空或已存在");
+                        $("#input-user").focus();
+                    }
+                })
+                return false;
+            })
+           $("#input-mobile").blur(function(){
+               var url          = $(".user_form").attr('action');
+               var Show         = $(this).parent().next();
+               var phone 	    = $("input[name='user_phone']").val();
+               var username 	= $("input[name='user_login']").val();
+               $.post(url,{user_login:username,user_phone:phone},function(data){
+                   if(data.status){
+                       Show.removeClass("onError").addClass("onShow").text();
+                   }else{
+                       //alert(data.info);
+                       Show.removeClass("onShow").addClass("onError").text("手机号码为空或已存在");
+                   }
+               })
+               return false;
+           })
+           $('.user_sub').click(function(){
+                if($(".onError").length){
+                    artDialog_alert("请将错误信息重新填写");
+                    return false;
+                }else{
+                    $("form[name='user_form']").submit();
+                    artDialog_alert("更新成功");
+                    window.location.reload();
+                    return false;
+                }
+           })
+        })
+    </script>
 </head>
 <body>
 <!--头部导航标题js-->
@@ -30,23 +75,22 @@
 	<div class="userRight">
         <div class="userMess">
             <div class="userInfo">
-                <form class="user_form" action="{:U('user/Profile/edit_post')}" method="post">
+                <form class="user_form" name="user_form" action="{:U('user/Profile/edit_post')}" method="post">
                     <div class="form-group">
                         <label class="control-label" for="username">用户名</label>
                         <div class="controls">
-                            <input type="text" id="input-user"  name="username" class="line-height" value="{$user.user_login}">
-
+                            <input type="text" id="input-user"  name="user_login" class="line-height" value="{$user.user_login}">
                         </div>
-                        <div class="onShow">请输入昵称</div>
+                        <div></div>
 
                     </div>
                     <div class="clears"></div>
                     <div class="form-group">
                         <label class="control-label" for="mobile">手机号</label>
                         <div class="controls">
-                            <input type="text" id="input-mobile" class="line-height"  name="mobile" value="{$user.user_phone}">
+                            <input type="text" id="input-mobile" class="line-height"  name="user_phone" value="{$user.user_phone}">
                         </div>
-                        <div class="onShow">请输入手机号</div>
+                        <div></div>
                     </div>
                     <div class="clears"></div>
                     <div class="form-group">

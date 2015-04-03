@@ -1,0 +1,470 @@
+.userBody{
+    width: 1200px;
+    margin:50px auto 0 ;
+    height: auto;
+    background-color: #fff;
+}
+.userLeft{
+    width: 175px;
+    height: 340px;
+    float: left;
+    margin-right: 25px;
+
+}
+.userRight{
+    float: left;
+    width: 1000px;
+
+}
+.leftTop {
+    border: 1px solid #a5a5a5;
+    margin-bottom: 12px;
+}
+
+.user_Title{
+    width: 175px;
+    background-color: #b5c8df;
+    text-align: center;
+    color: #ffffff;
+    font-family: Microsoft Yahei;
+    height: 45px;
+    font-size: 16px;
+    line-height: 45px;
+    margin-bottom: 7px;
+}
+.left_nav{
+    width: 175px;
+}
+.left_nav_bottom{
+
+    height: 35px;
+    text-align: left;
+    border-top: 1px dashed #a5a5a5;
+}
+.left_nav_bottom img{
+    margin:0 10px 3px 16px;
+}
+.left_nav li a {
+    line-height: 35px;
+    text-align: left;
+    font-size: 15px;
+    font-family: Microsoft Yahei;
+    color: #333;
+
+}
+.userMess{
+
+    width: 1000px;
+    background-color: #f2f2f2;
+    overflow: hidden;
+}
+.userInfo{
+    margin: 20px 0 20px 20px;
+    float: left;
+    width: 615px;
+    background-color: #fff;
+}
+form{
+    margin-top: 10px;
+}
+.line-height {
+    border: 1px solid #bbb;
+    width: 340px;
+    height: 30px;
+    line-height: 30px\9;
+}
+#input-user{
+    background: url("../images/tpl/user-6.png") no-repeat right top;
+}
+#input-mobile{
+    background: url("../images/tpl/use-8.png") no-repeat right top;
+}
+.control-label{
+    float: left;
+    margin-left: 22px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 16px;
+    text-align: right;
+}
+.form-group{
+    float: left;
+    margin-top: 30px;
+}
+
+.controls{
+    float: left;
+    margin-left: 10px;
+}
+
+.onShow{
+    background: url(../images/tpl/user-5.png) no-repeat;
+    height: 30px;
+    padding-left: 25px;
+    float: left;
+    margin-top: 5px;
+    margin-left: 10px;
+    font-size: 13px;
+    line-height: 22px;
+    vertical-align: middle;
+}
+.onError{
+    background: url(../images/tpl/tel-5.png) no-repeat;
+    height: 30px;
+    padding-left: 25px;
+    float: left;
+    margin-top: 5px;
+    margin-left: 10px;
+    font-size: 13px;
+    line-height: 22px;
+    vertical-align: middle;
+}
+
+/**修改密码部分**/
+.userMess h2{
+    line-height: 40px;
+    width: 550px;
+    border-bottom: 1px #ccc dotted;
+    margin: 10px 0 0 25px;
+    font-family: Microsoft Yahei;
+    font-size: 18px;
+    font-weight: normal;
+    color: #444;
+}
+
+.formpass{
+    float: left;
+    margin-top: 10px;
+}
+
+.user_pass{
+
+     float: left;
+ }
+.user_pass span {
+    margin-right: 5px;
+    color: #f00;
+    font-size: 12px;
+    font-weight: bold;
+}
+.password{
+    float: left;
+    width: 120px;
+    font-size: 16px;
+    text-align: right;
+    margin-right: 10px;
+}
+.formpass input{
+    float: left;
+}
+/**我的存钱罐**/
+
+.userInfotitle{
+    width: 100%;
+    background-color: #b5c8df;
+    color: #ffffff;
+    font-family: Microsoft Yahei;
+    height: 45px;
+    font-size: 16px;
+    line-height: 45px;
+    margin-bottom: 7px;
+}
+.userInfotitle span{
+    margin-left: 15px;
+}
+.pigbank{
+    width: 100%;
+    padding-bottom: 10px;
+}
+.usertab{
+    list-style: none;
+    width: 100%;
+    height: 30px;
+    border-bottom: 2px #ccc solid ;
+}
+.usertab li{
+    float: left;
+    width: 97px;
+    line-height: 30px;
+    text-align: center;
+    font-size: 14px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+.tags_at{
+    background:url("../images/tpl/back_03.png") repeat;
+}
+.scoreGrid{
+    width: 1000px;
+    height: 30px;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+.tag_th{
+    width: 1000px;
+    background: url("../images/tpl/back_03.png") repeat-x;
+}
+
+.scoreGrid tr th {
+    background: #f5f5f5;
+    line-height: 30px;
+    font-size: 13px;
+    font-weight: normal;
+    padding-left: 12px;
+    text-align: left;
+    border-bottom: 1px #ccc solid;
+}
+.scoreGrid tr td{
+    line-height: 26px;
+    border-bottom: 1px #f5f5f5 solid;
+    font-size: 13px;
+    padding-left: 15px;
+}
+/**联系**/
+.contact{
+    float: left;
+    width: 70px;
+    font-size: 16px;
+    text-align: right;
+    margin-right: 10px;
+}
+.address{
+    float: left;
+    width: 341px;
+}
+.Uaddress{
+    padding:0;
+    width: 100px;
+    height: 30px;
+    float: left;
+    font-size: 14px;
+    margin-right: 15px;
+    border: 1px #ccc solid;
+    
+}
+/**用户中心**/
+.pigbank_account{
+    margin-top: 10px;
+    margin-bottom: 20px;
+    height: 145px;
+    width: 100%;
+}
+.accountleft{
+    float: left;
+    width: 270px;
+}
+.accountright{
+    float: left;
+    margin-left: 25px;
+    width: 700px;
+    height: 140px;
+}
+
+.accountHeader{
+    height: 80px;
+    width: 270px;
+    background-color: #f3f3f3;
+    border:1px #ccc solid;
+    margin-bottom: 10px;
+}
+.headerImg {
+    width: 60px;
+    height: 60px;
+    margin: 8px;
+    float: left;
+    border: 1px #ccc solid;
+    padding: 2px;
+}
+.accountHeader b{
+    font-size: 16px;
+    font-family: Microsoft Yahei;
+    color: #333;
+}
+.accountHeader p{
+    padding-top: 5px;
+    padding-left: 85px;
+    display: block;
+    line-height: 22px;
+    font-size: 13px;
+    color: #aaa;
+}
+#checheckIn{
+    height: 50px;
+    width:270px;
+    border:1px #ccc solid;
+    background-color:#f3f3f3;
+}
+#checheckIn li {
+    float: left;
+    font-size: 12px;
+    color: #aaa;
+}
+#checheckIn li b {
+    display: block;
+    font-size: 18px;
+    font-family: Microsoft Yahei;
+    color: #333;
+
+    width: 70px;
+    text-align: center;
+}
+#checheckIn span{
+    display: block;
+    font-size: 14px;
+    font-family: Microsoft Yahei;
+    color: #333;
+    width: 60px;
+    text-align: center;
+}
+.checkIntxt {
+    line-height: 50px;
+    font-size: 16px;
+    font-family: Microsoft Yahei;
+    text-align: center;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+#checheckIn li strong {
+    font-size: 18px;
+    color: #333;
+    line-height: 50px;
+    margin-right: 2px;
+}
+.accountBalance{
+    font-size: 14px;
+    color: #333;
+    line-height: 30px;
+}
+#accountMoey {
+    height: 50px;
+}
+#accountMoey li {
+    float: left;
+    font-size: 14px;
+    color: #333;
+    margin-right: 10px;
+}
+#accountMoey li strong {
+    font-size: 30px;
+    color: #333;
+    font-weight: normal;
+    margin-right: 5px;
+}
+#accountMoey li.btn {
+
+    text-align: center;
+    padding-top: 10px;
+}
+#accountMoey li a.current {
+    color: #fff;
+    background: #b5c8df;
+}
+#accountMoey li a {
+    display: block;
+    height: 30px;
+    width: 80px;
+    text-align: center;
+    line-height: 30px;
+
+    background: #EEE;
+    color: #333;
+    margin-left: 20px;
+    text-decoration: none;
+    font-size: 14px;
+}
+#MoeyType {
+    margin-top:14px;
+    height: 48px;
+    background: #f6f6f6;
+    border-top:1px #ccc solid;
+    border-bottom: 1px #ccc solid;
+}
+#MoeyType li {
+    float: left;
+    padding-top: 10px;
+    margin-left: 25px;
+    margin-right: 35px;
+    font-size: 14px;
+}
+#MoeyType li span {
+    font-size: 18px;
+    color: #333;
+    margin-left: 10px;
+}
+.score{
+    font-weight:bold ;
+    color: #53A000;
+}
+/**收支明细**/
+.gridSearch {
+    width: 100%;
+    height: 40px;
+    background: #f4f4f4;
+    margin: 0 auto;
+    padding-top: 10px;
+    margin-top: 10px;
+    border-bottom: 1px #ccc solid;
+    border-top: 1px #ccc solid;
+}
+.gridSearch ul li {
+    float: left;
+    margin-left: 10px;
+    font-size: 13px;
+    line-height: 30px;
+}
+.datebox {
+    width: 165px;
+    height: 25px;
+    border: 1px #ccc solid;
+}
+#TypeID{
+
+    font-family: Microsoft Yahei;
+    width: 85px;
+    padding:0;
+    height: 25px;
+    border: 1px #ccc solid;
+}
+.search{
+    margin-top: 1px;
+}
+/**头像上传**/
+.avatar{
+    margin: 20px 0 20px 20px;
+    width:700px;
+    background-color: #fff;
+}
+
+.infoTitle {
+    display: block;
+    padding-top: 10px;
+    line-height: 30px;
+    border-bottom: 1px #ccc dotted;
+    margin: 0 auto;
+    font-family: Microsoft Yahei;
+    font-size: 18px;
+    font-weight: normal;
+    color: #444;
+}
+.infoForm {
+    float: right;
+    height: 200px;
+    margin-right: 150px;
+}
+.infoForm tr td {
+    line-height: 40px;
+    font-size: 16px;
+    color: #333;
+}
+.Avatar{
+    display: block;
+    width: 160px;
+    height: 160px;
+}
+.infoForm tr td.txt2 {
+    padding-left: 10px;
+}
+#altContent{
+    margin-top: 20px;
+}

@@ -33,8 +33,8 @@
 			});
 			
 			$(function(){
-				var url = window.location.href;
-				var strs=url.split("?");
+				var urls = window.location.href;
+				var strs=urls.split("?");
 				
 				$("form[name='logform']").submit(function(){
 					var url = $(this).attr('action');
@@ -43,7 +43,12 @@
 					$.post(url,{username:username,password:password},function(data){					
 						if(data.status){
 							artDialog_alert(data.info);
-							location.href = strs[1];
+							if(strs[1]){
+								location.href = strs[1];
+							}else{
+								window.location.href="{:U('Portal/index/index')}";
+							}
+
 						}else{
 							artDialog_alert(data.info);
 						}

@@ -45,7 +45,7 @@
 	            <th>ID</th>
 	            <th>标题</th>
 	            <th>站点</th>
-	            <th width="45">点击量</th>
+	            <th>分类</th>
                 <th width="50">缩略图</th>
 	            <th width="120"><span>发布时间</span></th>
 	            <th width="80">首页置顶</th>
@@ -59,12 +59,12 @@
 		            <td><input name='listorders[{$vo.id}]' class="input input-order"  type='text' size='3' value='{$vo.listorder}'></td>
 		            <td><a>{$vo.id}</a></td>
 		            <td>
-		            	<a href="{:U('portal/Active/info')}/id/{$vo.id}" target="_blank" title="{$vo.post_excerpt}">
+		            	<a href="{$vo.post_url}" target="_blank" title="{$vo.post_excerpt}">
 		            		<span>{$vo.post_title}</span>
 		            	</a>
 		            </td>
 		            <td>{$vo.site.site_name}</td>
-		            <td>{$vo.post_hits}</td>
+		            <td>{$vo.cate_name}</td>
     	            <td>
     	            	<a href="#"  onclick="image_priview('__ROOT__/{$vo.post_pic}');"><img src="__ROOT__/{$vo.post_pic}" style="width:200px;"/></a>
     	            </td>

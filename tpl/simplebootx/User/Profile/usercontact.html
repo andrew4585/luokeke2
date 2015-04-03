@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<tc_include file="Public:head_info"/>
+    <link rel="stylesheet" href="__STATICS__css/user.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__css/fancybox.css" />
+	<script type="text/javascript" src="__STATICS__js/china.js"></script>
+	<script type="text/javascript">
+        $(function() {
+            var $province = $('#province');
+            var $city = $('#city');
+            var province_temp = [],
+                    city_temp = [];
+
+            $.each(china.province, function(index, _province) {
+                // 缓存省中市
+                province_temp[_province.name] = _province.city;
+                // 添加到列表
+                var $p = $('<option>');
+                $p.text(_province.name);
+                $province.append($p);
+            });
+
+            $province.on('change', function(e) {
+                var _province = $(this).val();
+                if (_province) {
+                    // 省->市
+                    var cities = province_temp[_province];
+                    // 清空原有市
+                    $city.children().remove();
+
+                    var $_p = $('<option>');
+                    $_p.text('选择所在市');
+                    $city.append($_p);
+                    if ( !! cities.length) {
+                        $.each(cities, function(index, _city) {
+                            // 缓存市中县
+                            city_temp[_city.name] = _city.county;
+                            // 添加到列表
+                            var $p = $('<option>');
+                            $p.text(_city.name);
+                            $city.append($p);
+                        });
+                    } else {
+                        // 缓存市中县
+                        city_temp[cities.name] = cities.county;
+                        // 添加到列表
+                        var $p = $('<option>');
+                        $p.text(cities.name);
+                        $city.append(p);
+                    }
+                }
+            });
+        });
+
+
+    </script>
+    <style type="text/css">
+         .user_sub{
+            border-radius: 8px;
+            display: block;
+            margin-left: 80px;
+            margin-bottom: 25px;
+            width: 340px;
+            height: 30px;
+            font-family: Microsoft Yahei;
+            color: #FFF;
+            background: #b5c8df;
+
+
+        }
+    </style>
+</head>
+<body>
+<!--头部导航标题js-->
+<tc_include file="Public:nav"/>
+<!--头部结束-->
+<!--照片墙滑动效果-->
+<tc_include file="Public:userbanner"/>
+<div class="userBody">
+    <tc_include file="Public:usernav"/>
+	<div class="userRight">
+        <div class="userMess">
+            <div class="userInfo">
+                <form class="user_form" action="" method="post">
+                    <h2>联系信息</h2>
+                    <div class="formpass">
+                        <div class="user_pass">
+                            <label class="contact" for="password"><span>*</span>所在地</label>
+                        </div>
+                        <div class="address">
+                        <select class="Uaddress" id="province"  name="province">
+                            <option value="0" selected="selected">选择所在省</option>
+                            
+                        </select>
+                        <select class="Uaddress" id="city"  name="city">
+                            <option value="0" selected="selected">选择所在市</option>
+                            
+                        </select>
+                        </div>
+                        <div class="onShow"></div>
+                    </div>
+                    <div class="clears"></div>
+                    <div class="formpass">
+                        <div class="user_pass">
+
+                            <label class="contact" for="address"><span>*</span>地址</label>
+                        </div>
+                        <input type="text" id="address" class="line-height"  name="address" value="">
+                        <div class="onShow"></div>
+                    </div>
+                    <div class="clears"></div>
+                    <h2>其他信息</h2>
+                    <div class="formpass">
+                        <div class="user_pass">
+                            <label class="contact" for="wechat"><span>*</span>微信名</label>
+                        </div>
+                        <input type="text" id="wechat"  name="wechat" class="line-height" value="">
+                        <div class="onShow"></div>
+                    </div>
+                    <div class="clears"></div>
+                    <div class="formpass">
+                        <div class="user_pass">
+
+                            <label class="contact" for="weibo"><span>*</span>微博名</label>
+                        </div>
+                        <input type="text" id="weibo" class="line-height"  name="weibo" value="">
+                        <div class="onShow"></div>
+                    </div>
+                    <div class="clears"></div>
+                    <div class="formpass">
+                        <div class="user_pass">
+                            <label class="contact" for="qq"><span>*</span>QQ</label>
+                        </div>
+                        <input type="text" id="qq" class="line-height"  name="qq" value="">
+                        <div class="onShow"></div>
+                    </div>
+                    <div class="clears"></div>
+                    <div class="form-group">
+                        <button class="user_sub" type="submit">保存信息</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+     </div> 
+</div>
+<div class="clears"></div>
+<tc_include file="Public:servePromise"/>
+<!--底部的图片-->
+<div class="i_003">
+    <img src="__STATICS__images/tpl/ad_04_01.jpg" alt="" />
+</div>
+<!--@@@@@@@-->
+<div class="clears"></div>
+<!--底部-->
+<tc_include file="Public:footer"/>
+</body>
+</html>

@@ -1,83 +1,71 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>{$site_name}</title>
-<meta name="keywords" content="{$site_seo_keywords}" />
-<meta name="description" content="{$site_seo_description}">
-<meta name="author" content="ThinkCMF">
-<tc_include file="Public:head" />
+	<tc_include file="Public:head_info"/>
+    <link rel="stylesheet" href="__STATICS__css/user.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__css/fancybox.css" />
+    <style type="text/css">
+        .user_sub{
+            border-radius: 8px;
+            display: block;
+            margin-left: 85px;
+			margin-bottom: 25px;
+            width: 340px;
+            height: 30px;
+            font-family: Microsoft Yahei;
+            color: #FFF;
+            background: #b5c8df;
+			cursor:pointer;
+        }
+    </style>
 </head>
-<body class="body-white" id="top">
-	<tc_include file="Public:nav" />
+<body>
+<!--头部导航标题js-->
+<tc_include file="Public:nav"/>
+<!--头部结束-->
+<!--照片墙滑动效果-->
+<tc_include file="Public:userbanner"/>
+<div class="userBody">
+    <tc_include file="Public:usernav"/>
+	<div class="userRight">
+        <div class="userMess">
+            <div class="userInfo">
+                <form class="user_form" action="{:U('user/Profile/edit_post')}" method="post">
+                    <div class="form-group">
+                        <label class="control-label" for="username">用户名</label>
+                        <div class="controls">
+                            <input type="text" id="input-user"  name="username" class="line-height" value="{$user.user_login}">
 
-		<div class="container tc-main">
-                <div class="row">
-                    <div class="span3">
-	                    <tc_include file="Public:usernav"/>
+                        </div>
+                        <div class="onShow">请输入昵称</div>
+
                     </div>
-                    <div class="span9">
-                           <div class="tabs">
-                               <ul class="nav nav-tabs">
-                                   <li class="active"><a href="#one" data-toggle="tab"><i class="fa fa-list-alt"></i> 修改资料</a></li>
-                               </ul>
-                               <div class="tab-content">
-                                   <div class="tab-pane active" id="one">
-                                   		<form class="form-horizontal J_ajaxForm" action="{:u('profile/edit_post')}" method="post">
-                                   			<div class="control-group">
-                                   				<label class="control-label" for="input-user_nicename">昵称</label>
-                                   				<div class="controls">
-                                   					<input type="text" id="input-user_nicename" placeholder="昵称" name="user_nicename" value="{$user_nicename}">
-                                   				</div>
-                                   			</div>
-                                   			<div class="control-group">
-                                   				<label class="control-label" for="input-sex">性别</label>
-                                   				<div class="controls">
-                                   					<php>
-	                                   				$sexs=array("0"=>"保密","1"=>"程序猿","2"=>"程序媛");
-	                                   				</php>
-                                   					<select id="input-sex" name="sex">
-                                   						<foreach name="sexs" item="vo">
-                                   						<php>$sexselected=$key==$sex?"selected":"";</php>
-                                   							<option value="{$key}" {$sexselected}>{$vo}</option>
-                                   						</foreach>
-                                   					</select>
-                                   				</div>
-                                   			</div>
-                                   			<div class="control-group">
-                                   				<label class="control-label" for="input-birthday">生日</label>
-                                   				<div class="controls">
-                                   					<input class="J_date" type="text" id="input-birthday" placeholder="2013-01-04" name="birthday" value="{$birthday}">
-                                   				</div>
-                                   			</div>
-                                   			<div class="control-group">
-                                   				<label class="control-label" for="input-user_url">个人网址</label>
-                                   				<div class="controls">
-                                   					<input type="text" id="input-user_url" placeholder="http://thinkcmf.com" name="user_url" value="{$user_url}">
-                                   				</div>
-                                   			</div>
-                                   			<div class="control-group">
-                                   				<label class="control-label" for="input-signature">个性签名</label>
-                                   				<div class="controls">
-                                   					<textarea id="input-signature" placeholder="个性签名" name="signature">{$signature}</textarea>
-                                   				</div>
-                                   			</div>
-                                   			<div class="control-group">
-                                   				<div class="controls">
-                                   					<button type="submit" class="btn J_ajax_submit_btn">保存</button>
-                                   				</div>
-                                   			</div>
-                                   		</form>
-                                   </div>
-                               </div>							
-                           </div>
+                    <div class="clears"></div>
+                    <div class="form-group">
+                        <label class="control-label" for="mobile">手机号</label>
+                        <div class="controls">
+                            <input type="text" id="input-mobile" class="line-height"  name="mobile" value="{$user.user_phone}">
+                        </div>
+                        <div class="onShow">请输入手机号</div>
                     </div>
-                </div>
-
-		<tc_include file="Public:footer" />
-
-	</div>
-	<!-- /container -->
-
-	<tc_include file="Public:scripts" />
+                    <div class="clears"></div>
+                    <div class="form-group">
+                        <button class="user_sub" type="submit">保存信息</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+     </div> 
+</div>
+<div class="clears"></div>
+<tc_include file="Public:servePromise"/>
+<!--底部的图片-->
+<div class="i_003">
+    <img src="__STATICS__images/tpl/ad_04_01.jpg" alt="" />
+</div>
+<!--@@@@@@@-->
+<div class="clears"></div>
+<!--底部-->
+<tc_include file="Public:footer"/>
 </body>
 </html>

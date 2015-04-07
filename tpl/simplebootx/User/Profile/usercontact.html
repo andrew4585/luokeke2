@@ -51,8 +51,25 @@
                     }
                 }
             });
+            $("form[name='user_form']").submit(function(){
+                var url = $(this).attr('action');
+                var province 	= $("#province").val();
+                var city 	    = $("#city").val();
+                var address     = $("input[name='address']").val();
+                var wechat      = $("input[name='wechat']").val();
+                var weibo       = $("input[name='weibo']").val();
+                var qq          = $("input[name='qq']").val();
+                $.post(url,{province:province,city:city,address:address,wechat:wechat,weibo:weibo,qq:qq},function(data){
+                    if(data.status){
+                        artDialog_alert(data.info);
+                        window.location.href="{:U('user/Profile/usercontact')}";
+                    }else{
+                        artDialog_alert(data.info);
+                    }
+                });
+                return false;
+            })
         });
-
 
     </script>
     <style type="text/css">
@@ -66,7 +83,7 @@
             font-family: Microsoft Yahei;
             color: #FFF;
             background: #b5c8df;
-
+            cursor:pointer;
 
         }
     </style>
@@ -82,58 +99,58 @@
 	<div class="userRight">
         <div class="userMess">
             <div class="userInfo">
-                <form class="user_form" action="" method="post">
+                <form class="user_form" action="{:U('user/Profile/usercontact_post')}" name="user_form" method="post">
                     <h2>联系信息</h2>
                     <div class="formpass">
                         <div class="user_pass">
-                            <label class="contact" for="password"><span>*</span>所在地</label>
+                            <label class="contact" for="password">所在地</label>
                         </div>
                         <div class="address">
                         <select class="Uaddress" id="province"  name="province">
-                            <option value="0" selected="selected">选择所在省</option>
-                            
+                            <empty name="user.province">
+                                <option value="0" selected="selected">选择所在省</option>
+                                <else/>
+                            <option value="0" selected="selected">{$user.province}</option>
+                            </empty>
                         </select>
                         <select class="Uaddress" id="city"  name="city">
-                            <option value="0" selected="selected">选择所在市</option>
-                            
+                            <empty name="user.city">
+                                <option value="0" selected="selected">选择所在市</option>
+                                <else/>
+                                <option value="0" selected="selected">{$user.city}</option>
+                            </empty>
+
                         </select>
                         </div>
-                        <div class="onShow"></div>
                     </div>
                     <div class="clears"></div>
                     <div class="formpass">
                         <div class="user_pass">
-
-                            <label class="contact" for="address"><span>*</span>地址</label>
+                            <label class="contact" for="address">地址</label>
                         </div>
-                        <input type="text" id="address" class="line-height"  name="address" value="">
-                        <div class="onShow"></div>
+                        <input type="text" id="address" class="line-height"  name="address" value="{$user.address}">
                     </div>
                     <div class="clears"></div>
                     <h2>其他信息</h2>
                     <div class="formpass">
                         <div class="user_pass">
-                            <label class="contact" for="wechat"><span>*</span>微信名</label>
+                            <label class="contact" for="wechat">微信名</label>
                         </div>
-                        <input type="text" id="wechat"  name="wechat" class="line-height" value="">
-                        <div class="onShow"></div>
+                        <input type="text" id="wechat"  name="wechat" class="line-height" value="{$user.wechat}">
                     </div>
                     <div class="clears"></div>
                     <div class="formpass">
                         <div class="user_pass">
-
-                            <label class="contact" for="weibo"><span>*</span>微博名</label>
+                            <label class="contact" for="weibo">微博名</label>
                         </div>
-                        <input type="text" id="weibo" class="line-height"  name="weibo" value="">
-                        <div class="onShow"></div>
+                        <input type="text" id="weibo" class="line-height"  name="weibo" value="{$user.weibo}">
                     </div>
                     <div class="clears"></div>
                     <div class="formpass">
                         <div class="user_pass">
-                            <label class="contact" for="qq"><span>*</span>QQ</label>
+                            <label class="contact" for="qq">QQ</label>
                         </div>
-                        <input type="text" id="qq" class="line-height"  name="qq" value="">
-                        <div class="onShow"></div>
+                        <input type="text" id="qq" class="line-height"  name="qq" value="{$user.qq}">
                     </div>
                     <div class="clears"></div>
                     <div class="form-group">

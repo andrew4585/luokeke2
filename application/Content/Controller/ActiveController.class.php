@@ -35,6 +35,7 @@ class ActiveController extends AdminbaseController {
 			$_POST['price']			= I("post.price",0,'intval');
 			$_POST['sale_count']	= I("post.sale_count",0,'intval');
 			$_POST['post_date']= strtotime($_POST['post_date']);
+			$_POST['post_content']=htmlspecialchars($_POST['post_content']);
 			$_POST['post_pic'] = $this->removeUploadImage($this->imgFolder, $_POST['post_pic']);
 			$result=$this->model_obj->add($_POST);
 			if ($result) {
@@ -53,6 +54,7 @@ class ActiveController extends AdminbaseController {
 			$_POST['price']			= I("post.price",0,'intval');
 			$_POST['sale_count']	= I("post.sale_count",0,'intval');
 			$_POST['post_date']= strtotime($_POST['post_date']);
+			$_POST['post_content']=htmlspecialchars($_POST['post_content']);
 			$_POST['post_pic'] = $this->removeUploadImage($this->imgFolder, $_POST['post_pic']);
 			$result=$this->model_obj->save($_POST);
 			if ($result) {

@@ -26,11 +26,11 @@
                 var username 	= $("input[name='user_login']").val();
                 $.post(url,{user_login:username},function(data){
                     if(data.status){
-                        Show.removeClass("onError").addClass("onShow").text();
+                        Show.removeClass("onError").addClass("onShow").text("用户名可用！");
                     }else{
                         //alert(data.info);
                         Show.removeClass("onShow").addClass("onError").text("用户名为空或已存在");
-                        $("#input-user").focus();
+                        //$("#input-user").focus();
                     }
                 })
                 return false;
@@ -42,25 +42,30 @@
                var username 	= $("input[name='user_login']").val();
                $.post(url,{user_login:username,user_phone:phone},function(data){
                    if(data.status){
-                       Show.removeClass("onError").addClass("onShow").text();
+                       Show.removeClass("onError").addClass("onShow").text("手机号可用！");
                    }else{
                        //alert(data.info);
-                       Show.removeClass("onShow").addClass("onError").text("手机号码为空或已存在");
+                       Show.removeClass("onShow").addClass("onError").text("手机号码不准确！");
                    }
                })
                return false;
            })
-           $('.user_sub').click(function(){
-                if($(".onError").length){
-                    artDialog_alert("请将错误信息重新填写");
-                    return false;
-                }else{
-                    $("form[name='user_form']").submit();
-                    artDialog_alert("更新成功");
-                    window.location.reload();
-                    return false;
-                }
+
+           $("form[name='user_form']").submit(function(){
+               var url = $(this).attr('action');
+               var username 	= $("input[name='user_login']").val();
+               var mobile 	= $("input[name='user_phone']").val();
+               $.post(url,{user_login:username,user_phone:mobile},function(data){
+                   if(data.status){
+                       artDialog_alert(data.info);
+                       window.location.href="{:U('user/Profile/edit')}";
+                   }else{
+                       artDialog_alert(data.info);
+                   }
+               });
+               return false;
            })
+
         })
     </script>
 </head>

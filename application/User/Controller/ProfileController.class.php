@@ -15,7 +15,6 @@ class ProfileController extends MemberbaseController {
 	
     //编辑用户资料
 	public function edit() {
-		
 		$userid=sp_get_current_userid();
 		$user=$this->users_model->where(array("id"=>$userid))->find();
 		$this->assign($user);
@@ -56,8 +55,8 @@ class ProfileController extends MemberbaseController {
     		}
     		$uid=sp_get_current_userid();
     		$admin=$this->users_model->where("id=$uid")->find();
-    		$repassword=$_POST['repassword'];
-    		$password=$_POST['password'];
+    		$repassword 	= $_POST['repassword'];
+    		$password 		= $_POST['password'];
 			if($repassword == $password){
 				$data['user_pass'] 	= sp_password($password);
 				$data['id'] 		= $uid;
@@ -65,7 +64,7 @@ class ProfileController extends MemberbaseController {
 				if($res){
 					$this->success("修改成功！");
 				}else{
-					$this->error("修改成功!");
+					$this->error("修改失败!");
 				}
 			}else{
 				$this->error("密码输入不一致！");
@@ -89,6 +88,7 @@ class ProfileController extends MemberbaseController {
     
     function avatar(){
     	$userid=sp_get_current_userid();
+		$this->assign("servePromise",$this->_getAd("servePromise"));
 		$user=$this->users_model->where(array("id"=>$userid))->find();
 		$this->assign($user);
     	$this->display();
@@ -131,10 +131,26 @@ class ProfileController extends MemberbaseController {
     function usercontact(){
     	$userid=sp_get_current_userid();
     	$user=$this->users_model->where(array("id"=>$userid))->find();
-    	$this->assign($user);
+    	$this->assign("user",$user);
     	$this->assign("servePromise",$this->_getAd("servePromise"));
     	$this->display();
     }
-    
+
+	function usercontact_post(){
+		if(IS_POST){
+			$userid = sp_get_current_userid();
+			$_POST['id'] = $userid;
+			if($this->users_model->create($_POST)){
+				if($this->users_model->save()){
+					$this->success("保存成功！",U("user/profile/usercontact"));
+				}else{
+					$this->error("保存失败！");
+				}
+			}
+		}
+
+
+	}
+
 }
     

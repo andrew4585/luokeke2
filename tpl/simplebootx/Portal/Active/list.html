@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <tc_include file="Public:head_info"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__css/dress.css">
+    <link rel="stylesheet" type="text/css" href="__STATICS__css/store.css">
+
+</head>
+<body>
+<div class="head">
+    <!--头部导航标题js-->
+    <tc_include file="Public:nav"/>
+    <!-- banner轮播 -->
+    <tc_include file="Public:banner"/>
+    <!--内容-->
+    <div class="conter">
+        <div class="title_01">
+            <div class="a_l1_t">
+                <!--<span><font style="color:#7C7C7D"><</font>洛可可婚纱摄影<font style="color:#7C7C7D">></font>之<font style="color:#F37914 ">最新人气活动</font><font style="color:#7C7C7D">>POPULARA CTIVIES</font></span>-->
+                <div class="title_nav"></div>
+            </div>
+        </div>
+        <div class="main_activity">
+            <!--会员福利-->
+            <div class="info_membership">
+                <ul>
+                    <foreach name="list" item="item">
+                    <li>
+                        <div class="info_membership_img"><img src="__ROOT__/{$item.post_pic}" alt=""></div>
+
+                        <div class="info_activity_tit1">
+                            <div class="textbox">
+                                <div style="font-size:30px; font-weight:bold; font-family:'微软雅黑';">{$item.post_title}</div>
+                                <div style="font-size:16px; font-family:'微软雅黑'; color:#666; padding-top:10px;">{$item.post_excerpt}...</div>
+                            </div>
+                            <div class="more_z">
+                                <span><div class="date11">{$item.post_date|date="y-m-d",###}</div></span>
+                                <span><div class="more11"><a href="{:U('Portal/active/info')}/id/{$item.id}">查看更多>></a></div></span>
+                            </div>
+                        </div>
+                    </li>
+                    </foreach>
+                </ul>
+                <div class="digg" id="roll_top">
+                    <img src="__STATICS__/images/tpl/top_07.png">
+                </div>
+                <script type="text/javascript" src="__STATICS__/js/97zzw.js"></script>
+                <div class="digg">{$page}</div>
+
+            </div>
+
+        </div>
+        <!--中间导航-->
+        <div class="middle">
+            限时团购&nbsp;&nbsp;&nbsp;︳洛可可风&nbsp;&nbsp;&nbsp;︳用客照说话&nbsp;&nbsp;&nbsp;︳婚纱礼服定制&nbsp;&nbsp;&nbsp;︳洛可可之星
+        </div>
+        <!--广告位置-->
+        <tc_include file="Public:second_page_3"/>
+    </div>
+    <!--服务承诺-->
+    <tc_include file="Public:servePromise"/>
+    <!--底部的图片-->
+    <div class="i_003">
+        <img src="__STATICS__images/tpl/ad_04_01.jpg" alt="" />
+    </div>
+    <!--@@@@@@@-->
+    <div class="clears"></div>
+
+</div>
+<!--底部-->
+<tc_include file="Public:footer"/>
+</body>
+</html>

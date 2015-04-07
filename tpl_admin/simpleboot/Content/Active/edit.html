@@ -78,12 +78,6 @@ body fieldset legend {
               	<input type="hidden" name="id" value="{$id}"/>
               </td>
             </tr>
-            <tr>
-              <th width="80">副标题 </th>
-              <td>
-              	<input type="text" style="width:400px;" name="post_title2" id="title2" value="{$post_title2}"  class="input input_hd J_title_color" placeholder="可不填" onkeyup="strlen_verify(this, 'title_len', 160)" />
-              </td>
-            </tr>
              <tr>
             <th width="80">站点</th>
 			  <td>
@@ -94,27 +88,22 @@ body fieldset legend {
 				  </select>
 			  </td>
 		  </tr>
-		  	<tr>
-		  		<th>类型</th>
-		  		<td>
-		  			<select name="cate_name" class="normal_select" onchange="cate_choice(this);">
-		  				<option value="常规">常规</option>
-		  				<option value="出售">出售</option>
-		  			</select>
-		  		</td>
-		  	</tr>
-		  	<tr class="cate-attr">
-		  		<th width="80">价格</th>
-		  		<td><input type="text" class="input" name="price" value="{$price}"/></td>
-		  	</tr>
-		  	<tr class="cate-attr">
-		  		<th width="80">购买人数</th>
-		  		<td><input type="text" class="input" name="sale_count" value="{$sale_count}"/></td>
-		  	</tr>
             <tr>
               <th width="80">摘要 </th>
               <td><textarea name='post_excerpt' id='description'  style='width:98%;height:50px;' placeholder='请填写摘要'>{$post_excerpt}</textarea> </td>
             </tr>
+			  <tr>
+				  <th width="80">内容</th>
+				  <td>
+					  <script type="text/plain" id="content" name="post_content">{$post_content|htmlspecialchars_decode}</script>
+					  <script type="text/javascript">
+						  //编辑器路径定义
+						  var editorURL = GV.DIMAUB;
+					  </script>
+					  <script type="text/javascript"  src="__ROOT__/statics/ueditor/ueditor.config.js"></script>
+					  <script type="text/javascript"  src="__ROOT__/statics/ueditor/ueditor.all.min.js"></script>
+				  </td>
+			  </tr>
             <tr>
               <th width="80">链接地址 </th>
               <td><input type="text" name="post_url" value="{$post_url}" class="input input_hd J_title_color" placeholder="" style="width:400px;"/> </td>
@@ -144,45 +133,40 @@ body fieldset legend {
 </div>
 <script type="text/javascript" src="__ROOT__/statics/js/common.js"></script>
 <script type="text/javascript" src="__ROOT__/statics/js/content_addtop.js"></script>
-<script type="text/javascript"> 
-function cate_choice(obj){
-	var text = $(obj).val();
-	if(text=='常规'){
-		$(".cate-attr").css("display","none");
-	}else if(text=='出售'){
-		$(".cate-attr").css("display","table-row");
-	}
-}
-$(function () {
-	var cate_name='{$cate_name}';
-	if(cate_name=='常规'){
-		$(".cate-attr").css("display","none");
-	}else if(cate_name=='出售'){
-		$(".cate-attr").css("display","table-row");
-	}
-	$("select[name='cate_name']").find("option[value='"+cate_name+"']").attr("selected",true);
-	
-	 Wind.use('validate', 'ajaxForm', 'artDialog', function () {
-	            var form = $('form.J_ajaxForms');
-	        //ie处理placeholder提交问题
-	        if ($.browser.msie) {
-	            form.find('[placeholder]').each(function () {
-	                var input = $(this);
-	                if (input.val() == input.attr('placeholder')) {
-	                    input.val('');
-	                }
-	            });
-	        }
-	        //表单验证开始
-	        form.validate({
+<script type="text/javascript">
+	$(function () {
+		Wind.use('validate', 'ajaxForm', 'artDialog', function () {
+			//javascript
+
+			//编辑器
+			editorcontent = new baidu.editor.ui.Editor();
+			editorcontent.render( 'content' );
+			try{editorcontent.sync();}catch(err){};
+			//增加编辑器验证规则
+			jQuery.validator.addMethod('editorcontent',function(){
+				try{editorcontent.sync();}catch(err){};
+				return editorcontent.hasContents();
+			});
+			var form = $('form.J_ajaxForms');
+			//ie处理placeholder提交问题
+			if ($.browser.msie) {
+				form.find('[placeholder]').each(function () {
+					var input = $(this);
+					if (input.val() == input.attr('placeholder')) {
+						input.val('');
+					}
+				});
+			}
+			//表单验证开始
+			form.validate({
 				//是否在获取焦点时验证
 				onfocusout:false,
 				//是否在敲击键盘时验证
 				onkeyup:false,
 				//当鼠标掉级时验证
 				onclick: false,
-	            //验证错误
-	            showErrors: function (errorMap, errorArr) {
+				//验证错误
+				showErrors: function (errorMap, errorArr) {
 					//errorMap {'name':'错误信息'}
 					//errorArr [{'message':'错误信息',element:({})}]
 					try{
@@ -202,36 +186,36 @@ $(function () {
 						});
 					}catch(err){
 					}
-	            },
-	            //验证规则
-	            rules: {'post_title':{required:1},'post_pic':{required:1}},
-	            //验证未通过提示消息
-	            messages: {'post_title':{required:'请输入标题'},'post_pic':{required:'请选择封面图片'}},
-	            //给未通过验证的元素加效果,闪烁等
-	            highlight: false,
-	            //是否在获取焦点时验证
-	            onfocusout: false,
-	            //验证通过，提交表单
-	            submitHandler: function (forms) {
-	                $(forms).ajaxSubmit({
-	                    url: form.attr('action'), //按钮上是否自定义提交地址(多按钮情况)
-	                    dataType: 'json',
-	                    beforeSubmit: function (arr, $form, options) {
-	                        
-	                    },
-	                    success: function (data, statusText, xhr, $form) {
-	                        if(data.status){
+				},
+				//验证规则
+				rules: {'post_title':{required:1},'post_pic':{required:1}},
+				//验证未通过提示消息
+				messages: {'post_title':{required:'请输入标题'},'post_pic':{required:'请选择封面图片'}},
+				//给未通过验证的元素加效果,闪烁等
+				highlight: false,
+				//是否在获取焦点时验证
+				onfocusout: false,
+				//验证通过，提交表单
+				submitHandler: function (forms) {
+					$(forms).ajaxSubmit({
+						url: form.attr('action'), //按钮上是否自定义提交地址(多按钮情况)
+						dataType: 'json',
+						beforeSubmit: function (arr, $form, options) {
+
+						},
+						success: function (data, statusText, xhr, $form) {
+							if(data.status){
 								setCookie("refersh_time",1);
 								//添加成功
 								Wind.use("artDialog", function () {
-								    art.dialog({
-								        id: "succeed",
-								        icon: "succeed",
-								        fixed: true,
-								        lock: true,
-								        background: "#CCCCCC",
-								        opacity: 0,
-								        content: data.info,
+									art.dialog({
+										id: "succeed",
+										icon: "succeed",
+										fixed: true,
+										lock: true,
+										background: "#CCCCCC",
+										opacity: 0,
+										content: data.info,
 										button:[
 											{
 												name: '继续编辑？',
@@ -248,18 +232,18 @@ $(function () {
 												}
 											}
 										]
-								    });
+									});
 								});
 							}else{
 								isalert(data.info);
 							}
-	                    }
-	                });
-	            }
-	        });
-	    });
-	////-------------------------
-});
+						}
+					});
+				}
+			});
+		});
+		////-------------------------
+	});
 </script>
 </body>
 </html>

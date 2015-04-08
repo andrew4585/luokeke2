@@ -4,7 +4,6 @@
     <tc_include file="Public:head_info"/>
     <link rel="stylesheet" type="text/css" href="__STATICS__css/dress.css">
     <link rel="stylesheet" type="text/css" href="__STATICS__css/store.css">
-
 </head>
 <body>
 <div class="head">
@@ -12,6 +11,14 @@
     <tc_include file="Public:nav"/>
     <!-- banner轮播 -->
     <tc_include file="Public:banner"/>
+    <!-- js-->
+	<script type="text/javascript" src="__STATICS__js/jquery.insetborder.js"></script>
+	<script type="text/javascript">
+	    $(document).ready(function(){
+	        $('a.sample-border1').borderEffect();
+	    });
+	
+	</script>
     <!--内容-->
     <div class="conter">
         <div class="main_store">
@@ -26,12 +33,10 @@
                                     {$item.post_title}
                                 </div>
                                 <div class="tit_2">
-                                    {$item.post_excerpt}
-                                    ...
-
+                                    {$item.post_excerpt|msubstr=0,60}
                                 </div>
                                 <div class="tit_3">
-                                    <span><div class="date11">{$item.post_date|date="Y-m-d",###}</div></span>
+                                    <span><div class="date11">{$item.post_date|date="Y.m",###}</div></span>
                                     <span><div class="more11"><a href="{$item.post_url}">查看更多>></a></div></span>
 
                                 </div>

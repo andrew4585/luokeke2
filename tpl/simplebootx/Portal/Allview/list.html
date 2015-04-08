@@ -17,33 +17,32 @@
         <div class="main_store">
             <div class="info_store">
                 <ul class="box">
+                    <foreach name="list" item="item">
                     <li>
                         <a  class="sample-border1">
-                            <div class="info_store_img"><img src="images/store/s_1_03.jpg" alt=""></div>
+                            <div class="info_store_img"><img src="__ROOT__{$item.post_pic}" alt=""></div>
                             <div class="info_store_tit">
                                 <div class="tit_1">
-                                    索菲亚教堂
+                                    {$item.post_title}
                                 </div>
                                 <div class="tit_2">
-                                    十七世纪的欧式建筑风格，红木制作的教堂
-                                    脊梁与桌椅彰显尊贵。水晶吊灯，水晶饰品
-                                    存托整个教堂的晶莹剔透,充满烂漫气息...
+                                    {$item.post_excerpt}
+                                    ...
 
                                 </div>
                                 <div class="tit_3">
-                                    <span><div class="date11">2015.04</div></span>
-                                    <span><div class="more11">查看更多>></div></span>
+                                    <span><div class="date11">{$item.post_date|date="Y-m-d",###}</div></span>
+                                    <span><div class="more11"><a href="{$item.post_url}">查看更多>></a></div></span>
 
                                 </div>
                             </div>
                         </a>
                     </li>
-
+                    </foreach>
                 </ul>
 
-
             </div>
-            <div class="digg"><span class="disabled"> < </span><span class="current">1</span><a href="#">2</a><a href="#">3</a><a href="#">4</a><a href="#">5</a><a href="#"> > </a></div>
+            <div class="digg">{$page}</div>
         </div>
         <div class="foot_border_kz" align="center">
             <img src="__STATICS__images/tpl/grey_bottom.png" style="margin-top:-1px">
@@ -57,8 +56,8 @@
         <tc_include file="Public:second_page_3"/>
     </div>
     </div>
-    <!--服务承诺-->
     <tc_include file="Public:servePromise"/>
+<!--服务承诺-->
     <!--底部的图片-->
     <div class="i_003">
         <img src="__STATICS__images/tpl/ad_04_01.jpg" alt="" />

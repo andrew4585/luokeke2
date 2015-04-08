@@ -42,20 +42,21 @@ class IndexController extends HomeBaseController {
 			//好评
 			$this->assign("good",$this->getHomeContent("Good",false,array("head_img","post_excerpt")));
 			//婚嫁常识
-			$article_cat = D("Article_cat");
-			$articleC = $article_cat->limit(0,5)->select();
-			$list = $this->getHomeContent("Article",false,array("post_excerpt","post_date","cid"),6);
-			$articles = array();
+			$article_cat 	= D("Article_cat");
+			$articleCat 	= $article_cat->select();
+			$articleC 		= $article_cat->limit(0,5)->select();
+			$list 			= $this->getHomeContent("Article",false,array("post_excerpt","post_date","cid"),6);
+			$articles 		= array();
 			for ($i=0;$i<count($articleC);$i++){
 				for($j=0;$j<count($list);$j++){
 					if($list[$j]['cid']==$articleC[$i]['id']){
 						$articles[$i]['article'][] 	= $list[$j];					
 					}
 				}
-				$articles[$i][cat] 	= $articleC[$i]['cat_name'];
+				$articles[$i]['cat'] 	= $articleC[$i]['cat_name'];
+				$articles[$i]['cid'] 	= $articleC[$i]['id'];
 			}
-			
-			//dump($articles);
+			$this->assign("articleCat",$articleCat);//分类
 			$this->assign("articles",$articles);
 			
 			//广告位

@@ -85,7 +85,7 @@
                     <div class="info-img">
                     	<foreach name="photo" item="item">
 	                    	<div class="info-img-w">
-	                            <img src="__ROOT__/{$item.url}"  width="900" alt=""/>
+	                            <img src="__ROOT__/{$item.url}"  width="900" id="one" alt=""/>
 	                        </div>
                     	</foreach>
                     </div>
@@ -111,5 +111,15 @@
 </div>
 <!--底部-->
 <tc_include file="Public:footer"/>
+    <script>
+
+
+        var img = document.getElementById("one");
+        var width=img.width;
+        var height=img.height;
+        alert(width);
+        alert(height);
+
+    </script>
 </body>
 </html>

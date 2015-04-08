@@ -1,0 +1,52 @@
+<admintpl file="header"/>
+<body class="J_scroll_fixed">
+<div class="wrap jj">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#A" data-toggle="tab">PC端积分设置</a></li>
+        <li><a href="#B" data-toggle="tab">微信端积分设置</a></li>
+    </ul>
+
+    <div class="common-form">
+        <form method="post" class="J_ajaxForm" action="{:U('setting/score_post')}">
+            <div class="tabbable">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="A">
+                        <table width="100%" cellpadding="2" cellspacing="2" >
+                            <tbody>
+                            <tr>
+                                <td width="120">分享积分</td>
+                                <td><input type="text" class="input mr5" name="pc_share" value="{$score.pc_share}" /></td>
+                            </tr>
+                            <tr>
+                                <td>签到积分</td>
+                                <td><input type="text" class="input mr5" name="pc_sign" value="{$score.pc_sign}" /></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane" id="B">
+                        <table width="100%">
+                            <tbody>
+                            <tr>
+                                <td width="120">分享积分</td>
+                                <td><input type="text" class="input mr5" name="we_share" value="" /></td>
+                            </tr>
+                            <tr>
+                                <td>签到积分</td>
+                                <td><input type="text" class="input mr5" name="we_sign" value="" /></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary btn_submit J_ajax_submit_btn">确定</button>
+            </div>
+        </form>
+    </div>
+</div>
+<script src="__ROOT__/statics/js/common.js"></script>
+
+</body>
+</html>

@@ -52,7 +52,7 @@
 					</div>
 				</div>
 				<div class="con_a001">
-					<div class="al_001"><div class="more"><a href="{:U('Portal/Active/index')}">点击查看更多人气活动</a></div></div>
+					<div class="al_001"><div class="more"><a href="{:U('Portal/Active/lists')}">点击查看更多人气活动</a></div></div>
 
 					<div class="xl_001">
 						<ul>
@@ -78,11 +78,11 @@
 					<div class="zl_001">
 						<h5>
 				    	<ul>
-						<li>限时团购</li>
-						<li>洛可可风</li>
-						<li>用客照说话</li>
-	     				<li>婚纱礼服定制</li>
-						<li>洛可可之星</li>
+						<li><a href="{:U('Portal/Group/index')}">限时团购</a></li>
+						<li><a href="">洛可可风</a></li>
+						<li><a href="{:U('Portal/PCustom/list')}">用客照说话</a></li>
+	     				<li><a href="{:U('Portal/Dress/index')}">婚纱礼服定制</a></li>
+						<li><a href="">洛可可之星</a></li>
 					    </ul>
 						</h5>
 					</div>
@@ -108,7 +108,7 @@
 			<!--jQuery带左右按钮及水平滚动拖动条的图片相册特效 -->
 			<div class="con_a002">
 
-				<div class="al_001"><div class="more"><a href="{:U('Portal/Ptheme/index')}">点击查看更多作品</a></div></div>
+				<div class="al_001"><div class="more"><a href="{:U('Portal/PTheme/lists')}">点击查看更多作品</a></div></div>
 				<!-- 效果开始-->
 				<div id="zsgun">
 					<a href="#" class="prenext zspre"></a>
@@ -203,7 +203,7 @@
 					</div>
 				</div>
 				<div class="con_a003">
-					<div class="al_001"><div class="more"><a href="{:U('Portal/Group/index')}">点击查看更多人气活动</a></div></div>
+					<div class="al_001"><div class="more"><a href="{:U('Portal/Group/index')}">点击查看更多特惠套系</a></div></div>
 
 				<!-- 效果开始-->
 					<div id="zsgun1">
@@ -265,7 +265,7 @@
 						<ul>
 							<php>$pcustomCount = count($pcustom)-1;</php>
 							<foreach name="pcustom" item="item">
-								<li><a href="{:U('Portal/PCustom/info')}{$item.id}" title="{$item.post_title}" style="">{$item.post_title}<if condition="$pcustomCount neq $key">|</if></a></li>
+								<li><a href="{:U('Portal/PCustom/info')}/{$item.id}" title="{$item.post_title}" style="">{$item.post_title}<if condition="$pcustomCount neq $key">|</if></a></li>
 							</foreach>
 						</ul>
 					</h5>
@@ -273,7 +273,7 @@
 				</div>
 
 			<div class="con_a004">
-				<div class="al_001"><div class="more"><a href="{:U('Portal/Pcustom/index')}">点击查看更多作品</a></div></div>
+				<div class="al_001"><div class="more"><a href="{:U('Portal/PCustom/lists')}">点击查看更多客照</a></div></div>
 
 				<!-- 效果开始-->
 				<div id="zsgun2">
@@ -346,7 +346,7 @@
 						<ul>
 							<php>$dressCount = count($dress)-1;</php>
 							<foreach name="dress" item="item">
-								<li><a href="{:U('Portal/Dress/info')}{$item.id}" title="{$item.post_title}" style="">{$item.post_title}<if condition="$dressCount neq $key">|</if></a></li>
+								<li><a href="{:U('Portal/Dress/info')}/{$item.id}" title="{$item.post_title}" style="">{$item.post_title}<if condition="$dressCount neq $key">|</if></a></li>
 							</foreach>
 						</ul>
 					</h5>
@@ -354,7 +354,7 @@
 				</div>
 
 			<div class="con_a005">
-				<div class="al_001"><div class="more"><a href="{:U('Portal/Dress/index')}">点击查看更多作品</a></div></div>
+				<div class="al_001"><div class="more"><a href="{:U('Portal/Dress/index')}">点击查看更多婚纱礼服</a></div></div>
 				<!-- 效果开始-->
 				<div id="zsgun3">
 					<a href="#" class="prenext zspre"></a>
@@ -421,7 +421,7 @@
 				</div>
 
 			<div class="con_a006">
-				<div class="al_001"><div class="more"><a href="#">点击查看更多作品</a></div></div>
+				<div class="al_001"><div class="more"><a href="{U:('')}">点击查看更多评论</a></div></div>
 				<!--评价-->
 
 				<div class="stbox05box">
@@ -496,16 +496,10 @@
 						<!--<span><font style="color:#7C7C7D"><</font>洛可可风婚纱摄影<font style="color:#7C7C7D">></font>之<font style="color:#F37914 ">婚嫁常识</font><font style="color:#7C7C7D">>ROCOCO RRASIE</font></span>-->
 						<h5>
 						<ul>
-							<li><a href="" target="_blank" title="" style="">最新活动 |</a></li>
-							<li><a href="" target="_blank" title="" style="">结婚那些事儿|</a></li>
-							<li><a href="" target="_blank" title="" style="">结婚资讯 |</a></li>
-							<li><a href="" target="_blank" title="" style="">婚纱摄影 |</a></li>
-							<li><a href="" target="_blank" title="" style="">新娘美容 |</a></li>
-							<li><a href="" target="_blank" title="" style="">可可微刊 |</a></li>
-							<li><a href="" target="_blank" title="" style="">结婚用品 |</a></li>
-							<li><a href="" target="_blank" title="" style="">结婚习俗 |</a></li>
-							<li><a href="" target="_blank" title="" style="">时尚婚礼</a></li>
-							<li style="border:none;"><a href="" target="_blank" title="" style=""></a></li>
+							<foreach name="articleCat" item="item">
+							<li><a href="{:U('Portal/Article/lists')}/cid/{$item.id}" target="_blank" title="" style="">{$item.cat_name} |</a></li>
+							</foreach>
+
 						</ul>
 					</h5>
 
@@ -522,19 +516,19 @@
 				<div class="huan">
 				<div class="huan_title">
 					<volist name="articles" id="vo" key="k">
-				    <div id="huan_{$k+1}" class="huan_bt" onmousemove="star_show(this);"><a href="" target="_blank"><div class="menu_more">{$vo.cat}</div></a></div>
+				    <div id="huan_{$k+1}" class="huan_bt" onmousemove="star_show(this);"><a href="{:U('Portal/Article/lists')}/cid/{$vo.cid}" target="_blank"><div class="menu_more">{$vo.cat}</div></a></div>
 					</volist>
 				</div>
 					<volist name="articles" id="item" key="k">
 					<div id="level_{$k+1}" class="huan_cen">
 						
 						<dl>
-							<dt><a href="" target="_blank">LATEST ACTIVITY {$item.cat}</a></dt>
+							<dt><a href="{:U('Portal/Article/lists')}/cid/{$item.cid}" target="_blank">LATEST ACTIVITY {$item.cat}</a></dt>
 
 							<ul>
 							<volist name="item['article']" id="f">
 								<li>
-									<a href="" target="_blank" title="">
+									<a href="{:U('Portal/Article/info')}/id/{$f['id']}" target="_blank" title="">
 										<img src="__ROOT__/{$f.post_pic}" alt="" height="92" width="92">
 										<div class="nr"><b>[爱在大连]-{$f.post_title}</b><span>POST TIME</span><i>: </i><small>{$f.post_date|date="Y-m-d H:i:s",###}</small>
 											<div class="clear"></div>

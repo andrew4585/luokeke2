@@ -117,7 +117,32 @@ class SettingController extends AdminbaseController{
 			}
 		}
 	}
-	
+
+	//积分设置
+	function score(){
+		$score_model = D("Config");
+		$score['pc_share'] 	= $score_model->val("pc_share");
+		$score['pc_sign']	= $score_model->val("pc_sign");
+		$this->assign("score",$score);
+		$this->display();
+	}
+	function score_post(){
+		if(IS_POST){
+			$score_model 	= D("Config");
+			$pc_share 		= $_POST['pc_share'];
+			$pc_sign		= $_POST['pc_sign'];
+			$res1 = $score_model->val("pc_share",$pc_share);
+			$res2 = $score_model->val("pc_sign",$pc_sign);
+			if($res1 || $res2){
+				$this->success("更新成功！");
+			}else{
+				$this->error("更新失败！");
+			}
+		}
+
+
+
+	}
 	//清除缓存
 	function clearcache(){
 			

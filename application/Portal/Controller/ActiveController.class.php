@@ -8,7 +8,7 @@ class ActiveController extends IndexController {
         $this->model_active=D("Active");
     }
     public function lists(){
-        $this->_list($this->model_active,true,array("post_excerpt"),array(),6,"recommended desc,listorder");
+        $this->_list($this->model_active,true,array("post_excerpt"),array(),1,"recommended desc,listorder");
         //3个摆放在一起的二级页面广告位
         $this->assign("second_page_3",$this->_getAd("second_page_3"));
         //服务承诺

@@ -37,10 +37,10 @@ body fieldset legend {
 <body class="J_scroll_fixed">
 <div class="wrap J_check_wrap">
   <ul class="nav nav-tabs">
-     <li><a href="{:U('PTheme/index')}">所有主题</a></li>
-     <li class="active"><a href="{:U('PTheme/add')}"  target="_self">添加主题</a></li>
+     <li><a href="{:U('Allview/index')}">全景看店</a></li>
+     <li class="active"><a href="{:U('Allview/add')}"  target="_self">添加全景</a></li>
   </ul>
-  <form name="myform" id="myform" action="{:u('PTheme/add')}" method="post" class="form-horizontal J_ajaxForms" enctype="multipart/form-data">
+  <form name="myform" id="myform" action="{:u('Allview/add')}" method="post" class="form-horizontal J_ajaxForms" enctype="multipart/form-data">
   <div class="col-right">
     <div class="table_full">
       <table width="100%">
@@ -90,16 +90,7 @@ body fieldset legend {
               <th width="80">摘要 </th>
               <td><textarea name='post_excerpt' id='description'  style='width:98%;height:50px;' placeholder='请填写摘要'></textarea> </td>
             </tr>
-		  <tr>
-			  <th width="80">相册图集 </th>
-			  <td>
-				  <fieldset class="blue pad-10">
-					  <legend>图片列表</legend>
-					  <ul id="photos" class="picList"></ul>
-				  </fieldset>
-				  <div class="bk10"></div>
-				  <a href='javascript:void(0);' onclick="javascript:flashupload2('albums_images', '图片上传','photos',change_images,'10,gif|jpg|jpeg|png|bmp,0','','','')" class="btn">选择图片 </a> </td>
-		  </tr>
+
             <tr>
               <th width="80">链接地址 </th>
               <td><input type="text" name="post_url" class="input input_hd J_title_color" placeholder="填写链接地址后，内容将无效" style="width:400px;"/> </td>
@@ -123,7 +114,7 @@ body fieldset legend {
   </div>
   <div class="form-actions">
         <button class="btn btn-primary btn_submit J_ajax_submit_btn"type="submit">提交</button>
-        <a class="btn" href="{:U('PTheme/index')}">返回</a>
+        <a class="btn" href="{:U('Allview/index')}">返回</a>
   </div>
  </form>
 </div>
@@ -214,7 +205,7 @@ body fieldset legend {
 											},{
 												name: '返回列表页',
 												callback:function(){
-													location="{:U('PTheme/index')}";
+													location="{:U('Allview/index')}";
 													return true;
 												}
 											}

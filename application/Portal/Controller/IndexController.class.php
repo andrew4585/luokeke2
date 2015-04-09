@@ -29,9 +29,9 @@ class IndexController extends HomeBaseController {
 			//最新活动
 			$active = $this->getHomeContent("Active",false,array(),5);
 			$this->assign("active",$active);
-			//主题作品
-			$ptheme = $this->getHomeContent("Ptheme",true);
-			$this->assign("ptheme",$ptheme);
+			//作品
+			$ptheme = $this->getHomeContent("Photo",true);
+			$this->assign("photo",$ptheme);
 			//团购套系
 			$group = $this->getHomeContent("Group",false,array("post_price","post_num"));
  			$this->assign("group",$group);

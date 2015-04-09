@@ -16,7 +16,10 @@ class PhotoController extends IndexController {
 	 * 详细页
 	 */
 	public function info(){
-		$id			= I("get.id",1,'intval');
+		$id			= I("get.id",0,'intval');
+		if(empty($id)){
+			$this->error("参数丢失");
+		}
 		$where		= "id=$id and status=1";
 		$info		= $this->model_photo->where($where)->find();
 		if(!empty($info['post_url'])){
@@ -52,7 +55,7 @@ class PhotoController extends IndexController {
 	public function lists(){
 		$cid =&$_GET['cid'];
 		if(empty($cid)){
-			$this->error("非法操作");
+			$cid = $this->model_cat->getField("id");
 		}
 		$this->_list($this->model_photo,true,array(),array("cid=$cid"));
 		$this->getCategory();

@@ -16,10 +16,7 @@ class PhotoController extends IndexController {
 	 * 详细页
 	 */
 	public function info(){
-		$id			= I("get.id",0,'intval');
-		if(empty($id)){
-			$this->error("参数丢失");
-		}
+		$id			= I("get.id",1,'intval');
 		$where		= "id=$id and status=1";
 		$info		= $this->model_photo->where($where)->find();
 		if(!empty($info['post_url'])){

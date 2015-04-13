@@ -97,8 +97,8 @@
 						<h5>
 						<ul>
 							<php>$pthemeCount = count($ptheme)-1;</php>
-							<foreach name="ptheme" item="item">
-								<li><a href="{:U('Portal/PTheme/info')}/id/{$item.id}" title="{$item.post_title}" style="">{$item.post_title}<if condition="$pthemeCount neq $key">|</if></a></li>
+							<foreach name="photo" item="item">
+								<li><a href="{:U('Portal/Photo/info')}/id/{$item.id}" title="{$item.post_title}" style="">{$item.post_title}<if condition="$pthemeCount neq $key">|</if></a></li>
 							</foreach>
 						</ul>
 					</h5>
@@ -108,16 +108,16 @@
 			<!--jQuery带左右按钮及水平滚动拖动条的图片相册特效 -->
 			<div class="con_a002">
 
-				<div class="al_001"><div class="more"><a href="{:U('Portal/PTheme/lists')}">点击查看更多作品</a></div></div>
+				<div class="al_001"><div class="more"><a href="{:U('Portal/Photo/lists')}">点击查看更多作品</a></div></div>
 				<!-- 效果开始-->
 				<div id="zsgun">
 					<a href="#" class="prenext zspre"></a>
 					<a href="#" class="prenext zsnext"></a>
 					<div id="gundiv" class="container2">
 						<ul class="clearfix">
-							<foreach name="ptheme" item="item">
+							<foreach name="photo" item="item">
 							<li>
-								<a href="{:U('Portal/Ptheme/info')}/id/{$item.id}">
+								<a href="{:U('Portal/Photo/info')}/id/{$item.id}">
 								<div class="photo">
 									<img src="__ROOT__/{$item.post_pic}" alt="{$item.post_title}" width="290" height="430" />
 								</div>

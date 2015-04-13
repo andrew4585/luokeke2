@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
+<head>
+	<tc_include file="Public:head_info"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__css/info.css">
+    <link rel="stylesheet" type="text/css" href="__STATICS__css/group.css">
+    <style>
+    #info-func ul li{
+		display   : block;
+		float     : left;
+		width     : 115px;
+		height    : 30px ;
+		background: #4C4D4F;
+		border-radius        : 4px;
+		behavior: url(__STATICS__css/iecss3.htc);
+        margin-left: 11px;
+        color: #ffffff;
+	}
+    </style>
+</head>
+<body>
+<div class="head">
+    <!--头部导航标题js-->
+	<tc_include file="Public:nav"/>
+	<!-- banner轮播 -->
+	<tc_include file="Public:banner"/>	
+<!--内容-->
+<div class="conter">
+    <div class="main_dd">
+        <!--详细内容-->
+        <div class="con con-grey" >
+            <div id="info-main">
+                <!--左侧-->
+                <div id="info-left" class="fl">
+                	<!-- 团购属性 -->
+                	<table id="table-attr"  border="0" cellspacing="0" cellpadding="0">
+                		<tr>
+                			<td id="first-td" class="btmBorder price">¥8999</td>
+                			<td id="second-td">&nbsp;</td>
+                			<td rowspan="6"><div id="post_pic"><img src="__ROOT__/{$info.post_pic}"/></div></td>
+                		</tr>
+                		<tr>
+                			<td class="btmBorder relprice">价值：¥9999</td>
+                		</tr>
+                		<tr>
+                			<td class="btmBorder sale_number">120人已团购</td>
+                		</tr>
+                		<tr>
+                			<td class="btmBorder relprice">剩余时间：<span id="surplus-time">15天19时30秒</span></td>
+                		</tr>
+                		<tr>
+                			<td class="sign_up"><img src="__STATICS__/images/tpl/group/sign_up.png"/></td>
+                		</tr>
+                		<tr>
+                			<td class="func">
+								<ul>
+									<li class="like"><span>4</span></li>
+									<li class="share"></li>
+								</ul>
+							</td>
+                		</tr>
+                		<tr>
+                			<td colspan="3" id="desc">
+                				后期服务流程严格按照合同执行，所以请在付款前仔细与家人商量在付款,
+后期服务流程严格按照合同执行，所以请在付款前仔细与家人商量在付款
+                			</td>
+                		</tr>
+                	</table>
+                    <!--大图片-->
+                    <div class="sperate">&nbsp;</div>
+                    <div id="tab">
+                    	<ul id="ul-tab">
+                    		<li class="on" data-id="1">套系详情</li>
+                    		<li data-id="2">服务流程</li>
+                    		<li data-id="3">付款方式</li>
+                    	</ul>
+                    </div>
+                    <div class="info-img info1">
+                    	<foreach name="photo" item="item">
+	                    	<div class="info-img-w">
+	                            <img src="/luokeke2/data/upload/ad/551100e015ee7.jpg" id="one" width="790" alt=""/>
+	                        </div>
+                    	</foreach>
+                    </div>
+                    <div class="info-img info2 hidden">
+                    	<div class="info-img-w">
+                            <img src="/luokeke2/data/upload/ad/551100e015ee7.jpg" id="one" width="790" alt=""/>
+                        </div>
+                    </div>
+                    <div class="info-img info3 hidden">
+                    	<div class="info-img-w">
+                            <img src="/luokeke2/data/upload/ad/551100e015ee7.jpg" id="one" width="790" alt=""/>
+                        </div>
+                    </div>
+                    <script>
+                    	$(function(){
+                    		$("#ul-tab li").click(function(){
+                    			var id	= $(this).attr("data-id");
+                    			$("#ul-tab li").removeClass("on");
+                    			$(this).addClass("on");
+                    			$(".info-img").addClass("hidden");
+                    			$(".info"+id).removeClass("hidden");
+                    		});
+                    		
+                    	});
+                    </script>
+                </div>
+                <!--右侧-->
+                <div id="info-right" class="fr">
+		            <div id="right-title">团购套系</div>
+			    	<div id="right-content">
+			            <div class="group-one">
+			            	<img src='/luokeke2/data/upload/ad/551100e015ee7.jpg' width="272"/>
+			            	<div class="group-desc">洛可可春季特惠</div>
+			            	<div class="cut-price">¥9999</div>
+			            </div>
+			            <div class="group-one">
+			            	<img src='/luokeke2/data/upload/ad/551100e015ee7.jpg' width="272"/>
+			            	<div class="group-desc">洛可可春季特惠</div>
+			            	<div class="cut-price">¥9999</div>
+			            </div>	
+			        </div>
+				</div>
+                <div class="clear"></div>
+            </div>
+        </div>
+         <!--广告位置-->
+		<tc_include file="Public:second_page_3"/>
+    </div>
+<!--服务承诺-->
+<tc_include file="Public:servePromise"/>
+<!--底部的图片-->
+<div class="i_003">
+    <img src="__STATICS__images/tpl/ad_04_01.jpg" alt="" />
+</div>
+<!--@@@@@@@-->
+<div class="clears"></div>
+</div>
+<!--底部-->
+<tc_include file="Public:footer"/>
+    <script>
+        var img = document.getElementById("one");
+        var width=img.width;
+        var height=img.height;
+    </script>
+</body>
+</html>

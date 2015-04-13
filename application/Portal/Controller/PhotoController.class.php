@@ -55,7 +55,7 @@ class PhotoController extends IndexController {
 	public function lists(){
 		$cid =&$_GET['cid'];
 		if(empty($cid)){
-			$this->error("非法操作");
+			$cid = $this->model_cat->getField("id");
 		}
 		$this->_list($this->model_photo,true,array(),array("cid=$cid"));
 		$this->getCategory();

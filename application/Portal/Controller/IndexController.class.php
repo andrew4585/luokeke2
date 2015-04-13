@@ -162,12 +162,18 @@ class IndexController extends HomeBaseController {
     public function _getAd($status){
     	$model_ad = D("Ad1");
     	$model_cat= D("Ad1Cat");
-    	//获取广告分类编号
-    	$cid	  = $model_cat	->where("cat_idname='$status'")->getField("cid");
-    	//广告数据
-    	$data	  = $model_ad	->where("site_cid=$this->siteId and ad_cid=$cid")
-    							->order("listorder desc")->select();
-    	return $data;
+    	try{
+	    	//获取广告分类编号
+	    	$cid	  = $model_cat	->where("cat_idname='$status'")->getField("cid");
+	    	//广告数据
+	    	$data	  = $model_ad	->where("site_cid=$this->siteId and ad_cid=$cid")
+	    							->order("listorder desc")->select();
+	    	return $data;
+    	}catch (\Exception $e){
+    		Log::record($e->getMessage());
+    		return null;
+    	}
+    	
     }
     
     

@@ -13,26 +13,30 @@ class GroupController extends IndexController {
 	public function info(){
 		$id			= I("get.id",0,'intval');
 		if(empty($id)){ 
-			$this->error("参数丢失");
+			$where	= "status=1";
+		}else{
+			$where	= "id=$id and status=1";
 		}
-		$where		= "id=$id and status=1";
-		$info		= $this->model_group->where($where)->find();
+		$order		= "listorder,post_start desc";
+		$info		= $this->model_group->where($where)->order($order)->find();
+		if(!$info){
+			$this->error("非法操作");
+		}
+		$id			= $info['id'];
 		if(!empty($info['post_url'])){
 			header("location:".$info['post_url']);
 		}
+		//右侧信息
+		$rightList	= $this->model_group->field("id,post_pic,post_title,post_price")->where("status = 1")->order($order)->select();
+		$this->assign("rightList",$rightList);
 		//banner
 		$this->assign("home_head",$this->_getAd("banner_dress"));
-		//婚纱礼服广告位（专用）
-		$this->assign("ad_dress",$this->_getAd("dress"));
 		//3个摆放在一起的二级页面广告位
 		$this->assign("second_page_3",$this->_getAd("second_page_3"));
 		//服务承诺
 		$this->assign("servePromise",$this->_getAd("servePromise"));
 		//详细内容
 		$this->assign("info",$info);
-		//评论信息
-		$this->getCommentList("Dress",$info['id']);
-		$this->assign("table",'Dress');
 		//获取本页面的url
 		$url = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 		$this->assign("url",$url);
@@ -43,8 +47,15 @@ class GroupController extends IndexController {
 		$this->qrcode();
 		//右侧导航
 		$this->info_right();
-		$this->assign("model_table","Dress");
+		$this->assign("model_table","Group");
 		$this->display();
+	}
+	
+	/**
+	 * 用户点击‘喜欢’按钮
+	 */
+	public function ajax_like(){
+		$this->_like($this->model_group);
 	}
 	
 	public function nav_index(){

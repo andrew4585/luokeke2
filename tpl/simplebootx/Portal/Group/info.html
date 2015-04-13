@@ -35,18 +35,18 @@
                 	<!-- 团购属性 -->
                 	<table id="table-attr"  border="0" cellspacing="0" cellpadding="0">
                 		<tr>
-                			<td id="first-td" class="btmBorder price">¥8999</td>
+                			<td id="first-td" class="btmBorder price">¥{$info.post_price}</td>
                 			<td id="second-td">&nbsp;</td>
                 			<td rowspan="6"><div id="post_pic"><img src="__ROOT__/{$info.post_pic}"/></div></td>
                 		</tr>
                 		<tr>
-                			<td class="btmBorder relprice">价值：¥9999</td>
+                			<td class="btmBorder relprice">价值：¥{$info.post_relprice}</td>
                 		</tr>
                 		<tr>
-                			<td class="btmBorder sale_number">120人已团购</td>
+                			<td class="btmBorder sale_number">{$info.post_num}人已团购</td>
                 		</tr>
                 		<tr>
-                			<td class="btmBorder relprice">剩余时间：<span id="surplus-time">15天19时30秒</span></td>
+                			<td class="btmBorder relprice">剩余时间：<span id="surplus-time"></span></td>
                 		</tr>
                 		<tr>
                 			<td class="sign_up"><img src="__STATICS__/images/tpl/group/sign_up.png"/></td>
@@ -54,15 +54,14 @@
                 		<tr>
                 			<td class="func">
 								<ul>
-									<li class="like"><span>4</span></li>
+									<li class="like"><span>{$info.post_like}</span></li>
 									<li class="share"></li>
 								</ul>
 							</td>
                 		</tr>
                 		<tr>
                 			<td colspan="3" id="desc">
-                				后期服务流程严格按照合同执行，所以请在付款前仔细与家人商量在付款,
-后期服务流程严格按照合同执行，所以请在付款前仔细与家人商量在付款
+                				{$info.post_excerpt}
                 			</td>
                 		</tr>
                 	</table>
@@ -78,7 +77,7 @@
                     <div class="info-img info1">
                     	<foreach name="photo" item="item">
 	                    	<div class="info-img-w">
-	                            <img src="/luokeke2/data/upload/ad/551100e015ee7.jpg" id="one" width="790" alt=""/>
+	                            <img src="__ROOT__/{$item.url}" id="one" width="790" alt=""/>
 	                        </div>
                     	</foreach>
                     </div>
@@ -93,7 +92,10 @@
                         </div>
                     </div>
                     <script>
+	                    var endTime = {$info.post_deadline|strtotime};
+	                    var t;
                     	$(function(){
+                    		leaveTime();
                     		$("#ul-tab li").click(function(){
                     			var id	= $(this).attr("data-id");
                     			$("#ul-tab li").removeClass("on");
@@ -102,23 +104,55 @@
                     			$(".info"+id).removeClass("hidden");
                     		});
                     		
+                    		//点击喜欢按钮
+                    		$(".like").click(function(){
+                    			var number = $(".like span").html();
+                    				number = parseInt(number);
+                    			var id	   = {$info.id};
+                    			var url	   = "__ROOT__/Portal/Group/ajax_like";
+                    			$.post(url,{id:id},function(data){
+                    				if(data.status){
+                    					$(".like span").html(++number);
+                    				}else{
+                    					artDialog_alert(data.info,1);
+                    				}
+                    			});
+                    		});
                     	});
+                    	
+                    	//倒计时
+                		function leaveTime(){
+                			var timestamp = Date.parse(new Date())/1000;
+                			if(timestamp>endTime){
+                				$("#surplus-time").html("<span style='color:red'>已结束</span>");
+                				clearTimeout(t);
+                			}
+                			var leaveTime = endTime-timestamp;
+                			var day  = parseInt(leaveTime/86400);
+                			leaveTime= leaveTime-day*86400;
+                			var hour = parseInt((leaveTime/3600));
+                			leaveTime= leaveTime-hour*3600;
+                			var minu = parseInt((leaveTime/60));
+                			var sec	 = leaveTime%60;
+                			var str  = day+"天"+hour+'小时'+minu+'分'+sec+'秒';
+                			$("#surplus-time").html(str);
+                			t = setTimeout('leaveTime()',1000);
+                		}
                     </script>
                 </div>
                 <!--右侧-->
                 <div id="info-right" class="fr">
 		            <div id="right-title">团购套系</div>
 			    	<div id="right-content">
-			            <div class="group-one">
-			            	<img src='/luokeke2/data/upload/ad/551100e015ee7.jpg' width="272"/>
-			            	<div class="group-desc">洛可可春季特惠</div>
-			            	<div class="cut-price">¥9999</div>
-			            </div>
-			            <div class="group-one">
-			            	<img src='/luokeke2/data/upload/ad/551100e015ee7.jpg' width="272"/>
-			            	<div class="group-desc">洛可可春季特惠</div>
-			            	<div class="cut-price">¥9999</div>
-			            </div>	
+			    		<foreach name="rightList" item="item">
+				    		<div class="group-one">
+				    			<a href="{:U('Portal/Group/info')}/id/{$item.id}">
+				            	<img src='__ROOT__/{$item.post_pic}' width="272"/>
+				            	<div class="group-desc">{$item.post_title}</div>
+				            	</a>
+				            	<div class="cut-price">¥{$item.post_price}</div>
+				            </div>
+			    		</foreach>
 			        </div>
 				</div>
                 <div class="clear"></div>

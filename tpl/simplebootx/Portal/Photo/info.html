@@ -4,6 +4,7 @@
 	<tc_include file="Public:head_info"/>
     <link rel="stylesheet" type="text/css" href="__STATICS__css/info.css">
     <link rel="stylesheet" type="text/css" href="__STATICS__css/dress.css">
+    <link rel="stylesheet" href="__STATICS__css/fancybox.css" type="text/css" media="screen" />
     <style>
     #info-func ul li{
 		display   : block;
@@ -13,6 +14,8 @@
 		background: #4C4D4F;
 		border-radius        : 4px;
 		behavior: url(__STATICS__css/iecss3.htc);
+        position:relative;
+        z-index:2;
         margin-left: 11px;
         color: #ffffff;
 	}
@@ -71,11 +74,17 @@
 
                     <!--大图片-->
                     <div class="info-img">
-                    	<foreach name="photo" item="item">
-	                    	<div class="info-img-w">
-	                            <img src="__ROOT__/{$item.url}"  width="900" alt=""/>
-	                        </div>
-                    	</foreach>
+                        <foreach name="photo" item="item">
+                            <div class="info-img-w">
+                                <a >
+                                    <img src="__ROOT__/{$item.url}"  width="900" class="small" alt=""/>
+                                </a>
+                                <div class="iconbig">
+                                    <a rel="group" href="__ROOT__/{$item.url}"><img src="__STATICS__/images/tpl/big.png"  alt=""/></a>
+                                </div>
+
+                            </div>
+                        </foreach>
                     </div>
                 </div>
                 <!--右侧-->
@@ -99,5 +108,6 @@
 </div>
 <!--底部-->
 <tc_include file="Public:footer"/>
+ <tc_include file="Public:bigjs"/>
 </body>
 </html>

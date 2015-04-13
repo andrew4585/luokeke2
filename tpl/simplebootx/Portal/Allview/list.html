@@ -15,7 +15,7 @@
 	<script type="text/javascript" src="__STATICS__js/jquery.insetborder.js"></script>
 	<script type="text/javascript">
 	    $(document).ready(function(){
-	        $('a.sample-border1').borderEffect();
+	        $('div.sample-border1').borderEffect();
 	    });
 	
 	</script>
@@ -26,7 +26,7 @@
                 <ul class="box">
                     <foreach name="list" item="item">
                     <li>
-                        <a  class="sample-border1">
+                        <div  class="sample-border1">
                             <div class="info_store_img"><img src="__ROOT__{$item.post_pic}" alt=""></div>
                             <div class="info_store_tit">
                                 <div class="tit_1">
@@ -37,11 +37,11 @@
                                 </div>
                                 <div class="tit_3">
                                     <span><div class="date11">{$item.post_date|date="Y.m",###}</div></span>
-                                    <span><div class="more11"><a href="{$item.post_url}">查看更多>></a></div></span>
+                                    <span><div class="more11"><a href="{$item.post_url}" >查看更多>></a></div></span>
 
                                 </div>
                             </div>
-                        </a>
+                        </div>
                     </li>
                     </foreach>
                 </ul>

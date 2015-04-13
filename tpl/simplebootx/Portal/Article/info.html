@@ -26,47 +26,48 @@
 <tc_include file="Public:nav"/>
 <!--头部结束-->
 <!--照片墙滑动效果-->
-<tc_include file="Public:userbanner"/>
+<tc_include file="Public:banner"/>
 
 <div class="article_content">
     <div class="art_left">
         <div class="leftTop">
             <h2 class="art_Title">婚嫁资讯</h2>
             <ul class="left_nav">
-                <li class="left_nav_bottom"><img src="__STATICS__/images/tpl/usericon.png" alt=""/><a href="{:U('Portail/article/info')}">最新活动</a></li>
-                <li class="left_nav_bottom"><img src="__STATICS__/images/tpl/usericon.png" alt=""/><a href="{:U('Portail/article/info')}">最新活动</a></li>
-                <li class="left_nav_bottom"><img src="__STATICS__/images/tpl/usericon.png" alt=""/><a href="{:U('Portail/article/info')}">最新活动</a></li>
-                <li class="left_nav_bottom"><img src="__STATICS__/images/tpl/usericon.png" alt=""/><a href="{:U('Portail/article/info')}">最新活动</a></li>
-                <li class="left_nav_bottom"><img src="__STATICS__/images/tpl/usericon.png" alt=""/><a href="{:U('Portail/article/info')}">最新活动</a></li>
+                <foreach name="category" item="item">
+                <li class="left_nav_bottom">
+                    <img src="__STATICS__/images/tpl/usericon.png" alt=""/>
+                    <a href="{:U('Portail/article/info/category')}/{$item.id}">{$item.cat_name}</a>
+                </li>
+                </foreach>
             </ul>
         </div>
     </div>
     <div class="art_middle">
         <div class="art_padding">
-            <h1 class="newscontentTitle">孕妇如何选婚纱  挺大肚也要美美哒！</h1>
+            <h1 class="newscontentTitle">{$info.post_title}</h1>
             <p class="newsDesc">
-                <b>时间&nbsp;:&nbsp;</b>2015-03-24
-                <b>分类&nbsp;:&nbsp;</b>结婚那些事啊
-                <b>编辑&nbsp;:&nbsp;</b>雯子
+                <b>时间&nbsp;:&nbsp;</b>{$info.post_date|date='Y-m-d',###}
+                <b>分类&nbsp;:&nbsp;</b>{$info.cat.cat_name}
+                <b>编辑&nbsp;:&nbsp;</b>{$info.post_author}
             </p>
             <div class="news-icon">
                 <ul>
                     <li style="margin:0">
                         <div class="mix_ico"></div>
-                        <div class="info-lz info-like" data-model="Dress">喜欢&nbsp;500</div>
+                        <div class="info-lz info-like" data-model="{$model_table}">喜欢&nbsp;<font>{$info.post_like}</font></div>
                     </li>
                     <li>
                         <div class="mix_ico info-ico_wo"></div>
-                        <div class="info-lz">分享&nbsp;500</div>
+                        <div class="info-lz">分享&nbsp;{$info.post_share}</div>
                     </li>
                     <li class="hover_sj">
                         <div class="mix_ico info-ico_ph"></div>
                         <div class="info-lz">装到手机</div>
                         <div class="tips">
                             <div class="tipscont">
-                                <img id="qrcode" src="/luokeke2/./data/upload/qrcode/MDAwMDAwMDAwMMV8g5Sbp9OvhJioprtkdqfGgHGqlHxyq8m6n6qOiavRsZ1q25qWrmmRvaemvHp6oMhshaaRkG6lx9yfqI51b92xq26h.png">
-                                <img id="qrlogo" src="/luokeke2/statics/images/tpl/qrlogo.png">
-                                <p style="margin-top:-35px;">扫一扫微信</p>
+                                <img id="qrcode" src="__ROOT__/{$qrcode}">
+                                <img id="qrlogo" src="__STATICS__images/tpl/qrlogo.png">
+                                <p style="margin-top:-40px;">扫一扫微信</p>
                                 <p>更多" 惊喜 "等着你</p>
                                 <div id="arrow"></div>
                             </div>
@@ -86,7 +87,7 @@
                         $(".info-like").click(function(){
                             var number = $(".info-like font").html();
                             number = parseInt(number);
-                            var id	   = 13;
+                            var id	   = {$info.id};
                             var model  = $(this).attr("data-model");
                             var url	   = "/luokeke2/Portal/"+model+"/ajax_like";
                             $.post(url,{id:id},function(data){
@@ -102,7 +103,7 @@
 
             </div>
             <div class="newsContent">
-                内容显示
+                {$info.post_content|htmlspecialchars_decode}
             </div>
         </div>
     </div>
@@ -110,30 +111,21 @@
         <div class="newstopBox">
             <h2>热门资讯 &nbsp;<p>HOT</p></h2>
             <ul class="newstoplist">
-                <li><span>1</span><a href="/Marry/Item/1">举办西式婚礼要知道的知识</a></li>
-                <li><span>2</span><a href="/Marry/Item/4">婚礼场地预定要知道的知识</a></li>
-                <li><span>3</span><a href="/Marry/Item/5">如何把握细节成就完美的婚礼</a></li>
-                <li><span>4</span><a href="/Marry/Item/6">活跃婚礼现场气氛的小游戏</a></li>
-                <li><span>5</span><a href="/Marry/Item/7">关于喜帖你知道多少？</a></li>
-                <li><span>6</span><a href="/Marry/Item/7">关于喜帖你知道多少？</a></li>
-                <li><span>7</span><a href="/Marry/Item/7">关于喜帖你知道多少？</a></li>
-                <li><span>8</span><a href="/Marry/Item/7">关于喜帖你知道多少？</a></li>
-                <li><span>9</span><a href="/Marry/Item/7">关于喜帖你知道多少？</a></li>
-                <li><span>10</span><a href="/Marry/Item/7">关于喜帖你知道多少？</a></li>
+                <foreach name="hot_article" item="item">
+                <li><span>{$listnum++}</span><a href="{:U('Portal/Article/info')}/id/{$item.id}">{$item.post_title}</a></li>
+                </foreach>
             </ul>
         </div>
         <div class="newsbuttomBox">
+            <foreach name="article_ad" item="item">
             <a href="#">
-                <img alt="#" src="__STATICS__images/tpl/p001.jpg" class="adimg">
+                <img alt="#" src="__ROOT__{$item.ad_pic}" class="adimg">
             </a>
-            <div class="clears"></div>
-            <a href="#">
-                <img alt="#" src="__STATICS__images/tpl/p001.jpg" class="adimg">
-            </a>
+            </foreach>
+
         </div>
     </div>
 </div>
-
 
 <div class="clears"></div>
 <div class="foot_border_kz" align="center">

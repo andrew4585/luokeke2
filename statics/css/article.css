@@ -80,7 +80,10 @@
     margin-top: 10px;
 }
 .news-icon ul{
-    text-decoration: none
+    text-decoration: none;
+}
+.news-icon ul li {
+    cursor: pointer;
 }
 .newsContent {
     padding-top: 10px;
@@ -88,6 +91,7 @@
     font-size: 14px;
     color: #666;
 }
+.newsContent img{width:600px;}
 .mix_ico {
     width: 30px;
     height: 30px;
@@ -130,6 +134,19 @@
     left:150px;
     opacity:1;
 }
+#qrlogo {
+    display: block;
+    position: relative;
+    top: -123px;
+    left: 100px;
+}
+#qrcode {
+    width: 213px;
+    height: 213px;
+    display: block;
+    margin: 0 auto;
+}
+
 /**article left**/
 .art_right{
     width: 240px;
@@ -188,4 +205,19 @@
 .adimg{
     padding:10px;
     width: 208px;
+}
+.hover_sj .tips .tipscont p {
+    text-align: center;
+    font-size: 15px;
+    line-height: 21px;
+}
+.tipscont #arrow {
+    display: block;
+    position: relative;
+    width: 30px;
+    height: 30px;
+    left: -30px;
+    top: -150px;
+    background: url(../images/tpl/mix_icon.png);
+    background-position: 0 -270px;
 }

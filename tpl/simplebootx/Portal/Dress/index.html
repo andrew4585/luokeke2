@@ -34,25 +34,25 @@
 		
 		        <div class="xl_001_lf">
 		            <ul>
-		            <foreach name="active" item="item">
+		            <foreach name="Ad_five" item="item">
 		            <if condition="$key eq 0">
 		                <li class="b">
-		                    <a href="{:U('Portal/dress/info')}/id/{$item.id}" target="_blank" class="bigImg">
-		                        <img src="__ROOT__/{$item.post_pic}" class="Imghover" width="599" height="576" alt="" />
+		                    <a href="{$item.url}" target="_blank" class="bigImg">
+		                        <img src="__ROOT__/{$item.ad_pic}" class="Imghover" width="599" height="576" alt="" />
 								<div class="rsp"></div>
 								<div class="text">
-									<h3>{$item.post_title}</h3>
+									<h3>{$item.ad_name}</h3>
 									<img src="__STATICS__/images/tpl/dress/dress-icon.png" alt=""/>
 								</div>
 		                    </a>
 		                </li>
 		                <else/>
 		                <li>
-		                    <a href="{:U('Portal/dress/info')}/id/{$item.id}" class="smallImg" target="_blank" title="">
-		                        <img src="__ROOT__/{$item.post_pic}" class="Imghover" width="287" height="287" alt="" />
+		                    <a href="{$item.url}" class="smallImg" target="_blank" title="">
+		                        <img src="__ROOT__/{$item.ad_pic}" class="Imghover" width="287" height="287" alt="" />
 		                        <div class="rsp"></div>
 								<div class="text">
-									<h3>{$item.post_title}</h3>
+									<h3>{$item.ad_name}</h3>
 									<img src="__STATICS__/images/tpl/dress/dress-icon.png" alt=""/>
 								</div>
 		                    </a>

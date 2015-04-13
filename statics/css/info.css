@@ -137,7 +137,7 @@
 
 /*作品详情页面css*/
 .work_content_login{width: 1200px;  margin: 0 auto ;background: #ffffff}
-.work_login{height: 230px;}
+.work_login{height: 235px;}
 .work_l{ width: 93px; float: left}
 .work_r{float: left;width: 1055px}
 .work_r_up{height: 52px;width: 1055px}
@@ -153,8 +153,8 @@
 .input{width: 70px; height: 20px; border-radius: 6px; margin-top: 3px;}
 .work_l_ico{width: 64px; height: 64px;margin-left: 20px;margin-top: 30px;}
 .work_l_ico img{width:100%}
-.content-zg-border{border-bottom: 1px solid #e7e7e7;height: 30px;background: #f6f6f6;}
-.content-zg-border-x{border-top: 1px solid #e7e7e7;height: 15px;background: #f6f6f6;}
+.content-zg-border{border-bottom: 1px solid #e7e7e7;height: 25px;background: #f6f6f6;}
+.content-zg-border-x{border-top: 1px solid #e7e7e7;height: 10px;background: #f6f6f6;}
 .work_list{width: 1200px;overflow:auto; margin: 0 auto; margin-top: 15px; background: #ffffff;padding-bottom:20px;}
 .work_l_ico_x{width: 64px; height: 64px;margin-left: 20px;margin-top: 21px;}
 .work_r_down_x{border: 1px solid #e7e7e7;margin-top: 6px;padding:0 16px;background: #f6f6f6}
@@ -162,6 +162,7 @@
 
 .comment-submit{
 	border-raduis:5px;
+	margin-top:11px;
 	cursor:pointer;
 }
 /*微信扫一扫*/

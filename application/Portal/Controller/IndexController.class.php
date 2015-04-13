@@ -26,6 +26,8 @@ class IndexController extends HomeBaseController {
 			$this->assign("home_head",$this->_getAd("home_head"));
 			//首页中部轮播
 			$this->assign("home_middle",$this->_getAd("home_middle"));
+			//首页中部广告
+			$this->assign("home_mid_pic",$this->_getAd("home_mid_pic"));
 			//最新活动
 			$active = $this->getHomeContent("Active",false,array(),5);
 			$this->assign("active",$active);

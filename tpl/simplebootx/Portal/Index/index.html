@@ -45,7 +45,7 @@
 							<ul>
 								<php>$activeCount = count($active)-1;</php>
 								<foreach name="active" item="item">
-									<li><a href="{:U('Portal/Active/info')}/id/{$item.id}" title="{$item.post_title}" style="">{$item.post_title}<if condition="$activeCount neq $key">|</if></a></li>
+									<li><a href="{:U('Portal/Active/info')}/id/{$item.id}" title="{$item.post_title}" style="">Top{$key+1}<if condition="$activeCount neq $key">|</if></a></li>
 								</foreach>
 							</ul>
 						</h5>
@@ -78,9 +78,9 @@
 					<div class="zl_001">
 						<h5>
 				    	<ul>
-						<li><a href="{:U('Portal/Group/index')}">限时团购</a></li>
-						<li><a href="">洛可可风</a></li>
-						<li><a href="{:U('Portal/PCustom/list')}">用客照说话</a></li>
+						<li><a href="{:U('Portal/Group/info')}">限时团购</a></li>
+						<li><a href="{:U('Portal/Photo/lists')}">洛可可风</a></li>
+						<li><a href="{:U('Portal/PCustom/lists')}">用客照说话</a></li>
 	     				<li><a href="{:U('Portal/Dress/index')}">婚纱礼服定制</a></li>
 						<li><a href="">洛可可之星</a></li>
 					    </ul>
@@ -96,7 +96,7 @@
 						<div class="title_nav_01"></div>
 						<h5>
 						<ul>
-							<php>$pthemeCount = count($ptheme)-1;</php>
+							<php>$pthemeCount = count($photo)-1;</php>
 							<foreach name="photo" item="item">
 								<li><a href="{:U('Portal/Photo/info')}/id/{$item.id}" title="{$item.post_title}" style="">{$item.post_title}<if condition="$pthemeCount neq $key">|</if></a></li>
 							</foreach>
@@ -168,10 +168,10 @@
 					<ul style="left:0px;">
 						<foreach name="home_middle" item="item">
 						<li>
-							<img src="__ROOT__{$item.ad_pic}" width="135" height="56" alt=""><ins></ins>
+							<img src="__ROOT__/{$item.ad_pic}" width="135" height="56" alt=""><ins></ins>
 							<div>
 								<a href="{$item.ad_url}">
-									<img src="__ROOT__{$item.ad_pic}" height="629" alt="">
+									<img src="__ROOT__/{$item.ad_pic}" height="629" alt="">
 								</a>
 							</div>
 						</li>
@@ -185,7 +185,7 @@
 			</div>
 			</div>
 			<!--轮播结束-->
-			<!--人气活动内容2-->
+			<!--团购套系-->
 			<!--标题-->
 			<div style="background: #f3f3f3;padding-bottom: 30px;" >
 				<div class="title_01">
@@ -255,7 +255,7 @@
 				</div>
 				<div class="title_foot_02"></div>
 			</div>
-			<!--查看更多作品2-->
+			<!--客照-->
 			<div id="float03">
 				<div class="title_01">
 					<div class="a_l1_t">
@@ -325,10 +325,12 @@
 			<!--广告位置-->
 			<div class="ad_001">
 				<div class="ad_001_img01">
-					<img src="__STATICS__/images/tpl/n11-1.jpg" width="585" height="404" alt="" />
+					<a href="{$home_mid_pic.0.ad_url}">
+					<img src="__ROOT__/{$home_mid_pic.0.ad_pic}" width="585" height="404" alt="" /></a>
 				</div>
 				<div class="ad_001_img02">
-					<img src="__STATICS__/images/tpl/n11.jpg" width="585" height="404" alt="" />
+					<a href="{$home_mid_pic.1.ad_pic}">
+					<img src="__ROOT__/{$home_mid_pic.0.ad_pic}" width="585" height="404" alt="" /></a>
 				</div>
 
 			</div>
@@ -410,10 +412,10 @@
 						<!--<span><font style="color:#7C7C7D"><</font>洛可可风婚纱摄影<font style="color:#7C7C7D">></font>之<font style="color:#F37914 ">看看好评如潮</font><font style="color:#7C7C7D">>ROCOCO RRASIE</font></span>-->
 						<h5>
 						<ul>
-							<li><a>我说不如大家怎么说 |</a></li>
-							<li><a>有实力就是任性|</a></li>
-							<li><a>一切为客户着想，一切为客户负责 |</a></li>
-							<li><a>你有权对不满意拒绝买单 ！</a></li>
+							<li>我说不如大家怎么说 |</li>
+							<li>有实力就是任性|</li>
+							<li>一切为客户着想，一切为客户负责 |</li>
+							<li>你有权对不满意拒绝买单 ！</li>
 						</ul>
 					</h5>
 
@@ -496,8 +498,9 @@
 						<!--<span><font style="color:#7C7C7D"><</font>洛可可风婚纱摄影<font style="color:#7C7C7D">></font>之<font style="color:#F37914 ">婚嫁常识</font><font style="color:#7C7C7D">>ROCOCO RRASIE</font></span>-->
 						<h5>
 						<ul>
+						<php>$artCount = count($articleCat)-1;</php>
 							<foreach name="articleCat" item="item">
-							<li><a href="{:U('Portal/Article/lists')}/cid/{$item.id}" target="_blank" title="" style="">{$item.cat_name} |</a></li>
+							<li><a href="{:U('Portal/Article/lists')}/cid/{$item.id}" target="_blank" title="" style="">{$item.cat_name} <if condition="$artCount neq $key">|</if></a></li>
 							</foreach>
 
 						</ul>
@@ -530,7 +533,7 @@
 								<li>
 									<a href="{:U('Portal/Article/info')}/id/{$f['id']}" target="_blank" title="">
 										<img src="__ROOT__/{$f.post_pic}" alt="" height="92" width="92">
-										<div class="nr"><b>[爱在大连]-{$f.post_title}</b><span>POST TIME</span><i>: </i><small>{$f.post_date|date="Y-m-d H:i:s",###}</small>
+										<div class="nr"><b>{$f.post_title}</b><span>POST TIME</span><i>: </i><small>{$f.post_date|date="Y-m-d H:i:s",###}</small>
 											<div class="clear"></div>
 											<p>{$f.post_excerpt}...</p>
 										</div>

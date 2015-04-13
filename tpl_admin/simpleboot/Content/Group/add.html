@@ -57,12 +57,6 @@ body fieldset legend {
             </div>
 			</td>
         </tr>
-        <tr>
-          <td><b style="top:5px;">发布时间</b></td>
-        </tr>
-        <tr>
-          <td style="padding:8px;"><input type="text" name="post_date" id="updatetime" value="{:date('Y-m-d H:i:s',time())}" size="15" class="input length_3 J_datetime "></td>
-        </tr>
       </table>
     </div>
   </div>
@@ -85,7 +79,13 @@ body fieldset legend {
 	            	<span class="must_red">*</span>
 	            </td>
           	</tr>
-          	
+          	<tr>
+	            <th>原价格</th>
+	            <td>
+	            	<input type="text" style="width:200px;" name="post_relprice" id="post_relprice" value=""  placeholder="请输入原价格"  />
+	            	<span class="must_red">*</span>
+	            </td>
+          	</tr>
           	<tr>
 	            <th>已团购人次</th>
 	            <td>
@@ -96,8 +96,8 @@ body fieldset legend {
           	<tr>
 	            <th>团购限时</th>
 	            <td>
-	            	<input type="text" name="post_start" class="input length_2 J_date" value="{$formget.start_time|default=''}" style="width:100px;" autocomplete="off"> -
-        			<input type="text" class="input length_2 J_date" name="post_deadline" value="{$formget.end_time}" style="width:100px;" autocomplete="off">
+	            	<input type="text" name="post_start" class="input length_2 J_datetime" value="{$formget.start_time|default=''}" style="width:150px;" autocomplete="off"> -
+        			<input type="text" class="input length_2 J_datetime" name="post_deadline" value="{$formget.end_time}" style="width:150px;" autocomplete="off">
 	            	<span class="must_red">*</span>
 	            </td>
           	</tr>
@@ -131,7 +131,7 @@ body fieldset legend {
              -->
             <tr>
               <th width="80">链接地址 </th>
-              <td><input type="text" name="post_url" class="input input_hd J_title_color" placeholder="填写链接地址后，作品内容将无效" style="width:400px;"/> </td>
+              <td><input type="text" name="post_url" class="input input_hd J_title_color" placeholder="填写链接地址后，内容将无效" style="width:400px;"/> </td>
             </tr>
             
             

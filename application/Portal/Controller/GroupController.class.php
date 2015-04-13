@@ -1,9 +1,54 @@
 <?php
 namespace Portal\Controller;
-use Common\Controller\HomeBaseController;
-class GroupController extends HomeBaseController {
+class GroupController extends IndexController {
 
+	protected $model_group ;
+	
+	public function __construct(){
+		parent::__construct();
+		$this->model_group=D("Group");
+	}
+	
+	
+	public function info(){
+		$id			= I("get.id",0,'intval');
+		if(empty($id)){ 
+			$this->error("参数丢失");
+		}
+		$where		= "id=$id and status=1";
+		$info		= $this->model_group->where($where)->find();
+		if(!empty($info['post_url'])){
+			header("location:".$info['post_url']);
+		}
+		//banner
+		$this->assign("home_head",$this->_getAd("banner_dress"));
+		//婚纱礼服广告位（专用）
+		$this->assign("ad_dress",$this->_getAd("dress"));
+		//3个摆放在一起的二级页面广告位
+		$this->assign("second_page_3",$this->_getAd("second_page_3"));
+		//服务承诺
+		$this->assign("servePromise",$this->_getAd("servePromise"));
+		//详细内容
+		$this->assign("info",$info);
+		//评论信息
+		$this->getCommentList("Dress",$info['id']);
+		$this->assign("table",'Dress');
+		//获取本页面的url
+		$url = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+		$this->assign("url",$url);
+		//图片信息
+		$photo	= json_decode($info['smeta'],true);
+		$this->assign("photo",$photo['photo']);
+		//二维码
+		$this->qrcode();
+		//右侧导航
+		$this->info_right();
+		$this->assign("model_table","Dress");
+		$this->display();
+	}
+	
 	public function nav_index(){
+		exit();
 		$m 			= M('group_cat');
 		$msg 		= $m->where()->select();
 		$item 		= array();

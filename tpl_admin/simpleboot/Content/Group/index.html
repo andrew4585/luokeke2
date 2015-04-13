@@ -36,12 +36,14 @@
 	            <th width="50">排序</th>
 	            <th>ID</th>
 	            <th>标题</th>
-	            <th width="80">价格</th>
-	            <th width="80">团购次数</th>
+	            <th width="80">团购价格</th>
+	            <th width="80">原价格</th>
+	            <th width="80">已团购</th>
                 <th width="50">缩略图</th>
-	            <th width="120"><span>发布时间</span></th>
-	            <th width="80">首页置顶</th>
-	            <th width="80">推荐</th>
+	            <th width="120">开始时间</th>
+	            <th width="120">结束时间</th>
+	            <th width="50">置顶</th>
+	            <th width="50">推荐</th>
 	            <th width="120">操作</th>
 	          </tr>
         </thead>
@@ -51,16 +53,18 @@
 		            <td><input name='listorders[{$vo.id}]' class="input input-order"  type='text' size='3' value='{$vo.listorder}'></td>
 		            <td><a>{$vo.id}</a></td>
 		            <td>
-		            	<a href="{:U('portal/Group/index',array('id'=>$vo['tid']))}" target="_blank" title="{$vo.post_excerpt}">
+		            	<a href="{:U('portal/Group/info',array('id'=>$vo['id']))}" target="_blank" title="{$vo.post_excerpt}">
 		            		<span>{$vo.post_title}</span>
 		            	</a>
 		            </td>
 		            <td>{$vo.post_price}</td>
+		            <td>{$vo.post_relprice}</td>
 		            <td>{$vo.post_num}</td>
     	            <td>
     	            	<a href="#"  onclick="image_priview('__ROOT__/{$vo.post_pic}');"><img src="__ROOT__/{$vo.post_pic}" style="width:200px;"/></a>
     	            </td>
-		            <td>{$vo.post_date|date="Y-m-d H:i:s",###}</td>
+		            <td>{$vo.post_start}</td>
+		            <td>{$vo.post_deadline}</td>
 		            <td align="center">
 		            	<if condition="$vo.istop eq 1">
 			    		<font class="istop" color="#1DCCAA" title="置顶" data-id="{$vo.id}">√</font>

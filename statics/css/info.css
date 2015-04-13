@@ -232,3 +232,12 @@
 	opacity:1;
 }
 .text_con{ width: 1030px; height: 96px;}
+.iconbig{
+	height: 0;
+	position: relative;
+	display: none;
+}
+.small{
+	margin-bottom: 30px;
+}
+

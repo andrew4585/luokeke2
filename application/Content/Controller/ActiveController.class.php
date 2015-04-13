@@ -32,8 +32,6 @@ class ActiveController extends AdminbaseController {
 	
 	function add(){
 		if(IS_POST){
-			$_POST['price']			= I("post.price",0,'intval');
-			$_POST['sale_count']	= I("post.sale_count",0,'intval');
 			$_POST['post_date']= strtotime($_POST['post_date']);
 			$_POST['post_content']=htmlspecialchars($_POST['post_content']);
 			$_POST['post_pic'] = $this->removeUploadImage($this->imgFolder, $_POST['post_pic']);
@@ -51,8 +49,6 @@ class ActiveController extends AdminbaseController {
 	
 	public function edit(){
 		if(IS_POST){
-			$_POST['price']			= I("post.price",0,'intval');
-			$_POST['sale_count']	= I("post.sale_count",0,'intval');
 			$_POST['post_date']= strtotime($_POST['post_date']);
 			$_POST['post_content']=htmlspecialchars($_POST['post_content']);
 			$_POST['post_pic'] = $this->removeUploadImage($this->imgFolder, $_POST['post_pic']);

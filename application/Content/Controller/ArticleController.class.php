@@ -47,7 +47,7 @@ class ArticleController extends AdminbaseController{
 	public function edit(){
 		if(IS_POST){
 			$_POST['post_date']= strtotime($_POST['post_date']);
-			$_POST['post_content']=htmlspecialchars($_POST['post_content']);
+			$_POST['post_content']=$_POST['post_content'];
 			$_POST['post_pic'] = $this->removeUploadImage($this->imgFolder, $_POST['post_pic']);
 			$result=$this->model_obj->save($_POST);
 			if ($result) {

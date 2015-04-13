@@ -1,5 +1,7 @@
 <?php
+
 namespace Portal\Controller;
+
 class DressController extends IndexController {
 
 	protected $category 	= array(1=>'婚纱',2=>'礼服');
@@ -14,13 +16,10 @@ class DressController extends IndexController {
 	 */
 	public function index(){
 		
-		//最新礼服定制
-		//status：是否显示
-		$whereArr	= array("status=1","category=2");
-		$where		= join(" and ",$whereArr);
-		$field		= join(",",$fieldArr);
-		$drobe		= $this->model_dress->relation(true)->where($where)->order("recommended desc,listorder")->limit(0,5)->select();
-		$this->assign("drobe",$drobe);//礼服
+		//最新活动推荐
+		$extraWhere = array("recommended=1");
+		$active = $this->getRecommended("Active",false,array(),$extraWhere,5);
+		$this->assign("active",$active);
 		//绝美礼服
 		$beauty		=$this->model_dress->where("cid=8")->order("recommended desc,listorder")->limit(0,20)->select();
 		$this->assign("beauty",$beauty);

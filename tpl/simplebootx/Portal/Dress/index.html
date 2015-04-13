@@ -34,43 +34,34 @@
 		
 		        <div class="xl_001_lf">
 		            <ul>
-		            <foreach name="drobe" item="item">
+		            <foreach name="active" item="item">
 		            <if condition="$key eq 0">
 		                <li class="b">
 		                    <a href="{:U('Portal/dress/info')}/id/{$item.id}" target="_blank" class="bigImg">
-		                        <img src="__ROOT__/{$item.post_pic}" width="599" height="576" alt="" />
+		                        <img src="__ROOT__/{$item.post_pic}" class="Imghover" width="599" height="576" alt="" />
+								<div class="rsp"></div>
+								<div class="text">
+									<h3>{$item.post_title}</h3>
+									<img src="__STATICS__/images/tpl/dress/dress-icon.png" alt=""/>
+								</div>
 		                    </a>
 		                </li>
 		                <else/>
 		                <li>
 		                    <a href="{:U('Portal/dress/info')}/id/{$item.id}" class="smallImg" target="_blank" title="">
-		                        <img src="__ROOT__/{$item.post_pic}" width="287" height="287" alt="" />
+		                        <img src="__ROOT__/{$item.post_pic}" class="Imghover" width="287" height="287" alt="" />
 		                        <div class="rsp"></div>
+								<div class="text">
+									<h3>{$item.post_title}</h3>
+									<img src="__STATICS__/images/tpl/dress/dress-icon.png" alt=""/>
+								</div>
 		                    </a>
 		                </li>
 						</if>
 					</foreach>
 		            </ul>
 		        </div>
-		        <script>
-		            $(function() {
-		                $(".xl_001_lf .b .rsp").hide();
-		                $(".xl_001_lf .b .rsp1").hide();
-		                $(".xl_001_lf .b .rsp2").hide();
-		                $(".xl_001_lf ul li").hover(function() {
-		                    $(this).find(".rsp").stop().fadeTo(500, 0)
-		                    $(this).find(".rsp1").stop().fadeTo(500, 0)
-		                    $(this).find(".rsp2").stop().fadeTo(500, 0)
-		                     $(this).find(".text").stop().animate({left:'0'}, {duration: 500})
-		                }, function() {
-		                    $(this).find(".rsp").stop().fadeTo(500, 1.5)
-		                    $(this).find(".rsp1").stop().fadeTo(500, 1.5)
-		                    $(this).find(".rsp2").stop().fadeTo(500, 1.5)
-		                     $(this).find(".text").stop().animate({left:'318'}, {duration: "fast"})
-		                     $(this).find(".text").animate({left:'-318'}, {duration: 0})
-		                });
-		            });
-		        </script>
+
 		
 		        <div class="zl_001">
 		            <h5>
@@ -113,8 +104,12 @@
 	                                <img src="__ROOT__/{$item.post_pic}" alt="" width="290" height="429" />
 	                            </a>
 	                            <div class="rsp"></div>
-	                            <div class="text"><a href=""><h3>点.击.查.看.详.情<br>SHOW MORE</h3><div>{$item.post_title}</div></a>
-	                            </div>
+								<a href="{:U('Portal/dress/info')}/id/{$item.id}">
+									<div class="text">
+										<h3>点.击.查.看.详.情<br>SHOW MORE</h3>
+										<div>{$item.post_title}</div>
+	                            	</div>
+								</a>
 	                        </li>
             			</foreach>	
 	                    </ul>
@@ -181,8 +176,10 @@
 		                            <img src="__ROOT__/{$item.post_pic}" alt="" width="290" height="429" />
 		                        </a>
 		                        <div class="rsp"></div>
-		                        <div class="text"><a href=""><h3>点.击.查.看.详.情<br>SHOW MORE</h3><div>{$item.post_title}</div></a>
+								<a href="{:U('Portal/dress/info')}/id/{$item.id}">
+		                        <div class="text"><h3>点.击.查.看.详.情<br>SHOW MORE</h3><div>{$item.post_title}</div>
 		                        </div>
+								</a>
 		                    </li>
 		                    </foreach>
 		                    

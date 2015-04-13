@@ -25,9 +25,24 @@
 .xl_001_lf .b{ height: 576px; width: 599px;}
 .xl_001_lf .b .rsp{height: 576px; width: 599px}
 .xl_001_lf ul li{float:left;display:inline;width:287px;height:287px;overflow:hidden;position:relative;}
-.xl_001_lf .rsp{width:287px;height:287px;overflow:hidden;position: absolute;  background: url("../images/tpl/dress/n_02.png") repeat scroll 0 0 rgba(0, 0, 0, 0);top:0px;left:0px;}
-.xl_001_lf .rsp1{width:287px;height:287px;overflow:hidden;position: absolute;  background: url("../images/tpl/dress/n_03.png") repeat scroll 0 0 rgba(0, 0, 0, 0);top:0px;left:0px;}
-.xl_001_lf .rsp2{width:287px;height:287px;overflow:hidden;position: absolute;  background: url("../images/tpl/dress/n_04.png") repeat scroll 0 0 rgba(0, 0, 0, 0);top:0px;left:0px;}
+.xl_001_lf .rsp{width:287px;height:287px;overflow:hidden;position: absolute;background:#000;top:0px;left:0px;}
+.xl_001_lf .text{
+    position: absolute;
+    top: 0px;
+    overflow: hidden;
+}
+.xl_001_lf .text h3{
+
+    text-align: center;
+    color: #FFFFFF;
+    font-family: "微软雅黑";
+    font-weight: normal;
+    font-size: 25px;
+}
+.xl_001_lf .text img{
+
+    text-align: center;
+}
 .xl_001_lf ul {overflow: hidden;}
 .xl_001_lf ul a.bigImg {float: left;  height: 576px;  margin: 0 2px 0 0;  width: 599px;}
 .xl_001_lf ul a.smallImg {display: inline;  float: left;  height: 287px;  margin: 0 2px 1px;  width: 287px;}

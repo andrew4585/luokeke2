@@ -102,6 +102,7 @@ class IndexController extends HomeBaseController {
      * <br/>@适用范围：含有recommended字段
      */
     public function getRecommended($model,$siteCharge=false,$extra=array(),$extraWhere=array(),$limitNumber=16){
+		$model		= D($model);
     	$fieldArr	= array("id","post_pic","post_title","post_url");
     	//istop:置顶，status：是否显示
     	$whereArr	= array_merge($extraWhere,array("status=1"));

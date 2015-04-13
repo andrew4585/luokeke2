@@ -12,7 +12,7 @@ body{font-family: "Microsoft YaHei";}
 .tit_3 span { display:block}
 .date11{ margin-right: 20px;color: #484848}
 .more11{ border: 1px solid #24241f;width: 100px; float: right;background: #000000;color: #ffffff}
-.more11 a{color: #ffffff;}
+.more11 a{color: #ffffff; cursor:pointer}
 .box{margin:5px auto; width:450px;}
 .box li{float:left;display:inline-block;}
 .box li a{display:block;}
@@ -48,5 +48,6 @@ body{font-family: "Microsoft YaHei";}
 .textbox{ padding-top:20px; padding-left:40px; width:306px;}
 .more_z{float: right; height: 60px; width: 176px; font-size: 16px; text-align: right; padding-right:20px; padding-top:30px;}
 .more_z span{ display:block; padding-left:60px;}
+.sample-border1{cursor: pointer}
 
 

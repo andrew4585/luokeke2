@@ -10,16 +10,17 @@ class DressController extends IndexController {
 	public function __construct(){
 		parent::__construct();
 		$this->model_dress=D("Dress");
+		$this->assign('bannerpic',1);
 	}
 	/**
 	 * 首页
 	 */
 	public function index(){
 		
-		//最新活动推荐
-		$extraWhere = array("recommended=1");
-		$active = $this->getRecommended("Active",false,array(),$extraWhere,5);
-		$this->assign("active",$active);
+		//最新广告推荐
+		$Ad = D('Ad1');
+		$Ad_five = $Ad->where('ad_cid=18')->order('listorder')->select();
+		$this->assign('Ad_five',$Ad_five);
 		//绝美礼服
 		$beauty		=$this->model_dress->where("cid=8")->order("recommended desc,listorder")->limit(0,20)->select();
 		$this->assign("beauty",$beauty);

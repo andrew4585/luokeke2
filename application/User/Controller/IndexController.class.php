@@ -1,27 +1,22 @@
 <?php
-
-/**
- * 会员注册登录
- */
 namespace User\Controller;
-use Common\Controller\HomeBaseController;
-class IndexController extends HomeBaseController {
-    //登录
+
+use Common\Controller\MemberbaseController;
+
+
+class IndexController extends MemberbaseController {
+
 	public function index() {
-		$id=I("get.id");
-		
-		$users_model=M("Users");
-		
+		$id=sp_get_current_userid();
+		$users_model=D("Common/Users");
 		$user=$users_model->where(array("id"=>$id))->find();
-		
 		if(empty($user)){
 			$this->error("查无此人！");
 		}
 		$this->assign($user);
-		$this->display(":index");
+		$this->display(':user_account');
 
     }
-
     //退出
     public function logout(){
     	$ucenter_syn=C("UCENTER_ENABLED");

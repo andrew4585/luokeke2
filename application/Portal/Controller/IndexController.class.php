@@ -337,11 +337,10 @@ class IndexController extends HomeBaseController {
     				try{
     					$model = D($table);
     					$Cnum = $model->where("id={$_POST['post_id']}")->setInc('comment_count',1);
-    					$this->success($Cnum);
+    					if($Cnum) $this->success('评论成功');
     				}catch(\Exception $e) {
     					$this->error($e->getMessage());
     				}
-    				$this->success("评论成功");
     			}else{
     				$this->error("评论失败");
     			}

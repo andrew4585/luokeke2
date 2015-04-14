@@ -32,7 +32,7 @@
     <!--tab 导航 -->
     <div class="head_tab">
         <ul class="tab">
-            <li class="on">
+            <li>
                 <a href="{:U('Portal/Photo/lists')}/cid/{$cateList.0}">
                     <div class="nav_x">
                         <img src="__STATICS__images/tpl/photo/nav_01.png" height="71">
@@ -47,7 +47,7 @@
                 </a>
             </li>
             <li style="border: none">
-            	<a href="#">
+                <a href="{:U('Portal/PTheme/lists')}">
                 <div class="nav_x_1">
                     <img src="__STATICS__images/tpl/photo/nav_03.png" height="71">
                 </div>
@@ -109,5 +109,13 @@
 <!--底部-->
 <tc_include file="Public:footer"/>
  <tc_include file="Public:bigjs"/>
+<script type="text/javascript">
+    var cate = {$info.cid};
+    if(cate == {$cateList.0}){
+        $(".tab li:first").addClass("on");
+    }else if(cate == {$cateList.1}){
+        $(".tab li:eq(1)").addClass("on");
+    }
+</script>
 </body>
 </html>

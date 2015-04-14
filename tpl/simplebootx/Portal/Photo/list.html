@@ -30,7 +30,7 @@
                 </a>
             </li>
             <li style="border: none">
-            	<a href="#">
+                <a href="{:U('Portal/PTheme/lists')}">
                 <div class="nav_x_1">
                     <img src="__STATICS__images/tpl/photo/nav_03.png" height="71">
                 </div>
@@ -45,7 +45,7 @@
                     <ul >
                     	<foreach name="list" item="item">
                         <li>
-                        	<a href="{:U('Portal/PCustom/info')}/id/{$item.id}">
+                        	<a href="{:U('Portal/Photo/info')}/id/{$item.id}">
                             <div class="photo">
                                 <img src="__ROOT__/{$item.post_pic}" alt="" width="290" height="425" />
                             </div>
@@ -99,6 +99,6 @@
 		}else if(cate == {$cateList.1}){
 			$(".tab li:eq(1)").addClass("on");
 		}
-	</script>
+</script>
 </body>
 </html>

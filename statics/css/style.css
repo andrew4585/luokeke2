@@ -13,7 +13,7 @@ body{overflow-x:hidden;}
 ins.nm{height:89px;top:630px;filter:alpha(opacity=60);opacity:0.6; }
 .b1{width:1200px;height:80px;position:absolute;z-index:1; border-bottom: 1px solid #C4C4C4}
 .b1 li,.b1 li ins{width:188px;height:12px;position:relative;}
-.b1 li{margin-right:6px;cursor:pointer;}
+.b1 li{margin-right:12px;cursor:pointer;}
 .b1 li div{display:none;}
 .b1 li img{border:5px solid #fff;width:188px;height:70.5px;}
 .b1 li.active img{border:none;width:188px;height:70.5px;}

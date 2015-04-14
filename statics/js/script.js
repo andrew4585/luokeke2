@@ -26,13 +26,13 @@ $(function(){
 		$(".b1 li:eq(0)").click();
 		io=1;
 
-//		setInterval(function(){
-//			$(".b1 li:eq("+io+")").click();
-//			io++;
-//			if(io>=$(".b1 li").length){
-//				io=0	
-//			}
-//		},6000);
+		setInterval(function(){
+			$(".b1 li:eq("+io+")").click();
+			io++;
+			if(io>=$(".b1 li").length){
+				io=0	
+			}
+		},6000);
 		
 	});
 	

@@ -1,8 +1,6 @@
 .article_content{
     width:1200px;
     margin:50px auto 30px;
-
-    overflow: hidden;
     background-color:#fff;
 }
 /**左侧**/
@@ -12,11 +10,11 @@
     margin-right: 25px;
 }
 .leftTop {
-    border: 1px solid #a5a5a5;
+    border: 1px solid #cccccc;
     margin-bottom: 12px;
 }
 .art_Title{
-    width: 150px;
+    width: 148px;
     background-color: #b5c8df;
     text-align: center;
     color: #ffffff;
@@ -29,10 +27,17 @@
 .left_nav{
     width: 148px;
 }
+
+.left_nav .on{
+	background:#b5c8df;
+}
+.left_nav .on>a{
+	color:#FFFFFF;
+}
 .left_nav_bottom{
     height: 38px;
     text-align: left;
-    border-top: 1px dashed #a5a5a5;
+    border-top: 1px dotted #a5a5a5;
 }
 .left_nav_bottom img{
     margin:0 10px 3px 16px;
@@ -42,7 +47,6 @@
     text-align: left;
     font-size: 15px;
     font-family: Microsoft Yahei;
-    color: #333;
 }
 /**中间**/
 .art_middle{
@@ -134,6 +138,12 @@
     left:150px;
     opacity:1;
 }
+
+.hover_sj .tips .tipscont {
+width: 100%;
+position: absolute;
+margin-top: 10px;
+}
 #qrlogo {
     display: block;
     position: relative;
@@ -175,22 +185,29 @@
     width: 240px;
 }
 .newstopBox ul.newstoplist li {
+	display:block;
     line-height: 40px;
     border-bottom: 1px #ccc dotted;
+	padding:10px 0;
+	overflow: hidden;
 }
 .newstopBox ul.newstoplist li span {
-    padding-left: 5px;
-    padding-right: 5px;
+	width:18px;
+	height:18px;
+	line-height:18px;
     background: #B5C8DF;
     color: #fff;
     font-size: 12px;
+	text-align:center;
+	float:left;
 }
 .newstopBox ul.newstoplist li a {
-    font-size: 13px;
-    line-height: 40px;
+    font-size: 12px;
+    line-height: 18px;
+	margin-left:10px;
     color: #333;
-    margin-left: 10px;
     text-decoration: none;
+	float:left;
 }
 .newsbuttomBox {
     width: 240px;
@@ -221,3 +238,60 @@
     background: url(../images/tpl/mix_icon.png);
     background-position: 0 -270px;
 }
+
+/*-----------------------------------列表页面 start----------------------*/
+.art-item{
+	padding: 8px 25px 0;
+	height:276px;
+}
+/*标题*/
+.art-item h1{
+	font-size:21px;
+	line-height:53px;
+}
+
+.item-main{
+	display:block;
+	border-bottom: 1px dotted #a5a5a5;
+	height:215px;
+}
+
+.item-main .item-info{
+	width:505px;
+	height:215px;
+	float:left;
+	border-top:1px solid #d0d0d0;
+}
+/*属性*/	
+.item-info .newsDesc{
+	width:100%;
+	border:none;
+	text-align: left;
+	padding:0;
+	margin-left:-10px;
+	line-height:28px;
+}
+/*功能按钮*/
+.item-info .news-icon{
+	margin:5px 0 23px 0;
+}
+
+/*描述*/
+.item-info .item-desc{
+	color:#848383;
+	font-size:13px;
+	line-height:22px;
+}
+
+.item-img{
+	float:right;
+	width:180px;
+	height:180px;
+	padding:5px;
+	background:#e4e4e4;
+}
+.item-img img{
+	width:180px;
+	height:180px;
+}
+/*-----------------------------------列表页面 end----------------------*/

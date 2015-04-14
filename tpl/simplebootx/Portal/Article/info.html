@@ -34,9 +34,13 @@
             <h2 class="art_Title">婚嫁资讯</h2>
             <ul class="left_nav">
                 <foreach name="category" item="item">
-                <li class="left_nav_bottom">
+                <if condition="$cid eq $item['id']">
+                	<li class="left_nav_bottom on">
+                <else/>
+                	<li class="left_nav_bottom">
+                </if>
                     <img src="__STATICS__/images/tpl/usericon.png" alt=""/>
-                    <a href="{:U('Portail/article/info/category')}/{$item.id}">{$item.cat_name}</a>
+                    <a href="{:U('Portal/article/lists/cid')}/{$item.id}">{$item.cat_name}</a>
                 </li>
                 </foreach>
             </ul>
@@ -89,7 +93,7 @@
                             number = parseInt(number);
                             var id	   = {$info.id};
                             var model  = $(this).attr("data-model");
-                            var url	   = "/luokeke2/Portal/"+model+"/ajax_like";
+                            var url	   = "__ROOT__/Portal/"+model+"/ajax_like";
                             $.post(url,{id:id},function(data){
                                 if(data.status){
                                     $(".info-like font").html(++number);
@@ -112,7 +116,7 @@
             <h2>热门资讯 &nbsp;<p>HOT</p></h2>
             <ul class="newstoplist">
                 <foreach name="hot_article" item="item">
-                <li><span>{$listnum++}</span><a href="{:U('Portal/Article/info')}/id/{$item.id}">{$item.post_title}</a></li>
+                <li><span>{$key+1}</span><a href="{:U('Portal/Article/info')}/id/{$item.id}" title="{$item.post_title}">{$item.post_title|msubstr=0,14}</a></li>
                 </foreach>
             </ul>
         </div>

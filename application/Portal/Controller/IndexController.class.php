@@ -388,15 +388,23 @@ class IndexController extends HomeBaseController {
     /**
      * 生成二维码
      */
-    public function qrcode(){
-    	$url	= $this->_getUri();
-    	$name	= encrypt($url);
+    public function qrcode($url=''){
+    	if(empty($url)){
+    		$uri = $this->_getUri();
+    	}else{
+    		$uri = $url;
+    	}
+    	$name	= encrypt($uri);
     	$path	= "./data/upload/qrcode/$name.png";
     	if(!file_exists($path)){
     		Vendor("phpqrcode.phpqrcode");
     		\QRcode::png($url,$path,'L',1000,2);
     	}
-    	$this->assign("qrcode",$path);
+    	if(empty($url)){
+	    	$this->assign("qrcode",$path);
+    	}else{
+    		return $path;
+    	}
     }
     
     /**

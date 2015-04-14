@@ -16,22 +16,13 @@ class DressController extends IndexController {
 	 * 首页
 	 */
 	public function index(){
-		
 		//最新广告推荐
-		$Ad = D('Ad1');
-		$Ad_five = $Ad->where('ad_cid=18')->order('listorder')->select();
-		$this->assign('Ad_five',$Ad_five);
+		$this->assign('Ad_five',$this->_getAd("dress_5"));
 		//绝美礼服
-		$beauty		=$this->model_dress->where("cid=8")->order("recommended desc,listorder")->limit(0,20)->select();
+		$beauty		= $this->getRecommended('Dress',false,array(),array('category=2'),20);
 		$this->assign("beauty",$beauty);
-		//dump($beauty);
 		//最新婚纱定制
-		$fieldArr	= array("id","post_pic","post_title","post_url");
-		//status：是否显示
-		$whereArr	= array("status=1","category=1");
-		$where		= join(" and ",$whereArr);
-		$field		= join(",",$fieldArr);
-		$dress		= $this->model_dress->field($field)->where($where)->order("recommended desc,listorder")->limit(0,20)->select();
+		$dress		= $this->getRecommended('Dress',false,array(),array('category=1'),20);
 		$this->assign("dress",$dress);
 		//广告位显示
 		$this->assign("promise",$this->_getAd("promise"));

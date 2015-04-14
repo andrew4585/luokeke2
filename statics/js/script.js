@@ -49,10 +49,10 @@ $(function(){
 	
 	function middle_banner_init(){
 		var width = $(window).width();
-		var height		 = width/16*6;
+		var height		 = width/1920*600;
 		$(".b1 div img").css("width",width);
 		$(".b1 div img").css("height",height);
-		$(".wrap").css("height",height+125);
+		$(".wrap").css("height",height+110);
 		$(".b1").css("top",height+10);
 	}
 })

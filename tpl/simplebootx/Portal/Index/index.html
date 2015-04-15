@@ -45,7 +45,7 @@
 							<ul>
 								<php>$activeCount = count($active)-1;</php>
 								<foreach name="active" item="item">
-									<li><a href="{:U('Portal/Active/info')}/id/{$item.id}" title="{$item.post_title}" style="">Top{$key+1}<if condition="$activeCount neq $key">|</if></a></li>
+									<li><a href="{:U('Portal/Active/info')}/id/{$item.id}" title="{$item.post_title}" style="">{$item.post_title}<if condition="$activeCount neq $key">|</if></a></li>
 								</foreach>
 							</ul>
 						</h5>

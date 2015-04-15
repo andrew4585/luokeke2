@@ -1,0 +1,117 @@
+<admintpl file="header" />
+<style>
+    .recommended{cursor:pointer;font-size:15px;}
+</style>
+<body class="J_scroll_fixed">
+<div class="wrap J_check_wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="{:U('Enroll/index')}">所有成员</a></li>
+        <li><a href="{:U('Enroll/add')}">添加成员</a></li>
+    </ul>
+    <form class="well form-search" method="post" action="{:u('Enroll/index')}">
+        <div class="search_type cc mb10">
+            <div class="mb10">
+                <!--类别-->
+                <select class="select_2" name="cid"style="width:160px;" id="">
+                    <option value=''>全部类别</option>
+                    <foreach name="categorys" item="vo">
+                        <php>$cid_select=$vo['id']==$formget['cid']?"selected":"";</php>
+                        <option value="{$vo.id}" {$cid_select}>{$vo.cat_name}</option>
+                    </foreach>
+                </select>
+                &nbsp;&nbsp;时间：
+                <input type="text" name="start_time" class="input length_2 J_date" value="{$formget.start_time|default=''}" style="width:100px;" autocomplete="off"> -
+                <input type="text" class="input length_2 J_date" name="end_time" value="{$formget.end_time}" style="width:100px;" autocomplete="off">
+                <!--
+                <select class="select_2" name="searchtype" style="width:70px;">
+                  <option value='0' >标题</option>
+                </select>
+                 -->
+                &nbsp; &nbsp;关键字：
+                <input type="text" class="input length_2" name="keyword" style="width:200px;" value="{$formget.keyword}" placeholder="请输入关键字...">
+                <input type="submit" class="btn" value="搜索"/>
+                </span>
+            </div>
+        </div>
+    </form>
+
+    <form class="J_ajaxForm" action="" method="post">
+        <div class="table_list">
+            <table width="100%" class="table table-hover">
+                <thead>
+                <tr>
+                    <th width="16"><label><input type="checkbox" class="J_check_all" data-direction="x" data-checklist="J_check_x"></label></th>
+                    <th width="50">排序</th>
+                    <th width="50">ID</th>
+                    <th>名称</th>
+                    <th>类别</th>
+                    <th>图片</th>
+                    <th width="45">显示</th>
+                    <th width="120">操作</th>
+                </tr>
+                </thead>
+                <foreach name="list" item="vo">
+                    <tr>
+                        <td><input type="checkbox" class="J_check" data-yid="J_check_y" data-xid="J_check_x" name="ids[]" value="{$vo.id}"></td>
+                        <td><input name='listorders[{$vo.id}]' class="input input-order mr5"  type='text' size='3' value='{$vo.listorder}'></td>
+                        <td>{$vo.id}</td>
+                        <td title="{$vo.post_desc|msubstr=0,10}">{$vo.post_title}</td>
+                        <td>{$vo.cat.cat_name}</td>
+                        <td>
+                            <notempty name="vo['post_pic']">
+                                <a href="__ROOT__/{$vo['post_pic']}" target="_blank"><img src="__ROOT__/{$vo['post_pic']}" style="height:80px;max-width:600px" onclick=""/></a>
+                            </notempty>
+                        </td>
+                        <td align="center">
+                            <if condition="$vo.recommended eq 1">
+                                <font class="recommended" color="#1DCCAA" title="显示" data-id="{$vo.id}">√</font>
+                                <else/>
+                                <font class="recommended" color="red" title="隐藏" data-id="{$vo.id}">×</font>
+                            </if>
+                        </td>
+                        <td>
+                            <a href="{:U('Enroll/edit',array('id'=>$vo['id']))}">修改</a>|
+                            <a href="{:U('Enroll/delete',array('id'=>$vo['id']))}" class="J_ajax_del" >删除</a>
+                        </td>
+                    </tr>
+                </foreach>
+            </table>
+            <div class="p10"><div class="pagination">{$page}</div></div>
+
+        </div>
+        <div class="form-actions">
+            <button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('Enroll/listorders')}">排序</button>
+            <button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('Enroll/recommend',array('display'=>1))}" data-subcheck="true" >显示</button>
+            <button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('Enroll/recommend',array('hide'=>1))}" data-subcheck="true" >隐藏</button>
+            <button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:U('Enroll/delete')}" data-subcheck="true" >删除</button>
+        </div>
+
+    </form>
+</div>
+<script src="__ROOT__/statics/js/common.js?"></script>
+<script>
+    $(function () {
+        $(".recommended").click(function(){
+            var obj   = $(this);
+            var id    = obj.attr("data-id");
+            var href  = "{:U('Coco/Enroll/recommend')}";
+            var color = obj.attr("color");
+            var title = color=='red'?"显示":"隐藏";
+            var status= color=='red'?"1":"0";
+            var html  = color=='red'?"√":"×";
+            color = color=='red'?"#1DCCAA":"red";
+            $.get(href,{id:id,recommended:status},function(data){
+                if(data.status){
+                    obj.attr("color",color);
+                    obj.attr("title",title);
+                    obj.html(html);
+                }else{
+                    alert(data.info);
+                }
+            });
+        });
+    });
+
+</script>
+</body>
+</html>

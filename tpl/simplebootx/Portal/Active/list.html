@@ -14,7 +14,7 @@
     <tc_include file="Public:banner"/>
     <!--内容-->
     <div class="conter">
-        <div class="title_01">
+        <div class="title_01" style="border:none;">
             <div class="a_l1_t">
                 <!--<span><font style="color:#7C7C7D"><</font>洛可可婚纱摄影<font style="color:#7C7C7D">></font>之<font style="color:#F37914 ">最新人气活动</font><font style="color:#7C7C7D">>POPULARA CTIVIES</font></span>-->
                 <div class="title_nav"></div>
@@ -46,9 +46,17 @@
         </div>
         <div class="digg">{$page}</div>
         <!--中间导航-->
-        <div class="middle">
-            限时团购&nbsp;&nbsp;&nbsp;︳洛可可风&nbsp;&nbsp;&nbsp;︳用客照说话&nbsp;&nbsp;&nbsp;︳婚纱礼服定制&nbsp;&nbsp;&nbsp;︳洛可可之星
-        </div>
+        <div class="zl_001">
+						<h5>
+				    	<ul>
+						<li><a href="{:U('Portal/Group/info')}" style="color:#F67814">限时团购</a></li>
+						<li><a href="{:U('Portal/Photo/lists')}">洛可可风</a></li>
+						<li><a href="{:U('Portal/PCustom/lists')}">用客照说话</a></li>
+	     				<li><a href="{:U('Portal/Dress/index')}">婚纱礼服定制</a></li>
+						<li style="border:none;"><a href="{:U('Portal/coco/index')}">洛可可之星</a></li>
+					    </ul>
+						</h5>
+					</div>
         <!--广告位置-->
         <tc_include file="Public:second_page_3"/>
     </div>

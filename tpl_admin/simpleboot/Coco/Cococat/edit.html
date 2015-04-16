@@ -15,7 +15,14 @@
                         <td>分类名称:</td>
                         <td>
                             <input type="text" class="input" name="cat_name" value="{$cat_name}"><span class="must_red">*</span>
-                            <input type="hidden" class="input" name="cid" value="{$cid}">
+                            <input type="hidden" class="input" name="id" value="{$id}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>活动日期:</td>
+                        <td>
+                            <input type="text" name="start_time" class="input length_2 J_date" value="{$start_time|date="y-m-d",###}" style="width:100px;" autocomplete="off"> -
+                            <input type="text" class="input length_2 J_date" name="end_time" value="{$end_time|date="y-m-d",###}" style="width:100px;" autocomplete="off">
                         </td>
                     </tr>
                     <tr>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<!-- saved from url=(0072)http://luokekefw.tmall.com/hy/index.htm?spm=a1z10.1-b.0.0.2Y5cXq#!/index -->
+<html xmlns="http://www.w3.org/1999/html" class="ks-webkit537 ks-webkit ks-chrome31 ks-chrome">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="data-spm" content="">
+    <title>可可之星</title>
+    <link href="__STATICS__css/star.css" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+<div id="site-nav-shim"></div>
+<div class="wrapper" id="J_Wrapper">
+    <div id="J_Container" class="container">
+        <div class="nav" data-spm="a1z29" id="J_Nav" style="display: block;">
+            <div class="nav-box box">
+                <ul class="nav-list" id="J_NavList">
+                    <volist name="menuData" id="vo" key="k">
+                    <li class="nav-item nav-active" data-index="0" data-type="0" data-cata="index">
+                        <a href="{$vo.href}" data-spm-protocol="i">{$vo.label}</a>
+                    </li>
+                    </volist>
+
+
+                </ul>
+            </div>
+            <div class="like-box">
+                <div class="like-btn-tip" id="J_IndexUnlikeBtn">可可之星</div>
+                <div class="like-mic">
+                    <span> {$category.cat_name}</span>
+                    <span> 活动已开始 </span>
+                    <span> 距离投票结束还有{$day}天</span>
+                </div>
+                <div class="like-btn">
+                    <div class="l-btn">
+                        <label>我要报名</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main" id="J_Main" style="display: block;">
+            <div class="view active-view index" id="J_ActiveViewindex">
+                <div class="flow sub-flow" style="margin-left: 264px;"><div>
+                </div>
+                    <div class="flow-wrapper">
+                        <div class="flow-container" style=" margin: 10px 80px; width: 1756px; height: 100%">
+
+                            <div class="flow-freeze-layer"></div>
+                            <foreach name="info" item="item">
+                                <if condition="$key lt $count">
+                            <div class="feed-item" data-feedid="3115596" data-spm="xb219888" data-page="0" style="left: {$key*384}px; top: 0px;">
+                                <a class="feed-wrapper feed-xiaobao" data-spm-click="gostr=/tmallhy;locaid=dxb219888" href="#" >
+				                    <span class="feed-bg ss-image-lazyload" data-image="__ROOT__{$item.post_pic}" style="background-image: none; background-position: initial initial; background-repeat: initial initial;">
+					                    <img src="__ROOT__{$item.post_pic}" width="370px" alt=""/>
+									</span>
+                                    <div class="feed-name-wrapper">
+                                        <div class="feed-ctrline">
+                                            <div class="feed-like"><i></i>喜欢 {$item.post_like}</div>
+
+                                        </div>
+                                        <div class="feed-name">
+                                            <div class="feed-name-btn">
+                                                <p> 找朋友帮我投票</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="feed-name-tit">
+                                        <div class="feed-cr">
+                                            <div class="feed-cr-l"><p>{$key+1}</p></div>
+                                            <div class="feed-cr-r">{$item.post_title}</div>
+                                        </div>
+                                        <div class="feed-xr">{$item.post_desc}</div>
+                                    </div>
+                                </a>
+                            </div>
+                                    <else />
+                                    <div class="feed-item" data-feedid="3118099" data-spm="xb220272" data-page="0" style="left: <?php echo ($key-$count)*384; ?>px; top: 288px;">
+                                        <a class="feed-wrapper feed-xiaobao" data-spm-click="gostr=/tmallhy;locaid=dxb220272" href="#" >
+				                    <span class="feed-bg ss-image-lazyload" data-image="__ROOT__{$item.post_pic}" style="background-image: none; background-position: initial initial; background-repeat: initial initial;">
+                                    <img src="__ROOT__{$item.post_pic}" width="370px" alt=""/>
+                                    </span>
+                                            <div class="feed-name-wrapper">
+
+                                                <div class="feed-ctrline">
+                                                    <div class="feed-like"><i></i>喜欢{$item.post_like}</div>
+                                                </div>
+
+                                                <div class="feed-name">
+                                                    <div class="feed-name-btn">
+                                                        <p>找朋友帮我投票</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="feed-name-tit">
+                                                <div class="feed-cr">
+                                                    <div class="feed-cr-l"><p>{$key+1}</p></div>
+                                                    <div class="feed-cr-r"> {$item.post_title}</div>
+                                                </div>
+                                                <div class="feed-xr">{$item.post_desc}</div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </if>
+                            </foreach>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="J_MainBG" class="main-bg" data-image="__STATICS__/images/tpl/star-bg.jpg" style="display: block; background-image: none; background-position: initial initial; background-repeat: initial initial;"><span class="suitable-image-div" style="display: block; background-image: url(img/star-bg.jpg); background-size: cover; width: 100%; height: 100%; opacity: 1; position: absolute; top: 0px; left: 0px; background-position: 50% 50%; background-repeat: no-repeat no-repeat;"></span>
+        </div>
+    </div>
+</div>
+<div class="freeze-layer">
+
+</div>
+<script type="text/javascript" src="__STATICS__js/jquery.js"></script>
+<script type="text/javascript">
+    $(function(){
+        var height = $(window).height();
+        var marginHeight = (height-583)/2;
+        if(marginHeight<0){
+            marginHeight = 5;
+        }
+        $(".flow-container").css("margin-top",marginHeight);
+
+    })
+</script>
+
+</body>
+
+</html>

@@ -74,7 +74,7 @@
 					
 					<foreach name="siteData" item="item">
 							<if condition="$siteid neq $item['id']">
-							<div class="box_c_title"><a target="_self" href="__ROOT__{$item.url}/siteid/{$item.cid}">{$item.site_name}</a></div>
+							<div class="box_c_title"><a target="_self" href="{:U('Portal/Index/index')}/siteid/{$item.id}">{$item.site_name}</a></div>
 							</if>
 					</foreach>
 					</div>

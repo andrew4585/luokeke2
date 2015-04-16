@@ -25,9 +25,9 @@
 				<div id="izl_rmenu" class="izl-rmenu" >
 					<a target="_blank" href="tencent://Message/" class="btn btn-qq"></a>
 					<div class="btn btn-wo">
-						<img style="display: none;" class="pic" src="img/weibo.jpg" onclick="window.location.href='http://%77%77%77%2e%73%75%63%61%69%6a%69%61%79%75%61%6e%2e%63%6f%6d'">
+						<img style="display: none;" class="pic" src="__STATICS__/images/tpl/wbQr.png" onclick="window.location.href='http://%77%77%77%2e%73%75%63%61%69%6a%69%61%79%75%61%6e%2e%63%6f%6d'">
 					</div>
-					<div class="btn btn-wx"><img style="display: none;" class="pic" src="img/weixin.jpg" onclick="window.location.href='http://%77%77%77%2e%73%75%63%61%69%6a%69%61%79%75%61%6e%2e%63%6f%6d'">
+					<div class="btn btn-wx"><img style="display: none;" class="pic" src="__STATICS__/images/tpl/wxQr.png" onclick="window.location.href='http://%77%77%77%2e%73%75%63%61%69%6a%69%61%79%75%61%6e%2e%63%6f%6d'">
 					</div>
 					<div class="btn btn-phone">
 						<div class="phone">4000-999-136</div>
@@ -45,7 +45,7 @@
 							<ul>
 								<php>$activeCount = count($active)-1;</php>
 								<foreach name="active" item="item">
-									<li><a href="{:U('Portal/Active/info')}/id/{$item.id}" title="{$item.post_title}" style="">Top{$key+1}<if condition="$activeCount neq $key">|</if></a></li>
+									<li><a href="{:U('Portal/Active/info')}/id/{$item.id}" title="{$item.post_title}" style="">{$item.post_title}<if condition="$activeCount neq $key">|</if></a></li>
 								</foreach>
 							</ul>
 						</h5>
@@ -518,26 +518,31 @@
 				<div class="huan">
 				<div class="huan_title">
 					<volist name="articles" id="vo" key="k">
-				    <div id="huan_{$k+1}" class="huan_bt" onmousemove="star_show(this);"><a href="{:U('Portal/Article/lists')}/cid/{$vo.cid}" target="_blank"><div class="menu_more">{$vo.cat}</div></a></div>
+				    <div id="huan_{$k+1}" class="huan_bt" onmousemove="star_show(this);"><a href="{:U('Portal/Article/lists')}/cid/{$vo.cid}" target="_blank"><div class="menu_more">{$vo.cat_name}</div></a></div>
 					</volist>
 				</div>
 					<volist name="articles" id="item" key="k">
 					<div id="level_{$k+1}" class="huan_cen">
 						
 						<dl>
-							<dt><a href="{:U('Portal/Article/lists')}/cid/{$item.cid}" target="_blank">LATEST ACTIVITY {$item.cat}</a></dt>
-
+							<dt><a href="{:U('Portal/Article/lists')}/cid/{$item.cid}" target="_blank">LATEST ACTIVITY {$item.cat_name}</a></dt>
 							<ul>
-							<volist name="item['article']" id="f">
-								<li>
+							<volist name="item['article']" id="f" mod="2">
+								<eq name="mod" value="0"><li></eq>
+								<eq name="mod" value="1"><li style="border-left: 1px solid #e9e9e9;"></eq>
 									<a href="{:U('Portal/Article/info')}/id/{$f['id']}" target="_blank" title="">
-										<img src="__ROOT__/{$f.post_pic}" alt="" height="92" width="92">
-										<div class="nr"><b>{$f.post_title}</b><span>POST TIME</span><i>: </i><small>{$f.post_date|date="Y-m-d H:i:s",###}</small>
+										<img src="__ROOT__/{$f.post_pic}" alt="" height="100" width="100">
+										<div class="nr">
+											<b>{$f.post_title}</b>
+											<span>POST TIME: {$f.post_date|date="Y-m-d H:i:s",###}</span>
 											<div class="clear"></div>
-											<p>{$f.post_excerpt}...</p>
+											<p>{$f.post_excerpt|msubstr=0,90}</p>
 										</div>
 									</a>
 								</li>
+								<eq name="mod" value="1">
+									<li style="width:1200px;height:20px;padding:0;margin-left:-1px"><img src="__STATICS__/images/tpl/art_seper.png"/></li>
+								</eq>
 								</volist>
 							</ul>
 						</dl>

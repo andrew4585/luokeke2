@@ -83,12 +83,16 @@
                     </div>
                     <div class="info-img info2 hidden">
                     	<div class="info-img-w">
-                            <img src="/luokeke2/data/upload/ad/551100e015ee7.jpg" id="one" width="790" alt=""/>
+                    		<foreach name="serviceProcess">
+                            	<img src="__ROOT__/{$item.url}" id="one" width="790" alt=""/>
+                    		</foreach>
                         </div>
                     </div>
                     <div class="info-img info3 hidden">
                     	<div class="info-img-w">
-                            <img src="/luokeke2/data/upload/ad/551100e015ee7.jpg" id="one" width="790" alt=""/>
+                    		<foreach name="payMoney">
+	                            <img src="__ROOT__/{$item.url}" id="one" width="790" alt=""/>
+                    		</foreach>
                         </div>
                     </div>
                     <script>

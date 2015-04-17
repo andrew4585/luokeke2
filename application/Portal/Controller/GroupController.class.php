@@ -26,6 +26,10 @@ class GroupController extends IndexController {
 		if(!empty($info['post_url'])){
 			header("location:".$info['post_url']);exit;
 		}
+		//服务流程图片
+		$this->assign("serviceProcess",$this->_getSingle(29));
+		//付款方式图片
+		$this->assign("payMoney",$this->_getSingle(30));
 		//右侧信息
 		$rightList	= $this->model_group->field("id,post_pic,post_title,post_price")->where("status = 1")->order($order)->select();
 		$this->assign("rightList",$rightList);

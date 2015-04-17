@@ -9,7 +9,7 @@ use Common\Controller\HomeBaseController;
 class IndexController extends HomeBaseController {
 	
 	protected $siteId ;			//站点编号
-	
+	protected $model_single;
 	public function __construct(){
 		parent::__construct();
 		$this->setSiteId();
@@ -414,5 +414,17 @@ class IndexController extends HomeBaseController {
     public function _getUri(){
     	$url = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
     	return $url;
+    }
+    
+    /**
+     * 获取单页面图片
+     */
+    public function _getSingle($id){
+    	if(!$this->model_single)
+    		$this->model_single = D("Single");
+
+    	$smeta = $this->model_single->where("id=$id")->getField("smeta");
+    	$photo = json_decode($smeta,true);
+    	return $photo['photo'];
     }
 }

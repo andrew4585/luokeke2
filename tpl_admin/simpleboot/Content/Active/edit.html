@@ -92,18 +92,25 @@ body fieldset legend {
               <th width="80">摘要 </th>
               <td><textarea name='post_excerpt' id='description'  style='width:98%;height:50px;' placeholder='请填写摘要'>{$post_excerpt}</textarea> </td>
             </tr>
-			  <tr>
-				  <th width="80">内容</th>
-				  <td>
-					  <script type="text/plain" id="content" name="post_content">{$post_content|htmlspecialchars_decode}</script>
-					  <script type="text/javascript">
-						  //编辑器路径定义
-						  var editorURL = GV.DIMAUB;
-					  </script>
-					  <script type="text/javascript"  src="__ROOT__/statics/ueditor/ueditor.config.js"></script>
-					  <script type="text/javascript"  src="__ROOT__/statics/ueditor/ueditor.all.min.js"></script>
-				  </td>
-			  </tr>
+			<tr>
+              <th width="80">相册图集</th>
+              <td>
+				<fieldset class="blue pad-10">
+		        <legend>图片列表</legend>
+		       <ul id="photos" class="picList">
+		       		
+			        <foreach name="smeta" item="vo">
+				        <li id="savedimage{$key}">
+				        	<input type="text" name="photos_url[]" value="__ROOT__/{$vo['url']}" title='双击查看' style="width:310px;" ondblclick="image_priview(this.value);" class="input">
+				        	<input type="text" name="photos_alt[]" title="排序" value="{$vo.alt}" style="width:60px;" class="input" onfocus="if(this.value == this.defaultValue) this.value = ''" onblur="if(this.value.replace(' ','') == '') this.value = this.defaultValue;">
+				        	<a href="javascript:remove_div('savedimage{$key}')">移除</a>
+				        </li>
+			        </foreach>
+		        </ul>
+				</fieldset>
+				<div class="bk10"></div>
+				<a href='javascript:void(0);' onclick="javascript:flashupload2('albums_images', '图片上传','photos',change_images,'10,gif|jpg|jpeg|png|bmp,0','','','')" class="btn">选择图片 </a> </td>
+            </tr>
             <tr>
               <th width="80">链接地址 </th>
               <td><input type="text" name="post_url" value="{$post_url}" class="input input_hd J_title_color" placeholder="" style="width:400px;"/> </td>
@@ -138,15 +145,6 @@ body fieldset legend {
 		Wind.use('validate', 'ajaxForm', 'artDialog', function () {
 			//javascript
 
-			//编辑器
-			editorcontent = new baidu.editor.ui.Editor();
-			editorcontent.render( 'content' );
-			try{editorcontent.sync();}catch(err){};
-			//增加编辑器验证规则
-			jQuery.validator.addMethod('editorcontent',function(){
-				try{editorcontent.sync();}catch(err){};
-				return editorcontent.hasContents();
-			});
 			var form = $('form.J_ajaxForms');
 			//ie处理placeholder提交问题
 			if ($.browser.msie) {

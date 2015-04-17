@@ -59,7 +59,7 @@
 		            <td><input name='listorders[{$vo.id}]' class="input input-order"  type='text' size='3' value='{$vo.listorder}'></td>
 		            <td><a>{$vo.id}</a></td>
 		            <td>
-		            	<a href="{$vo.post_url}" target="_blank" title="{$vo.post_excerpt}">
+		            	<a href="{:U('portal/active/info',array('id'=>$vo['id']))}" target="_blank" title="{$vo.post_excerpt}">
 		            		<span>{$vo.post_title}</span>
 		            	</a>
 		            </td>

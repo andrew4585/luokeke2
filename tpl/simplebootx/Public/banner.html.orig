@@ -46,6 +46,15 @@
 			</a>
 		</li>
 		<li>
+<<<<<<< HEAD
+			<a href="{:U('Portal/Single/info')}/id/32">
+				<img src="__STATICS__/images/tpl/kpds_10.png" />
+			</a>
+		</li>
+		<li>
+			<a href="{:U('Portal/Single/info')}/id/31">
+				<img src="__STATICS__/images/tpl/kpds_05.png" />
+=======
 			<a href="">
 				<img src="__STATICS__/images/tpl/banner_02.png" />
 			</a>
@@ -53,6 +62,7 @@
 		<li>
 			<a href="">
 				<img src="__STATICS__/images/tpl/banner_03.png" />
+>>>>>>> stoneworld-master
 			</a>
 		</li>
 		<li>

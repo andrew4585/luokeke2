@@ -1,6 +1,6 @@
 <?php
 namespace Portal\Controller;
-use Common\Controller\HomeBaseController;
+
 class PCustomController extends IndexController {
 	
 	protected $model_pcustom	;
@@ -73,7 +73,11 @@ class PCustomController extends IndexController {
 	public function ajax_like(){
 		$this->_like($this->model_pcustom);
 	}
-	
+
 	public function nav_index(){
+		$nav_arr['name'] 	= "客片欣赏";
+		$nav_arr['name_url'] = U("Portal/PCustom/lists");
+		exit(json_encode($nav_arr));
 	}
+}
 }

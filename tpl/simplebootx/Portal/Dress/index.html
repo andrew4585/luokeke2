@@ -20,11 +20,12 @@
 		         <!--<span><font style="color:#7C7C7D"><</font>洛可可婚纱礼服馆<font style="color:#7C7C7D">></font>之<font style="color:#F37914 ">婚纱礼服定制</font><font style="color:#7C7C7D">>POPULARA CTIVIES</font></span>-->
 		            <h5>
 		                <ul>
-		                    <li><a href="" target="_blank" title="" style="">可可之星做最耀眼的新娘 |</a></li>
-		                    <li><a href="" target="_blank" title="" style="">积分上分享赢好礼 |</a></li>
-		                    <li><a href="" target="_blank" title="" style="">好评如潮 |</a></li>
-		                    <li><a href="" target="_blank" title="" style="">五星级店面，你造吗？ |</a></li>
-		                    <li><a href="" target="_blank" title="" style="">三月团购活动 2015 有一种腔调，想价你就嫁  </a></li>
+							<foreach name="Ad_five" item="item">
+								<if condition="$key+1 neq count($Ad_five)">
+		                    <li><a href="" target="_blank" title="" style="">{$item.ad_name} |</a></li>
+									<else /> <li><a href="" target="_blank" title="" style="">{$item.ad_name}</a></li>
+									</if>
+							</foreach>
 		                </ul>
 		            </h5>
 		        </div>
@@ -82,10 +83,13 @@
 	              <!--  <span><font style="color:#7C7C7D"><</font>洛可可风婚纱摄影<font style="color:#7C7C7D">></font>之<font style="color:#F37914 ">婚纱定制</font><font style="color:#7C7C7D">>ROCOCO SALES</font></span>-->
 	                <h5>
 	                    <ul>
-	                        <li><a href="" target="_blank" title="" style="">全新婚纱1000元3件起 | </a></li>
-	                        <li><a href="" target="_blank" title="" style="">颠覆传统，一件婚纱只租4次 |</a></li>
-	                        <li><a href="" target="_blank" title="" style="">比价格，比款式，比时尚，比质量 |</a></li>
-	                        <li><a href="" target="_blank" title="" style="">我们是大牌，但我们不耍大牌 </a></li>
+							<foreach name="dress" item="item">
+								<if condition="$key+1 neq count($dress)">
+									<li><a href="" target="_blank" title="" style="">{$item.post_title} |</a></li>
+									<else /> <li><a href="" target="_blank" title="" style="">{$item.post_title}</a></li>
+								</if>
+							</foreach>
+
 	                    </ul>
 	                </h5>
 	            </div>
@@ -154,10 +158,13 @@
 		           <!-- <span><font style="color:#7C7C7D"><</font>洛可可婚纱礼服馆<font style="color:#7C7C7D">></font>之<font style="color:#F37914 ">绝美礼服</font><font style="color:#7C7C7D">>ROCOCO SALES</font></span>-->
 		            <h5>
 		                <ul>
-		                    <li><a href="" target="_blank" title="" style="">3月想价就嫁4999特惠套装 | </a></li>
-		                    <li><a href="" target="_blank" title="" style="">3月想价就嫁6999特惠套装 |</a></li>
-		                    <li><a href="" target="_blank" title="" style="">3月想价就嫁7999特惠套装|</a></li>
-		                    <li><a href="" target="_blank" title="" style="">3月想价就嫁8999特惠套装 </a></li>
+							<foreach name="beauty" item="item">
+								<if condition="$key+1 neq count($beauty)">
+									<li><a href="" target="_blank" title="" style="">{$item.post_title} |</a></li>
+									<else /> <li><a href="" target="_blank" title="" style="">{$item.post_title}</a></li>
+								</if>
+							</foreach>
+
 		                </ul>
 		            </h5>
 		        </div>

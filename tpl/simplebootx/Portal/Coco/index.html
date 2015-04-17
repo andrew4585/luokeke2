@@ -6,7 +6,16 @@
     <meta name="data-spm" content="">
     <title>可可之星</title>
     <link href="__STATICS__css/star.css" rel="stylesheet" type="text/css">
-
+    <link href="__STATICS__js/artDialog/skins/default.css" rel="stylesheet">
+    <script>
+        //全局变量
+        var GV = {
+            HOST:"{$_SERVER['HTTP_HOST']}",
+            DIMAUB: "__ROOT__/",
+            JS_ROOT: "statics/js/",
+            TOKEN: ""
+        };
+    </script>
 </head>
 <body>
 <div id="site-nav-shim"></div>
@@ -55,7 +64,7 @@
 									</span>
                                     <div class="feed-name-wrapper">
                                         <div class="feed-ctrline">
-                                            <div class="feed-like"><i></i>喜欢 {$item.post_like}</div>
+                                            <div class="feed-like"><input type="hidden" value="{$item.id}"/>喜欢<font>{$item.post_like}</font></div>
 
                                         </div>
                                         <div class="feed-name">
@@ -84,7 +93,7 @@
                                             <div class="feed-name-wrapper">
 
                                                 <div class="feed-ctrline">
-                                                    <div class="feed-like"><i></i>喜欢{$item.post_like}</div>
+                                                    <div class="feed-like"><input type="hidden" value="{$item.id}"/>喜欢<font>{$item.post_like}</font></div>
                                                 </div>
 
                                                 <div class="feed-name">
@@ -117,7 +126,32 @@
 
 </div>
 <script type="text/javascript" src="__STATICS__js/jquery.js"></script>
+<script type="text/javascript" src="__STATICS__js/wind.js"></script>
 <script type="text/javascript">
+    function artDialog_alert(content,icon){
+        var iconStr = '';
+        switch(icon){
+            case 1:
+                iconStr = 'error';break;
+            case 2:
+                iconStr = 'succeed';break;
+            default:
+                iconStr = '';break;
+        }
+        Wind.use("artDialog",function(){
+            art.dialog({
+                id:'error',
+                icon:iconStr,
+                fixed: true,
+                lock: true,
+                background:"#CCCCCC",
+                opacity:0.2,
+                content: content,
+                cancelVal: '确定',
+                cancel: true
+            });
+        });
+    }
     $(function(){
         var height = $(window).height();
         var marginHeight = (height-583)/2;
@@ -127,8 +161,26 @@
         $(".flow-container").css("margin-top",marginHeight);
 
     })
-</script>
+    $(document).ready(function() {
+        $(".feed-like").click(function () {
+                var love = $(this);
+                var id = love.find("input").val();
+                var url = "__ROOT__/Portal/Coco/like";
+                var number = $(this).find("font").html();
+                number = parseInt(number);
+                $.post(url,{id:id},function(data){
+                    if(data.status){
+                        love.find("font").html(++number);
+                    }else{
+                        artDialog_alert(data.info,1);
 
+                    }
+                });
+
+
+        })
+    })
+</script>
 </body>
 
 </html>

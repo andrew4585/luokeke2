@@ -2,20 +2,20 @@
 namespace Portal\Controller;
 use Common\Controller\HomeBaseController;
 class PLastestController extends IndexController {
-	
+
 	public function nav_index(){
 		$m 			= M('plastest');
-		$msg 		= $m->where('status=1')->find();
+		$msg 		= $m->where('status=1 and recommended=1')->find();
 		$nav_arr = array(
 				"name"	=> "最新推荐客片",
 				"items" => array(
-						0 =>array(	"label" => "{$msg['post_title']}",
+						0 =>array("label" => "{$msg['post_title']}",
+							"href" => U("Portal/PLastest/index")
 						),
-						"href" => U("Portal/PLastest/index")
+
 				),
-		
-		
 		);
+		$nav_arr['name_url'] = U("Portal/PLastest/index");
 		exit(json_encode($nav_arr));
 	}
 	

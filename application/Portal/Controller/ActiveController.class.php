@@ -7,6 +7,11 @@ class ActiveController extends IndexController {
         parent::__construct();
         $this->model_active=D("Active");
     }
+    
+    public function index(){
+    	$this->redirect('Portal/Active/lists');
+    }
+    
     public function lists(){
         $this->_list($this->model_active,true,array("post_excerpt"),array(),6,"recommended desc,listorder");
         //banner

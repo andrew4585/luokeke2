@@ -34,7 +34,7 @@ class GroupController extends IndexController {
 		$rightList	= $this->model_group->field("id,post_pic,post_title,post_price")->where("status = 1")->order($order)->select();
 		$this->assign("rightList",$rightList);
 		//banner
-		$this->assign("home_head",$this->_getAd("banner_dress"));
+		$this->assign("home_head",$this->_getAd("banner_group"));
 		//3个摆放在一起的二级页面广告位
 		$this->assign("second_page_3",$this->_getAd("second_page_3"));
 		//服务承诺

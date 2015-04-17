@@ -9,6 +9,8 @@ class ActiveController extends IndexController {
     }
     public function lists(){
         $this->_list($this->model_active,true,array("post_excerpt"),array(),6,"recommended desc,listorder");
+        //banner
+        $this->assign("home_head",$this->_getAd("banner_active"));
         //3个摆放在一起的二级页面广告位
         $this->assign("second_page_3",$this->_getAd("second_page_3"));
         //服务承诺
@@ -38,6 +40,8 @@ class ActiveController extends IndexController {
     	$photoStr = join(",", $newPhoto);
     	$this->assign("photo",$photoStr);
     	$this->assign("desc_beautiful",$this->_getAd("desc_beautiful"));
+    	//banner
+    	$this->assign("home_head",$this->_getAd("banner_active"));
     	//3个摆放在一起的二级页面广告位
     	$this->assign("second_page_3",$this->_getAd("second_page_3"));
     	//服务承诺

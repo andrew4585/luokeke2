@@ -59,6 +59,8 @@ class PhotoController extends IndexController {
 		}
 		$this->_list($this->model_photo,true,array(),array("cid=$cid"));
 		$this->getCategory();
+		//banner
+		$this->assign("home_head",$this->_getAd("banner_photo"));
 		$this->assign("desc_beautiful",$this->_getAd("desc_beautiful"));
 		//3个摆放在一起的二级页面广告位
 		$this->assign("second_page_3",$this->_getAd("second_page_3"));

@@ -23,6 +23,8 @@ class PLastestController extends IndexController {
 		$where		= "recommended=1 and status=1";
 		$model_lastest = D('plastest');
 		$info		= $model_lastest->where($where)->limit(0,1)->find();
+		//banner
+		$this->assign("home_head",$this->_getAd("banner_pcustom"));
 		$this->assign("desc_beautiful",$this->_getAd("desc_beautiful"));
 		$this->assign("servePromise",$this->_getAd("servePromise"));
 		$this->assign("second_page_3",$this->_getAd("second_page_3"));

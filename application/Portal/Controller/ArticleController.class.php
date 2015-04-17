@@ -13,7 +13,8 @@ class ArticleController extends IndexController {
 	}
 
 	private function Article_common(){
-		//广告
+		//banner
+        $this->assign("home_head",$this->_getAd("banner_article"));
 		//美态
 		$this->assign("desc_beautiful",$this->_getAd("desc_beautiful"));
 		//3个摆放在一起的二级页面广告位

@@ -30,6 +30,8 @@ class PThemeController extends IndexController {
 		$photoStr = join(",", $newPhoto);
 		$this->assign("photo",$photoStr);
 		$this->assign("desc_beautiful",$this->_getAd("desc_beautiful"));
+		//banner
+		$this->assign("home_head",$this->_getAd("banner_pcustom"));
 		//3个摆放在一起的二级页面广告位
 		$this->assign("second_page_3",$this->_getAd("second_page_3"));
 		//服务承诺
@@ -40,6 +42,8 @@ class PThemeController extends IndexController {
 	function lists(){
 		$this->_list($this->model_PTheme,true,array(),array(),16,"recommended desc,listorder");
 		$this->assign("desc_beautiful",$this->_getAd("desc_beautiful"));
+		//banner
+		$this->assign("home_head",$this->_getAd("banner_photo"));
 		//3个摆放在一起的二级页面广告位
 		$this->assign("second_page_3",$this->_getAd("second_page_3"));
 		//服务承诺

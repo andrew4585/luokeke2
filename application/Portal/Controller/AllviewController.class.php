@@ -12,6 +12,8 @@ class AllviewController extends IndexController {
         $this->_list($this->model_allview,true,array("post_excerpt"),array(),6,"recommended desc,listorder");
         $this->assign("ad_dress",$this->_getAd("dress"));
         $this->assign("desc_beautiful",$this->_getAd("desc_beautiful"));
+        //banner
+        $this->assign("home_head",$this->_getAd("banner_view"));
         //3个摆放在一起的二级页面广告位
         $this->assign("second_page_3",$this->_getAd("second_page_3"));
         //服务承诺

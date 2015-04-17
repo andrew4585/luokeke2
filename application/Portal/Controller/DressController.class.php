@@ -16,6 +16,8 @@ class DressController extends IndexController {
 	 * 首页
 	 */
 	public function index(){
+		//banner
+		$this->assign("home_head",$this->_getAd("banner_dress"));
 		//最新广告推荐
 		$this->assign('Ad_five',$this->_getAd("dress_5"));
 		//绝美礼服
@@ -79,6 +81,8 @@ class DressController extends IndexController {
 		}
 		$this->_list($this->model_dress,false,array(),array("category={$category}"));
 		$this->assign("ad_dress",$this->_getAd("dress"));
+		//banner
+		$this->assign("home_head",$this->_getAd("banner_dress"));
 		$this->assign("desc_beautiful",$this->_getAd("desc_beautiful"));
 		//3个摆放在一起的二级页面广告位
 		$this->assign("second_page_3",$this->_getAd("second_page_3"));

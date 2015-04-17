@@ -22,7 +22,7 @@ class PCustomController extends IndexController {
 		$where		= "id=$id and status=1";
 		$info		= $this->model_pcustom->where($where)->find();
 		if(!empty($info['post_url'])){
-			header("location:".$info['post_url']);
+			header("location:".$info['post_url']);exit;
 		}
 		//上一组
 		$prev	 	= $this->model_pcustom->where("id>$id and status=1")->order("id asc")->getField("id");

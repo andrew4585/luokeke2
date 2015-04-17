@@ -16,9 +16,13 @@ class PThemeController extends IndexController {
 		}else{
 			$where = "id=$id and status=1";
 		}
-		$smeta = $this->model_PTheme->where($where)->getField("smeta");
-		$smeta	= json_decode($smeta,true);
+		$info	= $this->model_PTheme->field("post_url,smeta")->where($where)->find();
+		if(!empty($info['post_url'])){
+			header("location:".$info['post_url']);exit;
+		}
+		$smeta	= json_decode($info['smeta'],true);
 		$photo	= $smeta['photo'];
+		
 		$newPhoto = array();
 		foreach ($photo as $item){
 			array_push($newPhoto, "'".__ROOT__."/{$item['url']}'");

@@ -25,8 +25,11 @@ class ActiveController extends IndexController {
     	}else{
     		$where = "id=$id and status=1";
     	}
-    	$smeta = $this->model_active->where($where)->getField("smeta");
-    	$smeta	= json_decode($smeta,true);
+    	$info	= $this->model_active->field("post_url,smeta")->where($where)->find();
+    	if(!empty($info['post_url'])){
+    		header("location:".$info['post_url']);exit;
+    	}
+    	$smeta	= json_decode($info['smeta'],true);
     	$photo	= $smeta['photo'];
     	$newPhoto = array();
     	foreach ($photo as $item){

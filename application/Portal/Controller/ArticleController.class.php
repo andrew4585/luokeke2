@@ -76,7 +76,7 @@ class ArticleController extends IndexController {
 		$this->assign('info',$info);
 		$this->assign('cid',$info['cid']);
 		if(!empty($info['post_url'])){
-			header("location:".$info['post_url']);
+			header("location:".$info['post_url']);exit;
 		}
 		$this->Article_common();
 		//获取本页面的url

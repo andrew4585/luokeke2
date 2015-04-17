@@ -23,7 +23,7 @@ class PhotoController extends IndexController {
 		$where		= "id=$id and status=1";
 		$info		= $this->model_photo->where($where)->find();
 		if(!empty($info['post_url'])){
-			header("location:".$info['post_url']);
+			header("location:".$info['post_url']);exit;
 		}
 		//banner
 		$this->assign("home_head",$this->_getAd("banner_photo"));

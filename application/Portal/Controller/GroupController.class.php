@@ -24,7 +24,7 @@ class GroupController extends IndexController {
 		}
 		$id			= $info['id'];
 		if(!empty($info['post_url'])){
-			header("location:".$info['post_url']);
+			header("location:".$info['post_url']);exit;
 		}
 		//右侧信息
 		$rightList	= $this->model_group->field("id,post_pic,post_title,post_price")->where("status = 1")->order($order)->select();

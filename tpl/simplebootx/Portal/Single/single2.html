@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
+<head>
+	<tc_include file="Public:head_info"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__css/info.css">
+    <style>
+		.photo img{
+			/* 临时   width:100%;*/
+			margin:0 auto;
+			display:block;
+			max-width:100%;
+			clear:both;
+		}
+	</style>
+</head>
+<body>
+<div class="head">
+    <!--头部导航标题js-->
+	<tc_include file="Public:nav"/>
+	<!-- banner轮播 -->
+	<tc_include file="Public:banner"/>
+	
+<!--内容-->
+<div class="conter">
+    <div id="main">
+		<foreach name="photo" item="item">
+			<div class="photo"><img src="__ROOT__/{$item.url}"/></div>
+		</foreach>
+	</div>	
+<!--服务承诺-->
+<tc_include file="Public:servePromise"/>
+<!--底部的图片-->
+<div class="i_003">
+    <img src="__STATICS__images/tpl/ad_04_01.jpg" alt="" />
+</div>
+<!--@@@@@@@-->
+<div class="clears"></div>
+</div>
+<!--底部-->
+<tc_include file="Public:footer"/>
+</body>
+</html>

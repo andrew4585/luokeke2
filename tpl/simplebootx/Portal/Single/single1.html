@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
+<head>
+	<tc_include file="Public:head_info"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__css/info.css">
+    <link rel="stylesheet" type="text/css" href="__STATICS__css/nprogress.css">
+    <style>
+		#progress{
+			position: relative;
+			display: block;
+			color: #FFFFFF;
+			text-align: right;
+			height: 0;
+		}
+		#loadMore,#main{
+			display:none;
+		}
+		.photo img{
+			/* 临时   width:100%;*/
+			margin:0 auto;
+			display:block;
+			max-width:100%;
+		}
+	</style>
+    <!--[if lt IE 9]>
+		<script src="__STATICS__/js/html5shiv.js"></script>
+	<![endif]-->
+</head>
+<body>
+<div class="head">
+    <!--头部导航标题js-->
+	<tc_include file="Public:nav"/>
+	<div id="banner">
+		<img id="loadBanner" src="__STATICS__/images/tpl/singleLoad.png" style="width:100%"/>
+		<div id="progress"></div>
+	</div>
+	<div id="main"></div>
+	<a href="#" id="loadMore" >Load More</a>
+<!--内容-->
+<div class="conter">
+<!--服务承诺-->
+<tc_include file="Public:servePromise"/>
+<!--底部的图片-->
+<div class="i_003">
+    <img src="__STATICS__images/tpl/ad_04_01.jpg" alt="" />
+</div>
+<!--@@@@@@@-->
+<div class="clears"></div>
+</div>
+<script type="text/javascript" src="__STATICS__js/portal/nprogress.js"></script>
+<script>
+banner_init();
+function banner_init(){
+	var width = $(window).width();
+	var rate  = width/1920;
+	var height= width/1920*600;
+	$("#progress").css("top",-254*rate);
+	$("#progress").css("right",-1270*rate);
+	$("#progress").css("width",41*rate);
+	$("#nprogress").css("top",142+354*rate);
+	$("#nprogress").css("width",528*rate);
+	$("#nprogress").css("left",704*rate);
+}
+$(window).resize(function(){
+	banner_init();
+});
+(function($){
+	var photos = [{$photo}];
+
+	$(document).ready(function(){
+		var page = 0,
+			loaded = 0,
+			perpage = 10,
+			main = $('#main'),
+			expected = perpage,
+			loadMore = $('#loadMore');
+
+		main.on('image-loaded', function(){
+
+			loaded++;
+			
+			NProgress.set(loaded/expected);
+			
+			if(page*perpage >= photos.length){
+
+				loadMore.remove();
+			}
+		});
+
+		loadMore.click(function(e){
+
+			e.preventDefault();
+
+			loaded = 0;
+			expected = 0;
+
+			var deferred = $.Deferred().resolve();
+
+			$.each(photos.slice(page*perpage, page*perpage + perpage), function(){
+
+				deferred = main.showImage(this, deferred);
+
+				expected++;
+			});
+
+			NProgress.start();
+			banner_init();
+			page++;
+		});
+
+		loadMore.click();
+	});
+
+	$.fn.showImage = function(src, deferred){
+
+		var elem = $(this);
+
+		var result = $.Deferred();
+
+		var holder = $('<div class="photo" />').appendTo(elem);
+
+		var img = $('<img>');
+
+		img.load(function(){
+			deferred.always(function(){
+				elem.trigger('image-loaded');
+				img.hide().appendTo(holder).delay(100).fadeIn('fast', function(){
+					result.resolve()
+				});
+			});
+		});
+		img.attr('src', src);
+		return result;
+	} 
+})(jQuery);
+</script>
+<!--底部-->
+<tc_include file="Public:footer"/>
+</body>
+</html>

@@ -93,8 +93,8 @@ class PhotoController extends IndexController {
 					);
 		}
 		$nav_arr['name'] 	= "作品分类";
+		$nav_arr['name_url'] = U("Portal/Photo/lists");
 		$nav_arr['items'] 	= $item;
 		exit(json_encode($nav_arr));
-		
 	}
 }

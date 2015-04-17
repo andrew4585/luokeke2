@@ -54,6 +54,7 @@ class PThemeController extends IndexController {
 					);
 		}
 		$nav_arr['name'] 	= "主题作品";
+		$nav_arr['name_url'] = U("Portal/PTheme/lists");
 		$nav_arr['items'] 	= $item;
 		exit(json_encode($nav_arr));
 		

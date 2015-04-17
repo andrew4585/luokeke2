@@ -52,7 +52,7 @@
                   <!-- {:U('Portal/Index/index')} -->
                   <option value="">&nbsp;&nbsp;&nbsp;&nbsp;首页</option>
                   <foreach name="navs" item="vo">
-	            	<option disabled="disabled">{$vo.name}</option>
+					  <option value="{$vo.name_url}">{$vo.name}</option>
 	            	<foreach name="vo['items']" item="voo">
 	            		<option value='{$voo.href}'>&nbsp;&nbsp;&nbsp;&nbsp;{$voo.label}</option>
 	            	</foreach>

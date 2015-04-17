@@ -138,9 +138,9 @@ a.hScrollPane_rightarrow{ top:200px; cursor:pointer; display:block; width:25px; 
 .izl-rmenu .btn-top:hover{background-color:#444;}
 /**/
 
-div.floatCtro{ width:120px; height:400px; position:absolute; right:0; top:0; z-index:100}
-div.floatCtro p{width:120px; text-align:center; height:70px; line-height:58px; font-family:'微软雅黑'; font-size:16px; color:#000; margin:0; padding:0; cursor:pointer; background:#F7F8F8;border-bottom:solid 1px #8A8A8A;}
-div.floatCtro a{ display:inline-block;width:120px; height:60px;  background:#fff; color:#000;  vertical-align:middle; cursor:pointer;}
+div.floatCtro{ width:145px; height:400px; position:absolute; right:0; top:0; z-index:100}
+div.floatCtro p{width:145px; text-align:center; margin-top:-4px; padding:0; cursor:pointer; background:#F7F8F8;}
+div.floatCtro a{ display:inline-block;width:145px; height:60px;  background:#fff; color:#000;  vertical-align:middle; cursor:pointer;}
 div.floatCtro p span{ display:block; width:120px; height:44px; line-height:6px;  font-family:'微软雅黑'; font-size:9px;  text-align:center;color:#797979;margin-top:-8px;}
 div.floatCtro a span{ display:block; width:120px; height:44px; line-height:6px;  font-family:'微软雅黑'; font-size:12px;  text-align:center;}
 div.floatCtro a:hover{ background:#FFFFFF; color:#000; zoom:1;}

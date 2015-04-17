@@ -99,16 +99,16 @@ class DressController extends IndexController {
 	
 	public function nav_index(){
 		$m 			= M('dress_cat');
-		$msg 		= $m->where()->select();
+		$msg 		= $this->category;
 		$item = array();
 		foreach ($msg as $key=>$value){
 			$item[] = array(
-					"label" => "{$value['cat_name']}",
-					"href" => U("Portal/Dress/lists/category/{$value['id']}")
-					
+					"label" => "{$value}",
+					"href" => U("Portal/Dress/lists/category/{$key}")
 							);
 		}
 		$nav_arr['name'] 	= "婚纱礼服分类";
+		$nav_arr['name_url'] = U("Portal/Dress/lists");
 		$nav_arr['items'] 	= $item;
 		exit(json_encode($nav_arr));
 	}

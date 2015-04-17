@@ -102,6 +102,7 @@ class ArticleController extends IndexController {
 			);
 		}
 		$nav_arr['name'] 	= "婚嫁分类";
+		$nav_arr['name_url'] = U("Portal/Article/lists");
 		$nav_arr['items'] 	= $item;
 		exit(json_encode($nav_arr));
 	}

@@ -41,4 +41,21 @@ class ActiveController extends IndexController {
     	$this->assign("servePromise",$this->_getAd("servePromise"));
     	$this->display(":Single:single1");
     }
+
+	public function nav_index(){
+		$m 			= M('Active');
+		$msg 		= $m->where('status=1 and recommended=1')->select();
+		$item = array();
+		foreach ($msg as $key=>$value){
+			$item[] = array(
+				"label" => "{$value['post_title']}",
+				"href" => U("Portal/Active/info/id/{$value['id']}")
+			);
+		}
+		$nav_arr['name'] 	= "最新活动";
+		$nav_arr['name_url'] = U("Portal/active/lists");
+		$nav_arr['items'] 	= $item;
+		exit(json_encode($nav_arr));
+
+	}
 }

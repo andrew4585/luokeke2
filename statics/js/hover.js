@@ -46,5 +46,19 @@
         });
 
 });
+  //婚纱礼服页面的淡入淡出效果
+    $(function() {
+        $(".dress_photo ul li .rsp").hide();
+        $(".dress_photo ul li .text").hide();
+        $(".dress_photo	 ul li").hover(function() {
+            $(this).find(".rsp").stop().fadeTo(500, 1.0)
+            $(this).find(".text").stop().fadeTo(500, 1.0)
+
+        }, function() {
+            $(this).find(".rsp").stop().fadeTo(500, 0)
+            $(this).find(".text").stop().fadeTo(500, 0)
+
+        });
+});
 
 

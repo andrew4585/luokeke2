@@ -4,11 +4,11 @@ use Think\Model\RelationModel;
 class GroupModel extends RelationModel
 {
 	protected $_link = array(
-			'GroupCat' => array(
+			'Site' => array(
 					'mapping_type'  => self::BELONGS_TO,
-					'class_name'    => 'GroupCat',
-					'foreign_key'   => 'cid',
-					'mapping_name'  => 'cat',
+					'class_name'    => 'Site',
+					'foreign_key'   => 'site_id',
+					'mapping_name'  => 'site',
 			),
 	);
 	protected $_validate = array(

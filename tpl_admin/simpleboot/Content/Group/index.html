@@ -11,7 +11,14 @@
   <form class="well form-search" method="post" action="{:u('Group/index')}">
     <div class="search_type cc mb10">
       <div class="mb10"> 
-             <!-- 站点-->
+                <!-- 站点-->
+	  <select class="select_2" name="site_id" style="width:160px">
+		  <option value=''>全部站点</option>
+		  <foreach name="siteList" item="vo">
+			  <php>$id_select=$vo['id']==$formget['site_id']?"selected":"";</php>
+			  <option value="{$vo.id}" {$id_select}>{$vo.site_name}</option>
+		  </foreach>
+	  </select>
         &nbsp;&nbsp;时间：
         <input type="text" name="start_time" class="input length_2 J_date" value="{$formget.start_time|default=''}" style="width:100px;" autocomplete="off"> -
         <input type="text" class="input length_2 J_date" name="end_time" value="{$formget.end_time}" style="width:100px;" autocomplete="off">
@@ -36,6 +43,7 @@
 	            <th width="50">排序</th>
 	            <th>ID</th>
 	            <th>标题</th>
+	            <th>站点</th>
 	            <th width="80">团购价格</th>
 	            <th width="80">原价格</th>
 	            <th width="80">已团购</th>
@@ -57,6 +65,7 @@
 		            		<span>{$vo.post_title}</span>
 		            	</a>
 		            </td>
+		            <td>{$vo.site.site_name}</td>
 		            <td>{$vo.post_price}</td>
 		            <td>{$vo.post_relprice}</td>
 		            <td>{$vo.post_num}</td>

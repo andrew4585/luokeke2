@@ -10,9 +10,17 @@ class GroupController extends AdminbaseController{
 		$this->imgFolder	= "Group";
 		$this->model_obj	= D("Group");
 	}
+	
+	//公共参数
+	function commonParam(){
+		//站点列表
+		$this->assign("siteList",$this->getSite());
+	}
+	
 	function index(){
 		//列表数据
 		$this->_lists();
+		$this->commonParam();
 		$this->display();
 	}
 	private  function _lists(){
@@ -21,6 +29,7 @@ class GroupController extends AdminbaseController{
 		//listorder：排序，post_date:发布时间
 		$order		="istop desc,recommended desc,listorder ASC,post_date DESC";
 		$fields=array(
+				'site_id'	=> array("field"=>'site_id','operator'=>'=','type'=>'int'),
 				'start_time'=> array("field"=>"post_date","operator"=>">=",'type'=>'time'),
 				'end_time'  => array("field"=>"post_date","operator"=>"<=",'type'=>'time'),
 		);
@@ -47,7 +56,7 @@ class GroupController extends AdminbaseController{
 			
 		$page = $this->page($count, 20);
 			
-		$list =$this->model_obj ->where($where)
+		$list =$this->model_obj ->relation(true)->where($where)
 		->limit($page->firstRow, $page->listRows)
 		->order($order)->select();
 		$this->assign("Page", $page->show('Admin'));
@@ -74,6 +83,7 @@ class GroupController extends AdminbaseController{
 				$this->error("添加失败！");
 			}
 		}else{
+			$this->commonParam();
 			$this->display();
 		}
 	}
@@ -100,6 +110,7 @@ class GroupController extends AdminbaseController{
 			$info = $this->model_obj->where("id=$id")->find();
 			$this->assign($info);
 			$this->assign("smeta",json_decode($info['smeta'],true));
+			$this->commonParam();
 			$this->display();
 		}
 	}

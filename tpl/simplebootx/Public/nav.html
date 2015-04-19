@@ -120,6 +120,7 @@
 		<script type="text/javascript">
 			$(function () {
 				var navLi=$(".head_nav .nav li");
+				$(this).find(".box").css("margin-top","0");
 				navLi.mouseenter(function () {
 					var size 	= $(this).find(".box a").size();
 					if(size){
@@ -133,7 +134,6 @@
 					$(this).find("a").removeClass("current");
 					$(this).find(".box").stop().slideUp();
 				})
-
 			})
 		</script>
 

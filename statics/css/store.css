@@ -22,7 +22,7 @@ body{font-family: "Microsoft YaHei";}
 .info_activity{ height: 440px; margin-bottom: 65px;}
 .info_activity ul{ width: 1250px;}
 .info_membership{}
-.info_membership_img{ height:285px; width: 388px;overflow: hidden; }
+.info_membership_img{ height:285px; width: 388px;overflow: hidden; background: #F4F4F3;}
 .info_membership_img img{width:100%;}
 .info_membership ul{ width: 1250px;}
 .info_membership ul li{ float:left;width: 390px; height: 600px; margin-right: 10px;}

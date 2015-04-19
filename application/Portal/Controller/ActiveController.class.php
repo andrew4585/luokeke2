@@ -13,7 +13,7 @@ class ActiveController extends IndexController {
     }
     
     public function lists(){
-        $this->_list($this->model_active,true,array("post_excerpt"),array(),6,"recommended desc,listorder");
+        $this->_list($this->model_active,true,array("post_excerpt,post_date"),array(),6,"recommended desc,listorder");
         //banner
         $this->assign("home_head",$this->_getAd("banner_active"));
         //3个摆放在一起的二级页面广告位

@@ -12,13 +12,11 @@ class GroupController extends IndexController {
 	
 	public function info(){
 		$id			= I("get.id",0,'intval');
-		if(empty($id)){ 
-			$where	= "status=1";
-		}else{
-			$where	= "id=$id and status=1";
-		}
+		$where		= "site_id=$this->siteId and status=1";
+		$whereInfo	= empty($id)?$where:"id=$id and ".$where;
+		
 		$order		= "listorder,post_start desc";
-		$info		= $this->model_group->where($where)->order($order)->find();
+		$info		= $this->model_group->where($whereInfo)->order($order)->find();
 		if(!$info){
 			$this->error("非法操作");
 		}
@@ -31,7 +29,7 @@ class GroupController extends IndexController {
 		//付款方式图片
 		$this->assign("payMoney",$this->_getSingle(30));
 		//右侧信息
-		$rightList	= $this->model_group->field("id,post_pic,post_title,post_price")->where("status = 1")->order($order)->select();
+		$rightList	= $this->model_group->field("id,post_pic,post_title,post_price")->where($where)->order($order)->select();
 		$this->assign("rightList",$rightList);
 		//banner
 		$this->assign("home_head",$this->_getAd("banner_group"));

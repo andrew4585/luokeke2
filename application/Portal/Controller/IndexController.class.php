@@ -35,7 +35,7 @@ class IndexController extends HomeBaseController {
 			$ptheme = $this->getHomeContent("Photo",true);
 			$this->assign("photo",$ptheme);
 			//团购套系
-			$group = $this->getHomeContent("Group",false,array("post_price","post_num"));
+			$group = $this->getHomeContent("Group",true,array("post_price","post_num"));
  			$this->assign("group",$group);
 			//客照
 			$this->assign("pcustom",$this->getHomeContent("Pcustom",true));

@@ -35,7 +35,7 @@ class Ad1Controller extends AdminbaseController{
 		$count=$this->ad1_obj->where($where)->count();
 		$page = $this->page($count,20);
 		$slides=$this->ad1_obj->relation(true)->where($where)
-							->order("listorder ASC")
+							->order("listorder ASC,ad_id desc")
 							->limit($page->firstRow,$page->listRows)->select();
 		$this->assign('slides',$slides);
 		$this->assign("page",$page->show("Admin"));

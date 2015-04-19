@@ -29,7 +29,8 @@ class IndexController extends HomeBaseController {
 			//首页中部广告
 			$this->assign("home_mid_pic",$this->_getAd("home_mid_pic"));
 			//最新活动
-			$active = $this->getHomeContent("Active",false,array(),5);
+			$active = $this->_getAd("home_active");
+			//$active = $this->getHomeContent("Active",false,array(),5);
 			$this->assign("active",$active);
 			//作品
 			$ptheme = $this->getHomeContent("Photo",true);

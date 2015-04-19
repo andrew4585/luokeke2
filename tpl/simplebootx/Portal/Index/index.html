@@ -265,7 +265,7 @@
 						<ul>
 							<php>$pcustomCount = count($pcustom)-1;</php>
 							<foreach name="pcustom" item="item">
-								<li><a href="{:U('Portal/PCustom/info')}/{$item.id}" title="{$item.post_title}" style="">{$item.post_title}<if condition="$pcustomCount neq $key">|</if></a></li>
+								<li><a href="{:U('Portal/PCustom/info')}/id/{$item.id}" title="{$item.post_title}" style="">{$item.post_title}<if condition="$pcustomCount neq $key">|</if></a></li>
 							</foreach>
 						</ul>
 					</h5>

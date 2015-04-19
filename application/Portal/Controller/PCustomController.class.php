@@ -80,4 +80,3 @@ class PCustomController extends IndexController {
 		exit(json_encode($nav_arr));
 	}
 }
-}

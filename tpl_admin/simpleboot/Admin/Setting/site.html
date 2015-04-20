@@ -5,10 +5,12 @@
 		<ul class="nav nav-tabs">
 	        <li class="active"><a href="#A" data-toggle="tab">网站信息</a></li>
 	        <li><a href="#B" data-toggle="tab">SEO设置</a></li>
+	        <li><a href="#C" data-toggle="tab">超链接</a></li>
 	    </ul>
 		
 		<form class="J_ajaxForms" name="myform" id="myform" action="{:u('setting/site_post')}" method="post">
 		 <input type="hidden" value="simplebootx" name="options[site_tpl]"/>
+		 <input type="hidden" value="2" name="options[urlmode]"/>
 		 <fieldset>
 		<div class="tabbable">
         <div class="tab-content"> 
@@ -56,6 +58,16 @@
 								</tr>
 							</tbody>
 						</table>
+          </div>
+          <div class="tab-pane" id="C">
+            <table cellpadding="2" cellspacing="2" class="table_form" width="100%">
+				<tbody>
+					<tr>
+						<td width="180">开启商务通:</td>
+						<td><input type="text" class="input" name="options[swt_url]" value="{$swt_url}" style="width:380px;"></td>
+					</tr>
+				</tbody>
+			</table>
           </div>
         </div>
       </div>

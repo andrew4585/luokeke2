@@ -259,6 +259,14 @@ function sp_get_site_options(){
 	get_site_options();
 }
 
+/**
+ * 获取第三方js
+ */
+function sp_get_js(){
+	$model = D("Js");
+	$jscode = $model->where("status=1")->order("listorder")->getField("content",true);
+	return $jscode;
+}
 
 function sp_get_cmf_settings($key=""){
 	$cmf_settings = F("cmf_settings");

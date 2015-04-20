@@ -219,9 +219,15 @@ class IndexController extends HomeBaseController {
     		$this->error("站点获取失败，请检查后台是否填写站点信息");
     	}else{
     		cookie("siteid",$site);
-    		$site_name	= $model_site->where("id=$site")->getField("site_name");
-    		$this->assign("site_name",$site_name);
-    		$this->assign("siteid",$site);
+    		$site_url	= $model_site->where("id=$site")->getField("site_url");
+    		if(empty($site_url)){
+    			$site_name	= $model_site->where("id=$site")->getField("site_name");
+    			$this->assign("site_name",$site_name);
+    			$this->assign("siteid",$site);
+    		}else{
+    			header("location:$site_url"."/siteid/".$site);
+    			exit;
+    		}
     	}
     }
     /**

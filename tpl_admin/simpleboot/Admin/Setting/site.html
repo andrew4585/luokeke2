@@ -8,6 +8,7 @@
 	    </ul>
 		
 		<form class="J_ajaxForms" name="myform" id="myform" action="{:u('setting/site_post')}" method="post">
+		 <input type="hidden" value="simplebootx" name="options[site_tpl]"/>
 		 <fieldset>
 		<div class="tabbable">
         <div class="tab-content"> 
@@ -16,7 +17,7 @@
 				<tbody>
 					<tr>
 						<td width="180">网站名称：</td>
-						<td><input type="text" class="input" name="options[site_name]" value="{$site_name}"><span class="must_red">*</span>
+						<td><input type="text" class="input" name="options[web_name]" value="{$web_name}"><span class="must_red">*</span>
 						<php>if($option_id):</php>
 						<input type="hidden" class="input" name="option_id" value="{$option_id}">
 						<php>endif;</php>
@@ -112,9 +113,9 @@
 					}
 	            },
 	            //验证规则
-	            rules: {'options[site_name]':{required:1},'options[site_host]':{required:1},'options[site_root]':{required:1}},
+	            rules: {'options[web_name]':{required:1},'options[site_host]':{required:1},'options[site_root]':{required:1}},
 	            //验证未通过提示消息
-	            messages: {'options[site_name]':{required:'请输入网站名称！'},'options[site_host]':{required:'请输入网站域名！'},'options[site_root]':{required:'请输入安装路径！'}},
+	            messages: {'options[web_name]':{required:'请输入网站名称！'},'options[site_host]':{required:'请输入网站域名！'},'options[site_root]':{required:'请输入安装路径！'}},
 	            //给未通过验证的元素加效果,闪烁等
 	            highlight: false,
 	            //是否在获取焦点时验证

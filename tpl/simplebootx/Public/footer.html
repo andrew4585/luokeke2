@@ -2,24 +2,24 @@
 <div class="flooter">
 	<div class="bottom6">
 		<div class="copyright">
-			<p>版权所有:大连洛可可婚纱摄影有限公司</p>
-			<span>Copyright &#169; 1997-2014 St.Valentine www.shengphoto.com Corporation, All Rights Reserved</span>
+			<p>版权所有:{$site_icp}</p>
+			<span>{$site_copyright}</span>
 			<font>TAGS:
-				<a href="#"><strong>大连婚纱摄影</strong></a> 
-				<a href="#"><strong>三亚婚纱摄影</strong></a>  
-				<a href="#"><strong>青岛婚纱摄影</strong></a> 
-				<a href="#"><strong>婚纱摄影</strong></a> 
-				<a href="#"><strong>大连婚纱摄影</strong></a> 
-				<a href="#"><strong>大连婚纱摄影</strong></a> 
+				<a href="{:U('Portal/Index/index')}"><strong>首页</strong></a>
+				<a href="{:U('Portal/Photo/lists')}"><strong>作品欣赏</strong></a> 
+				<a href="{:U('Portal/Dress/index')}"><strong>婚纱礼服</strong></a>  
+				<a href="{:U('Portal/PCustom/lists')}"><strong>客片欣赏</strong></a> 
+				<a href="{:U('Portal/Article/lists')}"><strong>婚嫁资讯</strong></a> 
+				<a href="{:U('Portal/Coco/index')}"><strong>可可之星</strong></a> 
 			</font>
 		</div>
 		<div class="links">
-			<p><a href="" title="" target="_blank">大连婚纱摄影</a> | <a href="" title="海南婚纱摄影" target="_blank">海南婚纱摄影</a> | <a href="" title="海南婚纱摄影" target="_blank">海南婚纱摄影</a> |
-				<a href="" title="" target="_blank">青岛婚纱摄影</a> | <a href="" title="海南婚纱摄影" target="_blank">海南婚纱摄影</a> | <a href="" title=" " target="_blank">青岛婚纱摄影 </a> | <a href="" title="海南婚纱摄影" target="_blank">海南婚纱摄影</a> | <a href="" title="" target="_blank">青岛婚纱摄影</a>						| <a href="" title="青岛婚纱摄影" target="_blank">青岛婚纱摄影</a> |
-				<a href="" title="" target="_blank">海南婚纱摄影</a> | <a href="" title=" 海南婚纱摄影" target="_blank"> 海南婚纱摄影</a> | <a href="" title="三亚婚纱摄影칫˾" target="_blank">大连婚纱摄影</a> | <a href="" title="" target="_blank">青岛婚纱摄影</a> | <a href="" title="" target="_blank">青岛婚纱摄影</a>						| <a href="" title="" target="_blank">青岛婚纱摄影</a> | <a href="" title="" target="_blank">大连婚纱摄影</a> | <a href="" title="" target="_blank">大连婚纱摄影</a> | <a href="" title="海南婚纱摄影" target="_blank">海南婚纱摄影</a> |
-				<a href="" title="" target="_blank">三亚婚纱摄影</a> | <a href="" title="海南婚纱摄影" target="_blank">海南婚纱摄影 </a> | <a href="" title="" target="_blank">青岛婚纱摄影</a> |
-				<a href="" title="" target="_blank">长沙婚纱摄影</a> | <a href="" title="海南婚纱摄影" target="_blank">海南婚纱摄影</a> | <a href="" title="" target="_blank">  大连婚纱摄影</a> | <a href="" title="青岛婚纱摄影" target="_blank">青岛婚纱摄影</a> | <a href="" title="青岛婚纱摄影" target="_blank">青岛婚纱摄影</a>						| <a href="" title="" target="_blank">青岛婚纱摄影</a> | <a href="" title="" target="_blank">大连婚纱摄影</a> | <a href="" title="" target="_blank">大连婚纱摄影</a> | <a href="" title="" target="_blank">海南婚纱摄影</a> |
-				<a href="" title="" target="_blank">青岛婚纱摄影</a> | <a href="" title="青岛婚纱摄影" target="_blank">青岛婚纱摄影</a> | <a href="" title="青岛婚纱摄影" target="_blank">青岛婚纱摄影</a> | </p>
+			<p style="text-align: center;">
+			<php>$links=sp_getlinks();</php>
+	        <foreach name="links" item="vo">
+	          <a href="{$vo.link_url}" target="_blank">{$vo.link_name}</a> | 
+	        </foreach>
+			</p>
 		</div>
 	</div>
 	<div class="clears"></div>

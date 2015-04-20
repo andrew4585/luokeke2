@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
+<head>
+	<tc_include file="Public:head_info"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__css/info.css">
+    <style>
+		.photo img{
+			/* 临时   width:100%;*/
+			margin:0 auto;
+			display:block;
+			max-width:100%;
+			clear:both;
+		}
+	</style>
+</head>
+<body>
+<!--内容-->
+<div class="conter">
+    <div id="main">
+		<foreach name="photo" item="item">
+			<div class="photo"><img src="__ROOT__/{$item.url}"/></div>
+		</foreach>
+	</div>	
+<!--@@@@@@@-->
+<div class="clears"></div>
+</div>
+</body>
+</html>

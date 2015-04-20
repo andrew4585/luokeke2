@@ -33,6 +33,9 @@ class SingleController extends IndexController {
 			$photoStr = join(",", $newPhoto);
 			$this->assign("photo",$photoStr);
 			$display  = "single1";
+		}elseif ($type==3){
+			$this->assign("photo",$photo);
+			$display  = "single3";
 		}else{
 			$this->error("文章出错");
 		}

@@ -20,11 +20,9 @@
 		         <!--<span><font style="color:#7C7C7D"><</font>洛可可婚纱礼服馆<font style="color:#7C7C7D">></font>之<font style="color:#F37914 ">婚纱礼服定制</font><font style="color:#7C7C7D">>POPULARA CTIVIES</font></span>-->
 		            <h5>
 		                <ul>
+							<php>$activeCount = count($Ad_five)-1;</php>
 							<foreach name="Ad_five" item="item">
-								<if condition="$key+1 neq count($Ad_five)">
-		                    <li><a href="" target="_blank" title="" style="">{$item.ad_name} |</a></li>
-									<else /> <li><a href="" target="_blank" title="" style="">{$item.ad_name}</a></li>
-									</if>
+								<li><a href="{$item.ad_url}" title="{$item.ad_name}" style="">{$item.ad_name}<if condition="$activeCount neq $key">|</if></a></li>
 							</foreach>
 		                </ul>
 		            </h5>
@@ -83,11 +81,9 @@
 	              <!--  <span><font style="color:#7C7C7D"><</font>洛可可风婚纱摄影<font style="color:#7C7C7D">></font>之<font style="color:#F37914 ">婚纱定制</font><font style="color:#7C7C7D">>ROCOCO SALES</font></span>-->
 	                <h5>
 	                    <ul>
+							<php>$dressCount = count($photo)-1;</php>
 							<foreach name="dress" item="item">
-								<if condition="$key+1 neq count($dress)">
-									<li><a href="" target="_blank" title="" style="">{$item.post_title} |</a></li>
-									<else /> <li><a href="" target="_blank" title="" style="">{$item.post_title}</a></li>
-								</if>
+								<li><a href="{:U('Portal/dress/info')}/id/{$item.id}" title="{$item.post_title}" style="">{$item.post_title}<if condition="$dressCount neq $key">|</if></a></li>
 							</foreach>
 
 	                    </ul>
@@ -158,11 +154,9 @@
 		           <!-- <span><font style="color:#7C7C7D"><</font>洛可可婚纱礼服馆<font style="color:#7C7C7D">></font>之<font style="color:#F37914 ">绝美礼服</font><font style="color:#7C7C7D">>ROCOCO SALES</font></span>-->
 		            <h5>
 		                <ul>
+							<php>$beautyCount = count($photo)-1;</php>
 							<foreach name="beauty" item="item">
-								<if condition="$key+1 neq count($beauty)">
-									<li><a href="" target="_blank" title="" style="">{$item.post_title} |</a></li>
-									<else /> <li><a href="" target="_blank" title="" style="">{$item.post_title}</a></li>
-								</if>
+								<li><a href="{:U('Portal/dress/info')}/id/{$item.id}" title="{$item.post_title}" style="">{$item.post_title}<if condition="$beautyCount neq $key">|</if></a></li>
 							</foreach>
 
 		                </ul>

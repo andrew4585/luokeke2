@@ -111,7 +111,7 @@ class DressController extends IndexController {
 					"href" => U("Portal/Dress/lists/category/{$key}")
 							);
 		}
-		$nav_arr['name'] 	= "婚纱礼服分类";
+		$nav_arr['name'] 	= "婚纱礼服";
 		$nav_arr['name_url'] = U("Portal/Dress/lists");
 		$nav_arr['items'] 	= $item;
 		exit(json_encode($nav_arr));

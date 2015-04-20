@@ -160,6 +160,27 @@ class EnrollController extends AdminbaseController{
             }
         }
     }
+    //投票情况显示
 
+    public function vote(){
+        $vote_model = D("Common/Vote");
+        $where = array();
+        $enroll_id=I("get.enroll_id");
+        if(!empty($enroll_id)){
+            $where['enroll_id']=$enroll_id;
+        }
+        $count=$vote_model->where($where)->count();
+        $page = $this->page($count, 20);
+        $vote=$vote_model
+            ->relation(true)
+            ->where($where)
+            ->limit($page->firstRow . ',' . $page->listRows)
+            ->order("time DESC")
+            ->select();
+        dump($vote);
+        $this->assign("vote",$vote);
+        $this->assign("Page", $page->show('Admin'));
+        $this->display("");
+    }
 
 }

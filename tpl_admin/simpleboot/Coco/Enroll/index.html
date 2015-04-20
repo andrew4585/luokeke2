@@ -46,6 +46,7 @@
                     <th>名称</th>
                     <th>类别</th>
                     <th>图片</th>
+                    <th>喜欢人数</th>
                     <th width="45">显示</th>
                     <th width="120">操作</th>
                 </tr>
@@ -62,6 +63,7 @@
                                 <a href="__ROOT__/{$vo['post_pic']}" target="_blank"><img src="__ROOT__/{$vo['post_pic']}" style="height:80px;max-width:600px" onclick=""/></a>
                             </notempty>
                         </td>
+                        <td>{$vo.post_like}</td>
                         <td align="center">
                             <if condition="$vo.recommended eq 1">
                                 <font class="recommended" color="#1DCCAA" title="显示" data-id="{$vo.id}">√</font>
@@ -70,6 +72,7 @@
                             </if>
                         </td>
                         <td>
+                            <a href="javascript:open_iframe_dialog('{:u('Coco/Enroll/vote',array('enroll_id'=>$vo['id']))}','评论列表')">投票情况</a> |
                             <a href="{:U('Enroll/edit',array('id'=>$vo['id']))}">修改</a>|
                             <a href="{:U('Enroll/delete',array('id'=>$vo['id']))}" class="J_ajax_del" >删除</a>
                         </td>

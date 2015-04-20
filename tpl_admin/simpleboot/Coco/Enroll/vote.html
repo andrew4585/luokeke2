@@ -13,24 +13,21 @@
                     <th width="50">ID</th>
                     <th>用户名/姓名</th>
                     <th>手机号</th>
-                    <th width="140">内容</th>
-                    <th width="140"><span>评论时间</span></th>
-                    <th width="50"><span>状态</span></th>
+                    <th width="140">喜欢</th>
+                    <th width="140"><span>投票时间</span></th>
                     <th width="120">操作</th>
                 </tr>
                 </thead>
-                <php>$status=array("1"=>"已审核","0"=>"未审核");</php>
-                <foreach name="comments" item="vo">
+                <foreach name="vote" item="vo">
                     <tr>
-                        <td><input type="checkbox" class="J_check" data-yid="J_check_y" data-xid="J_check_x" name="ids[]" value="{$vo.id}" ></td>
+                        <td><input type="checkbox" class="J_check" data-yid="J_check_y" data-xid="J_check_x" name="ids[]" value="{$vo.enroll_id}" ></td>
                         <td>{$vo.id}</td>
                         <td>{$vo.user.user_nicename}</td>
                         <td>{$vo.user.user_phone}</td>
-                        <td>{$vo.content}</td>
-                        <td>{$vo.createtime}</td>
-                        <td>{$status[$vo['status']]}</td>
+                        <td style="color:red;">+1</td>
+                        <td>{$vo.time|date="Y.m.d",###}</td>
                         <td>
-                            <a href="{:U('Commentadmin/delete',array('id'=>$vo['id']))}" class="J_ajax_del" >删除</a>
+                            <a href="{:U('Enroll/vote_delete',array('id'=>$vo['id']))}" class="J_ajax_del" >删除</a>
                         </td>
                     </tr>
                 </foreach>
@@ -40,9 +37,7 @@
         </div>
         <div class="form-actions">
             <label class="checkbox inline" for="check_all"><input type="checkbox" class="J_check_all" data-direction="y" data-checklist="J_check_y" id="check_all">全选</label>
-            <button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('Commentadmin/check',array('check'=>1))}" data-subcheck="true">审核</button>
-            <button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('Commentadmin/check',array('uncheck'=>1))}" data-subcheck="true">取消审核</button>
-            <button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('Commentadmin/delete')}" data-subcheck="true" data-msg="你确定删除吗？">删除</button>
+            <button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('Enroll/vote_delete')}" data-subcheck="true" data-msg="你确定删除吗？">删除</button>
         </div>
     </form>
 </div>

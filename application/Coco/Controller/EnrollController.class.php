@@ -177,10 +177,28 @@ class EnrollController extends AdminbaseController{
             ->limit($page->firstRow . ',' . $page->listRows)
             ->order("time DESC")
             ->select();
-        dump($vote);
         $this->assign("vote",$vote);
         $this->assign("Page", $page->show('Admin'));
-        $this->display("");
+        $this->display();
+    }
+    function vote_delete(){
+        $vote_model = D("Common/Vote");
+        if(isset($_GET['id'])){
+            $id = intval(I("get.id"));
+            if ($vote_model->where("id=$id")->delete()!==false) {
+                $this->success("删除成功！");
+            } else {
+                $this->error("删除失败！");
+            }
+        }
+        if(isset($_POST['ids'])){
+            $ids=join(",",$_POST['ids']);
+            if ($vote_model->where("id in ($ids)")->delete()!==false) {
+                $this->success("删除成功！");
+            } else {
+                $this->error("删除失败！");
+            }
+        }
     }
 
 }

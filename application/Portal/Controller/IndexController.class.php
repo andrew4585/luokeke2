@@ -213,21 +213,22 @@ class IndexController extends HomeBaseController {
     		if(empty($site)){
 				$site		= $model_site->order("listorder,id")->getField("id");
     		}
+    	}else{
+    		$site_url	= $model_site->where("id=$site")->getField("site_url");
+    		if(!empty($site_url)){
+    			cookie("siteid",$site);
+    			header("location:$site_url"."/siteid/".$site);
+    			exit;
+    		}
     	}
     	//判断是否取得站点编号
     	if(!$site){
     		$this->error("站点获取失败，请检查后台是否填写站点信息");
     	}else{
     		cookie("siteid",$site);
-    		$site_url	= $model_site->where("id=$site")->getField("site_url");
-    		if(empty($site_url)){
-    			$site_name	= $model_site->where("id=$site")->getField("site_name");
-    			$this->assign("site_name",$site_name);
-    			$this->assign("siteid",$site);
-    		}else{
-    			header("location:$site_url"."/siteid/".$site);
-    			exit;
-    		}
+    		$site_name	= $model_site->where("id=$site")->getField("site_name");
+    		$this->assign("site_name",$site_name);
+    		$this->assign("siteid",$site);
     	}
     }
     /**

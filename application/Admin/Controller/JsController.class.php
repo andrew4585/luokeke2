@@ -71,8 +71,17 @@ class JsController extends AdminbaseController{
 	
 	//删除
 	public function delete(){
-		
-		
+		$id = I("id",0,'intval');
+		if($id){
+			$result = $this->model_js->where("id=$id")->delete();
+			if($result){
+				$this->success("删除成功");
+			}else{
+				$this->error("删除失败");
+			}
+		}else{
+			$this->error("编号缺失");
+		}
 	}
 	
 	//排序

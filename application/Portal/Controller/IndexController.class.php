@@ -216,7 +216,6 @@ class IndexController extends HomeBaseController {
     	}else{
     		$site_url	= $model_site->where("id=$site")->getField("site_url");
     		if(!empty($site_url)){
-    			cookie("siteid",$site);
     			header("location:$site_url");
     			exit;
     		}

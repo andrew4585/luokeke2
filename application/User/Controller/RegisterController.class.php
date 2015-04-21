@@ -42,13 +42,15 @@ class RegisterController extends IndexController {
     	if(strlen($password) < 5 || strlen($password) > 20){
     		$this->error("密码长度至少5位，最多20位！");
     	}
-    	if(!preg_match("/^13[0-9]{1}[0-9]{8}$|15[0189]{1}[0-9]{8}$|189[0-9]{8}$/",$mobile)){
+    	if(!preg_match("/^1\d{10}$/",$mobile)){
     		$this->error('手机号码格式不正确');
     	}
+    	
     	//需要获取到的短信验证码验证规则
-    	/* if($messcode != ){
+    	$verifyCode = session("registerSMS");;
+    	if($messcode != $verifyCode){
     		$this->error("短信验证码不正确，请重新验证！");
-    	} */
+    	}
 		
     	$where['user_login']=$username;
     	$where['user_phone']=$mobile;

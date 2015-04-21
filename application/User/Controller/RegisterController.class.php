@@ -79,4 +79,39 @@ class RegisterController extends IndexController {
 		}
 	}
 	
+	/**
+	 * 发送注册验证码
+	 */
+	public function sendRegisterSMS(){
+		try{
+			$user_phone=I("post.user_phone");
+			$model_user=D("Users");
+			$hasUser=$model_user->where("user_phone='$user_phone'")->find();
+			if($hasUser)$this->returnfalse("该手机号已经注册");
+			$code=rand(1000, 9999);
+			$content="您好，您的验证码是:".$code.",感谢您注册大连洛可可婚纱摄影，如非本人操作请忽略【大连洛可可婚纱摄影】";
+			$reply=$this->authcode($user_phone, $content);
+			session("registerSMS",$code);
+			$this->success($reply);
+		}catch (\Exception $e){
+			$this->error($e->getMessage());
+		}
+	}
+	
+	/**
+	 *发送验证码
+	 *@param string $user_name 用户名(即手机号)
+	 *@param string $content   短信内容
+	 */
+	private function authcode($user_name,$content){
+		$url="http://api.chanyoo.cn/utf8/interface/send_sms.aspx";
+		$data=array(
+				"username"=>"rococo",
+				"password"=>"5843385",
+				"receiver"=>$user_name,
+				"content"=>$content
+		);
+		$reply=http($url, $data,"POST");
+		return $reply;
+	}
 }

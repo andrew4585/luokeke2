@@ -64,8 +64,7 @@ body{background-color: #fff;}
 .line-height {line-height: 30px\9;}
 .repass{margin-top: 6px;}
 .reg-phone{
-	position: relative;
-	left: -45px;
+	width:100%;
 }
 .ico7{
 	display:block; 
@@ -91,15 +90,14 @@ body{background-color: #fff;}
 	float: right;
 }
 .phone-c{
-	display: block;
 	float:right;
 	width:120px;
-	margin-top:1px;
 	height:33px;
 	background-color:#f4f4f4;
 	text-align:center;
-	line-height: 30px;
+	line-height: 31px;
 	border: 1px solid #cccccc;
+	margin-right:18px;
 }
 .reg-4{
 	margin: 10px 60px;

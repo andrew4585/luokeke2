@@ -51,31 +51,39 @@
 			})
 		})
 		/*获取短信验证码js效果*/
-			var time = 10;
+			var time = 25;
 			$(function(){
 				$(".phone-c").click(function(){
 					checkphone();
 				});
 			});
 			function checkphone(){
-				var phone = $("#mobile");
-				if(!phone.val().match(/^(((13[0-9]{1})|159|153)+\d{8})$/)){
-					phone.focus();
-					phone.attr("placeholder","请检查您的手机号码格式！")
+				var phone = $("#mobile").val();
+				if(!phone.match(/^1\d{10}$/)){
+					$("#mobile").focus();
+					$("#mobile").attr("placeholder","请检查您的手机号码格式！")
 				}else{
-					$(".phone-c").attr("disabled","disabled");
-					$(".phone-c").text(time + "秒之后点击获取");
-					time--;
-		            if (time > 0) {
-		                setTimeout(checkphone, 1000);
-		            }else{
-		            	$(".phone-c").removeAttr("disabled");
-		            	$(".phone-c").text("点击获取验证码");
-		            	time = 10; 
-		            }
+					$.post("{:U('User/Register/sendRegisterSMS')}",{user_phone:phone},function(data){
+						if(data.status==1){
+							codeTime();
+						}else{
+							alert(data.info);
+						}
+					});
 				}
 			}
-			
+			function codeTime(){
+				$(".phone-c").attr("disabled","disabled");
+				$(".phone-c").text(time + "秒之后重新获取");
+				time--;
+				if (time > 0) {
+	                setTimeout(codeTime, 1000);
+	            }else{
+	            	$(".phone-c").removeAttr("disabled");
+	            	$(".phone-c").text("点击获取验证码");
+	            	time = 25; 
+	            }
+			}
 		</script>
 	</head>
 	<body>
@@ -105,7 +113,7 @@
 					<img src="__STATICS__images/tpl/login-1.png"/>
 				</div>
 				<div class="code-1">
-					<img src="__STATICS__images/tpl/code-1.jpg"/>
+					<img src="__STATICS__images/tpl/wxQr.png" height="136"/>
 				</div>
 				<div class="login-3">
 					<img src="__STATICS__images/tpl/log-3.png"/>
@@ -121,11 +129,10 @@
 					<p><label for="repassword"><font color="#f79646">*</font>请确认密码：</label><input class="line-height" type="password" name="repassword"  id="repassword" value=""/><img class="ico8" src="__STATICS__images/tpl/ico6.png" /></p>
 					<p><label for="mobile"><font color="#f79646">*</font>验证手机：</label><input class="line-height" type="text" name="mobile" id="mobile" value=""/><img class="ico8" src="__STATICS__images/tpl/ico6.png" /></p>
 					<p class="reg-phone">
-						<label for="messcode"><font color="#f79646">*</font>短信验证码：</label>
-						<input type="text" class="line-height"  style="width: 100px;margin-right: 12px;" name="messcode" id="messcode" value=""/>
+						<label for="messcode" style="margin-left:18px;"><font color="#f79646">*</font>短信验证码：</label>
+						<input type="text" class="line-height"  style="width: 125px;" name="messcode" id="messcode" value=""/>
 						<!--<a class="phone-c" href="">获取短信验证码</a>-->
 						<button class="phone-c" type="button">获取短信验证码</button>
-						
 					</p>
 				</div>
 				<div class="clears"></div>
@@ -134,8 +141,7 @@
 						<a href="{:U('User/login/index')}">登陆</a>
 					</div>
 					<div class="reg-6 reg-all">
-					
-					<input type="submit" style="cursor:pointer;" value="立即注册" />
+						<a onclick="document.getElementById('regform').submit();">立即注册</a>
 						
 					</div>
 				</div>
@@ -147,15 +153,15 @@
 		<div class="log-footer">
 			<div class="site_nav">
 				<ul>
-					<li><a href="">关于洛可可&nbsp;&nbsp;|&nbsp;&nbsp;</a></li>
-					<li><a href="">作品欣赏&nbsp;&nbsp;|&nbsp;&nbsp;</a></li>
-					<li><a href="">客片欣赏&nbsp;&nbsp;|&nbsp;&nbsp;</a></li>
-					<li><a href="">婚纱礼服&nbsp;&nbsp;|&nbsp;&nbsp;</a></li>
-					<li><a href="">婚嫁资讯&nbsp;&nbsp;|&nbsp;&nbsp;</a></li>
-					<li><a href="">可可之星</a></li>
+					<li><a href="{:U('Portal/Index/index')}">关于洛可可&nbsp;&nbsp;|&nbsp;&nbsp;</a></li>
+					<li><a href="{:U('Portal/Photo/lists')}">作品欣赏&nbsp;&nbsp;|&nbsp;&nbsp;</a></li>
+					<li><a href="{:U('Portal/Dress/index')}">客片欣赏&nbsp;&nbsp;|&nbsp;&nbsp;</a></li>
+					<li><a href="{:U('Portal/PCustom/lists')}">婚纱礼服&nbsp;&nbsp;|&nbsp;&nbsp;</a></li>
+					<li><a href="{:U('Portal/Article/lists')}">婚嫁资讯&nbsp;&nbsp;|&nbsp;&nbsp;</a></li>
+					<li><a href="{:U('Portal/Coco/index')}">可可之星</a></li>
 				</ul>
 			</div>
-			<div class="log-copy">Copyright©2004-2014 &nbsp; 洛可可 rococo1999.com 版权所有</div>
+			<div class="log-copy">{$site_copyright}</div>
 		</div>
 	</body>
 </html>

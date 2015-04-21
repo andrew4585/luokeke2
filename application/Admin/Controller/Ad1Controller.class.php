@@ -16,7 +16,7 @@ class Ad1Controller extends AdminbaseController{
 		$this->site_obj = D("Common/Site");
 	}
 	function index(){
-    	$categorys=$this->ad1cat_obj->field("cid,cat_name")->select();
+    	$categorys=$this->ad1cat_obj->field("cid,cat_name")->order("id")->select();
 		$list=$this->site_obj->field("id,site_name")->select();
 	    $this->assign("categorys",$categorys);
 		$where	= "1=1";

@@ -16,7 +16,7 @@ class Ad1Controller extends AdminbaseController{
 		$this->site_obj = D("Common/Site");
 	}
 	function index(){
-    	$categorys=$this->ad1cat_obj->field("cid,cat_name")->order("id")->select();
+    	$categorys=$this->ad1cat_obj->field("cid,cat_name")->order("cid")->select();
 		$list=$this->site_obj->field("id,site_name")->select();
 	    $this->assign("categorys",$categorys);
 		$where	= "1=1";
@@ -43,7 +43,7 @@ class Ad1Controller extends AdminbaseController{
 	}
 	function add(){
 		//获取广告的分类
-		$categorys=$this->ad1cat_obj->field("cid,cat_name")->where("cat_status!=0")->select();
+		$categorys=$this->ad1cat_obj->field("cid,cat_name")->where("cat_status!=0")->order("cid")->select();
 		//获取分站名称
 		$list=$this->site_obj->field("id,site_name")->select();
 		$this->assign("list",$list);
@@ -79,7 +79,7 @@ class Ad1Controller extends AdminbaseController{
 		}
 	}
 	function edit(){
-		$categorys=$this->ad1cat_obj->field("cid,cat_name")->where("cat_status!=0")->select();
+		$categorys=$this->ad1cat_obj->field("cid,cat_name")->where("cat_status!=0")->order("cid")->select();
 		$list=$this->site_obj->field("id,site_name")->select();
 //         dump($list);
 		$id= intval(I("get.id"));

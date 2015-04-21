@@ -11,7 +11,7 @@ class Ad1catController extends AdminbaseController{
 	}
 	
 	function index(){
-		$cats=$this->ad1cat_obj->where("cat_status!=0")->select();
+		$cats=$this->ad1cat_obj->where("cat_status!=0")->order("cid")->select();
 		$this->assign("ad1cat",$cats);
 		$this->display();
 	}

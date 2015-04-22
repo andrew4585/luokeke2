@@ -3,21 +3,13 @@
 <head>
     <tc_include file="Public:head_info"/>
     <link rel="stylesheet" type="text/css" href="__STATICS__css/jifen.css">
-    <style>
-        #info-func ul li{
-            display   : block;
-            float     : left;
-            width     : 115px;
-            height    : 30px ;
-            background: #4C4D4F;
-            border-radius: 4px;
-            behavior: url(__STATICS__css/iecss3.htc);
-            position:relative;
-            z-index:2;
-            margin-left: 11px;
-            color: #ffffff;
-        }
-    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //$('#aOpen').leanModal({ top: 100, closeButton: ".modal_close" });
+            $('a[rel*=leanModal]').leanModal({ top: 100, closeButton: ".modal_close" });
+        });
+    </script>
+
 </head>
 <body>
 <div class="head">
@@ -54,12 +46,15 @@
                         <ul>
                             <li class="like"><span>2</span></li>
                             <li class="share"></li>
+                            <li class="jifen_now"><a id="aOpen" href="#OpenWindow" rel="leanModal">现在兑换</a></li>
                         </ul>
                     </div>
+
                     <div class="clears"></div>
                     <ul id="txTabs" class="clear" >
                         <li class="tags_at on" data-id="1" >礼品详情</li>
                         <li class="tags_none" data-id="2" >兑换流程</li>
+
                     </ul>
                     <div class="info-img info1">
                         <div class="info-img-w">
@@ -194,6 +189,7 @@
                 </div>
             </div>
         </div>
+
         <!--服务承诺-->
         <tc_include file="Public:servePromise"/>
         <!--底部的图片-->
@@ -204,6 +200,43 @@
         <div class="clears"></div>
     </div>
     <!--底部-->
+    <div id="OpenWindow">
+        <div id="signup-ct">
+            <div id="OpenWindow-header">
+                <h2>立即兑换</h2>
+                <a href="#" class="modal_close"></a>
+            </div>
+            <form action="">
+                <div class="txt-fld">
+                    <label for="">配送方式</label>
+                    <select  name="" id="">
+                        <option value="">自取</option>
+                        <option value="">店家代为邮递</option>
+                    </select>
+                </div>
+                <div class="txt-fld">
+                    <label for="">邮递地址（选填）</label>
+                    <input type="text" name="" id="" />
+                </div>
+                <div class="txt-fld">
+                    <label for="">联系人</label>
+                    <input type="text" name="" id="" />
+                </div>
+                <div class="txt-fld">
+                    <label for="">联系电话</label>
+                    <input type="text" name="" id="" />
+                </div>
+                <div class="txt-fld">
+                    <label for="">备注</label>
+                    <input type="text" name="" id="" />
+                </div>
+                <div class="btn-fld">
+                    <button type="submit">确定 »</button>
+                </div>
+            </form>
+        </div>
+    </div>
     <tc_include file="Public:footer"/>
+    <script type="text/javascript" src="__STATICS__js/jquery.leanModal.min.js"></script>
 </body>
 </html>

@@ -220,7 +220,18 @@
     font-size: 17px;
     padding-left: 100px;
 }
-
+.jifen_now{
+    margin-left: 20px;
+    background-color: #f5f5f5;
+    width: 90px;
+    border: 1px solid #f0f0f0;
+    height: 36px;
+}
+.jifen_now a {
+    color: #5E5E5E;
+    padding-left: 15px;
+    line-height: 38px;
+}
 .share {
     margin-left: 20px;
     width: 90px;
@@ -258,3 +269,13 @@
 .info-img-w {
     width: 920px;
 }
+#lean_overlay { position: fixed; z-index: 100; top: 0px; left: 0px; height: 100%; width: 100%; background: #000; display: none; }
+#OpenWindow { background: none repeat scroll 0 0 #FFFFFF; border-radius: 5px 5px 5px 5px; box-shadow: 0 0 4px rgba(0, 0, 0, 0.7); display: none; padding-bottom: 2px; width: 580px; z-index: 11000; left: 50%; margin-left: -202px; opacity: 1; position: fixed; top: 200px; }
+#OpenWindow-header { background: url("../images/tpl/hd-bg.png") repeat scroll 0 0 transparent; border-bottom: 1px solid #CCCCCC; border-top-left-radius: 5px; border-top-right-radius: 5px; padding: 18px 18px 14px; }
+.modal_close { background: url("../images/tpl/modal_close.png") repeat scroll 0 0 transparent; display: block; height: 14px; position: absolute; right: 12px; top: 12px; width: 14px; z-index: 2; }
+body { font-size: 13px; }
+#OpenWindow .txt-fld { border-bottom: 1px solid #EEEEEE; padding: 14px 20px; position: relative; text-align: right; width: 400px; }
+#OpenWindow .txt-fld input, select { background: none repeat scroll 0 0 #F7F7F7; border-color: #CCCCCC #E7E6E6 #E7E6E6 #CCCCCC; border-radius: 4px 4px 4px 4px; border-style: solid; border-width: 1px; color: #222222; font-family: "Helvetica Neue"; font-size: 1.2em; outline: medium none; padding: 8px; width: 254px; }
+#OpenWindow .btn-fld { overflow: hidden; padding: 12px 20px 12px 130px; width: 254px; }
+button { background: none repeat scroll 0 0 #3F9D4A; border: medium none; border-radius: 4px 4px 4px 4px; color: #FFFFFF; float: right; font-family: Verdana; font-size: 13px; font-weight: bold; overflow: visible; padding: 7px 10px; text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4); width: auto; }
+#OpenWindow .txt-fld select{ width: 274px; }

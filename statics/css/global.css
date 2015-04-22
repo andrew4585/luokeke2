@@ -144,7 +144,14 @@ table { border-collapse: collapse; border-spacing: 0; }
  text-align: left;
  width: 230px;
 }
-.xl_001 ul { height: 500px;  overflow: hidden;}
+/*.clear:after{
+ content: ".";
+ height: 0;
+ visibility: hidden;
+ display: block;
+ clear: both;
+}*/
+.xl_001 ul { overflow: hidden;}
 .xl_001 ul a.bigImg {   float: left;  height: 535px;  margin: 0 2px 0 0;  width: 393px;}
 .xl_001 ul a.smallImg {   display: inline;  float: left;  height: 267px;  margin: 0 2px 1px;  width: 395px;}
 .zl_001 ul li a{color: #000000;font-size:17px;font-weight: 200;}

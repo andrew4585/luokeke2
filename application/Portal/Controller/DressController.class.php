@@ -112,7 +112,7 @@ class DressController extends IndexController {
 							);
 		}
 		$nav_arr['name'] 	= "婚纱礼服";
-		$nav_arr['name_url'] = U("Portal/Dress/lists");
+		$nav_arr['name_url'] = U("Portal/Dress");
 		$nav_arr['items'] 	= $item;
 		exit(json_encode($nav_arr));
 	}

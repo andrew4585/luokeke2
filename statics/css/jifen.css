@@ -1,0 +1,281 @@
+.jifen_content{
+    margin: 0 auto;
+    margin-top: 22px;
+    width: 1200px;
+}
+.clear:after{
+    content: ".";
+    height: 0;
+    visibility: hidden;
+    display: block;
+    clear: both;
+}
+.jifen_left{
+    float: left;
+}
+.jifen_top{
+    width: 948px;
+    height: 40px;
+    background: url("../images/tpl/jifen_03.png") repeat-x;
+    border: 1px solid #ECEBEB;
+}
+.jifen_top li{
+    float: left;
+    line-height: 40px;
+    font-family: Microsoft Yahei;
+}
+.jifen_top li h2{
+    font-size: 16px;
+    padding-left: 15px;
+    font-weight: normal;
+}
+.jifen_top li.sort, li.sort1{
+    font-size: 15px;
+    padding-right: 15px;
+    float: right;
+}
+.jifen_top li.sort1{
+    padding-left: 15px;
+    border-left: 1px solid #CECECE;
+}
+.listmain, .jifen_info{
+    width: 948px;
+    margin-top: 10px;
+    height: auto;
+    border: 1px solid #DFDEDE;
+}
+.listmain ul{
+    height: auto;
+}
+.listmain ul li {
+    width: 312px;
+    padding-top: 15px;
+    float: left;
+}
+.listmain ul li img {
+    width: 290px;
+    height: 200px;
+    margin-left: 15px;
+    border: 1px #f0f0f0 solid;
+}
+.listmain ul li h3 {
+    font-weight:normal;
+    padding-left: 15px;
+    font-size: 14px;
+    line-height: 40px;
+}
+.listmain ul li h4 {
+    display: inline;
+    font-size: 16px;
+}
+
+.listmain ul li p {
+    padding-left: 15px;
+    line-height: 22px;
+    font-size: 14px;
+
+}
+.listmain ul li p b {
+    padding-left:3px ;
+    font-weight:normal;
+    font-size: 18px;
+    color: #c00;
+    font-family: Microsoft yahei;
+}
+.jifen_right{
+    width: 225px;
+    float: right;
+}
+.scorelnav, .scorelistBox{
+    border: 1px solid #cccccc;
+    margin-bottom: 12px;
+}
+.goods_Title{
+    width: 201px;
+    background-color: #b5c8df;
+    color: #ffffff;
+    font-family: Microsoft Yahei;
+    height: 45px;
+    font-size: 16px;
+    padding-left: 22px;
+    line-height: 45px;
+    margin-bottom: 7px;
+}
+.left_nav_bottom {
+    height: 36px;
+    text-align: left;
+    border-top: 1px dotted #a5a5a5;
+}
+.left_nav li a {
+    background: url("../images/tpl/usericon.png") no-repeat left center;
+    padding-left: 10px;
+    line-height: 36px;
+    text-align: left;
+    font-size: 15px;
+    margin-left: 12px;
+    font-family: Microsoft Yahei;
+}
+.exchange li {
+    width: 213px;
+    height: 85px;
+    line-height: 18px;
+    border-top: 1px #a5a5a5 dotted;
+    padding-left: 10px;
+}
+.exchange li p.name {
+    font-size: 13px;
+    color: #c00;
+    margin-top: 8px;
+}
+.exchange li p.content {
+    color: #333;
+    font-size: 12px;
+}
+.exchange li p.time {
+    color: #999;
+}
+.ranking {
+    width: 223px;
+    height: 37px;
+    border-top: 1px #ccc dotted;
+
+    font-size: 12px;
+}
+.ranking li{float: left;line-height: 30px;}
+.ranking li.no {
+    width: 35px;
+    text-align: center;
+    font-size: 14px;
+    font-family: Microsoft Yahei;
+    padding-top: 5px;
+}
+.ranking li.img {
+    width: 40px;
+}
+.ranking li.img img {
+    border: 1px #ccc solid;
+    width: 30px;
+    height: 30px;
+    display: block;
+    vertical-align: middle;
+    margin-top: 2px;
+}
+
+.ranking li.name {
+    width: 80px;
+    padding-left: 15px;
+    text-align: left;
+    padding-top: 5px;
+}
+.ranking li.rank {
+    text-align: center;
+    padding-top: 5px;
+    color: #c00;
+}
+/**积分详情页**/
+.jifen_info img#info_img{
+    display: block;
+    float: left;
+    margin: 15px 23px 0 15px;
+    width: 290px;
+    height: 200px;
+    border: 1px #f0f0f0 solid;
+}
+.serviceInfoLevel {
+    float: left;
+    margin-top: 15px;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 22px;
+}
+.serviceInfoLevel h2{
+    font-family: Microsoft Yahei;
+    font-size: 18px;
+    color: #000;
+}
+.serviceMoney {
+    font-size: 30px;
+    color: #c00;
+    line-height: 76px;
+    margin-left: 5px;
+    font-weight: normal;
+}
+.throughline {
+    text-decoration: line-through;
+    margin-left: 3px;
+}
+.serviceInfoLevel li{
+    float: left;
+    cursor: pointer;
+}
+
+.like {
+    width: 144px;
+    height: 38px;
+    background: url('../images/tpl/group/like.png') no-repeat;
+}
+ .like span {
+    color: #5E5E5E;
+    line-height: 38px;
+    font-size: 17px;
+    padding-left: 100px;
+}
+.jifen_now{
+    margin-left: 20px;
+    background-color: #f5f5f5;
+    width: 90px;
+    border: 1px solid #f0f0f0;
+    height: 36px;
+}
+.jifen_now a {
+    color: #5E5E5E;
+    padding-left: 15px;
+    line-height: 38px;
+}
+.share {
+    margin-left: 20px;
+    width: 90px;
+    height: 38px;
+    background: url('../images/tpl/group/share.png') no-repeat;
+}
+#txTabs{
+    margin-top: 35px;
+    margin-left: 15px;
+    border-bottom: #DFDFDF 1px solid;
+}
+#txTabs li{
+    float: left;
+    width: 76px;
+    height: 33px;
+    cursor: pointer;
+    border: #dfdfdf 1px solid;
+    border-bottom: none;
+    margin-right: 9px;
+    font-size: 16px;
+    line-height: 33px;
+    text-align: center;
+}
+#txTabs .on {
+    background: #B5C8DF;
+    color: #FFFFFF;
+}
+.hidden{
+    display:none;
+}
+.info-img{
+    margin: 20px 14px 10px;
+
+}
+.info-img-w {
+    width: 920px;
+}
+#lean_overlay { position: fixed; z-index: 100; top: 0px; left: 0px; height: 100%; width: 100%; background: #000; display: none; }
+#OpenWindow { background: none repeat scroll 0 0 #FFFFFF; border-radius: 5px 5px 5px 5px; box-shadow: 0 0 4px rgba(0, 0, 0, 0.7); display: none; padding-bottom: 2px; width: 580px; z-index: 11000; left: 50%; margin-left: -202px; opacity: 1; position: fixed; top: 200px; }
+#OpenWindow-header { background: url("../images/tpl/hd-bg.png") repeat scroll 0 0 transparent; border-bottom: 1px solid #CCCCCC; border-top-left-radius: 5px; border-top-right-radius: 5px; padding: 18px 18px 14px; }
+.modal_close { background: url("../images/tpl/modal_close.png") repeat scroll 0 0 transparent; display: block; height: 14px; position: absolute; right: 12px; top: 12px; width: 14px; z-index: 2; }
+body { font-size: 13px; }
+#OpenWindow .txt-fld { border-bottom: 1px solid #EEEEEE; padding: 14px 20px; position: relative; text-align: right; width: 400px; }
+#OpenWindow .txt-fld input, select { background: none repeat scroll 0 0 #F7F7F7; border-color: #CCCCCC #E7E6E6 #E7E6E6 #CCCCCC; border-radius: 4px 4px 4px 4px; border-style: solid; border-width: 1px; color: #222222; font-family: "Helvetica Neue"; font-size: 1.2em; outline: medium none; padding: 8px; width: 254px; }
+#OpenWindow .btn-fld { overflow: hidden; padding: 12px 20px 12px 130px; width: 254px; }
+button { background: none repeat scroll 0 0 #3F9D4A; border: medium none; border-radius: 4px 4px 4px 4px; color: #FFFFFF; float: right; font-family: Verdana; font-size: 13px; font-weight: bold; overflow: visible; padding: 7px 10px; text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4); width: auto; }
+#OpenWindow .txt-fld select{ width: 274px; }

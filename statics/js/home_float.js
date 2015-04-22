@@ -55,7 +55,7 @@
     function leftFloat(){
     	var f1,f2,f3,f4,f5,f6,bck;
         var fixRight = $('div.floatCtro p');
-        var blackTop = $('div.floatCtro a')
+        var blackTop = $('div.floatCtro a');
         var sTop = $(window).scrollTop();
         fl = $('#float01').offset().top;
         f2 = $('#float02').offset().top;

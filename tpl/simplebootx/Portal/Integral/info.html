@@ -1,0 +1,242 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
+<head>
+    <tc_include file="Public:head_info"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__css/jifen.css">
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //$('#aOpen').leanModal({ top: 100, closeButton: ".modal_close" });
+            $('a[rel*=leanModal]').leanModal({ top: 100, closeButton: ".modal_close" });
+        });
+    </script>
+
+</head>
+<body>
+<div class="head">
+    <!--头部导航标题js-->
+    <tc_include file="Public:nav"/>
+    <!-- banner轮播 -->
+    <tc_include file="Public:banner"/>
+    <!--内容-->
+    <div class="conter">
+        <div class="jifen_content clear">
+            <div class="jifen_left">
+                <div class="jifen_top">
+                    <ul>
+                        <li><h2>商品详情</h2></li>
+                    </ul>
+                </div>
+                <div class="jifen_info clear">
+                    <img id="info_img" src="http://wx.rococo1999.com/wxupload/image/20140809/20140809163141_6240.jpg">
+                    <div class="serviceInfoLevel">
+                        <h2>
+                            静音榨汁机（已订单客户可兑换,已兑换完）</h2>
+                        <h3>
+
+                        </h3>
+                        <p>
+                            需要&nbsp;:<b class="serviceMoney">2500</b>积分</p>
+                        <p>
+                            价格&nbsp;:¥<span class="throughline">399.00</span></p>
+                        <p>
+                            邮寄:代办邮寄，邮寄费用客人自理，邮寄起点大连（费用的计算方式以邮寄里程和重量计算）</p>
+                        <p>&nbsp;</p>
+                        <p>
+                        </p>
+                        <ul>
+                            <li class="like"><span>2</span></li>
+                            <li class="share"></li>
+                            <li class="jifen_now"><a id="aOpen" href="#OpenWindow" rel="leanModal">现在兑换</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="clears"></div>
+                    <ul id="txTabs" class="clear" >
+                        <li class="tags_at on" data-id="1" >礼品详情</li>
+                        <li class="tags_none" data-id="2" >兑换流程</li>
+
+                    </ul>
+                    <div class="info-img info1">
+                        <div class="info-img-w">
+                            <img src="http://wx.rococo1999.com/wxupload/image/20140809/20140809163141_6240.jpg" id="one" width="920" alt=""/>
+                        </div>
+                    </div>
+                    <div class="info-img info2 hidden">
+                        <div class="info-img-w">
+                            <img src="http://localhost/luokeke2/data/upload/ad/551118b063a50.png" id="one" width="920" alt=""/>
+                        </div>
+                    </div>
+                    <script>
+                        $(function(){
+                            $("#txTabs li").click(function(){
+                                var id	= $(this).attr("data-id");
+                                $("#txTabs li").removeClass("on");
+                                $(this).addClass("on");
+                                $(".info-img").addClass("hidden");
+                                $(".info"+id).removeClass("hidden");
+                            });
+                            /*$(".like").click(function(){
+                                var number = $(".like span").html();
+                                number = parseInt(number);
+                                var id	   = {$info.id};
+                                var url	   = "__ROOT__/Portal/Group/ajax_like";
+                                $.post(url,{id:id},function(data){
+                                    if(data.status){
+                                        $(".like span").html(++number);
+                                    }else{
+                                        artDialog_alert(data.info,1);
+                                    }
+                                });
+                            });*/
+                        });
+                    </script>
+                </div>
+            </div>
+            <div class="jifen_right">
+                <div class="scorelnav">
+                    <h2 class="goods_Title">商品分类</h2>
+                    <ul class="left_nav">
+                        <li class="left_nav_bottom on">
+
+                            <a href="/luokeke2/Portal/article/lists/cid/1">所有商品</a>
+                        </li>
+                        <li class="left_nav_bottom">
+
+                            <a href="/luokeke2/Portal/article/lists/cid/3">婚庆用品</a>
+                        </li>
+                        <li class="left_nav_bottom">
+
+                            <a href="/luokeke2/Portal/article/lists/cid/6">生活用品</a>
+                        </li>
+                        <li class="left_nav_bottom">
+
+                            <a href="/luokeke2/Portal/article/lists/cid/5">家用小电器</a>
+                        </li>
+                        <li class="left_nav_bottom">
+
+                            <a href="/luokeke2/Portal/article/lists/cid/7">后期用品</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="scorelistBox">
+                    <h2 class="goods_Title">最新兑换</h2>
+                    <ul class="exchange">
+                        <li>
+                            <p class="name">
+                                心</p>
+                            <p class="content">
+                                兑换了热水壶（已订单客户可兑换，已兑换完）</p>
+                            <p class="time">2014-12-05</p>
+                        </li>
+                        <li>
+                            <p class="name">
+                                心</p>
+                            <p class="content">
+                                兑换了热水壶（已订单客户可兑换，已兑换完）</p>
+                            <p class="time">2014-12-05</p>
+                        </li>
+                        <li>
+                            <p class="name">
+                                心</p>
+                            <p class="content">
+                                兑换了热水壶（已订单客户可兑换，已兑换完）</p>
+                            <p class="time">2014-12-05</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="scorelistBox clear">
+                    <h2 class="goods_Title">积分排名</h2>
+                    <ul class="ranking">
+                        <li class="no">1</li>
+                        <li class="img">
+                            <img alt="排名" src="http://www.rococo1999.com/Content/Avatar/4276.jpg">
+                        </li>
+                        <li class="name">左左</li>
+                        <li class="rank">4129</li>
+                    </ul>
+                    <ul class="ranking">
+                        <li class="no">1</li>
+                        <li class="img">
+                            <img alt="排名" src="http://www.rococo1999.com/Content/Avatar/4276.jpg">
+                        </li>
+                        <li class="name">左左</li>
+                        <li class="rank">4129</li>
+                    </ul>
+                    <ul class="ranking">
+                        <li class="no">1</li>
+                        <li class="img">
+                            <img alt="排名" src="http://www.rococo1999.com/Content/Avatar/4276.jpg">
+                        </li>
+                        <li class="name">左左</li>
+                        <li class="rank">4129</li>
+                    </ul>
+                    <ul class="ranking">
+                        <li class="no">1</li>
+                        <li class="img">
+                            <img alt="排名" src="http://www.rococo1999.com/Content/Avatar/4276.jpg">
+                        </li>
+                        <li class="name">左左</li>
+                        <li class="rank">4129</li>
+                    </ul>
+                    <ul class="ranking">
+                        <li class="no">1</li>
+                        <li class="img">
+                            <img alt="排名" src="http://www.rococo1999.com/Content/Avatar/4276.jpg">
+                        </li>
+                        <li class="name">左左</li>
+                        <li class="rank">4129</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!--服务承诺-->
+        <tc_include file="Public:servePromise"/>
+        <!--底部的图片-->
+        <div class="i_003">
+            <img src="__STATICS__images/tpl/ad_04_01.jpg" alt="" />
+        </div>
+        <!--@@@@@@@-->
+        <div class="clears"></div>
+    </div>
+    <!--底部-->
+    <div id="OpenWindow">
+        <div id="signup-ct">
+            <div id="OpenWindow-header">
+                <h2>立即兑换</h2>
+                <a href="#" class="modal_close"></a>
+            </div>
+            <form action="">
+                <div class="txt-fld">
+                    <label for="">配送方式</label>
+                    <select  name="" id="">
+                        <option value="">自取</option>
+                        <option value="">店家代为邮递</option>
+                    </select>
+                </div>
+                <div class="txt-fld">
+                    <label for="">邮递地址（选填）</label>
+                    <input type="text" name="" id="" />
+                </div>
+                <div class="txt-fld">
+                    <label for="">联系人</label>
+                    <input type="text" name="" id="" />
+                </div>
+                <div class="txt-fld">
+                    <label for="">联系电话</label>
+                    <input type="text" name="" id="" />
+                </div>
+                <div class="txt-fld">
+                    <label for="">备注</label>
+                    <input type="text" name="" id="" />
+                </div>
+                <div class="btn-fld">
+                    <button type="submit">确定 »</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <tc_include file="Public:footer"/>
+    <script type="text/javascript" src="__STATICS__js/jquery.leanModal.min.js"></script>
+</body>
+</html>

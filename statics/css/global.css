@@ -72,8 +72,7 @@ table { border-collapse: collapse; border-spacing: 0; }
 .ban a:hover{color:#fff; text-decoration:none;}
 /*  15/02/28*/
 
-.fgx3{height:63px;  text-align:center;  background: url(../images/tpl/bg_fx4.png) repeat;}
-#main_tools {height: 63px;   margin: 0px auto;width:1200px;  }
+.fgx3{height:63px;  text-align:center;  background: url(../images/tpl/bg_fx4.png) repeat-x;}#main_tools {height: 63px;   margin: 0px auto;width:1200px;  }
 #main_tools li {  float: left;  }
 #main_tools li img {  border: medium none;height:63px;width:300px;  }
 /*首页标题*/
@@ -144,7 +143,14 @@ table { border-collapse: collapse; border-spacing: 0; }
  text-align: left;
  width: 230px;
 }
-.xl_001 ul { height: 500px;  overflow: hidden;}
+/*.clear:after{
+ content: ".";
+ height: 0;
+ visibility: hidden;
+ display: block;
+ clear: both;
+}*/
+.xl_001 ul { overflow: hidden;}
 .xl_001 ul a.bigImg {   float: left;  height: 535px;  margin: 0 2px 0 0;  width: 393px;}
 .xl_001 ul a.smallImg {   display: inline;  float: left;  height: 267px;  margin: 0 2px 1px;  width: 395px;}
 .zl_001 ul li a{color: #000000;font-size:17px;font-weight: 200;}

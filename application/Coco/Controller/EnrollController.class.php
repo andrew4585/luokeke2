@@ -72,7 +72,7 @@ class EnrollController extends AdminbaseController{
 
     function add(){
         if(IS_POST){
-            $_POST['post_date']= strtotime($_POST['post_date']);
+            $_POST['post_date']= time();
             $_POST['post_pic'] = $this->removeUploadImage($this->imgFolder, $_POST['post_pic']);
             $result=$this->model_obj->add($_POST);
             if ($result) {
@@ -88,7 +88,6 @@ class EnrollController extends AdminbaseController{
 
     public function edit(){
         if(IS_POST){
-            $_POST['post_date']= strtotime($_POST['post_date']);
             $_POST['post_pic'] = $this->removeUploadImage($this->imgFolder, $_POST['post_pic']);
             $result=$this->model_obj->save($_POST);
             if ($result) {

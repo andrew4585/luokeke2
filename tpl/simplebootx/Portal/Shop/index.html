@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
+<head>
+    <tc_include file="Public:head_info"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__css/jifen.css">
+    <style>
+        #info-func ul li{
+            display   : block;
+            float     : left;
+            width     : 115px;
+            height    : 30px ;
+            background: #4C4D4F;
+            border-radius: 4px;
+            behavior: url(__STATICS__css/iecss3.htc);
+            position:relative;
+            z-index:2;
+            margin-left: 11px;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+<div class="head">
+    <!--头部导航标题js-->
+    <tc_include file="Public:nav"/>
+    <!-- banner轮播 -->
+    <tc_include file="Public:banner"/>
+    <!--内容-->
+    <div class="conter">
+        <div class="jifen_content clear">
+            <div class="jifen_left">
+                <div class="jifen_top">
+                    <ul>
+                        <li><h2>所有商品</h2></li>
+                        <li class="sort1"><a href="{:U('Portal/Shop/index/cid')}/{$cid}/sort/2">兑换人气</a></li>
+                        <li class="sort"><a href="{:U('Portal/Shop/index/cid')}/{$cid}/sort/1">所需积分</a></li>
+                    </ul>
+                </div>
+
+                <div class="listmain">
+                    <ul class="clear" style="margin-bottom: 10px;">
+                        <foreach name="list" item="item">
+                        <li>
+                            <a href="{:U('Portal/Shop/info/id')}/{$item.id}">
+                                <img src="__ROOT__/{$item.post_pic}">
+                            </a>
+                            <h3>
+                                <a href="{:U('Portal/Shop/info/id')}/{$item.id}"><h4>{$item.post_title}</h4>（已订单客户可兑换,已兑换完）</a>
+                            </h3>
+                            <p>
+                                兑换积分&nbsp;:<b>{$item.post_score}</b> 分
+                            </p>
+                        </li>
+                        </foreach>
+                    </ul>
+                    <div class="digg">{$page}</div>
+                </div>
+            </div>
+            <div class="jifen_right">
+                <div class="scorelnav">
+                    <h2 class="goods_Title">商品分类</h2>
+                    <ul class="left_nav">
+                        <li class="left_nav_bottom on">
+
+                            <a href="{:U('Portal/shop/index')}">所有商品</a>
+                        </li>
+                        <foreach name="category" item="item">
+                        <li class="left_nav_bottom">
+
+                            <a href="{:U('Portal/Shop/index/cid')}/{$item.id}">{$item.cat_name}</a>
+                        </li>
+                        </foreach>
+
+                    </ul>
+                </div>
+                <div class="scorelistBox">
+                    <h2 class="goods_Title">最新兑换</h2>
+                    <ul class="exchange">
+                        <foreach name="new_exchange" item="item">
+                        <li>
+                            <p class="name">
+                                {$item.user.user_login}</p>
+                            <p class="content">
+                                兑换了{$item.Shop.post_title}（已订单客户可兑换，已兑换完）</p>
+                            <p class="time">{$item.post_date|date="Y-m-d",###}</p>
+                        </li>
+                        </foreach>
+                    </ul>
+                </div>
+                <div class="scorelistBox clear">
+                    <h2 class="goods_Title">积分排名</h2>
+                    <foreach name="score" item="item">
+                    <ul class="ranking">
+                        <li class="no">{$key+1}</li>
+                        <li class="img">
+                            <img alt="排名" src="__ROOT__/{$item.avatar}">
+                        </li>
+                        <li class="name">{$item.user_login}</li>
+                        <li class="rank">{$item.score}</li>
+                    </ul>
+                    </foreach>
+                </div>
+            </div>
+        </div>
+        <!--服务承诺-->
+        <tc_include file="Public:servePromise"/>
+        <!--底部的图片-->
+        <div class="i_003">
+            <img src="__STATICS__images/tpl/ad_04_01.jpg" alt="" />
+        </div>
+        <!--@@@@@@@-->
+        <div class="clears"></div>
+    </div>
+    <!--底部-->
+    <tc_include file="Public:footer"/>
+</body>
+</html>

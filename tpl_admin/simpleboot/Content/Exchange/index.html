@@ -1,0 +1,112 @@
+<admintpl file="header" />
+<style>
+    .recommended,.istop{cursor:pointer;font-size:15px;}
+</style>
+<body class="J_scroll_fixed">
+<div class="wrap J_check_wrap">
+    <ul class="nav nav-tabs">
+        <li class=""><a href="javascript:;">所有兑换记录</a></li>
+    </ul>
+    <form class="well form-search" method="post" action="{:u('Exchange/index')}">
+        <div class="search_type cc mb10">
+            <div class="mb10">
+                <!--类别-->
+                &nbsp;&nbsp;时间：
+                <input type="text" name="start_time" class="input length_2 J_date" value="{$formget.start_time|default=''}" style="width:100px;" autocomplete="off"> -
+                <input type="text" class="input length_2 J_date" name="end_time" value="{$formget.end_time}" style="width:100px;" autocomplete="off">
+                <!--
+                <select class="select_2" name="searchtype" style="width:70px;">
+                  <option value='0' >标题</option>
+                </select>
+                 -->
+                &nbsp; &nbsp;关键字：
+                <input type="text" class="input length_2" name="keyword" style="width:200px;" value="{$formget.keyword}" placeholder="请输入关键字...">
+                <input type="submit" class="btn" value="搜索"/>
+                </span>
+            </div>
+        </div>
+    </form>
+    <form class="J_ajaxForm" action="" method="post">
+        <div class="table_list">
+            <table width="100%" class="table table-hover">
+                <thead>
+                <tr>
+                    <th width="16"><label><input type="checkbox" class="J_check_all" data-direction="x" data-checklist="J_check_x"></label></th>
+                    <th>ID</th>
+                    <th>姓名</th>
+                    <th width="120">兑换商品名称</th>
+                    <th width="80">缩略图</th>
+                    <th width="120"><span>兑换时间</span></th>
+                    <th>兑换方式</th>
+                    <th>邮寄地址</th>
+                    <th width="120">是否兑换</th>
+                </tr>
+                </thead>
+                <foreach name="list" item="vo">
+                    <tr>
+                        <td><input type="checkbox" class="J_check" data-yid="J_check_y" data-xid="J_check_x" name="ids[]" value="{$vo.id}" ></td>
+                        <td><a>{$vo.id}</a></td>
+                        <td>
+                                <span>
+                                    <empty name="vo.name">
+                                        {$vo.user.user_login}
+                                    <else/>
+                                        {$vo.name}
+                                    </empty>
+                                </span>
+                        </td>
+                        <td>{$vo.Shop.post_title}</td>
+                        <td>
+                            <a href="#"  onclick="image_priview('__ROOT__/{$vo.Shop.post_pic}');"><img src="__ROOT__/{$vo.Shop.post_pic}" style="width:200px;"/></a>
+                        </td>
+                        <td>{$vo.post_date|date="Y-m-d H:i:s",###}</td>
+                        <td>{$vo.type}</td>
+                        <td>{$vo.address}</td>
+                        <td align="center">
+                            <if condition="$vo.status eq 1">
+                                <font class="recommended" color="#1DCCAA" title="显示" data-id="{$vo.id}">√</font>
+                                <else/>
+                                <font class="recommended" color="red" title="隐藏" data-id="{$vo.id}">×</font>
+                            </if>
+                        </td>
+
+                    </tr>
+                </foreach>
+            </table>
+            <div class="pagination">{$Page}</div>
+
+        </div>
+        <div class="form-actions">
+            <button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('Exchange/recommend',array('recommend'=>1))}" data-subcheck="true" >已兑换</button>
+            <button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('Exchange/recommend',array('unrecommend'=>1))}" data-subcheck="true" >未兑换</button>
+        </div>
+    </form>
+</div>
+<script src="__ROOT__/statics/js/common.js"></script>
+<script type="text/javascript" src="__ROOT__/statics/js/content_addtop.js"></script>
+<script>
+    $(function () {
+        $(".recommended").click(function(){
+            var obj   = $(this);
+            var id    = obj.attr("data-id");
+            var href  = "{:U('Content/Exchange/recommend')}";
+            var color = obj.attr("color");
+            var title = color=='red'?"显示":"隐藏";
+            var status= color=='red'?"1":"0";
+            var html  = color=='red'?"√":"×";
+            color = color=='red'?"#1DCCAA":"red";
+            $.get(href,{id:id,recommended:status},function(data){
+                if(data.status){
+                    obj.attr("color",color);
+                    obj.attr("title",title);
+                    obj.html(html);
+                }else{
+                    alert(data.info);
+                }
+            });
+        });
+    });
+
+</script>
+</body>
+</html>

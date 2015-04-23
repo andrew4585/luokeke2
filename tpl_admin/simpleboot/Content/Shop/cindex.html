@@ -2,8 +2,8 @@
 <body class="J_scroll_fixed">
 <div class="wrap jj">
    <ul class="nav nav-tabs">
-     <li class="active"><a href="{:U('Photo/cindex')}">作品类别</a></li>
-     <li><a href="{:U('Photo/cadd')}">添加类别 </a></li>
+     <li class="active"><a href="{:U('Shop/cindex')}">商品类别</a></li>
+     <li><a href="{:U('Shop/cadd')}">添加类别 </a></li>
   </ul>
   <div class="common-form">
   	<form class="J_ajaxForm" action="" method="post">
@@ -28,8 +28,8 @@
 		            <!-- <td>{$vo.cat_idname}</td> -->
 		            <td>{$vo.cat_remark}</td>
 		            <td>
-		            	<a href="{:U('Photo/cedit',array('id'=>$vo['id']))}" >修改</a>|
-			            <a href="{:U('Photo/cdelete',array('id'=>$vo['id']))}" class="J_ajax_del" >删除</a>
+		            	<a href="{:U('Shop/cedit',array('id'=>$vo['id']))}" >修改</a>|
+			            <a href="{:U('Shop/cdelete',array('id'=>$vo['id']))}" class="J_ajax_del" >删除</a>
 			        </td>
 	          	</tr>
 	          	</foreach>
@@ -37,7 +37,7 @@
 	      </table>
   		</div>
   		<div class="form-actions">
-        <button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('Photo/clistorders')}">排序</button>
+        <button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('Shop/clistorders')}">排序</button>
       </div>
   </form>
   </div>

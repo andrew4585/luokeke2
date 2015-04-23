@@ -37,10 +37,10 @@ body fieldset legend {
 <body class="J_scroll_fixed">
 <div class="wrap J_check_wrap">
   <ul class="nav nav-tabs">
-     <li><a href="{:U('Photo/index')}">所有作品</a></li>
-     <li class="active"><a href="{:U('Photo/add')}"  target="_self">添加作品</a></li>
+     <li><a href="{:U('Shop/index')}">所有商品</a></li>
+     <li class="active"><a href="{:U('Shop/add')}"  target="_self">添加商品</a></li>
   </ul>
-  <form name="myform" id="myform" action="{:u('Photo/add')}" method="post" class="form-horizontal J_ajaxForms" enctype="multipart/form-data">
+  <form name="myform" id="myform" action="{:u('Shop/add')}" method="post" class="form-horizontal J_ajaxForms" enctype="multipart/form-data">
   <div class="col-right">
     <div class="table_full">
       <table width="100%">
@@ -70,22 +70,12 @@ body fieldset legend {
     <div class="table_full">
       <table width="100%" cellpadding="2" cellspacing="2">
       		<tr>
-              <th width="80">标题 </th>
+              <th width="80">商品名称</th>
               <td>
-              	<input type="text" style="width:400px;" name="post_title" id="title" value=""  class="input input_hd J_title_color" placeholder="请输入标题" onkeyup="strlen_verify(this, 'title_len', 160)" />
+              	<input type="text" style="width:400px;" name="post_title" id="title" value=""  class="input input_hd J_title_color" placeholder="请输入商品名称" onkeyup="strlen_verify(this, 'title_len', 160)" />
               	<span class="must_red">*</span>
               </td>
             </tr>
-            <tr>
-            <th width="80">站点</th>
-			  <td>
-				  <select name="site_id" class="normal_select">
-					  <foreach name="siteList" item="vo">
-						  <option value="{$vo.id}">{$vo.site_name}</option>
-					  </foreach>
-				  </select>
-			  </td>
-		  </tr>
 		  <tr>
               <th width="80">类别</th>
               <td>
@@ -96,9 +86,21 @@ body fieldset legend {
                 </select>
               </td>
             </tr>
+		  <tr>
+			  <th width="80">商品原价</th>
+			  <td><input type="text" name="post_price" /></td>
+		  </tr>
+		  <tr>
+			  <th width="80">兑换积分</th>
+			  <td><input type="text" name="post_score" /></td>
+		  </tr>
+		  <tr>
+			  <th width="80">现存量</th>
+			  <td><input type="text" name="remain" /></td>
+		  </tr>
             <tr>
               <th width="80">摘要 </th>
-              <td><textarea name='post_excerpt' id='description'  style='width:98%;height:50px;' placeholder='请填写摘要'></textarea> </td>
+              <td><textarea name='post_desc' id='description'  style='width:98%;height:50px;' placeholder='请填写摘要'></textarea> </td>
             </tr>
             <tr>
               <th width="80">相册图集 </th>
@@ -122,10 +124,6 @@ body fieldset legend {
                 <script type="text/javascript"  src="__ROOT__/statics/ueditor/ueditor.all.min.js"></script>
 				</td>
             </tr> -->
-            <tr>
-              <th width="80">链接地址 </th>
-              <td><input type="text" name="post_url" class="input input_hd J_title_color" placeholder="填写链接地址后，作品内容将无效" style="width:400px;"/> </td>
-            </tr>
             
 
             
@@ -135,7 +133,7 @@ body fieldset legend {
   </div>
   <div class="form-actions">
         <button class="btn btn-primary btn_submit J_ajax_submit_btn" type="submit">提交</button>
-        <a class="btn" href="{:U('Photo/index')}">返回</a>
+        <a class="btn" href="{:U('Shop/index')}">返回</a>
   </div>
  </form>
 </div>
@@ -224,7 +222,7 @@ $(function () {
 											},{
 												name: '返回列表页',
 												callback:function(){
-													location="{:U('Photo/index')}";
+													location="{:U('Shop/index')}";
 													return true;
 												}
 											}

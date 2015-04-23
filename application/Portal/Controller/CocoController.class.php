@@ -14,6 +14,9 @@ class CocoController extends IndexController {
 
         //dump($_SESSION['user']);
         $category = $this->model_cat->where("recommended = 1")->find();
+        if(empty($category)){
+        	$this->error("活动尚未开始，敬请期待");
+        }
         $this->assign('category',$category);
         $info = $this->model_coco->where("cid={$category['id']} and recommended=1")->order('post_like desc')->select();
         $count = ceil(count($info)/2);

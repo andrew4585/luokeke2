@@ -11,7 +11,7 @@ body{font-family: "Microsoft YaHei";}
 .tit_3{ height: 60px;  text-align: right; font-size: 16px; }
 .tit_3 span { display:block}
 .date11{ margin-right: 20px;color: #484848}
-.more11{ border: 1px solid #24241f;width: 100px; float: right;background: #000000;color: #ffffff}
+.more11{ border: 1px solid #24241f;width: 100px; float: right;background: #000000;color: #ffffff;position:relative;z-index:200;}
 .more11 a{color: #ffffff; cursor:pointer}
 .box{margin:5px auto; width:450px;}
 .box li{float:left;display:inline-block;}

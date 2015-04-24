@@ -150,8 +150,9 @@
                 background:"#CCCCCC",
                 opacity:0.2,
                 content: content,
-                cancelVal: '确定',
-                cancel: true
+                okVal: '登陆',
+                ok: function(){location.href="{:U('User/login')}";},
+                cancel:true
             });
         });
     }
@@ -162,7 +163,7 @@
             marginHeight = 5;
         }
         $(".flow-container").css("margin-top",marginHeight);
-
+   		$(".nav").css("padding-top",marginHeight);
     })
     $(document).ready(function() {
         $(".feed-like").click(function () {

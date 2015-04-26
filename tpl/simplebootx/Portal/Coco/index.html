@@ -61,7 +61,7 @@
                             <foreach name="info" item="item">
                                 <if condition="$key lt $count">
                             <div class="feed-item" data-feedid="3115596" data-spm="xb219888" data-page="0" style="left: {$key*384}px; top: 0px;">
-                                <a class="feed-wrapper feed-xiaobao" data-spm-click="gostr=/tmallhy;locaid=dxb219888" href="#" >
+                                <a class="feed-wrapper feed-xiaobao" data-spm-click="gostr=/tmallhy;locaid=dxb219888" href="{$item.post_url}" >
 				                    <span class="feed-bg ss-image-lazyload" data-image="__ROOT__/{$item.post_pic}" style="background-image: none; background-position: initial initial; background-repeat: initial initial;">
 					                    <img src="__ROOT__/{$item.post_pic}" width="370px" alt=""/>
 									</span>
@@ -88,14 +88,14 @@
                             </div>
                                     <else />
                                     <div class="feed-item" data-feedid="3118099" data-spm="xb220272" data-page="0" style="left: <?php echo ($key-$count)*384; ?>px; top: 288px;">
-                                        <a class="feed-wrapper feed-xiaobao" data-spm-click="gostr=/tmallhy;locaid=dxb220272" href="#" >
+                                        <a class="feed-wrapper feed-xiaobao" data-spm-click="gostr=/tmallhy;locaid=dxb220272" href="{$item.post_url}" >
 				                    <span class="feed-bg ss-image-lazyload" data-image="__ROOT__/{$item.post_pic}" style="background-image: none; background-position: initial initial; background-repeat: initial initial;">
                                     <img src="__ROOT__/{$item.post_pic}" width="370px" alt=""/>
                                     </span>
                                             <div class="feed-name-wrapper">
 
                                                 <div class="feed-ctrline">
-                                                    <div class="feed-like"><i></i><input type="hidden" value="{$item.id}"/>喜欢<font>{$item.post_like}</font></div>
+                                                    <div class="feed-like"><input type="hidden" value="{$item.id}"/>喜欢<font>{$item.post_like}</font></div>
                                                 </div>
 
                                                 <div class="feed-name">

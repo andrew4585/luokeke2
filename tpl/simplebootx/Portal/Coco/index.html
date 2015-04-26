@@ -67,13 +67,12 @@
 									</span>
                                     <div class="feed-name-wrapper">
                                         <div class="feed-ctrline">
-                                            <div class="feed-like"><input type="hidden" value="{$item.id}"/>喜欢<font>{$item.post_like}</font></div>
+                                            <div class="feed-like"><i></i><input type="hidden" value="{$item.id}"/>喜欢<font>&nbsp;{$item.post_like}</font></div>
 
                                         </div>
                                         <div class="feed-name">
-                                            <div class="feed-name-btn">
-                                                <p> 找朋友帮我投票</p>
-                                            </div>
+                                            <div class="feed-name-btn"></div>
+                                            <p> 找朋友帮我投票</p>
                                         </div>
                                     </div>
 
@@ -96,13 +95,12 @@
                                             <div class="feed-name-wrapper">
 
                                                 <div class="feed-ctrline">
-                                                    <div class="feed-like"><input type="hidden" value="{$item.id}"/>喜欢<font>{$item.post_like}</font></div>
+                                                    <div class="feed-like"><i></i><input type="hidden" value="{$item.id}"/>喜欢<font>{$item.post_like}</font></div>
                                                 </div>
 
                                                 <div class="feed-name">
-                                                    <div class="feed-name-btn">
-                                                        <p>找朋友帮我投票</p>
-                                                    </div>
+                                                    <div class="feed-name-btn"></div>
+                                                    <p>找朋友帮我投票</p>
                                                 </div>
                                             </div>
                                             <div class="feed-name-tit">
@@ -138,6 +136,19 @@
                 iconStr = 'error';break;
             case 2:
                 iconStr = 'succeed';break;
+                Wind.use("artDialog",function(){
+                    art.dialog({
+                        id:'error',
+                        icon:iconStr,
+                        fixed: true,
+                        lock: true,
+                        background:"#CCCCCC",
+                        opacity:0.2,
+                        content: content,
+                        cancel:true
+                    });
+                });
+                return;
             default:
                 iconStr = '';break;
         }
@@ -175,13 +186,12 @@
                 $.post(url,{id:id},function(data){
                     if(data.status){
                         love.find("font").html(++number);
+                        artDialog_alert('投票成功',2);
                     }else{
                         artDialog_alert(data.info,1);
 
                     }
                 });
-
-
         })
     })
 </script>

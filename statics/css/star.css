@@ -252,8 +252,8 @@ table {
 	width: 135px;
 	padding-top: 3px;
 	height: 25px;
-	background :#a6a39e ;
-	border-radius: 6px;
+	background: #CFCECE;
+	border-radius: 9px;
 	margin-top: 10px;
 	filter:alpha(opacity=60);
 	-moz-opacity:0.6;
@@ -261,8 +261,11 @@ table {
 	opacity: 0.8;
     /*color: #FFFFFF;*/
 }
-.feed-name-btn p{
- color: #FFFFFF;
+.feed-name p {
+	position: relative;
+	top: -24px;
+	left: 6px;
+	color: #FFFFFF;
 }
 .feed-item .feed-icon {
 	position: absolute;

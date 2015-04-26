@@ -133,30 +133,32 @@
 <script type="text/javascript">
     function artDialog_alert(content,icon){
         var iconStr = '';
-        switch(icon){
-            case 1:
-                iconStr = 'error';break;
-            case 2:
-                iconStr = 'succeed';
-                Wind.use("artDialog",function(){
-                    art.dialog({
-                        id:'error',
-                        icon:iconStr,
-                        fixed: true,
-                        lock: true,
-                        background:"#CCCCCC",
-                        opacity:0.2,
-                        content: content,
-                        cancelVal:'确定',
-                        cancel:true
-                    });
-                });
-                return;
-            default:
-                iconStr = '';break;
-        }
         Wind.use("artDialog",function(){
-            art.dialog({
+        	switch(icon){
+	            case 1:
+	                iconStr = 'error';
+	                if(content!=1){
+	                	art.dialog({
+		                    id:'error',
+		                    icon:iconStr,
+		                    fixed: true,
+		                    lock: true,
+		                    background:"#CCCCCC",
+		                    opacity:0.2,
+		                    content: content,
+		                    okVal: '登陆',
+		                    ok: function(){location.href="{:U('User/login')}";},
+		                    cancel:true
+		                });
+	                	return;
+	                }
+	                break;
+	            case 2:
+	                iconStr = 'succeed';break;
+	            default:
+	                iconStr = '';break;
+	        }
+        	art.dialog({
                 id:'error',
                 icon:iconStr,
                 fixed: true,
@@ -164,8 +166,7 @@
                 background:"#CCCCCC",
                 opacity:0.2,
                 content: content,
-                okVal: '登陆',
-                ok: function(){location.href="{:U('User/login')}";},
+                cancelVal:'确定',
                 cancel:true
             });
         });

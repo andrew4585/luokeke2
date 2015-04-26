@@ -41,7 +41,7 @@
 			);
 
 			if($(this).find('.' + options.borderClass).length <= 0){
-
+				var url = $(this).find('.more11 a').attr("href");
 				var border = $("<div />", {
 					"class": options.borderClass,
 					"css"  : {
@@ -54,7 +54,8 @@
 						"left": 0,
 						"opacity": "0",
 						"z-index": options.zIndex
-					}
+					},
+					'onclick':"javascript:location.href='"+url+"'",
 				});
 
 				$(this).append(border);

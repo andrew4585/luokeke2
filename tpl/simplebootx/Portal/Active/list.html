@@ -12,6 +12,14 @@
     <tc_include file="Public:nav"/>
     <!-- banner轮播 -->
     <tc_include file="Public:banner"/>
+    <!-- js-->
+	<script type="text/javascript" src="__STATICS__js/jquery.insetborder.js"></script>
+	<script type="text/javascript">
+	    $(document).ready(function(){
+	        $('div.sample-border1').borderEffect();
+	    });
+	
+	</script>
     <!--内容-->
     <div class="conter">
         <div class="title_01" style="border:none;">
@@ -26,8 +34,8 @@
                 <ul>
                     <foreach name="list" item="item">
                     <li>
+                    	<div  class="sample-border1">
                         <div class="info_membership_img"><img src="__ROOT__/{$item.post_pic}" alt=""></div>
-
                         <div class="info_activity_tit1">
                             <div class="textbox">
                                 <div style="font-size:30px; font-weight:bold; font-family:'微软雅黑';">{$item.post_title}</div>
@@ -37,6 +45,7 @@
                                 <span><div class="date11">{$item.post_date|date="Y.m",###}</div></span>
                                 <span><div class="more11"><a href="{:U('Portal/active/info')}/id/{$item.id}">查看更多>></a></div></span>
                             </div>
+                        </div>
                         </div>
                     </li>
                     </foreach>

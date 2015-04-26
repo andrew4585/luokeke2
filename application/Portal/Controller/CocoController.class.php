@@ -51,6 +51,7 @@ class CocoController extends IndexController {
                     $data['time']       = time();
                     $voteres = $uservote->data($data)->add();
                     if($result && $voteres){
+                    	$this->success('操作成功');
                     }else{
                         $this->error('操作失败');
                     }

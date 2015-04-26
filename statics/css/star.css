@@ -266,6 +266,7 @@ table {
 	top: -24px;
 	left: 6px;
 	color: #FFFFFF;
+	cursor: pointer;
 }
 .feed-item .feed-icon {
 	position: absolute;
@@ -364,7 +365,7 @@ table {
 	color: #eee;
 	display: inline-block
 }
-.feed-like{ width: 90px;font-size: 15px;}
+.feed-like{ width: 90px;font-size: 15px;cursor: pointer;}
 .feed-name{float: right}
 /*.feed-ctrline{ float: left}*/
 .feed-item .feed-ctrline .feed-like i,

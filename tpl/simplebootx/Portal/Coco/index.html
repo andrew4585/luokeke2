@@ -65,6 +65,7 @@
 				                    <span class="feed-bg ss-image-lazyload" data-image="__ROOT__/{$item.post_pic}" style="background-image: none; background-position: initial initial; background-repeat: initial initial;">
 					                    <img src="__ROOT__/{$item.post_pic}" width="370px" alt=""/>
 									</span>
+								</a>
                                     <div class="feed-name-wrapper">
                                         <div class="feed-ctrline">
                                             <div class="feed-like"><i></i><input type="hidden" value="{$item.id}"/>喜欢<font>&nbsp;{$item.post_like}</font></div>
@@ -84,7 +85,7 @@
                                         </div>
                                         <div class="feed-xr">{$item.post_desc}</div>
                                     </div>
-                                </a>
+                                
                             </div>
                                     <else />
                                     <div class="feed-item" data-feedid="3118099" data-spm="xb220272" data-page="0" style="left: <?php echo ($key-$count)*384; ?>px; top: 288px;">
@@ -92,6 +93,7 @@
 				                    <span class="feed-bg ss-image-lazyload" data-image="__ROOT__/{$item.post_pic}" style="background-image: none; background-position: initial initial; background-repeat: initial initial;">
                                     <img src="__ROOT__/{$item.post_pic}" width="370px" alt=""/>
                                     </span>
+                                    </a>
                                             <div class="feed-name-wrapper">
 
                                                 <div class="feed-ctrline">
@@ -110,7 +112,7 @@
                                                 </div>
                                                 <div class="feed-xr">{$item.post_desc}</div>
                                             </div>
-                                        </a>
+                                        
                                     </div>
                                 </if>
                             </foreach>

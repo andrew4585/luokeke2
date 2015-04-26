@@ -25,21 +25,21 @@
 						<img src="__STATICS__/images/bg/t{$num[0]}.gif" alt="洛可可摄影" />
 						<img src="__STATICS__/images/bg/t{$num[1]}.gif" alt="洛可可摄影" />
 					</i>
-					<i class="day">
+					<i class="day" style="float: left;padding: 3px 0 0;">
 						<img src="__STATICS__/images/bg/t0{$num[2]}.gif" alt="洛可可摄影" />
 						<img src="__STATICS__/images/bg/t0{$num[3]}.gif" alt="洛可可摄影" />
 					</i>
 					<b><img src="__STATICS__/images/bg/bg76.gif" alt="洛可可摄影" /></b>
 
 					<span><a href="javascript:;" title="洛可可摄影提醒您注意天气变化" class="tip" id="img_title1"><img src="" alt="" /></a></span>
-					<strong><a href="javascript:;" title="洛可可摄影提醒您注意天气变化" class="tip" id="temp1"><em id="low"></em>~<small id="high"></small></a></strong>
+					<strong><a href="javascript:;" title="洛可可摄影提醒您注意天气变化" class="tip" id="temp1"><em id="low"></em></a></strong>
 					<b style="padding:0;"><a href="javascript:;" title="" id="temp2" class="tip welcome2"></a></b>
 					<script type="text/javascript">
 					$(function(){
 						var url = "{:U('portal/index/getWeather')}"; 
 						$.post(url, function(data){
-							var obj = jQuery.parseJSON(data);
-							var photo = obj.weatherinfo.weather;
+							var today = jQuery.parseJSON(data);
+							var photo = today.weather;
 							var photos = photo.split("转");
 							var a = new Array("暴雪", "暴雨", "大雪", "大雨","多云","浮尘","晴","沙尘暴","雾","小雪","小雨","阴","雨夹雪","阵雪","阵雨","中雪","中雨","雷阵雨");
 							var b = 0;
@@ -48,10 +48,8 @@
 							}
 							if(b==0){photos[0]="晴";}//没有的话就设为默认值为晴天。
 							$("#img_title1 img").attr("src", "__STATICS__/images/wea/"+ photos[0] + ".gif");
-							var s = obj.weatherinfo.temp1;
-							var e = obj.weatherinfo.temp2;
-							$("#low").html(e);
-							$("#high").html(s);
+							var s = today.temperature;
+							$("#low").html(s);
 						});
 					})
 						

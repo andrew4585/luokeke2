@@ -18,4 +18,5 @@ class ExchangeModel extends RelationModel{
             'mapping_name'  => 'Shop',
         ),
     );
+
 }

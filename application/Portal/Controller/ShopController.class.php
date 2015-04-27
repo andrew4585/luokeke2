@@ -22,12 +22,14 @@ class ShopController extends IndexController
         $category = $this->model_cat->order('listorder')->select();
         $this->assign('category',$category);
         $exchange = D('Exchange');
-        $new_exchange = $exchange->relation(true)->order("post_date DESC")->limit(0,5)->select();
+        $new_exchange = $exchange->relation(true)->where("status=1")->order("post_date DESC")->limit(0,5)->select();
         $this->assign('new_exchange',$new_exchange);
         $user       = D('Users');
         $field      = 'avatar,user_login,score';
         $score      = $user->field($field)->order("score DESC")->limit(0,10)->select();
         $this->assign('score',$score);
+        $changeTypes = array(0=>'已订单用户',1=>'全部用户');
+        $this->assign('changeTypes',$changeTypes);
 
 
     }
@@ -62,7 +64,6 @@ class ShopController extends IndexController
         $this->assign('list',$list);
         $this->assign('page',$Page->show("Home"));
         $this->assign("cid",$cid);
-
         $this->display();
     }
 

@@ -4,13 +4,15 @@
 	<tc_include file="Public:head_info"/>
     <link rel="stylesheet" href="__STATICS__css/user.css"/>
     <link rel="stylesheet" type="text/css" href="__STATICS__css/fancybox.css" />
+    <script type="text/javascript" src="__ROOT__/statics/js/Calendar.js"></script>
+
 </head>
 <body>
 <!--头部导航标题js-->
 <tc_include file="Public:nav"/>
 <!--头部结束-->
 <!--照片墙滑动效果-->
-<tc_include file="Public:userbanner"/>
+<tc_include file="Public:banner"/>
 <div class="userBody">
     <tc_include file="Public:usernav"/>
 	<div class="userRight">
@@ -22,14 +24,16 @@
                 <li class="tags_none"><a href="{:U('user/Center/userrule')}">存钱规则</a></li>
             </ul>
             <div class="gridSearch">
-                <ul>
+                <form action="{:U('user/Center/pointlist')}" method="post" name="search">
+                <ul class="clear gsearch">
                     <li>起止日期</li>
                     <li>
-                    <input name="STime" type="text" id="STime"  value="" class="datebox">
+                        <input name="control_date" type="text" id="control_date" class="datebox" size="10" maxlength="10" onClick="new Calendar().show(this);" readonly="readonly" />
                     </li>
                     <li>
-                    <input name="ETime" type="text" id="ETime"  value="" class="datebox">
+                        <input name="control_date2" type="text" id="control_date2" class="datebox" size="10" maxlength="10" onClick="new Calendar().show(this);" readonly="readonly" />
                     </li>
+
                     <li>
                         <select id="TypeID" name="TypeID">
                             <option value="0" selected="selected">所有类型</option>
@@ -41,6 +45,7 @@
                         <input type="image" name="btn_pointlist_search" id="btn_pointlist_search" class="search" src="__STATICS__images/tpl/gridsearchBtn.jpg">
                     </li>
                 </ul>
+                </form>
             </div>
 			<div class="tag_content">
 
@@ -54,17 +59,30 @@
                         <th> 总额(积分)</th>
                         <th>余额(积分)</th>
                     </tr>
-                    <tr>
-                        <td>2250-12-31 19:20:00</td>
-                        <td> 分享作品到腾讯微博</td>
-                        <td class="score">+10</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                    </tr> 
+                    <foreach name="list" item="item">
+                        <tr>
+                            <td>{$item.post_date|date="Y-m-d h:i:s",###}</td>
+                            <if condition="$item.gid eq 0">
+                                <td>
+                                    {$item.memo}
+                                </td>
+                                <td class="score">+{$item.point}</td>
+                                <else/>
+                                <td>
+                                    兑换礼品{$item.Shop.post_title}
+                                </td>
+                                <td class="score">-{$item.Shop.post_score}</td>
+                            </if>
+                            <td>1</td>
+                            <td>{$item.sumpoint}</td>
+                            <td>{$item.user.score}</td>
+                        </tr>
+                    </foreach>
+
                     </tbody>
                 </table>
             </div>
+            <div class="digg">{$page}</div>
 		</div>
     </div> 
 </div>
@@ -78,6 +96,11 @@
 <div class="clears"></div>
 <!--底部-->
 <tc_include file="Public:footer"/>
+<script type="text/javascript">
+    $("#btn_pointlist_search").click(function () {
+        $("form[name='search']").submit();
+    })
+</script>
 </body>
 </html>
 </html>

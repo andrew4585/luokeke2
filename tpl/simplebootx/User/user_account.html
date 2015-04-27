@@ -44,29 +44,29 @@
                     <div class="accountHeader">
                         <img src="__STATICS__/images/tpl/user.jpg" class="headerImg">
                         <p>
-                            <b>您好，洛可可开心</b><br>
-                            用户名：add<br>
+                            <b>您好，{$user.user_login}</b><br>
+                            用户名：{$user.user_login}<br>
                             账户类型： 普通账户
                         </p>
                     </div>
                     <ul id="checheckIn">
                         <li><b>星期四</b><span>09:40</span></li>
-                        <li><strong><a href="" class="checkIntxt">签到</a></strong></li>
-                        <li><strong id="checknum">88</strong>次</li>
+                        <li><strong><a class="checkIntxt">签到</a></strong></li>
+                        <li><strong id="checknum">{$signNum}</strong>次</li>
                     </ul>
                 </div>
                 <div class="accountright">
                     <p class="accountBalance">账户余额</p>
                     <ul id="accountMoey">
                         <li>
-                            <strong>0</strong>积分
+                            <strong>{$user.score}</strong>积分
                         </li>
-                        <li class="btn"><a href="/Shop/List" class="current">兑换</a></li>
-                        <li class="btn"><a href="/Account/PointList">查询记录</a></li>
+                        <li class="btn"><a href="{:U('Portal/shop/index')}" class="current">兑换</a></li>
+                        <li class="btn"><a href="{:U('user/center/pointlist')}">查询记录</a></li>
                     </ul>
                     <ul id="MoeyType">
-                        <li> 签到积分:<span>400</span></li>
-                        <li>分享积分:<span>400</span></li>
+                        <li> 签到积分:<span>{$signPointSum}</span></li>
+                        <li>分享积分:<span>{$sharePointSum}</span></li>
                     </ul>
                 </div>
 
@@ -85,14 +85,25 @@
                         <th> 总额(积分)</th>
                         <th>余额(积分)</th>
                     </tr>
+                    <foreach name="list" item="item">
                     <tr>
-                        <td>2250-12-31 19:20:00</td>
-                        <td> 分享作品到腾讯微博</td>
-                        <td class="score">+10</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
+                        <td>{$item.post_date|date="Y-m-d h:i:s",###}</td>
+                        <if condition="$item.gid eq 0">
+                            <td>
+                                {$item.memo}
+                            </td>
+                            <td class="score">+{$item.point}</td>
+                            <else/>
+                            <td>
+                                兑换礼品{$item.Shop.post_title}
+                            </td>
+                            <td class="score">-{$item.Shop.post_score}</td>
+                        </if>
+                        <td>1</td>
+                        <td>{$item.sumpoint}</td>
+                        <td>{$item.user.score}</td>
                     </tr>
+                    </foreach>
                     </tbody>
                 </table>
             </div>
@@ -110,5 +121,21 @@
 <div class="clears"></div>
 <!--底部-->
 <tc_include file="Public:footer"/>
+<script type="text/javascript">
+    $(function(){
+        $('.checkIntxt').click(function(){
+            var number  = $("#checknum").html();
+            number      = parseInt(number);
+            var url	    = "__ROOT__/user/Center/sign";
+            $.post(url,function(data){
+                if(data.status){
+                    $("#checknum").html(++number);
+                }else{
+                    artDialog_alert(data.info,1);
+                }
+            });
+        })
+    })
+</script>
 </body>
 </html>

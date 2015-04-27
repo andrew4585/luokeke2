@@ -468,3 +468,33 @@ form{
 #altContent{
     margin-top: 20px;
 }
+.gsearch{
+    margin-top: -10px;
+}
+
+.digg {
+    PADDING-RIGHT: 10px;
+    PADDING-LEFT: 10px;
+    PADDING-BOTTOM: 10px;
+    MARGIN: 35px;
+    PADDING-TOP: 10px;
+    TEXT-ALIGN: center;
+    clear: both;
+}
+
+DIV.digg SPAN.current {
+    background-color: #e8e5e6;
+    margin: 2px;
+    padding: 10px 15px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+DIV.digg A {
+    border-color: #aaaadd;
+    /* color: #000099; */
+    margin: 2px;
+    padding: 10px 15px;
+    text-decoration: none;
+    background-color: #E8E5E6;
+}

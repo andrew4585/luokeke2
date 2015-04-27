@@ -97,6 +97,16 @@ body fieldset legend {
 			  <td><input type="text" name="post_score" value="{$post_score}" /></td>
 		  </tr>
 		  <tr>
+			  <th width="80">兑换类型</th>
+			  <td>
+				  <select name="changeType" class="normal_select">
+					  <foreach name="changeTypes" item="vo">
+						  <option value="{$key}" <if condition="$changetype eq $key"> selected </if>>{$vo}</option>
+					  </foreach>
+				  </select>
+			  </td>
+		  </tr>
+		  <tr>
 			  <th width="80">现存量</th>
 			  <td><input type="text" name="remain" value="{$remain}" /></td>
 		  </tr>
@@ -120,7 +130,7 @@ body fieldset legend {
 		        </ul>
 				</fieldset>
 				<div class="bk10"></div>
-				<a href='javascript:void(0);' onclick="javascript:flashupload2('albums_images', '图片上传','Shops',change_images,'10,gif|jpg|jpeg|png|bmp,0','','','')" class="btn">选择图片 </a> </td>
+				<a href='javascript:void(0);' onclick="javascript:flashupload2('albums_images', '图片上传','photos',change_images,'10,gif|jpg|jpeg|png|bmp,0','','','')" class="btn">选择图片 </a> </td>
             </tr>
             
             <!-- 内容隐藏

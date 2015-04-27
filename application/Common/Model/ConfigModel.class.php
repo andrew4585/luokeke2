@@ -14,7 +14,6 @@ class ConfigModel extends CommonModel{
 			}else{				//获取value值
 				$val = $this->where($where)->getField("value");
 				return $val;
-
 			}
 		}catch (\Exception $e){
 			Log::record($e->getMessage());

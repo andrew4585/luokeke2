@@ -77,7 +77,7 @@ class DressController extends IndexController {
 	public function lists(){
 		$category = I("get.category",0,'intval');
 		if(empty($category)){
-			$this->error("参数丢失");
+			$category = 1;
 		}
 		$this->_list($this->model_dress,false,array(),array("category={$category}"));
 		$this->assign("ad_dress",$this->_getAd("dress"));

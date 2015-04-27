@@ -131,6 +131,22 @@
 <script type="text/javascript" src="__STATICS__js/jquery.js"></script>
 <script type="text/javascript" src="__STATICS__js/wind.js"></script>
 <script type="text/javascript">
+$(function() {
+    // 设置每次滚动长度，单位 px
+    var scroll_width = 100;
+    var scroll_events = "mousewheel DOMMouseScroll MozMousePixelScroll";
+    $(document).on(scroll_events, function(e) {
+        var delta = e.originalEvent.wheelDelta || e.originalEvent.detail;
+        // 滑轮向下滚动，滚动条向右移动，scrollleft+
+        if(delta > 0) {
+            $(".active-view").scrollLeft($(".active-view").scrollLeft() + scroll_width);
+        }
+        // 滑轮向上滚动，滚动条向座移动，scrollleft-
+        else {
+            $(".active-view").scrollLeft($(".active-view").scrollLeft() - scroll_width);
+        }
+    });
+});
     function artDialog_alert(content,icon){
         var iconStr = '';
         Wind.use("artDialog",function(){

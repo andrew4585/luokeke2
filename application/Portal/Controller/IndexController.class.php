@@ -407,7 +407,7 @@ class IndexController extends HomeBaseController {
     	$path	= "./data/upload/qrcode/$name.png";
     	if(!file_exists($path)){
     		Vendor("phpqrcode.phpqrcode");
-    		\QRcode::png($url,$path,'L',1000,2);
+    		\QRcode::png($uri,$path,'L',1000,2);
     	}
     	if(empty($url)){
 	    	$this->assign("qrcode",$path);

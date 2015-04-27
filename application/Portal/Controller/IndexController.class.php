@@ -266,8 +266,9 @@ class IndexController extends HomeBaseController {
      */
     public function getWeather(){
     	header("Content-type:text/html;charset=utf-8");
-    	$weather = file_get_contents("http://www.weather.com.cn/adat/cityinfo/101070201.html");
-    	echo $weather;
+    	$weather = file_get_contents("http://api.map.baidu.com/telematics/v3/weather?location=大连&output=json&ak=F1f9d239ddb4b86bd403120058d1ee08");
+    	$arr = json_decode($weather,true);
+    	echo json_encode($arr['results'][0]['weather_data'][0]);
     }
     
     /**
@@ -406,7 +407,7 @@ class IndexController extends HomeBaseController {
     	$path	= "./data/upload/qrcode/$name.png";
     	if(!file_exists($path)){
     		Vendor("phpqrcode.phpqrcode");
-    		\QRcode::png($url,$path,'L',1000,2);
+    		\QRcode::png($uri,$path,'L',1000,2);
     	}
     	if(empty($url)){
 	    	$this->assign("qrcode",$path);

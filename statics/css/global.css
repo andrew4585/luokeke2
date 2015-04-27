@@ -72,7 +72,7 @@ table { border-collapse: collapse; border-spacing: 0; }
 .ban a:hover{color:#fff; text-decoration:none;}
 /*  15/02/28*/
 
-.fgx3{height:63px;  text-align:center;  background: url(../images/tpl/bg_fx4.png) repeat-x;}#main_tools {height: 63px;   margin: 0px auto;width:1200px;  }
+.fgx3{height:63px;  text-align:center;  background: url(../images/tpl/bg_fx4.png) repeat;}#main_tools {height: 63px;   margin: 0px auto;width:1200px;  }
 #main_tools li {  float: left;  }
 #main_tools li img {  border: medium none;height:63px;width:300px;  }
 /*首页标题*/

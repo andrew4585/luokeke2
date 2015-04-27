@@ -9,7 +9,7 @@ class AllviewController extends IndexController {
         $this->model_allview=D("Allview");
     }
     public function lists(){
-        $this->_list($this->model_allview,true,array("post_excerpt"),array(),6,"recommended desc,listorder");
+        $this->_list($this->model_allview,true,array("post_date,post_excerpt"),array(),6,"recommended desc,listorder");
         $this->assign("ad_dress",$this->_getAd("dress"));
         $this->assign("desc_beautiful",$this->_getAd("desc_beautiful"));
         //banner

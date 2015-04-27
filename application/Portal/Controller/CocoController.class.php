@@ -14,6 +14,9 @@ class CocoController extends IndexController {
 
         //dump($_SESSION['user']);
         $category = $this->model_cat->where("recommended = 1")->find();
+        if(empty($category)){
+        	$this->error("活动尚未开始，敬请期待");
+        }
         $this->assign('category',$category);
         $info = $this->model_coco->where("cid={$category['id']} and recommended=1")->order('post_like desc')->select();
         $count = ceil(count($info)/2);
@@ -40,7 +43,7 @@ class CocoController extends IndexController {
                 $uservote = M('vote');
                 $res = $uservote->where("enroll_id = $id and userid = $userid")->find();
                 if($res){
-                    $this->error('您已经投过票了!');
+                    $this->error(1);	//您已经投过票了!
                 }else{
                     $result	= $this->model_coco->where("id=$id")->setInc("post_like",1);
                     $data['enroll_id']  = $id;
@@ -48,7 +51,7 @@ class CocoController extends IndexController {
                     $data['time']       = time();
                     $voteres = $uservote->data($data)->add();
                     if($result && $voteres){
-                        $this->success('操作成功');
+                    	$this->success('操作成功');
                     }else{
                         $this->error('操作失败');
                     }

@@ -61,19 +61,19 @@
                             <foreach name="info" item="item">
                                 <if condition="$key lt $count">
                             <div class="feed-item" data-feedid="3115596" data-spm="xb219888" data-page="0" style="left: {$key*384}px; top: 0px;">
-                                <a class="feed-wrapper feed-xiaobao" data-spm-click="gostr=/tmallhy;locaid=dxb219888" href="#" >
-				                    <span class="feed-bg ss-image-lazyload" data-image="__ROOT__{$item.post_pic}" style="background-image: none; background-position: initial initial; background-repeat: initial initial;">
-					                    <img src="__ROOT__{$item.post_pic}" width="370px" alt=""/>
+                                <a class="feed-wrapper feed-xiaobao" data-spm-click="gostr=/tmallhy;locaid=dxb219888" href="{$item.post_url}" >
+				                    <span class="feed-bg ss-image-lazyload" data-image="__ROOT__/{$item.post_pic}" style="background-image: none; background-position: initial initial; background-repeat: initial initial;">
+					                    <img src="__ROOT__/{$item.post_pic}" width="370px" alt=""/>
 									</span>
+								</a>
                                     <div class="feed-name-wrapper">
                                         <div class="feed-ctrline">
-                                            <div class="feed-like"><input type="hidden" value="{$item.id}"/>喜欢<font>{$item.post_like}</font></div>
+                                            <div class="feed-like"><i></i><input type="hidden" value="{$item.id}"/>喜欢&nbsp;<font>{$item.post_like}</font></div>
 
                                         </div>
                                         <div class="feed-name">
-                                            <div class="feed-name-btn">
-                                                <p> 找朋友帮我投票</p>
-                                            </div>
+                                            <div class="feed-name-btn"></div>
+                                            <p> 找朋友帮我投票</p>
                                         </div>
                                     </div>
 
@@ -85,24 +85,24 @@
                                         </div>
                                         <div class="feed-xr">{$item.post_desc}</div>
                                     </div>
-                                </a>
+                                
                             </div>
                                     <else />
                                     <div class="feed-item" data-feedid="3118099" data-spm="xb220272" data-page="0" style="left: <?php echo ($key-$count)*384; ?>px; top: 288px;">
-                                        <a class="feed-wrapper feed-xiaobao" data-spm-click="gostr=/tmallhy;locaid=dxb220272" href="#" >
-				                    <span class="feed-bg ss-image-lazyload" data-image="__ROOT__{$item.post_pic}" style="background-image: none; background-position: initial initial; background-repeat: initial initial;">
-                                    <img src="__ROOT__{$item.post_pic}" width="370px" alt=""/>
+                                        <a class="feed-wrapper feed-xiaobao" data-spm-click="gostr=/tmallhy;locaid=dxb220272" href="{$item.post_url}" >
+				                    <span class="feed-bg ss-image-lazyload" data-image="__ROOT__/{$item.post_pic}" style="background-image: none; background-position: initial initial; background-repeat: initial initial;">
+                                    <img src="__ROOT__/{$item.post_pic}" width="370px" alt=""/>
                                     </span>
+                                    </a>
                                             <div class="feed-name-wrapper">
 
                                                 <div class="feed-ctrline">
-                                                    <div class="feed-like"><input type="hidden" value="{$item.id}"/>喜欢<font>{$item.post_like}</font></div>
+                                                    <div class="feed-like"><i></i><input type="hidden" value="{$item.id}"/>喜欢&nbsp;<font>{$item.post_like}</font></div>
                                                 </div>
 
                                                 <div class="feed-name">
-                                                    <div class="feed-name-btn">
-                                                        <p>找朋友帮我投票</p>
-                                                    </div>
+                                                    <div class="feed-name-btn"></div>
+                                                    <p>找朋友帮我投票</p>
                                                 </div>
                                             </div>
                                             <div class="feed-name-tit">
@@ -112,7 +112,7 @@
                                                 </div>
                                                 <div class="feed-xr">{$item.post_desc}</div>
                                             </div>
-                                        </a>
+                                        
                                     </div>
                                 </if>
                             </foreach>
@@ -131,18 +131,52 @@
 <script type="text/javascript" src="__STATICS__js/jquery.js"></script>
 <script type="text/javascript" src="__STATICS__js/wind.js"></script>
 <script type="text/javascript">
+$(function() {
+    // 设置每次滚动长度，单位 px
+    var scroll_width = 100;
+    var scroll_events = "mousewheel DOMMouseScroll MozMousePixelScroll";
+    $(document).on(scroll_events, function(e) {
+        var delta = e.originalEvent.wheelDelta || e.originalEvent.detail;
+        // 滑轮向下滚动，滚动条向右移动，scrollleft+
+        if(delta > 0) {
+            $(".active-view").scrollLeft($(".active-view").scrollLeft() + scroll_width);
+        }
+        // 滑轮向上滚动，滚动条向座移动，scrollleft-
+        else {
+            $(".active-view").scrollLeft($(".active-view").scrollLeft() - scroll_width);
+        }
+    });
+});
     function artDialog_alert(content,icon){
         var iconStr = '';
-        switch(icon){
-            case 1:
-                iconStr = 'error';break;
-            case 2:
-                iconStr = 'succeed';break;
-            default:
-                iconStr = '';break;
-        }
         Wind.use("artDialog",function(){
-            art.dialog({
+        	switch(icon){
+	            case 1:
+	                iconStr = 'error';
+	                if(content!=1){
+	                	art.dialog({
+		                    id:'error',
+		                    icon:iconStr,
+		                    fixed: true,
+		                    lock: true,
+		                    background:"#CCCCCC",
+		                    opacity:0.2,
+		                    content: content,
+		                    okVal: '登陆',
+		                    ok: function(){location.href="{:U('User/login')}";},
+		                    cancel:true
+		                });
+	                	return;
+	                }else{
+	                	content='请不要重复投票！';
+	                }
+	                break;
+	            case 2:
+	                iconStr = 'succeed';break;
+	            default:
+	                iconStr = '';break;
+	        }
+        	art.dialog({
                 id:'error',
                 icon:iconStr,
                 fixed: true,
@@ -150,8 +184,8 @@
                 background:"#CCCCCC",
                 opacity:0.2,
                 content: content,
-                cancelVal: '确定',
-                cancel: true
+                cancelVal:'确定',
+                cancel:true
             });
         });
     }
@@ -162,7 +196,7 @@
             marginHeight = 5;
         }
         $(".flow-container").css("margin-top",marginHeight);
-
+   		$(".nav").css("padding-top",marginHeight);
     })
     $(document).ready(function() {
         $(".feed-like").click(function () {
@@ -174,13 +208,12 @@
                 $.post(url,{id:id},function(data){
                     if(data.status){
                         love.find("font").html(++number);
+                        artDialog_alert('投票成功',2);
                     }else{
                         artDialog_alert(data.info,1);
 
                     }
                 });
-
-
         })
     })
 </script>

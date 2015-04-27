@@ -281,7 +281,7 @@ class IndexController extends HomeBaseController {
 	    	try{
 	    		//喜欢的文章编号
 	    		$id	= I("post.id",0,'intval');
-	    		if(empty($id)) throw new Exception("文章编号丢失");
+	    		if(empty($id)) throw new Exception("编号丢失");
 	    		$result	= $model->where("id=$id")->setInc("post_like",1);
 	    		if($result){
 	    			$this->success('操作成功');

@@ -43,8 +43,9 @@
 	            <th width="50">排序</th>
 	            <th>ID</th>
 	            <th>标题</th>
-	            <th width="80">类别</th>
-	            <th width="45">点击量</th>
+	            <th width="90">类别</th>
+				<th width="45">现存量</th>
+	            <th width="45">喜欢量</th>
                 <th width="50">缩略图</th>
 	            <th width="120"><span>发布时间</span></th>
 	            <th width="80">显示</th>
@@ -57,12 +58,13 @@
 		            <td><input name='listorders[{$vo.id}]' class="input input-order"  type='text' size='3' value='{$vo.listorder}'></td>
 		            <td><a>{$vo.id}</a></td>
 		            <td>
-		            	<a href="{:U('Portal/Shop/info',array('id'=>$vo['id']))}" target="_blank" title="{$vo.post_excerpt}">
+		            	<a href="{:U('Portal/Shop/info',array('id'=>$vo['id']))}" target="_blank" title="{$vo.post_desc}">
 		            		<span>{$vo.post_title}</span>
 		            	</a>
 		            </td>
 		            <td>{$vo.cat.cat_name}</td>
-		            <td>{$vo.post_hits}</td>
+					<td>{$vo.remain}</td>
+		            <td>{$vo.post_like}</td>
     	            <td>
     	            	<a href="#"  onclick="image_priview('__ROOT__/{$vo.post_pic}');"><img src="__ROOT__/{$vo.post_pic}" style="width:200px;"/></a>
     	            </td>
@@ -86,8 +88,8 @@
     </div>
     <div class="form-actions">
         <button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('Shop/listorders')}">排序</button>
-		<button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('Single/recommend',array('recommend'=>1))}" data-subcheck="true" >显示</button>
-		<button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('Single/recommend',array('unrecommend'=>1))}" data-subcheck="true" >隐藏</button>
+		<button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('Shop/recommend',array('recommend'=>1))}" data-subcheck="true" >显示</button>
+		<button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('Shop/recommend',array('unrecommend'=>1))}" data-subcheck="true" >隐藏</button>
         <button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('Shop/delete')}" data-subcheck="true" data-msg="你确定删除吗？">删除</button>
       </div>
   </form>

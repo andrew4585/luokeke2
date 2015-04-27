@@ -13,6 +13,8 @@
 .jifen_left{
     float: left;
 }
+
+
 .jifen_top{
     width: 948px;
     height: 40px;
@@ -279,3 +281,30 @@ body { font-size: 13px; }
 #OpenWindow .btn-fld { overflow: hidden; padding: 12px 20px 12px 130px; width: 254px; }
 button { background: none repeat scroll 0 0 #3F9D4A; border: medium none; border-radius: 4px 4px 4px 4px; color: #FFFFFF; float: right; font-family: Verdana; font-size: 13px; font-weight: bold; overflow: visible; padding: 7px 10px; text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4); width: auto; }
 #OpenWindow .txt-fld select{ width: 274px; }
+
+.digg {
+    PADDING-RIGHT: 10px;
+    PADDING-LEFT: 10px;
+    PADDING-BOTTOM: 10px;
+    MARGIN: 10px;
+    PADDING-TOP: 10px;
+    TEXT-ALIGN: center;
+    clear: both;
+}
+
+DIV.digg SPAN.current {
+    background-color: #e8e5e6;
+    margin: 2px;
+    padding: 10px 15px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+DIV.digg A {
+    border-color: #aaaadd;
+    /* color: #000099; */
+    margin: 2px;
+    padding: 10px 15px;
+    text-decoration: none;
+    background-color: #E8E5E6;
+}

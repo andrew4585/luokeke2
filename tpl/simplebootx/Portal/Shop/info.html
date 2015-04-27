@@ -27,24 +27,24 @@
                     </ul>
                 </div>
                 <div class="jifen_info clear">
-                    <img id="info_img" src="http://wx.rococo1999.com/wxupload/image/20140809/20140809163141_6240.jpg">
+                    <img id="info_img" src="__ROOT__{$info.post_pic}">
                     <div class="serviceInfoLevel">
                         <h2>
-                            静音榨汁机（已订单客户可兑换,已兑换完）</h2>
+                            {$info.post_title}（已订单客户可兑换,已兑换完）</h2>
                         <h3>
 
                         </h3>
                         <p>
-                            需要&nbsp;:<b class="serviceMoney">2500</b>积分</p>
+                            需要&nbsp;:<b class="serviceMoney">{$info.post_score}</b>积分</p>
                         <p>
-                            价格&nbsp;:¥<span class="throughline">399.00</span></p>
+                            价格&nbsp;:¥<span class="throughline">{$info.post_price}</span></p>
                         <p>
                             邮寄:代办邮寄，邮寄费用客人自理，邮寄起点大连（费用的计算方式以邮寄里程和重量计算）</p>
                         <p>&nbsp;</p>
                         <p>
                         </p>
                         <ul>
-                            <li class="like"><span>2</span></li>
+                            <li class="like"><span>{$info.post_like}</span></li>
                             <li class="share"></li>
                             <li class="jifen_now"><a id="aOpen" href="#OpenWindow" rel="leanModal">现在兑换</a></li>
                         </ul>
@@ -57,13 +57,17 @@
 
                     </ul>
                     <div class="info-img info1">
-                        <div class="info-img-w">
-                            <img src="http://wx.rococo1999.com/wxupload/image/20140809/20140809163141_6240.jpg" id="one" width="920" alt=""/>
-                        </div>
+                        <foreach name="photo" item="item">
+                            <div class="info-img-w">
+                                <img src="__ROOT__/{$item.url}" id="one" width="920" alt=""/>
+                            </div>
+                        </foreach>
                     </div>
                     <div class="info-img info2 hidden">
                         <div class="info-img-w">
-                            <img src="http://localhost/luokeke2/data/upload/ad/551118b063a50.png" id="one" width="920" alt=""/>
+                            <foreach name="exchangeProcess" item="item">
+                                <img src="__ROOT__/{$item.url}" id="one" width="920" alt=""/>
+                            </foreach>
                         </div>
                     </div>
                     <script>
@@ -75,11 +79,11 @@
                                 $(".info-img").addClass("hidden");
                                 $(".info"+id).removeClass("hidden");
                             });
-                            /*$(".like").click(function(){
+                            $(".like").click(function(){
                                 var number = $(".like span").html();
                                 number = parseInt(number);
                                 var id	   = {$info.id};
-                                var url	   = "__ROOT__/Portal/Group/ajax_like";
+                                var url	   = "__ROOT__/Portal/Shop/ajax_like";
                                 $.post(url,{id:id},function(data){
                                     if(data.status){
                                         $(".like span").html(++number);
@@ -87,7 +91,7 @@
                                         artDialog_alert(data.info,1);
                                     }
                                 });
-                            });*/
+                            });
                         });
                     </script>
                 </div>
@@ -98,94 +102,43 @@
                     <ul class="left_nav">
                         <li class="left_nav_bottom on">
 
-                            <a href="/luokeke2/Portal/article/lists/cid/1">所有商品</a>
+                            <a href="{:U('Portal/shop/index')}">所有商品</a>
                         </li>
-                        <li class="left_nav_bottom">
+                        <foreach name="category" item="item">
+                            <li class="left_nav_bottom">
 
-                            <a href="/luokeke2/Portal/article/lists/cid/3">婚庆用品</a>
-                        </li>
-                        <li class="left_nav_bottom">
+                                <a href="{:U('Portal/Shop/index/cid')}/{$item.id}">{$item.cat_name}</a>
+                            </li>
+                        </foreach>
 
-                            <a href="/luokeke2/Portal/article/lists/cid/6">生活用品</a>
-                        </li>
-                        <li class="left_nav_bottom">
-
-                            <a href="/luokeke2/Portal/article/lists/cid/5">家用小电器</a>
-                        </li>
-                        <li class="left_nav_bottom">
-
-                            <a href="/luokeke2/Portal/article/lists/cid/7">后期用品</a>
-                        </li>
                     </ul>
                 </div>
                 <div class="scorelistBox">
                     <h2 class="goods_Title">最新兑换</h2>
                     <ul class="exchange">
-                        <li>
-                            <p class="name">
-                                心</p>
-                            <p class="content">
-                                兑换了热水壶（已订单客户可兑换，已兑换完）</p>
-                            <p class="time">2014-12-05</p>
-                        </li>
-                        <li>
-                            <p class="name">
-                                心</p>
-                            <p class="content">
-                                兑换了热水壶（已订单客户可兑换，已兑换完）</p>
-                            <p class="time">2014-12-05</p>
-                        </li>
-                        <li>
-                            <p class="name">
-                                心</p>
-                            <p class="content">
-                                兑换了热水壶（已订单客户可兑换，已兑换完）</p>
-                            <p class="time">2014-12-05</p>
-                        </li>
+                        <foreach name="new_exchange" item="item">
+                            <li>
+                                <p class="name">
+                                    {$item.user.user_login}</p>
+                                <p class="content">
+                                    兑换了{$item.Shop.post_title}（已订单客户可兑换，已兑换完）</p>
+                                <p class="time">{$item.post_date|date="Y-m-d",###}</p>
+                            </li>
+                        </foreach>
                     </ul>
                 </div>
                 <div class="scorelistBox clear">
                     <h2 class="goods_Title">积分排名</h2>
-                    <ul class="ranking">
-                        <li class="no">1</li>
-                        <li class="img">
-                            <img alt="排名" src="http://www.rococo1999.com/Content/Avatar/4276.jpg">
-                        </li>
-                        <li class="name">左左</li>
-                        <li class="rank">4129</li>
-                    </ul>
-                    <ul class="ranking">
-                        <li class="no">1</li>
-                        <li class="img">
-                            <img alt="排名" src="http://www.rococo1999.com/Content/Avatar/4276.jpg">
-                        </li>
-                        <li class="name">左左</li>
-                        <li class="rank">4129</li>
-                    </ul>
-                    <ul class="ranking">
-                        <li class="no">1</li>
-                        <li class="img">
-                            <img alt="排名" src="http://www.rococo1999.com/Content/Avatar/4276.jpg">
-                        </li>
-                        <li class="name">左左</li>
-                        <li class="rank">4129</li>
-                    </ul>
-                    <ul class="ranking">
-                        <li class="no">1</li>
-                        <li class="img">
-                            <img alt="排名" src="http://www.rococo1999.com/Content/Avatar/4276.jpg">
-                        </li>
-                        <li class="name">左左</li>
-                        <li class="rank">4129</li>
-                    </ul>
-                    <ul class="ranking">
-                        <li class="no">1</li>
-                        <li class="img">
-                            <img alt="排名" src="http://www.rococo1999.com/Content/Avatar/4276.jpg">
-                        </li>
-                        <li class="name">左左</li>
-                        <li class="rank">4129</li>
-                    </ul>
+                    <foreach name="score" item="item">
+                        <ul class="ranking">
+                            <li class="no">{$key+1}</li>
+                            <li class="img">
+                                <img alt="排名" src="__ROOT__/{$item.avatar}">
+                            </li>
+                            <li class="name">{$item.user_login}</li>
+                            <li class="rank">{$item.score}</li>
+                        </ul>
+                    </foreach>
                 </div>
             </div>
         </div>

@@ -53,7 +53,7 @@
 .details_img{ height: auto;  width: 980px; margin: 0 auto;}
 .border{ width: 1200px; margin: 0 auto; border-bottom: 1px solid #C4C4C4}
 .dress_photo{ margin: 0 auto;width: 1200px;height: auto;}
-.dress_photo ul li{float:left;margin-right:10px;display:inline;width:290px;height:500px;overflow:hidden;position:relative;}
+.dress_photo ul li{float:left;margin-right:10px;display:inline;width:290px;height:465px;overflow:hidden;position:relative;}
 .dress_photo ul li .photo{width:290px;height:430px;overflow:hidden;}
 .dress_photo .rsp{width:290px;height:425px;overflow:hidden;position: absolute;top:0px;left:0px;background: url("../images/tpl/n08.png") repeat scroll 0 0 rgba(0, 0, 0, 0);}
 .dress_photo .text{position:absolute;width:290px;height:425px;top:0px;overflow:hidden;}
@@ -106,7 +106,7 @@ DIV.digg SPAN.disabled {
     height: 13px;
     width: 1200px;
     margin: 0 auto;
-    margin-top: 50px;
+    margin-top: 20px;
 
 
 }

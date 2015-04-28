@@ -81,6 +81,7 @@ class ShopController extends IndexController
 		$photo	= json_decode($info['smeta'],true);
 		$this->assign("photo",$photo['photo']);
         $this->common();
+        $this->assign("model_table","Shop");
         $this->display();
     }
 

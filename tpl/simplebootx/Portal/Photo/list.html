@@ -62,7 +62,10 @@
                         <img src="__STATICS__/images/tpl/top_07.png">
                     </div>
                     <script type="text/javascript" src="__STATICS__/js/97zzw.js"></script>
-                    <div class="digg">{$page}</div>
+                    <empty name="page">
+                        <else/>
+                        <div class="digg">{$page}</div>
+                    </empty>
                     
                 </div>
             </div>

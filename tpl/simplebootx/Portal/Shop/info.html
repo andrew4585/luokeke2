@@ -27,7 +27,7 @@
                     </ul>
                 </div>
                 <div class="jifen_info clear">
-                    <img id="info_img" src="__ROOT__{$info.post_pic}">
+                    <img id="info_img" src="__ROOT__/{$info.post_pic}">
                     <div class="serviceInfoLevel">
                         <h2>
                             {$info.post_title}（
@@ -48,7 +48,7 @@
                         </p>
                         <ul>
                             <li class="like"><span>{$info.post_like}</span></li>
-                            <li class="share"></li>
+                            <li id="parentIframe" data-model="{$model_table}"  class="share"></li>
                             <li class="jifen_now"><a id="aOpen" href="#OpenWindow" rel="leanModal">现在兑换</a></li>
                         </ul>
                     </div>
@@ -202,6 +202,33 @@
     <tc_include file="Public:footer"/>
     <script type="text/javascript" src="__STATICS__js/jquery.leanModal.min.js"></script>
     <script type="text/javascript">
+        function artDialogalert(content,icon,url){
+            var iconStr = '';
+            switch(icon){
+                case 1:
+                    iconStr = 'error';break;
+                case 2:
+                    iconStr = 'succeed';break;
+                default:
+                    iconStr = '';break;
+            }
+            Wind.use("artDialog",function(){
+                art.dialog({
+                    id:'error',
+                    icon:iconStr,
+                    fixed: true,
+                    lock: true,
+                    background:"#CCCCCC",
+                    opacity:0.2,
+                    content: content,
+                    url: url,
+                    zIndex:12000,
+                    cancelVal: '关闭',
+                    ok: function(){location.href=url;},
+                    cancel: true
+                });
+            });
+        }
 
         $(function(){
             $("form[name='exchange_form']").submit(function(){
@@ -213,17 +240,30 @@
                 var remark    = $("input[name='remark']").val();
                 $.post(url,{phone:phone,type:type,address:address,name:name,remark:remark},function(data){
                     if(data.status){
-                        artDialog_alert(data.info);
+                        artDialogalert(data.info,2,data.url);
                         $("#OpenWindow").css('display','none');
                         $("#lean_overlay").css('display','none');
                     }else{
-                        artDialog_alert(data.info);
+                        artDialogalert(data.info,1,data.url);
                     }
                 });
 
                 return false;
             })
         })
+
+        $('#parentIframe').click(function(){
+            var model  = $(this).attr("data-model");
+            var id	   = {$info.id};
+            layer.open({
+                type: 2,
+                title: '分享给好友',
+                maxmin: true,
+                shadeClose: true, //点击遮罩关闭层
+                area : ['556px' , '470px'],
+                content: ["{:U('Portal/Share/shareWindow/model')}/"+model+'/id/'+id, 'no']
+            });
+        });
     </script>
 </body>
 </html>

@@ -123,11 +123,11 @@ a.hScrollPane_rightarrow{ top:200px; cursor:pointer; display:block; width:25px; 
 .izl-rmenu .btn-qq{background:url(../images/tpl/r_qq.png) 0px 0px no-repeat; background-color:#6da9de;}
 .izl-rmenu .btn-qq:hover{background-color:#488bc7;}
 .izl-rmenu a.btn-qq,.izl-rmenu a.btn-qq:visited{background:url(../images/tpl/r_qq.png) 0px 0px no-repeat; background-color:#6da9de; text-decoration:none; display:block;}
-.izl-rmenu .btn-wx{background:url(../images/tpl/r_wx.png) 0px 0px no-repeat; background-color:#78c340;}
+.izl-rmenu .btn-wx{background:url(../images/tpl/r_wx.png) 0px 0px no-repeat; display: block; background-color:#78c340;}
 .izl-rmenu .btn-wx:hover{background-color:#58a81c;}
 .izl-rmenu .btn-wx .pic{position:absolute; right:-240px; top:0px; display:none;width:240px;height:240px;}
 
-.izl-rmenu .btn-wo{background:url(../images/tpl/r_weibo.png) 0px 0px no-repeat; background-color:#78c340;}
+.izl-rmenu .btn-wo{background:url(../images/tpl/r_weibo.png) 0px 0px no-repeat; display:block; background-color:#78c340;}
 .izl-rmenu .btn-wo:hover{background-color:#58a81c;}
 .izl-rmenu .btn-wo .pic{position:absolute; right:-240px; top:0px; display:none;width:240px;height:240px;}
 

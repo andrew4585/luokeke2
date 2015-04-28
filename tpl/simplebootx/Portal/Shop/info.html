@@ -30,7 +30,10 @@
                     <img id="info_img" src="__ROOT__{$info.post_pic}">
                     <div class="serviceInfoLevel">
                         <h2>
-                            {$info.post_title}（已订单客户可兑换,已兑换完）</h2>
+                            {$info.post_title}（
+                            <?php $changekey = $info['changetype'] ?>
+                            {$changeTypes["$changekey"]}可兑换,<if condition="$info['remain'] lt 1"> 已兑换完<else/>库存仅剩{$info.remain}个</if>
+                            ）</h2>
                         <h3>
 
                         </h3>
@@ -121,7 +124,10 @@
                                 <p class="name">
                                     {$item.user.user_login}</p>
                                 <p class="content">
-                                    兑换了{$item.Shop.post_title}（已订单客户可兑换，已兑换完）</p>
+                                    兑换了{$item.Shop.post_title}
+                                    <?php $changekey = $item['Shop']['changetype'] ?>
+                                    （{$changeTypes["$changekey"]}可兑换,<if condition="$item['Shop']['remain'] lt 1"> 已兑换完<else/>库存仅剩{$item.Shop.remain}个</if>）
+                                </p>
                                 <p class="time">{$item.post_date|date="Y-m-d",###}</p>
                             </li>
                         </foreach>
@@ -133,7 +139,11 @@
                         <ul class="ranking">
                             <li class="no">{$key+1}</li>
                             <li class="img">
-                                <img alt="排名" src="__ROOT__/{$item.avatar}">
+                                <empty name="item.avatar">
+                                    <img src="__STATICS__images/tpl/comment/user_default.png" alt=""/>
+                                    <else/>
+                                    <img src="{:sp_get_user_avatar_url($item.avatar)}" alt=""/>
+                                </empty>
                             </li>
                             <li class="name">{$item.user_login}</li>
                             <li class="rank">{$item.score}</li>
@@ -159,29 +169,29 @@
                 <h2>立即兑换</h2>
                 <a href="#" class="modal_close"></a>
             </div>
-            <form action="">
+            <form action="{:U('Portal/exchange/index/id/')}/{$info.id}" name="exchange_form" method="post" >
                 <div class="txt-fld">
                     <label for="">配送方式</label>
-                    <select  name="" id="">
-                        <option value="">自取</option>
-                        <option value="">店家代为邮递</option>
+                    <select  name="type" id="">
+                        <option value="自取">自取</option>
+                        <option value="店家邮递">店家代为邮递</option>
                     </select>
                 </div>
                 <div class="txt-fld">
                     <label for="">邮递地址（选填）</label>
-                    <input type="text" name="" id="" />
+                    <input type="text" name="address" id="" />
                 </div>
                 <div class="txt-fld">
                     <label for="">联系人</label>
-                    <input type="text" name="" id="" />
+                    <input type="text" name="name" id="" />
                 </div>
                 <div class="txt-fld">
                     <label for="">联系电话</label>
-                    <input type="text" name="" id="" />
+                    <input type="text" name="phone" id="" />
                 </div>
                 <div class="txt-fld">
                     <label for="">备注</label>
-                    <input type="text" name="" id="" />
+                    <input type="text" name="remark" id="" />
                 </div>
                 <div class="btn-fld">
                     <button type="submit">确定 »</button>
@@ -191,5 +201,29 @@
     </div>
     <tc_include file="Public:footer"/>
     <script type="text/javascript" src="__STATICS__js/jquery.leanModal.min.js"></script>
+    <script type="text/javascript">
+
+        $(function(){
+            $("form[name='exchange_form']").submit(function(){
+                var url = $(this).attr('action');
+                var phone 	= $("input[name='phone']").val();
+                var type    = $("select option:selected").val();
+                var address    = $("input[name='address']").val();
+                var name    = $("input[name='name']").val();
+                var remark    = $("input[name='remark']").val();
+                $.post(url,{phone:phone,type:type,address:address,name:name,remark:remark},function(data){
+                    if(data.status){
+                        artDialog_alert(data.info);
+                        $("#OpenWindow").css('display','none');
+                        $("#lean_overlay").css('display','none');
+                    }else{
+                        artDialog_alert(data.info);
+                    }
+                });
+
+                return false;
+            })
+        })
+    </script>
 </body>
 </html>

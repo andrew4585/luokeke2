@@ -45,7 +45,10 @@
                                 <img src="__ROOT__/{$item.post_pic}">
                             </a>
                             <h3>
-                                <a href="{:U('Portal/Shop/info/id')}/{$item.id}"><h4>{$item.post_title}</h4>（已订单客户可兑换,已兑换完）</a>
+                                <a href="{:U('Portal/Shop/info/id')}/{$item.id}"><h4>{$item.post_title}</h4>
+                                    <?php $changekey = $item['changetype'] ?>
+                                    （{$changeTypes["$changekey"]}可兑换,<if condition="$item['remain'] lt 1"> 已兑换完<else/>库存仅剩{$item.remain}个</if>）
+                                </a>
                             </h3>
                             <p>
                                 兑换积分&nbsp;:<b>{$item.post_score}</b> 分
@@ -81,7 +84,10 @@
                             <p class="name">
                                 {$item.user.user_login}</p>
                             <p class="content">
-                                兑换了{$item.Shop.post_title}（已订单客户可兑换，已兑换完）</p>
+                                兑换了{$item.Shop.post_title}
+                                <?php $changekey = $item['Shop']['changetype'] ?>
+                                （{$changeTypes["$changekey"]}可兑换,<if condition="$item['Shop']['remain'] lt 1"> 已兑换完<else/>库存仅剩{$item.Shop.remain}个</if>）
+                            </p>
                             <p class="time">{$item.post_date|date="Y-m-d",###}</p>
                         </li>
                         </foreach>
@@ -93,7 +99,12 @@
                     <ul class="ranking">
                         <li class="no">{$key+1}</li>
                         <li class="img">
-                            <img alt="排名" src="__ROOT__/{$item.avatar}">
+                            <empty name="item.avatar">
+                                <img src="__STATICS__images/tpl/comment/user_default.png" alt=""/>
+                                <else/>
+                                <img src="{:sp_get_user_avatar_url($item.avatar)}" alt=""/>
+                            </empty>
+
                         </li>
                         <li class="name">{$item.user_login}</li>
                         <li class="rank">{$item.score}</li>

@@ -23,6 +23,8 @@ class EnrollController extends AdminbaseController{
 
     function index(){
         //列表数据
+
+
         $this->_lists();
         $this->commonParam();
         $this->display();

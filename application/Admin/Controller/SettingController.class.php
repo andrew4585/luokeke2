@@ -123,6 +123,7 @@ class SettingController extends AdminbaseController{
 		$score_model = D("Config");
 		$score['pc_share'] 	= $score_model->val("pc_share");
 		$score['pc_sign']	= $score_model->val("pc_sign");
+		$score['share_max'] = $score_model->val('share_max');
 		$this->assign("score",$score);
 		$this->display();
 	}
@@ -131,9 +132,11 @@ class SettingController extends AdminbaseController{
 			$score_model 	= D("Config");
 			$pc_share 		= $_POST['pc_share'];
 			$pc_sign		= $_POST['pc_sign'];
-			$res1 = $score_model->val("pc_share",$pc_share);
-			$res2 = $score_model->val("pc_sign",$pc_sign);
-			if($res1 || $res2){
+			$share_max		= $_POST['share_max'];
+			$res1 			= $score_model->val("pc_share",$pc_share);
+			$res2 			= $score_model->val("pc_sign",$pc_sign);
+			$res3 			= $score_model->val("share_max",$share_max);
+			if($res1 || $res2 || $res3){
 				$this->success("更新成功！");
 			}else{
 				$this->error("更新失败！");

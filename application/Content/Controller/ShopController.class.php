@@ -26,6 +26,9 @@ class ShopController extends  AdminbaseController{
         //分类列表
         $categorys = $this->getCategory($this->model_cate);
         $this->assign("categorys",$this->getCategory($this->model_cate));
+        //兑换类型
+        $changeTypes = array(0=>'已订单用户',1=>'全部用户');
+        $this->assign('changeTypes',$changeTypes);
     }
 
 

@@ -11,7 +11,6 @@ class CocoController extends IndexController {
         $this->model_cat 	 = D('CocoCat');
     }
     public function index(){
-
         //dump($_SESSION['user']);
         $category = $this->model_cat->where("recommended = 1")->find();
         if(empty($category)){
@@ -29,6 +28,7 @@ class CocoController extends IndexController {
         $url = $this->_getUri();
         $this->assign('url',$url);
         $this->assign('day',$day);
+        $this->assign("model_table","Enroll");
         $this->display();
     }
 

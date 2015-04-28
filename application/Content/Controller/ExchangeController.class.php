@@ -20,7 +20,7 @@ class ExchangeController extends AdminbaseController{
 
     private  function _lists(){
         //post_date:发布时间
-        $where_ands =array();
+        $where_ands =array("gid>0");
         $order		="post_date DESC";
         $fields=array(
             'start_time'=> array("field"=>"post_date","operator"=>">=",'type'=>'time'),

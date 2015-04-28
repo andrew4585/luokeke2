@@ -62,7 +62,7 @@
                     </li>
                     <li>
                         <div class="mix_ico info-ico_wo"></div>
-                        <div class="info-lz">分享&nbsp;{$info.post_share}</div>
+                        <div class="info-lz" id="parentIframe">分享&nbsp;{$info.post_share}</div>
                     </li>
                     <li class="hover_sj">
                         <div class="mix_ico info-ico_ph"></div>
@@ -100,6 +100,16 @@
                                 }else{
                                     artDialog_alert(data.info,1);
                                 }
+                            });
+                        });
+                        $('#parentIframe').click(function(){
+                            layer.open({
+                                type: 2,
+                                title: '分享给好友',
+                                maxmin: true,
+                                shadeClose: true, //点击遮罩关闭层
+                                area : ['556px' , '470px'],
+                                content: ["{:U('Portal/Share/shareWindow')}", 'no']
                             });
                         });
                     });

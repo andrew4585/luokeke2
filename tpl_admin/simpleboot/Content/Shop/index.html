@@ -44,6 +44,7 @@
 	            <th>ID</th>
 	            <th>标题</th>
 	            <th width="90">类别</th>
+				<th width="90">兑换类型</th>
 				<th width="45">现存量</th>
 	            <th width="45">喜欢量</th>
                 <th width="50">缩略图</th>
@@ -63,6 +64,8 @@
 		            	</a>
 		            </td>
 		            <td>{$vo.cat.cat_name}</td>
+					<?PHP $changekey = $vo['changetype'] ?>
+					<td>{$changeTypes.$changekey}</td>
 					<td>{$vo.remain}</td>
 		            <td>{$vo.post_like}</td>
     	            <td>

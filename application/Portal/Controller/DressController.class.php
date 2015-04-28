@@ -20,6 +20,8 @@ class DressController extends IndexController {
 		$this->assign("home_head",$this->_getAd("banner_dress"));
 		//最新广告推荐
 		$this->assign('Ad_five',$this->_getAd("dress_index"));
+		//首页中部广告
+		$this->assign("home_mid_pic",$this->_getAd("home_mid_pic"));
 		//绝美礼服
 		$beauty		= $this->getRecommended('Dress',false,array(),array('category=2'),20);
 		$this->assign("beauty",$beauty);

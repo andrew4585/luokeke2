@@ -95,6 +95,16 @@ body fieldset legend {
 			  <td><input type="text" name="post_score" /></td>
 		  </tr>
 		  <tr>
+			  <th width="80">兑换类型</th>
+			  <td>
+				  <select name="changeType" class="normal_select">
+					  <foreach name="changeTypes" item="vo">
+						  <option value="{$key}">{$vo}</option>
+					  </foreach>
+				  </select>
+			  </td>
+		  </tr>
+		  <tr>
 			  <th width="80">现存量</th>
 			  <td><input type="text" name="remain" /></td>
 		  </tr>

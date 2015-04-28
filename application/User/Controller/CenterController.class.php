@@ -24,6 +24,12 @@ class CenterController extends MemberbaseController {
 		parent::__construct();
 		$this->userid=sp_get_current_userid();
 		$user=$this->users_model->where(array("id"=>$this->userid))->find();
+		if(strpos($user['avatar'],"http")){
+			$avatarPath = $user['avatar'];
+		}else{
+			$avatarPath = __ROOT__.'/'.$user['avatar'];
+		}
+		$this->assign('avatarpath',$avatarPath);
 		$this->sign_num = $this->exchange->where(array("uid"=>$this->userid,"memo"=>"网站签到"))->count();
 		$this->assign('signNum',$this->sign_num);
 		$this->sign_point = D('Config')->val("pc_sign");

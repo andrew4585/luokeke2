@@ -64,7 +64,7 @@
 		                    </li>
 		                    <li>
 		                        <div class="mix_ico info-ico_wo"></div>
-		                        <div id="parentIframe" data-model="{$model_table}" class="info-lz">分享&nbsp;{$item.post_share}</div>
+		                        <div  data-model="{$model_table}" data-id="{$item.id}" class="info-lz parentIframe">分享&nbsp;{$item.post_share}</div>
 		                    </li>
 		                    <li class="hover_sj">
 		                        <div class="mix_ico info-ico_ph"></div>
@@ -113,18 +113,18 @@
                     }
                 });
             });
-            $('#parentIframe').click(function(){
+            $('.parentIframe').click(function(){
                 var model  = $(this).attr("data-model");
                 var id	   = $(this).attr("data-id");
-            layer.open({
-                type: 2,
-                title: '分享给好友',
-                maxmin: true,
-                shadeClose: true, //点击遮罩关闭层
-                area : ['556px' , '470px'],
-                content: ["{:U('Portal/Share/shareWindow/model')}/"+model+'/id/'+id, 'no']
+                layer.open({
+                    type: 2,
+                    title: '分享给好友',
+                    maxmin: true,
+                    shadeClose: true, //点击遮罩关闭层
+                    area : ['556px' , '470px'],
+                    content: ["{:U('Portal/Share/shareWindow/model')}/"+model+'/id/'+id, 'no']
+                });
             });
-        });
         });
     </script>
     <div class="art_right">

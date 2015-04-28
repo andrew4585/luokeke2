@@ -28,6 +28,7 @@ class CocoController extends IndexController {
         $url = $this->_getUri();
         $this->assign('url',$url);
         $this->assign('day',$day);
+        $this->assign("model_table","Enroll");
         $this->display();
     }
 

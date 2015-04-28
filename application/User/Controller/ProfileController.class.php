@@ -90,7 +90,7 @@ class ProfileController extends MemberbaseController {
     	$userid=sp_get_current_userid();
 		$this->assign("servePromise",$this->_getAd("servePromise"));
 		$user=$this->users_model->where(array("id"=>$userid))->find();
-		$this->assign($user);
+		$this->assign('user',$user);
     	$this->display();
     }
 

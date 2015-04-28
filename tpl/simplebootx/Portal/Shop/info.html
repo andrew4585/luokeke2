@@ -139,14 +139,11 @@
                         <ul class="ranking">
                             <li class="no">{$key+1}</li>
                             <li class="img">
-                                <?php
-                                if(strpos($item['avatar'],"http")){
-                                    $avatarPath = $item['avatar'];
-                                }else{
-                                    $avatarPath = "__ROOT__".'/'.$item['avatar'];
-                                }
-                            ?>
-                                <img alt="排名" src="{$avatarPath}">
+                                <empty name="item.avatar">
+                                    <img src="__STATICS__images/tpl/comment/user_default.png" alt=""/>
+                                    <else/>
+                                    <img src="{:sp_get_user_avatar_url($item.avatar)}" alt=""/>
+                                </empty>
                             </li>
                             <li class="name">{$item.user_login}</li>
                             <li class="rank">{$item.score}</li>

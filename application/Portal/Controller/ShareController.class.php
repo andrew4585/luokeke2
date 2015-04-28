@@ -17,11 +17,16 @@ class ShareController extends HomeBaseController {
 	function shareWindow($model,$id=0){
 
 		$shareModel = D($model);
+		if($model == "Article"){
+			$url = 'http://'.$_SERVER['HTTP_HOST'].U("Portal/Article/info")."/id/".$id;
+		}else{
+			$url = $this->_getUri();
+		}
 		$info = $shareModel->where("id=$id")->find();
 		$picUrl = $info['post_pic'];
-		$url = $this->_getUri();
-		$this->qrcode();
+		$this->qrcode($url);
 		$this->assign('picurl',$picUrl);
+		$this->assign('avatar',$_SESSION['user']['avatar']);
 		$this->display();
 	}
 	
@@ -49,10 +54,6 @@ class ShareController extends HomeBaseController {
 			Vendor("phpqrcode.phpqrcode");
 			\QRcode::png($uri,$path,'L',1000,2);
 		}
-		if(empty($url)){
-			$this->assign("qrcode",$path);
-		}else{
-			return $path;
-		}
+		return $this->assign("qrcode",$path);
 	}
 }

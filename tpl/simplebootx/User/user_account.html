@@ -42,7 +42,11 @@
             <div class="pigbank_account">
                 <div class="accountleft">
                     <div class="accountHeader">
-                        <img src="{$avatarpath}" class="headerImg">
+                        <empty name="user.avatar">
+                            <img  class="headerImg"  src="__STATICS__images/tpl/comment/user_default.png" alt=""/>
+                            <else/>
+                            <img class="headerImg" src="{:sp_get_user_avatar_url($user.avatar)}" alt=""/>
+                        </empty>
                         <p>
                             <b>您好，{$user.user_login}</b><br>
                             用户名：{$user.user_login}<br>

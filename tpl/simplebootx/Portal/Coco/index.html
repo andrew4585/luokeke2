@@ -73,7 +73,7 @@
                                         </div>
                                         <div class="feed-name">
                                             <div class="feed-name-btn"></div>
-                                            <p> 找朋友帮我投票</p>
+                                            <p data-model="{$model_table}" data-id="{$item.id}" class="parentIframe"> 找朋友帮我投票</p>
                                         </div>
                                     </div>
 
@@ -102,7 +102,7 @@
 
                                                 <div class="feed-name">
                                                     <div class="feed-name-btn"></div>
-                                                    <p>找朋友帮我投票</p>
+                                                    <p data-model="{$model_table}" data-id="{$item.id}" class="parentIframe">找朋友帮我投票</p>
                                                 </div>
                                             </div>
                                             <div class="feed-name-tit">
@@ -129,6 +129,7 @@
 
 </div>
 <script type="text/javascript" src="__STATICS__js/jquery.js"></script>
+<script src="__STATICS__js/layer/layer.js"></script>
 <script type="text/javascript" src="__STATICS__js/wind.js"></script>
 <script type="text/javascript">
 $(function() {
@@ -214,7 +215,19 @@ $(function() {
 
                     }
                 });
-        })
+        });
+        $('.parentIframe').click(function(){
+            var model  = $(this).attr("data-model");
+            var id	   = $(this).attr("data-id");
+            layer.open({
+                type: 2,
+                title: '分享给好友',
+                maxmin: true,
+                shadeClose: true, //点击遮罩关闭层
+                area : ['556px' , '470px'],
+                content: ["{:U('Portal/Share/shareWindow/model')}/"+model+'/id/'+id, 'no']
+            });
+        });
     })
 </script>
 </body>

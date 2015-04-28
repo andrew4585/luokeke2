@@ -34,7 +34,13 @@
     <div class="share-container">
 
         <div class="share-comment-container">
-            <div class="share-commnet-user"><img width="43" height="43" alt="用户头像" src="__STATICS__images/tpl/user.png" /></div>
+            <div class="share-commnet-user">
+                <empty name="avatar">
+                    <img  width="43" height="43" src="__STATICS__images/tpl/comment/user_default.png" alt=""/>
+                    <else/>
+                    <img width="43" height="43" src="{:sp_get_user_avatar_url($avatar)}" alt=""/>
+                </empty>
+            </div>
             <div class="share-comment">
                 <textarea class="share-comment-textarea" id="sharecomment" rows="3">说点什么...</textarea>
             </div>

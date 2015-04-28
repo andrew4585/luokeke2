@@ -51,7 +51,7 @@ class PCustomController extends IndexController {
 		$this->assign("url",$this->_getUri());
 		//生成二维码
 		$this->qrcode();
-		$this->assign("model_table","PCustom");
+		$this->assign("model_table","Pcustom");
 		$this->display();
 	}
 	public function lists(){

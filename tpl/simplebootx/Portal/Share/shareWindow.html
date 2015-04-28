@@ -7,55 +7,72 @@
                 body{margin:0px; padding:0px; font-size:12px;}
         ul,li{list-style-type:none; float:left; display: inline;}
         img{border:0px;}
-.share-container{width:550px; padding-bottom:12px;}
+        .clear:after{
+            content: ".";
+            height: 0;
+            visibility: hidden;
+            display: block;
+            clear: both;
+        }
+        .share-container{width:550px; padding-bottom:12px;}
         .share-container div{float:left; display:inline;}
         .share-title-container{width:100%;height:40px; background:#adc7e8;}
         .share-title{font-size:14px; line-height:40px; font-weight:bold; color:#0a3369; margin-left:13px;}
         .share-close{float:right!important; margin-top:12px; margin-right:20px;}
         .share-comment-container{width:521px; margin-left:15px; margin-top:17px;}
         .share-commnet-user{width:43px; height:43px;}
-        .share-comment{ margin-left:9px; width:459px; padding:5px; background:url(/Content/images/share/comment.jpg) no-repeat; height:34px;}
+        .share-comment{ margin-left:9px; width:459px; padding:5px; background:url(__STATICS__/images/comment.jpg) no-repeat; height:34px;}
         .share-comment-textarea{border:0px; line-height:18px; color:#c7c7c7; height:30px; width:445px; overflow:hidden;}
-        .share-photo-container{margin:19px 0px 0px 15px;background:url(/Content/images/share/photobg2.jpg); width:523px;}
+        .share-photo-container{margin:19px 0px 0px 15px;background:#E3E3E3; width:523px;}
         .share-photo{border:3px solid #f0edde;height: 230px;}
-        .share-site-container{margin:14px 0px 0px 15px;background:#f0edde; width:523px; height:30px; padding-top:3px;}
-        .share-site-weibo{ margin-left:68px;}
+        .share-site-container{margin:10px 0px 0px 15px; width:523px;padding-top:3px;}
+        .hover{display: none;}
+
     </style>
 </head>
 <body style="">
     <div class="share-container">
 
         <div class="share-comment-container">
-            <div class="share-commnet-user"><img alt="用户头像" src="/Content/images/share/userbg.jpg" /></div>
+            <div class="share-commnet-user"><img width="43" height="43" alt="用户头像" src="__STATICS__images/tpl/user.png" /></div>
             <div class="share-comment">
-
-                <textarea class="share-comment-textarea" id="sharecomment" rows="3">@(Model.Title)</textarea>
+                <textarea class="share-comment-textarea" id="sharecomment" rows="3">说点什么...</textarea>
             </div>
         </div>
-        <div class="share-photo-container">
+        <div class="share-photo-container clear">
             <table cellspacing="0" border="0" cellpadding="0" width="100%">
                 <tr>
-                    <td align="center" valign="middle" style="padding:16px"><img alt="photo" src="@(Model.Thumb)" class="share-photo" /></td>
+                    <td align="center" valign="middle" style="padding:16px">
+                        <img id="picurl" alt="photo" src="__ROOT__/{$picurl}" class="share-photo" />
+                        <img id="qrcode" class="hover" src="__ROOT__/{$qrcode}" height="236"/>
+                    </td>
                 </tr>
             </table>
         </div>
-        <div class="share-site-container">
-            <div class="share-site-weibo"><a href="javascript:;;" id="ShartPhotoToWeiBo"><img alt="分享到新浪微博" src="/Content/images/share/shareB1.jpg" /></a></div>
-            <div><a href="javascript:;;"><img alt="分享到腾讯微博" id="ShartPhotoToQQ" src="/Content/images/share/shareB2.jpg" /></a></div>
-            <div><a href="#"><img alt="分享到微信" src="images/share/shareB3.jpg" /></a></div>
+        <div class="share-site-container clear">
+            <div class="share-site-weibo"><a href="javascript:;;" id="ShartPhotoToWeiBo"><img alt="分享到新浪微博" src="__STATICS__/images/tpl/xl_wo_04.jpg" /></a></div>
+            <div><a href="javascript:;;"><img alt="分享到腾讯微博" id="ShartPhotoToQQ" src="__STATICS__/images/tpl/tx_wo_03.jpg" /></a></div>
+            <div><a href="#"><img class="wechat" alt="分享到微信" src="__STATICS__/images/tpl/tx_wo_04.png" /></a></div>
         </div>
-    </div>
+    </div>
+
 
 </body>
 </html>
-<script type="text/javascript" src="/Content/Lightbox/jquery-1.10.1.min.js"></script>
-<script type="text/javascript" src="/Content/layer/layer.min.js?v=1.6.0"></script>
-<script type="text/javascript" src="/Content/js/charCount.js"></script>
+<script src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+
 <script type="text/javascript">
-    $(document).ready(function(){	
-        //$("#Contents").charCount();
+    $(document).ready(function(){
+        $(".wechat").hover(function(){
+            $("#picurl").addClass("hover");
+            $("#qrcode").removeClass("hover");
+        },function(){
+            $("#qrcode").addClass("hover");
+            $("#picurl").removeClass("hover");
+        });
     });
-</script>
+</script>
+
 <script type="text/javascript">
     $(document).ready(function () {
         $("#ShartPhotoToWeiBo").click(function () {

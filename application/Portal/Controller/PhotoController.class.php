@@ -37,7 +37,7 @@ class PhotoController extends IndexController {
 		$this->getCommentList("Photo",$info['id']);
 		$this->assign("table",'Photo');
 		//获取本页面的url
-		$url = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+		$url = $this->_getUri();
 		$this->assign("url",$url);
 		//图片信息
 		$photo	= json_decode($info['smeta'],true);

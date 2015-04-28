@@ -5,7 +5,7 @@
     </li>
 	<li>
         <div class="mix_ico info-ico_wo"></div>
-        <div class="info-lz">分享&nbsp;{$info.post_share}</div>
+        <div id="parentIframe" data-model="{$model_table}" class="info-lz">分享&nbsp;{$info.post_share}</div>
     </li>
 	<li class="comment-reach">
         <div class="mix_ico info-ico_pl"></div>
@@ -57,5 +57,17 @@
 				}
 			});
 		});
+         $('#parentIframe').click(function(){
+             var model  = $(this).attr("data-model");
+             var id	   = {$info.id};
+             layer.open({
+                 type: 2,
+                 title: '分享给好友',
+                 maxmin: true,
+                 shadeClose: true, //点击遮罩关闭层
+                 area : ['556px' , '470px'],
+                 content: ["{:U('Portal/Share/shareWindow/model')}/"+model+'/id/'+id, 'no']
+             });
+         });
      });
  </script>

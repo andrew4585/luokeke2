@@ -43,7 +43,7 @@ class IndexController extends HomeBaseController {
 			//婚纱礼服
 			$this->assign("dress",$this->getHomeContent("Dress",false,array("rent","sale_price")));
 			//好评
-			$this->assign("good",$this->getHomeContent("Good",false,array("head_img","post_excerpt")));
+			$this->assign("good",$this->getHomeContent("Good",false,array("head_img","post_excerpt")),30);
 			//婚嫁常识
 			$article_cat 	= D("ArticleCat");
 			$model_article	= D("Article");
@@ -62,7 +62,7 @@ class IndexController extends HomeBaseController {
 			
 			$this->assign("articleCat",$articleCat);//分类
 			$this->assign("articles",$articles);
-			
+			$this->assign('index','index');
 			//广告位
 			$this->assign("promise",$this->_getAd("promise"));
 			$this->assign("servePromise",$this->_getAd("servePromise"));

@@ -215,3 +215,18 @@ table { border-collapse: collapse; border-spacing: 0; }
 .copyright font a {  color: #afa49e;  }
 .links p {  color: #b0a49e;  display: block;  line-height: 21px;  }
 .links p a {  color: #b0a49e;  padding: 0 8px;  }
+
+#back-to-top {  position: fixed;  bottom: 100px;  right: 40px;}
+#back-to-top a span.backtop{
+ display: block;
+ height: 40px;
+ width: 40px;
+ background:url(../images/tpl/top.png) no-repeat center center;
+}
+
+#back-to-top a span.backhome{
+ display: block;
+ height: 40px;
+ width: 40px;
+ background:url(../images/tpl/home.png) no-repeat center center;
+}

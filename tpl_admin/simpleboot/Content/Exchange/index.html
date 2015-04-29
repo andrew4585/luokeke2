@@ -5,7 +5,7 @@
 <body class="J_scroll_fixed">
 <div class="wrap J_check_wrap">
     <ul class="nav nav-tabs">
-        <li class=""><a href="javascript:;">所有兑换记录</a></li>
+        <li class=""><a href="{:U('Exchange/index')}">所有兑换记录</a></li>
     </ul>
     <form class="well form-search" method="post" action="{:u('Exchange/index')}">
         <div class="search_type cc mb10">
@@ -19,7 +19,7 @@
                   <option value='0' >标题</option>
                 </select>
                  -->
-                &nbsp; &nbsp;关键字：
+                &nbsp; &nbsp;用户名：
                 <input type="text" class="input length_2" name="keyword" style="width:200px;" value="{$formget.keyword}" placeholder="请输入关键字...">
                 <input type="submit" class="btn" value="搜索"/>
                 </span>

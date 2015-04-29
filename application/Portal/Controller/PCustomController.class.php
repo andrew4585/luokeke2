@@ -55,7 +55,7 @@ class PCustomController extends IndexController {
 		$this->display();
 	}
 	public function lists(){
-		$this->_list($this->model_pcustom,true,array(),array(),16,"recommended desc,listorder");
+		$this->_list($this->model_pcustom,true,array(),array(),1,"recommended desc,listorder");
 		$this->assign("ad_dress",$this->_getAd("dress"));
 		$this->assign("desc_beautiful",$this->_getAd("desc_beautiful"));
 		//banner
@@ -64,6 +64,7 @@ class PCustomController extends IndexController {
 		$this->assign("second_page_3",$this->_getAd("second_page_3"));
 		//服务承诺
 		$this->assign("servePromise",$this->_getAd("servePromise"));
+
 		$this->display("list");
 	}
 	

@@ -108,8 +108,10 @@ class CenterController extends MemberbaseController {
 				$sumPoint = $this->exchange->where("uid=%d and gid=%d and post_date<%d",array($this->userid,0,$data['post_date']))->sum('point');
 				$data['sumPoint'] = $sumPoint+$data['point'];
 				if ($this->exchange->create($data)) {
+					$score['score'] = $data['point'];
+					$User = $this->users_model->where("id = $this->userid")->save($score);
 					$result = $this->exchange->add(); // 写入数据到数据库
-					if ($result) {
+					if ($result && $User) {
 						$this->success('签到成功');
 					} else {
 						$this->error('签到失败');

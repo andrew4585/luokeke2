@@ -27,15 +27,20 @@
 <!--jquery左侧随滚动条浮动导航代码-->
 <div id="izl_rmenu" class="izl-rmenu" >
 	<a target="_blank" href="{$swt_url}" class="btn btn-qq"></a>
-	<div class="btn btn-wo">
-		<img style="display: none;" class="pic" src="__STATICS__/images/tpl/wbQr.png" onclick="window.location.href='http://%77%77%77%2e%73%75%63%61%69%6a%69%61%79%75%61%6e%2e%63%6f%6d'">
-	</div>
-	<div class="btn btn-wx"><img style="display: none;" class="pic" src="__STATICS__/images/tpl/wxQr.png" onclick="window.location.href='http://%77%77%77%2e%73%75%63%61%69%6a%69%61%79%75%61%6e%2e%63%6f%6d'">
-	</div>
+	<a target="_blank" href="{:U('Portal/Single/info/id/31')}" class="btn btn-wo">
+	</a>
+	<a target="_blank" href="{:U('Portal/Single/info/id/32')}" class="btn btn-wx">
+	</a>
 	<div class="btn btn-phone">
 		<div class="phone">4000-999-136</div>
 	</div>
-
+	<script type="text/javascript">
+		$(".i_003").find("img").hover(function(){
+			$(this).css("cursor","pointer").click(function(){
+				window.open('http://pvt.zoosnet.net/LR/Chatpre.aspx?id=PVT87924920&lng=cn');
+			})
+		});
+	</script>
 <php>$jscode = sp_get_js();</php>
 <foreach name="jscode" item="item">
 	{$item}

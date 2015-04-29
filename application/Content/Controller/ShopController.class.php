@@ -259,4 +259,14 @@ class ShopController extends  AdminbaseController{
             $this->error("排序更新失败！");
         }
     }
+
+    //分类排序
+    public function clistorders() {
+        $status = parent::_listorders($this->model_cate);
+        if ($status) {
+            $this->success("排序更新成功！");
+        } else {
+            $this->error("排序更新失败！");
+        }
+    }
 }

@@ -13,6 +13,7 @@ class CenterController extends MemberbaseController {
 	protected 	$users_model;
 	protected 	$exchange;
 	protected 	$userid;
+	protected 	$user;
 	public 		$sign_point,$share_point;
 	protected 	$sign_num;
 	function _initialize(){
@@ -23,12 +24,12 @@ class CenterController extends MemberbaseController {
 	function __construct(){
 		parent::__construct();
 		$this->userid=sp_get_current_userid();
-		$user=$this->users_model->where(array("id"=>$this->userid))->find();
+		$this->user=$this->users_model->where(array("id"=>$this->userid))->find();
 		$this->sign_num = $this->exchange->where(array("uid"=>$this->userid,"memo"=>"网站签到"))->count();
 		$this->assign('signNum',$this->sign_num);
 		$this->sign_point = D('Config')->val("pc_sign");
 		$this->share_point = D('Config')->val('pc_share');
-		$this->assign('user',$user);
+		$this->assign('user',$this->user);
 		$this->assign("servePromise",$this->_getAd("servePromise"));
 	}
     //会员中心type = 2 为 签到 =3 是分享
@@ -108,7 +109,7 @@ class CenterController extends MemberbaseController {
 				$sumPoint = $this->exchange->where("uid=%d and gid=%d and post_date<%d",array($this->userid,0,$data['post_date']))->sum('point');
 				$data['sumPoint'] = $sumPoint+$data['point'];
 				if ($this->exchange->create($data)) {
-					$score['score'] = $data['point'];
+					$score['score'] = $data['point']+$this->user['score'];
 					$User = $this->users_model->where("id = $this->userid")->save($score);
 					$result = $this->exchange->add(); // 写入数据到数据库
 					if ($result && $User) {

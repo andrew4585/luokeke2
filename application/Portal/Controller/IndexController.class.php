@@ -62,7 +62,7 @@ class IndexController extends HomeBaseController {
 			
 			$this->assign("articleCat",$articleCat);//分类
 			$this->assign("articles",$articles);
-			
+			$this->assign('index','index');
 			//广告位
 			$this->assign("promise",$this->_getAd("promise"));
 			$this->assign("servePromise",$this->_getAd("servePromise"));

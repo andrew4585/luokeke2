@@ -89,23 +89,23 @@ a.hScrollPane_rightarrow{ top:200px; cursor:pointer; display:block; width:25px; 
 .container2 .text a{text-decoration:none}
 .container2 .text div{text-align:center;color:#FFFFFF;font-size:18px;margin-top: 80px;}
  /*客照轮播图效果CSS开始*/
-.main_kz{ width:1200px; margin:0 auto; height: 1180px;}
+.main_kz{ width:1200px; margin:0 auto; height: 920px;}
 .mod18{width:1200px;position:relative;}
 .mod18 .btn{position:absolute;cursor:pointer;z-index:99;font-size:50px;font-weight:bold;}
-.mod18 .prev{left:5px;background:url(../images/tpl/icon.png) no-repeat; background-position: 0px 0px;}
-.mod18 #prevTop,.mod18 #nextTop{top:450px;width:66px;height:66px;}
-.mod18 #prev,.mod18 #next{top:1043px;width:30px;height:43px; }
+.mod18 .prev{left:135px;background:url(../images/tpl/icon.png) no-repeat; background-position: 0px 0px;}
+.mod18 #prevTop,.mod18 #nextTop{top:320px;width:66px;height:66px;}
+.mod18 #prev,.mod18 #next{top:783px;width:30px;height:43px; }
 .mod18 #prevTop{background:url(../images/tpl/icon-1.png) no-repeat; background-position: 0px -104px}
 .mod18 #nextTop{background:url(../images/tpl/icon-1.png) 0 0 no-repeat;}
-.mod18 .next{right:5px;background:url(../images/tpl/icon.png) no-repeat; background-position: 0px -68px;}
+.mod18 .next{right:135px;background:url(../images/tpl/icon.png) no-repeat; background-position: 0px -68px;}
 .mod18 li{float:left;}
 .mod18 .cf li{position:relative;color:#fff;}
 .mod18 .cf a{display:block;width:526px;height:377px;position:absolute;color:#fff;}
 /*.mod18 .cf li span{display:block;width:486px;position:absolute;left:75px;bottom:0;padding:10px 20px;line-height:22px;text-align:left;background:rgba(0,0,0,0.6);filter:progid:DXImageTransform.Microsoft.gradient( GradientType = 0,startColorstr = "#60000000",endColorstr = "#60000000");}*/
-.mod18 .picBox{ width:900px;margin: 0 auto; height:900px;  margin-bottom:30px;padding-left:80px; padding-right:80px;position:relative;overflow:hidden;  padding-top:40px; }
-.mod18 .picBox ul{height:900px;position:absolute; left:0;}
-.mod18 .picBox li{padding-left:83px; padding-right:1px; width:900px; height:900px;}
-.mod18 .listBox{width:1080px;height:180px;margin:0 auto;position:relative; padding-top:15px;overflow:hidden; }
+.mod18 .picBox{ width:640px;margin: 0 auto; height:640px;  margin-bottom:30px;padding-left:80px; padding-right:80px;position:relative;overflow:hidden;  padding-top:40px; }
+.mod18 .picBox ul{height:640px;position:absolute; left:0;}
+.mod18 .picBox li{padding-left:83px; padding-right:1px; width:640px; height:640px;}
+.mod18 .listBox{width:840px;height:180px;margin:0 auto;position:relative; padding-top:15px;overflow:hidden; }
 .mod18 .listBox ul{height:140px;position:absolute; }
 .mod18 .listBox li{width:156px;height:156px;  cursor:pointer;position:relative;padding:5px 0 0 0; }
 .mod18 .listBox li i{display:none;}
@@ -114,7 +114,7 @@ a.hScrollPane_rightarrow{ top:200px; cursor:pointer; display:block; width:25px; 
 .mod18 .listBox .on img{border:3px solid #c86139;}
 .mod18 .listBox .on{ }
 .mod18 .listBox .on i{display:block;}
-.zz_list{width: 1200px; height: 180px; background: #c6c6c6;}
+.zz_list{width: 960px; height: 180px; background: #c6c6c6; margin:0 auto;}
 .left { width:1200px; float:left; padding-bottom:34px; }
 .left_top { font-family:Arial; font-size:32px; color:#fff; text-align:center; height:30px; line-height:30px; background:#333}
  /*效果CSS结束*/

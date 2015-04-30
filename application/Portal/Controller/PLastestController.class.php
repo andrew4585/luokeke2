@@ -10,7 +10,7 @@ class PLastestController extends IndexController {
 	}
 	
 	public function index(){
-		$where		= "recommended=1 and status=1";
+		$where		= "recommended=1 and status=1 and site_id={$this->siteId}";
 		$model_lastest = D('plastest');
 		$info		= $model_lastest->where($where)->limit(0,1)->find();
 		//banner

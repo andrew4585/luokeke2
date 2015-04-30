@@ -41,11 +41,12 @@
 	<script type="text/javascript">
 		$(".i_003").find("img").hover(function(){
 			$(this).css("cursor","pointer").click(function(){
-				window.open('http://pvt.zoosnet.net/LR/Chatpre.aspx?id=PVT87924920&lng=cn');
+				window.open('{$swt_url}');
 			})
 		});
 	</script>
-<php>$jscode = sp_get_js();</php>
+</div>
+<div style="background:#2E3339"><php>$jscode = sp_get_js();</php>
 <foreach name="jscode" item="item">
 	{$item}
 </foreach>

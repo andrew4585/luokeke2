@@ -111,11 +111,23 @@
 				<ul class="nav">
 				<volist name="menuData" id="vo" key="k">
 					<li>
-						<a href="{$vo.href}" ><span>{$vo.label}</span><font>{$vo.english}</font></a>
+						<php>
+							$target = '';
+							if($vo['target']=='_blank'){
+								$target = "target='_blank'";
+							}
+						</php>
+						<a href="{$vo.href}" {$target}><span>{$vo.label}</span><font>{$vo.english}</font></a>
 						<if condition="$vo['child'] neq NULL">
 						<div class="box">
 							<volist name="vo['child']" id="f">
-							<a href="{$f.href}">{$f.label}</a>
+							<php>
+								$target = '';
+								if($f['target']=='_blank'){
+									$target = "target='_blank'";
+								}
+							</php>
+							<a href="{$f.href}" {$target}>{$f.label}</a>
 							</volist>
 						</div>
 						</if>

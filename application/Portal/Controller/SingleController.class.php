@@ -22,7 +22,7 @@ class SingleController extends IndexController {
 		$photo	= $smeta['photo'];
 		$display= '';
 		if($type==1){
-			$this->assign("home_head",$this->_getAd("home_head"));
+			$this->assign("home_head",$this->_getAd("banner_single"));
 			$this->assign("photo",$photo);
 			$display  = "single2";
 		}elseif ($type==2){

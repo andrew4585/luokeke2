@@ -48,7 +48,7 @@ class AssetController extends AdminbaseController {
                 //裁剪图片
                 import("Resizeimage",UTIl);
                 $resize=new \Resizeimage();
-                $resize->initAttribute($config['rootPath'], 200, 200, 2);
+                $resize->initAttribute($config['rootPath'],600,600, 2);
                 $cutimg=$resize->resize($first['savename']);
 				echo "1," . $url.",".'1,'.$first['name'];
 				exit;

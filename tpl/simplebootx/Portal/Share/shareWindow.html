@@ -34,6 +34,7 @@
     <div class="share-container">
 
         <div class="share-comment-container">
+            <form action="" method="post" name="share">
             <div class="share-commnet-user">
                 <empty name="avatar">
                     <img  width="43" height="43" src="__STATICS__images/tpl/comment/user_default.png" alt=""/>
@@ -42,7 +43,7 @@
                 </empty>
             </div>
             <div class="share-comment">
-                <textarea class="share-comment-textarea" id="sharecomment" rows="3">说点什么...</textarea>
+                <textarea class="share-comment-textarea" name="sharecomment" id="sharecomment" rows="3">说点什么...</textarea>
             </div>
         </div>
         <div class="share-photo-container clear">
@@ -50,106 +51,106 @@
                 <tr>
                     <td align="center" valign="middle" style="padding:16px">
                         <img id="picurl" alt="photo" src="__ROOT__/{$picurl}" class="share-photo" />
+                        <input type="hidden" name="picurl" value="__ROOT__/{$picurl}"/>
                         <img id="qrcode" class="hover" src="__ROOT__/{$qrcode}" height="236"/>
                     </td>
                 </tr>
             </table>
         </div>
         <div class="share-site-container clear">
-            <div class="share-site-weibo"><a href="javascript:;;" id="ShartPhotoToWeiBo"><img alt="分享到新浪微博" src="__STATICS__/images/tpl/xl_wo_04.jpg" /></a></div>
-            <div><a href="javascript:;;"><img alt="分享到腾讯微博" id="ShartPhotoToQQ" src="__STATICS__/images/tpl/tx_wo_03.jpg" /></a></div>
+            <div id="shareMess" data-model="{$model}" data-id="{$id}"></div>
+            <div class="share-site-weibo"><a href="javascript:;;" id="SharePhotoToWeiBo"><img alt="分享到新浪微博" src="__STATICS__/images/tpl/xl_wo_04.jpg" /></a></div>
+            <div><a href="javascript:;;" id="SharePhotoToQQ"><img alt="分享到腾讯微博" id="SharePhotoToQQ" src="__STATICS__/images/tpl/tx_wo_03.jpg" /></a></div>
             <div><a href="#"><img class="wechat" alt="分享到微信" src="__STATICS__/images/tpl/tx_wo_04.png" /></a></div>
         </div>
+        </form>
     </div>
 
+    <script src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
 
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $(".wechat").hover(function(){
+                $("#picurl").addClass("hover");
+                $("#qrcode").removeClass("hover");
+            },function(){
+                $("#qrcode").addClass("hover");
+                $("#picurl").removeClass("hover");
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#SharePhotoToWeiBo").click(function () {
+                var table  = $("#shareMess").attr("data-model");
+                var id	   = $("#shareMess").attr("data-id");
+                var url = "{:U('Api/share/sina/')}/table/"+table+"/id/"+id;
+                $("form[name='share']").attr("action", url).submit();
+            });
+
+            $("#SharePhotoToQQ").click(function () {
+                var table  = $("#shareMess").attr("data-model");
+                var id	   = $("#shareMess").attr("data-id");
+                var url = "{:U('Api/share/tencent/')}/table/"+table+"/id/"+id;
+                $("form[name='share']").attr("action", url).submit();
+            });
+        });
+/*
+        function PostToQQ() {
+            $.ajax({
+                url: '/Share/ShareQQPhoto',
+                type: 'Post',
+                data: { PhotoID: @(Model.ID), Content: $("#sharecomment").val() },
+                dataType: 'json',
+                        error: function () { alert('发生异常'); },
+                success: function (result) {
+                    if (result.success) {
+                        var oldShareNum=parseInt(window.parent.$("#photoshare_@(Model.ID)").html());
+                        window.parent.$("#photoshare_@(Model.ID)").html(oldShareNum+1);
+                        var index = parent.layer.getFrameIndex(window.name);
+                        parent.layer.msg(result.message+"，积分+@(cfg.PhotoPoint)。" , 1, 1);
+                        parent.layer.close(index);
+                    }
+                    else {
+                        if(result.message=="showOAuthWindow"){
+                            ShowOAuthWindow(result.WeiBoLoginUrl,'登录腾讯微博');
+                        }
+                        else{
+                            alert(result.message);
+                        }
+                    }
+                }
+
+            });
+        }
+        function PostToWeiBo() {
+            $.ajax({
+                url: '/Share/SharePhoto',
+                type: 'Post',
+                data: { PhotoID: @(Model.ID), Content: $("#sharecomment").val() },
+                dataType: 'json',
+                        error: function () { alert('发生异常'); },
+                success: function (result) {
+                    if (result.success) {
+                        var oldShareNum=parseInt(window.parent.$("#photoshare_@(Model.ID)").html());
+                        window.parent.$("#photoshare_@(Model.ID)").html(oldShareNum+1);
+                        var index = parent.layer.getFrameIndex(window.name);
+                        parent.layer.msg(result.message+"，积分+@(cfg.PhotoPoint)。" , 1, 1);
+                        parent.layer.close(index);
+                    }
+                    else {
+                        if(result.message=="showOAuthWindow"){
+                            ShowOAuthWindow(result.WeiBoLoginUrl,'登录新浪微博');
+                        }
+                        else{
+                            alert(result.message);
+                        }
+                    }
+                }
+
+            });
+        }*/
+    </script>
 </body>
 </html>
-<script src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
-
-<script type="text/javascript">
-    $(document).ready(function(){
-        $(".wechat").hover(function(){
-            $("#picurl").addClass("hover");
-            $("#qrcode").removeClass("hover");
-        },function(){
-            $("#qrcode").addClass("hover");
-            $("#picurl").removeClass("hover");
-        });
-    });
-</script>
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        $("#ShartPhotoToWeiBo").click(function () {
-            PostToWeiBo();
-        });
-        $("#ShartPhotoToQQ").click(function () {
-            PostToQQ();
-        });
-    });
-    function PostToQQ() {
-        $.ajax({
-            url: '/Share/ShareQQPhoto',
-            type: 'Post',
-            data: { PhotoID: @(Model.ID), Content: $("#sharecomment").val() },
-            dataType: 'json',
-            error: function () { alert('发生异常'); },
-            success: function (result) {
-                if (result.success) {
-                    var oldShareNum=parseInt(window.parent.$("#photoshare_@(Model.ID)").html());
-                    window.parent.$("#photoshare_@(Model.ID)").html(oldShareNum+1);
-                    var index = parent.layer.getFrameIndex(window.name);
-                    parent.layer.msg(result.message+"，积分+@(cfg.PhotoPoint)。" , 1, 1);
-                    parent.layer.close(index);
-                }
-                else {
-                    if(result.message=="showOAuthWindow"){
-                        ShowOAuthWindow(result.WeiBoLoginUrl,'登录腾讯微博');
-                    }
-                    else{
-                        alert(result.message);
-                    }
-                }
-            }
-
-        });
-    }
-    function PostToWeiBo() {
-        $.ajax({
-            url: '/Share/SharePhoto',
-            type: 'Post',
-            data: { PhotoID: @(Model.ID), Content: $("#sharecomment").val() },
-            dataType: 'json',
-            error: function () { alert('发生异常'); },
-            success: function (result) {
-                if (result.success) {
-                    var oldShareNum=parseInt(window.parent.$("#photoshare_@(Model.ID)").html());
-                    window.parent.$("#photoshare_@(Model.ID)").html(oldShareNum+1);
-                    var index = parent.layer.getFrameIndex(window.name);
-                    parent.layer.msg(result.message+"，积分+@(cfg.PhotoPoint)。" , 1, 1);
-                    parent.layer.close(index);
-                }
-                else {
-                    if(result.message=="showOAuthWindow"){
-                        ShowOAuthWindow(result.WeiBoLoginUrl,'登录新浪微博');
-                    }
-                    else{
-                        alert(result.message);
-                    }
-                }
-            }
-
-        });
-    }
-
-    function ShowOAuthWindow(url,title){
-        parent.$.layer({
-            type: 2,
-            title: title,
-            iframe: { src: url },
-            area: ['770px', '665px'],
-            offset: ['100px', '']
-        });
-    }
-</script>

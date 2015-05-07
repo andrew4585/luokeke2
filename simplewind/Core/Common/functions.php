@@ -524,6 +524,7 @@ function import($class, $baseUrl = '', $ext=EXT) {
     if (substr($baseUrl, -1) != '/')
         $baseUrl    .= '/';
     $classfile       = $baseUrl . $class . $ext;
+
     if (!class_exists(basename($class),false)) {
         // 如果类不存在 则导入类库文件
         return require_cache($classfile);

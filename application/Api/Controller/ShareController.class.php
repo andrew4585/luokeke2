@@ -4,6 +4,7 @@
  */
 namespace Api\Controller;
 
+use Think\Log;
 class ShareController extends OauthController {
 	
 	public $type; 			//分享平台,1:sina,2:qq
@@ -49,7 +50,17 @@ class ShareController extends OauthController {
 		$this->getConfig();
 		//判断新浪微博是否已经登陆
 		if(!empty($this->token)){
+			$_SESSION['sina_token'] = $this->token;
+			vendor("sina.sina");
+			$c = new \SaeTClientV2($this->AppKey, $this->AppSecret, $_SESSION['sina_token']['access_token']);
+			$ret = $c->upload_url_text( $_REQUEST['sharecomment'],'http://'.$_SERVER['HTTP_HOST'].$_REQUEST['picurl']);
+			if ( isset($ret['error_code']) && $ret['error_code'] > 0 ) {
+				echo "<p>发送失败，错误：{$ret['error_code']}:{$ret['error']}</p>";
+			} else {
+				echo "<p>发送成功</p>";
+			}
 			$this->share();
+			exit;
 		}
 		
 		if (isset($_REQUEST['code'])) {
@@ -71,6 +82,14 @@ class ShareController extends OauthController {
 		//判断是否授权成功
 		if ($this->token) {
 			$_SESSION['sina_token'] = $this->token;
+			$c = new \SaeTClientV2($this->AppKey, $this->AppSecret, $_SESSION['sina_token']['access_token']);
+
+			$ret = $c->upload_url_text( $_REQUEST['sharecomment'],'http://'.$_SERVER['HTTP_HOST'].$_REQUEST['picurl']);
+			if ( isset($ret['error_code']) && $ret['error_code'] > 0 ) {
+				echo "<p>发送失败，错误：{$ret['error_code']}:{$ret['error']}</p>";
+			} else {
+				echo "<p>发送成功</p>";
+			}
 			$this->share();
 		}else{
 			exit("授权失败！");
@@ -84,7 +103,57 @@ class ShareController extends OauthController {
 	function tencent(){
 		$this->type = 'QQ';
 		$this->getConfig();
-		$this->OAuthor();
+		vendor('qq.Tencent');
+		\OAuth::init($this->AppKey,$this->AppSecret);
+		if ($_SESSION['t_access_token'] || ($_SESSION['t_openid'] && $_SESSION['t_openkey'])){
+
+		}else{
+			$callback = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];
+			if ($_GET['code']) {//已获得code
+				$code = $_GET['code'];
+				$openid = $_GET['openid'];
+				$openkey = $_GET['openkey'];
+				//获取授权token
+				$url = \OAuth::getAccessToken($code, $callback);
+				$r = \Http::request($url);
+				parse_str($r, $out);
+				//存储授权数据
+				if ($out['access_token']) {
+					$_SESSION['t_access_token'] = $out['access_token'];
+					$_SESSION['t_refresh_token'] = $out['refresh_token'];
+					$_SESSION['t_expire_in'] = $out['expires_in'];
+					$_SESSION['t_code'] = $code;
+					$_SESSION['t_openid'] = $openid;
+					$_SESSION['t_openkey'] = $openkey;
+
+					//验证授权
+					$r = \OAuth::checkOAuthValid();
+					if ($r) {
+						header('Location: ' . $callback);//刷新页面
+					} else {
+						exit('<h3>授权失败,请重试</h3>');
+					}
+				} else {
+					exit($r);
+				}
+			} else {//获取授权code
+				if ($_GET['openid'] && $_GET['openkey']){//应用频道
+					$_SESSION['t_openid'] = $_GET['openid'];
+					$_SESSION['t_openkey'] = $_GET['openkey'];
+					//验证授权
+					$r = \OAuth::checkOAuthValid();
+					if ($r) {
+						header('Location: ' . $callback);//刷新页面
+					} else {
+						exit('<h3>授权失败,请重试</h3>');
+					}
+				} else{
+					$url =\OAuth::getAuthorizeURL($callback);
+					header('Location: ' . $url);
+				}
+			}
+
+		}
 	}
 	
 	/**
@@ -93,60 +162,60 @@ class ShareController extends OauthController {
 	 */
 	function OAuthor(){
 		try{
-			$this->user = session("user");
-			//用户未登陆
-			if(empty($this->user)){
-				$url = U("User/Login/index");
-				header("location:$url");
-				exit;
-			}else{
-				switch ($this->type){
-					//新浪微博登陆
-					case 'SINA':
-						vendor("sina.sina");
-						$o			= new \SaeTOAuthV2($this->AppKey, $this->AppSecret);
-						$callback	= $this->_getUri();
-						$code_url 	= $o->getAuthorizeURL( $callback );
-						header("location:$code_url");
-						exit;
-					//qq互联登陆
-					case 'QQ':
-						
-						exit;
-					default:
-						throw new \Exception("非法操作");
-				}
+			switch ($this->type){
+				//新浪微博登陆
+				case 'SINA':
+					vendor("sina.sina");
+					$o			= new \SaeTOAuthV2($this->AppKey, $this->AppSecret);
+					$callback	= $this->_getUri();
+					$code_url 	= $o->getAuthorizeURL( $callback );
+					header("location:$code_url");
+					exit;
+				//qq互联登陆
+				case 'QQ':
+					vendor('qq.Tencent');
+					\OAuth::init($this->AppKey,$this->AppSecret);
+					$oc = new \OAuth();
+					exit;
+				default:
+					throw new \Exception("非法操作");
 			}
 		}catch(\Exception $e){
 			Log::record("OAuthor:".$e->getMessage());
 			exit($e->getMessage());
 		}
 	}
-	
+
 	/**
 	 * 分享积分
 	 */
 	function share(){
 		try{
-			$model_score = D("Score");
-			$model_config= D("Config"); 
-			$model_user	 = D("User");
-			$data['user_id']	= $this->user['user_id'];
-			$data['score']		= $model_config->val("pc_share");
-			$data['total_score']= $model_user->where("user_id={$data['user_id']}")->getField("score")
-									+ $data['score'];
-			$data['type']		= "分享".$this->tblName[$this->table]."到".$this->weibo[$this->type];
-			$data['add_time']	= time();
-			$data['today']		= date("Y-m-d");
-			$result = $model_score->add($data);
+			$contentModel = D("{$this->table}");
+			$result	= $contentModel->where("id={$this->id}")->setInc("post_share",1);
 			if($result){
 				$this->assign("msg","分享成功");
 			}else{
 				$this->assign("msg","分享失败");
 			}
 			$this->display("share");
+			if(!empty($_SESSION['user'])){
+				$model_score = D("Exchange");
+				$model_config = D("Config");
+				$model_user = D("Users");
+				$data['uid'] = $_SESSION['user']['id'];
+				$data['point'] = $model_config->val('pc_share');
+				$sumPoint = $model_score->where("uid={$data['uid']}")->order('post_date desc')->limit(1)->find();
+				dump($sumPoint);
+				$data['sumpoint'] = $sumPoint['sumpoint']+$data['point'];
+				$data['memo'] = "分享".$this->tblName[$this->table]."到".$this->weibo[$this->type];
+				$data['type'] = 3;//为分享
+				$data['post_date'] = time();
+				$result = $model_score->add($data);
+			}
 		}catch(\Exception $e){
 			Log::record("OAuthor:".$e->getMessage());
+
 			exit($e->getMessage());
 		}
 	}
@@ -185,5 +254,6 @@ class ShareController extends OauthController {
 	public function _getUri(){
 		$url = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 		return $url;
+
 	}
 }

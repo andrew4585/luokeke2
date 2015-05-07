@@ -9,7 +9,6 @@ class ShareController extends HomeBaseController {
 
 	public function __construct() {
 		parent::__construct();
-		$this->check_login();
 	}
 	/**
 	 * 分享页面
@@ -26,6 +25,8 @@ class ShareController extends HomeBaseController {
 		$picUrl = $info['post_pic'];
 		$this->qrcode($url);
 		$this->assign('picurl',$picUrl);
+		$this->assign('id',$id);
+		$this->assign('model',$model);
 		$this->assign('avatar',$_SESSION['user']['avatar']);
 		$this->display();
 	}

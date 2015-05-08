@@ -201,12 +201,12 @@ class Page {
             }
         }
 		//判断listlong是否为偶数
-		if( (int)$cfg ['listlong']%2 != 0  ){
+		/*if( (int)$cfg ['listlong']%2 != 0  ){
 		   $cfg ['listlong'] = $cfg ['listlong']+1;
-		}
+		}*/
 		
         $tmpStr = $Page_tpl ['Tpl'];
-        $pStart = $cfg ['pageindex'] - (($cfg ['listlong'] / 2) + ($cfg ['listlong'] % 2)) + 1;
+        $pStart = $cfg ['pageindex'] - (floor(($cfg ['listlong'] / 2)) + ($cfg ['listlong'] % 2)) + 1;
         $pEnd = $cfg ['pageindex'] + $cfg ['listlong'] / 2;
         if ($pStart < 1) {
             $pStart = 1;

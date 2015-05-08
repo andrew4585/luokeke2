@@ -51,6 +51,8 @@ class ArticleController extends IndexController {
 							->order($order)
 							->limit($Page->firstRow.','.$Page->listRows)
 							->select();
+
+		$Page->SetPager('Phone','{list}',array("listlong"=>"5",'list'=>'*','disabledclass'=>''));
 		//获取每篇文章的二维码
 		for ($i=0;$i<5;$i++){
 			if(empty($list[$i]))	break;
@@ -59,6 +61,9 @@ class ArticleController extends IndexController {
 		}
 		$this->assign("list",$list);
 		$this->assign('page',$Page->show("Home"));
+		//手机分页样式
+		$this->assign('phonepage',$Page->show('Phone'));
+		$this->assign('totalpage',$Page->Total_Pages);
 		$this->assign("cid",$cid);
 		$this->assign("model_table","Article");
 		$this->display('list');

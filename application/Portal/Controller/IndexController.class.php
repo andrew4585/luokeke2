@@ -153,6 +153,10 @@ class IndexController extends HomeBaseController {
     						->order($order)
     						->limit($Page->firstRow.','.$Page->listRows)
     						->select();
+		$Page->SetPager('Phone','{list}',array("listlong"=>"5",'list'=>'*','disabledclass'=>''));
+		//手机分页样式
+		$this->assign('phonepage',$Page->show('Phone'));
+		$this->assign('totalpage',$Page->Total_Pages);
     	$this->assign("list",$list);
     	$this->assign('page',$Page->show("Home"));
     }

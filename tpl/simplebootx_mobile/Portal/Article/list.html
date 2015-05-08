@@ -1,0 +1,47 @@
+<tc_include file="Public:phoneNav"/>
+
+<div class="phoneContent articleContent ">
+    <foreach name="list" item="item">
+    <div class="phoneArticle">
+        <h2><a href="{:U('Portal/Article/info')}/id/{$item.id}">{$item.post_title}</a></h2>
+        <div class="groupimg">
+            <img src="__ROOT__/{$item.post_pic}" width="582" alt=""/>
+            <a href="{:U('Portal/Article/info')}/id/{$item.id}"><img src="__STATICS__/phone/images/phone-03.png" class="phoneicon" alt=""/></a>
+        </div>
+        <p>{$item.post_excerpt}</p>
+        <ul>
+            <li class="phoneDate">{$item.post_date|date='Y年m月d日',###}</li>
+            <li class="phoneHeart">{$item.cat.cat_name}</li>
+            <li class="phoneAuthor">{$item.post_author}</li>
+        </ul>
+    </div>
+    </foreach>
+</div>
+<div class="page">
+    <a class="prev" href=""></a>
+    <!--<ul>
+        <li><a href="javascript:;" class="hover" onclick="start(1,options.tid)">1</a></li>
+        <li><a href="javascript:;" class="{0}" onclick="start(2,options.tid)">2</a></li>
+        <li><a href="javascript:;" class="{0}" onclick="start(3,options.tid)">3</a></li>
+        <li><a href="javascript:;" class="{0}" onclick="start(4,options.tid)">4</a></li>
+        <li><a href="javascript:;" class="{0}" onclick="start(5,options.tid)">5</a></li>
+    </ul>-->
+    <div class="phonePage">
+        {$phonepage}
+    </div>
+    <a class="next" href=""></a>
+</div>
+<script>
+    $(document).ready(function(){
+        var pageCount = {$totalpage};
+        if($(".phonePage span").length==0){
+            $(".page").hide();
+        }else{
+            $(".prev").attr("href",$(".current").prev().attr("href"));
+            $(".next").attr("href",$(".current").next().attr("href"));
+        }
+    })
+
+</script>
+<tc_include file="Public:phoneFooter"/>
+

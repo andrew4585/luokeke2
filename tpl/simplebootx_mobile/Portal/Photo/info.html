@@ -1,17 +1,17 @@
-<tc_include file="Public:phoneNav"/>
-<div class="head_Within">
-
-    <div class="nav">
-        <ul id="_nav">
-            <li><a href="" class="hover">作品欣赏</a></li>
-            <li><a href="">客片欣赏</a></li>
-            <li><a href="">婚嫁资讯</a></li>
-            <li><a href="">可可之星</a></li>
-        </ul>
-    </div>
-</div><!--head_Within -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0038)http://www.iaviva.com/phone/wuhan.aspx -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <tc_include file="Public:phoneNav"/>
+</head>
+<body>
+<tc_include file="Public:phonebanner"/>
 <div class="phoneContent">
-    <h1>花香维也纳</h1>
-    <img width="640" height="" src="./images/info_02.jpg" alt=""/>
+    <h1>{$info.post_title}</h1>
+    <foreach name="photo" item="item">
+                <img src="__ROOT__/{$item.url}"  width="640" class="small" alt=""/>
+    </foreach>
 </div>
 <tc_include file="Public:phoneFooter"/>
+</body>
+</html>

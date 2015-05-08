@@ -34,12 +34,12 @@ class OauthadminController extends AdminbaseController {
 					'THINK_SDK_QQ' => array(
 							'APP_KEY'    => $qq_key,
 							'APP_SECRET' => $qq_sec,
-							'CALLBACK'   => $call_back . 'qq',
+							'CALLBACK'   =>$callback_uri_root . 'qq',
 					),
 					'THINK_SDK_SINA' => array(
 							'APP_KEY'    => $sina_key,
 							'APP_SECRET' => $sina_sec,
-							'CALLBACK'   => $call_back . 'sina',
+							'CALLBACK'   => $callback_uri_root  . 'sina',
 					),
 			);
 			$result=sp_set_dynamic_config($data);

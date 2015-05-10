@@ -1,9 +1,16 @@
-<tc_include file="Public:phoneNav"/>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0038)http://www.iaviva.com/phone/wuhan.aspx -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <tc_include file="Public:phoneNav"/>
+</head>
+<body>
+<tc_include file="Public:phonebanner"/>
 
 <div class="menu wuhan_menu">
     <ul id="_case">
-        <li><a href="{:U('Portal/Photo/lists')}/cid/{$cateList.1}">外景作品</a></li>
         <li><a href="{:U('Portal/Photo/lists')}/cid/{$cateList.0}">内景作品</a></li>
+        <li><a href="{:U('Portal/Photo/lists')}/cid/{$cateList.1}">外景作品</a></li>
         <li><a href="">主题作品</a></li>
     </ul>
 </div><!--wuhan_menu -->
@@ -34,10 +41,14 @@
     <img src="__STATICS__phone/images/phonecon.png" alt=""/>
     <img src="__STATICS__phone/images/phonewechat.png" alt=""/>
 </div><!--Shortcut -->
-<tc_include file="Public:phoneFooter"/>
 <script>
-
-    
-
-
+    var cate = {$Think.get.cid};
+    if(cate == {$cateList.0}){
+        $("#_case li:first a").addClass("hover");
+    }else if(cate == {$cateList.1}){
+        $("#_case li:eq(1) a").addClass("hover");
+    }
 </script>
+<tc_include file="Public:phoneFooter"/>
+</body>
+</html>

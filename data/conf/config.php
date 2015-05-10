@@ -1,6 +1,6 @@
 <?php	
 return array (
-  'SP_DEFAULT_THEME' => 'simplebootx',
+  'SP_DEFAULT_THEME' => 'simplebootx_mobile',
   'DEFAULT_THEME' => NULL,
   'SP_ADMIN_STYLE' => NULL,
   'URL_MODEL' => 2,
@@ -8,7 +8,7 @@ return array (
   'UCENTER_ENABLED' => 0,
   'COMMENT_NEED_CHECK' => 0,
   'COMMENT_TIME_INTERVAL' => 0,
-  'MOBILE_TPL_ENABLED' => 0,
+  'MOBILE_TPL_ENABLED' => 1,
 	'THINK_SDK_QQ' =>
 	array (
 			'APP_KEY' => '101201968',

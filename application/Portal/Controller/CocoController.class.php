@@ -11,6 +11,9 @@ class CocoController extends IndexController {
         $this->model_cat 	 = D('CocoCat');
     }
     public function index(){
+    	if(sp_is_mobile()){
+    		$this->assign("m_banner_coco",$this->_getAd("m_banner_coco"));
+    	}
         //dump($_SESSION['user']);
         $category = $this->model_cat->where("recommended = 1")->find();
         if(empty($category)){

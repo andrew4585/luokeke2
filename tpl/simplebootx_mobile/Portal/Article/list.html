@@ -10,7 +10,7 @@
 <div class="phoneContent articleContent ">
     <foreach name="list" item="item">
     <div class="phoneArticle">
-        <h2><a href="{:U('Portal/Article/info')}/id/{$item.id}">{$item.post_title}</a></h2>
+        <h2><a href="{:U('Portal/Article/info')}/id/{$item.id}">{$item.post_title|msubstr=0,16}</a></h2>
         <div class="groupimg">
             <img src="__ROOT__/{$item.post_pic}" width="582" alt=""/>
             <a href="{:U('Portal/Article/info')}/id/{$item.id}"><img src="__STATICS__/phone/images/phone-03.png" class="phoneicon" alt=""/></a>

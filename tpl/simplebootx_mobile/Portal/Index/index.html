@@ -83,7 +83,7 @@ $(document).ready(function(){
 	}
 	//----------------------end------------------------
 	//----------------------天气----------------
-	var weatherUrl = "http://rococo1999.com/portal/index/getWeather";
+	var weatherUrl = "{:U('portal/index/getWeather')}";
 	$.post(weatherUrl, function(data){
 		var today = jQuery.parseJSON(data);
 		var photo = today.weather;
@@ -94,7 +94,7 @@ $(document).ready(function(){
 			if(photos[0]==a[i]){b++;}	
 		}
 		if(b==0){photos[0]="晴";}//没有的话就设为默认值为晴天。
-		$("#img_title1 img").attr("src", "__STATICS__/images/wea/"+ photos[0] + ".png");
+		$("#weather img").attr("src", "__STATICS__/images/wea/"+ photos[0] + ".png");
 		var s = today.temperature;
 		$("#low").html(s);
 	});
@@ -108,24 +108,24 @@ $(document).ready(function(){
 	<div class="visual_head">
 		<!--天气-->
 		<div id="weather">
-			<img src="__STATICS__images/wea/晴.png" alt="" />
-			<em id="low">-4C~15C</em>
+			<img src="" alt="" />
+			<em id="low"></em>
 		</div>
 		<!--站点-->
 		<ul class="site">
 			<li class="drop">
 				<a class="main down" target="_self" href="#url">
-					<font>大连</font>
+					<font>{$site_name}</font>
 				</a>
 				<div class="box_c">
-					<div class="box_c_title">
-						<a target="_self" href="#">
-							三亚</a>
-					</div>
-					<div class="box_c_title">
-						<a target="_self" href="#">
-							三亚</a>
-					</div>
+					<foreach name="siteData" item="item">
+							<if condition="$siteid neq $item['id']">
+							<div class="box_c_title">
+								<a target="_self" href="{:U('Portal/Index/index')}/siteid/{$item.id}">
+									{$item.site_name}</a>
+							</div>
+							</if>
+					</foreach>
 				</div>
 			</li>
 		</ul>
@@ -154,7 +154,7 @@ $(document).ready(function(){
 	<div class="main_image">
 		<ul>
 			<foreach name="m_home_head" item="item">
-				<li><a href="{$item.ad_url}"><span style="background:url('{$item.ad_pic}') center top no-repeat"></span></a></li>
+				<li><a href="{$item.ad_url}"><span style="background:url('__ROOT__/{$item.ad_pic}') center top no-repeat"></span></a></li>
 			</foreach>
 		</ul>
 		<a href="javascript:;" id="btn_prev"></a>
@@ -166,13 +166,13 @@ $(document).ready(function(){
 <!------------------导航-->
 <ul class="ul-navi">
 	<li>
-		<a href="{:U('Portal/Photo/index')}">作品欣赏</a>
+		<a href="{:U('Portal/Photo/lists')}">作品欣赏</a>
 	</li>
 	<li>
-		<a href="{:U('Portal/PCustom/index')}">客片欣赏</a>
+		<a href="{:U('Portal/PCustom/lists')}">客片欣赏</a>
 	</li>
 	<li>
-		<a href="{:U('Portal/Article/index')}">婚嫁资讯</a>
+		<a href="{:U('Portal/Article/lists')}">婚嫁资讯</a>
 	</li>
 	<li>
 		<a href="{:U('Portal/coco/index')}">可可之星</a>
@@ -197,35 +197,18 @@ $(document).ready(function(){
 		</div>
 	</div>
 	<!--中部广告-->
-	<div class="mid-ad"><img src="__STATICS__phone/images/mid-ad.png"/></div>
+	<div class="mid-ad"><img src="__ROOT__/{$m_home_middle.0.ad_pic}"/></div>
 	<!--内景作品-->
 	<div class="container-item">
-		<div class="item-title"><a href="#"><img src="images/home_title_inter.jpg"/></a></div>
+		<div class="item-title"><a href="#"><img src="__STATICS__phone/images/home_title_inter.jpg"/></a></div>
 		<div class="items">
-			<div class="item-one">
-				<a href="#">
-					<img src="__STATICS__phone/images/201502071718221822.jpg"/>
-					<div class="one-title">&gt;1月第三季</div>
-				</a>
-			</div>
-			<div class="item-one">
-				<a href="#">
-					<img src="__STATICS__phone/images/201502071718221822.jpg"/>
-					<div class="one-title">&gt;1月第三季</div>
-				</a>
-			</div>
-			<div class="item-one">
-				<a href="#">
-					<img src="__STATICS__phone/images/201502071718221822.jpg"/>
-					<div class="one-title">&gt;1月第三季</div>
-				</a>
-			</div>
-			<div class="item-one">
-				<a href="#">
-					<img src="__STATICS__phone/images/201502071718221822.jpg"/>
-					<div class="one-title">&gt;1月第三季</div>
-				</a>
-			</div>
+			<foreach name="inner" item="item">
+				<div class="item-one">
+					<a href="{:U('Portal/Photo/info')}/id/{$item.id}">
+					<img src="__ROOT__/{$item.post_pic}"/>
+					<div class="one-title">&gt;{$item.post_title|msubstr=0,5}</div></a>
+				</div>
+			</foreach>
 			<div class="clear"></div>
 		</div>
 	</div>
@@ -233,30 +216,13 @@ $(document).ready(function(){
 	<div class="container-item">
 		<div class="item-title"><a href="#"><img src="__STATICS__phone/images/home_title_photo.jpg"/></a></div>
 		<div class="items">
-			<div class="item-one">
-				<a href="#">
-					<img src="__STATICS__phone/images/201502071718221822.jpg"/>
-					<div class="one-title">&gt;1月第三季</div>
-				</a>
-			</div>
-			<div class="item-one">
-				<a href="#">
-					<img src="__STATICS__phone/images/201502071718221822.jpg"/>
-					<div class="one-title">&gt;1月第三季</div>
-				</a>
-			</div>
-			<div class="item-one">
-				<a href="#">
-					<img src="__STATICS__phone/images/201502071718221822.jpg"/>
-					<div class="one-title">&gt;1月第三季</div>
-				</a>
-			</div>
-			<div class="item-one">
-				<a href="#">
-					<img src="__STATICS__phone/images/201502071718221822.jpg"/>
-					<div class="one-title">&gt;1月第三季</div>
-				</a>
-			</div>
+			<foreach name="pcustom" item="item">
+				<div class="item-one">
+					<a href="{:U('Portal/Photo/info')}/id/{$item.id}">
+					<img src="__ROOT__/{$item.post_pic}"/>
+					<div class="one-title">&gt;{$item.post_title|msubstr=0,5}</div></a>
+				</div>
+			</foreach>
 			<div class="clear"></div>
 		</div>
 	</div>

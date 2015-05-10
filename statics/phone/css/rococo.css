@@ -503,9 +503,11 @@ dl.about02 li i a:hover{ color:#000;}
 }
 .cocoList ul li div p {
     position: absolute;
-    right: 17px;
-    bottom: -55px;
-    color: #999999;
+	right: 11px;
+	bottom: -55px;
+	color: #999999;
+	width: 50px;
+	text-align: center;
 }
 
 .cocoList ul li b.cocoTitle {

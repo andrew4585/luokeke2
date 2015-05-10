@@ -3,38 +3,114 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <tc_include file="Public:phoneNav"/>
+    <link href="__STATICS__js/artDialog/skins/default.css" rel="stylesheet">
 </head>
 <body>
 <tc_include file="Public:phonebanner"/>
 
-<img src="__STATICS__phone/images/coco_02.png" width="640" alt="" class="cocoBanner"/>
+<img src="__ROOT__/{$m_banner_coco.0.ad_pic}" width="640" alt="" class="cocoBanner"/>
 <ul class="cocoContact">
-    <li class="phoneDate">2015年1月20日</li>
+    <li class="phoneDate">{$category.cat_name}</li>
     <li class="phoneHeart">我要报名</li>
-    <li class="phoneAuthor">距离结束还有5天</li>
+    <li class="phoneAuthor">距离结束还有{$day}天</li>
 </ul>
 <div class="cocoList">
     <ul>
-        <li>
+    	<foreach name="info" item="item">
+        <li style="border-bottom: 1px solid #cdcdcd;padding-top:10px">
             <div>
-                <img src="http://www.rococo1999.com/data/upload/Enroll/5539f21c857c8.jpg"  width="640px" alt=""/>
-                <img src="__STATICS__phone/images/share-1.png" class="share" alt=""/>
-                <p>300</p>
+                <img src="__ROOT__/{$item.post_pic}"  width="640px" alt=""/>
+                <img src="__STATICS__phone/images/share-1.png" class="share feed-like" alt=""/>
+                <p>{$item.post_like}</p>
             </div>
-            <b class="cocoTitle">花香维也ddf df 纳</b>
-            <p class="cocodesc">没心没肺快活不累逗比到永远</p>
+            <b class="cocoTitle">{$item.post_title}</b>
+            <p class="cocodesc">{$item.post_desc}</p>
         </li>
+        </foreach>
     </ul>
 </div><!--wuhan_list -->
 
 <div class="page"><a class="prev" href="javascript:;" onclick=""></a><ul><li><a href="javascript:;" class="hover" onclick="start(1,options.tid)">1</a></li><li><a href="javascript:;" class="{0}" onclick="start(2,options.tid)">2</a></li><li><a href="javascript:;" class="{0}" onclick="start(3,options.tid)">3</a></li><li><a href="javascript:;" class="{0}" onclick="start(4,options.tid)">4</a></li><li><a href="javascript:;" class="{0}" onclick="start(5,options.tid)">5</a></li></ul><a class="next" href="javascript:;" onclick="start(options.pageindex+1)"></a></div>
 
 <div class="Shortcut">
-    <a href="" class="a01">我要报名</a>
-    <a href="" class="a02">联络客服</a>
-    <a href="sms:18672386450" class="a03">网上咨询</a>
-</div>
+    <img src="__STATICS__phone/images/phonecon.png" alt=""/>
+    <img src="__STATICS__phone/images/phonewechat.png" alt=""/>
+</div><!--Shortcut -->
 
 <tc_include file="Public:phoneFooter"/>
 </body>
+<script>
+     //全局变量
+     var GV = {
+         HOST:"{$_SERVER['HTTP_HOST']}",
+         DIMAUB: "__ROOT__/",
+         JS_ROOT: "statics/js/",
+         TOKEN: ""
+     };
+ </script>
+<script src="__STATICS__js/layer/layer.js"></script>
+<script type="text/javascript" src="__STATICS__js/wind.js"></script>
+<script>
+$(function(){
+	$(".feed-like").click(function () {
+        var love = $(this);
+        var id = love.find("input").val();
+        var url = "__ROOT__/Portal/Coco/like";
+        var number = $(this).next("p").html();
+        number = parseInt(number);
+        $.post(url,{id:id},function(data){
+            if(data.status){
+                love.find("font").html(++number);
+                artDialog_alert('投票成功',2);
+            }else{
+                artDialog_alert(data.info,1);
+
+            }
+        });
+	});
+	
+});
+function artDialog_alert(content,icon){
+    var iconStr = '';
+    Wind.use("artDialog",function(){
+    	switch(icon){
+            case 1:
+                iconStr = 'error';
+                if(content!=1){
+                	art.dialog({
+	                    id:'error',
+	                    icon:iconStr,
+	                    fixed: true,
+	                    lock: true,
+	                    background:"#CCCCCC",
+	                    opacity:0.2,
+	                    content: content,
+	                   // okVal: '登陆',
+	                   // ok: function(){location.href="{:U('User/login')}";},
+	                    cancel:true
+	                });
+                	return;
+                }else{
+                	content='请不要重复投票！';
+                }
+                break;
+            case 2:
+                iconStr = 'succeed';break;
+            default:
+                iconStr = '';break;
+        }
+    	art.dialog({
+            id:'error',
+            icon:iconStr,
+            fixed: true,
+            lock: true,
+            background:"#CCCCCC",
+            opacity:0.2,
+            content: content,
+            cancelVal:'确定',
+            cancel:true
+        });
+    });
+}
+</script>
 </html>

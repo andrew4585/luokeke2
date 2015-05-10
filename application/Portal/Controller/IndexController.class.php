@@ -21,7 +21,7 @@ class IndexController extends HomeBaseController {
     //首页
 	public function index() {
 		try{
-			if(!sp_is_mobile()){
+			if(sp_is_mobile()){
 				//首页头部轮播
 				$this->assign("m_home_head",$this->_getAd("m_home_head"));
 				//中部广告

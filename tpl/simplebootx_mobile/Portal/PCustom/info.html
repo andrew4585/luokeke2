@@ -6,29 +6,23 @@
 </head>
 <body>
 <tc_include file="Public:phonebanner"/>
-<div class="head_Within">
-    <div class="nav">
-        <ul id="_nav">
-            <li><a href="">作品欣赏</a></li>
-            <li><a href="" class="hover">客片欣赏</a></li>
-            <li><a href="" >婚嫁资讯</a></li>
-            <li><a href="">可可之星</a></li>
-        </ul>
-    </div>
-</div><!--head_Within -->
 <div class="daydaymenu">
-    <a href="" class="prev"></a>
+	<notempty name="prev">
+		<a href="{:U('Portal/PCustom/info')}/id/{$prev}" class="prev"></a>
+	</notempty>
 <span>
-<b>2015年5月第一季</b>
+<b>{$info.post_title}</b>
 <i>洛可可用<i style="display:inline;color:red">真实客片</i>说话</i>
 </span>
-    <a href="" class="next"></a>
-    <ins><a href="">查看更多客片</a></ins>
+	<notempty name="next">
+		<a href="{:U('Portal/PCustom/info')}/id/{$next}" class="next"></a>
+	</notempty>
+    <ins><a href="{:U('Portal/PCustom/lists')}">查看更多客片</a></ins>
 </div>
 <div class="custom">
-    <img src="./images/custom_05.jpg" width="640px" alt=""/>
-    <img src="./images/custom_05.jpg" width="640px" alt=""/>
-    <img src="./images/custom_05.jpg" width="640px" alt=""/>
+	<foreach name="photo" item="item">
+		<img src="__ROOT__/{$item.url}" alt="" style="width:640px;">
+	</foreach>
 </div>
 
 <div class="phoneContact">

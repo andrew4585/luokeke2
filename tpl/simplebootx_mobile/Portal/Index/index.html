@@ -1,0 +1,265 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>洛可可摄影</title>
+<meta http-equiv = "X-UA-Compatible" content = "IE=edge,chrome=1" />
+<meta name="Description" content="">
+<meta name="Keywords" content="">
+<script type="text/javascript">
+	if(/Android (\d+\.\d+)/.test(navigator.userAgent)){
+		var version = parseFloat(RegExp.$1);
+		if(version>2.3){
+			var phoneScale = parseInt(window.screen.width)/640;
+			document.write('<meta name="viewport" content="width=640, minimum-scale = '+ phoneScale +', maximum-scale = '+ phoneScale +', target-densitydpi=device-dpi">');
+		}else{
+			document.write('<meta name="viewport" content="width=640, target-densitydpi=device-dpi">');
+		}
+	}else{
+		document.write('<meta name="viewport" content="width=640, user-scalable=no, target-densitydpi=device-dpi">');
+	}
+</script>
+<meta name="viewport" content="width=640, user-scalable=no, target-densitydpi=device-dpi">
+<link type="text/css" href="__STATICS__phone/css/rococo.css" rel="stylesheet">
+<link rel="stylesheet" href="__STATICS__phone/css/home.css" />
+<script src="__STATICS__phone/js/jquery-1.8.3.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="__STATICS__phone/js/jquery.touchSlider.js" ></script>
+<script type="text/javascript" src="__STATICS__phone/js/jquery.event.drag-1.5.min.js" ></script>
+<style>[touch-action="none"]{ -ms-touch-action: none; touch-action: none; }[touch-action="pan-x"]{ -ms-touch-action: pan-x; touch-action: pan-x; }[touch-action="pan-y"]{ -ms-touch-action: pan-y; touch-action: pan-y; }[touch-action="scroll"],[touch-action="pan-x pan-y"],[touch-action="pan-y pan-x"]{ -ms-touch-action: pan-x pan-y; touch-action: pan-x pan-y; }</style></head>
+<script type="text/javascript">
+$(document).ready(function(){
+	//----------------------首页轮播效果------------
+	$dragBln = false;
+	$length = $(".flicking_con a").length;
+	if($length==1){
+		$(".flicking_con").css("display","none");
+		$("#btn_prev").css("display","none");
+		$("#btn_next").css("display","none");
+	}else{
+		$(".main_image").touchSlider({
+			flexible : true,
+			speed : 200,
+			btn_prev : $("#btn_prev"),
+			btn_next : $("#btn_next"),
+			paging : $(".flicking_con a"),
+			counter : function (e){
+				$(".flicking_con a").removeClass("on").eq(e.current-1).addClass("on");
+			}
+		});
+		$(".flicking_con").css("left",320-$length*11);
+		$(".main_image").bind("mousedown", function() {
+			$dragBln = false;
+		});
+		
+		$(".main_image").bind("dragstart", function() {
+			$dragBln = true;
+		});
+		
+		$(".main_image a").click(function(){
+			if($dragBln) {
+				return false;
+			}
+		});
+		
+		timer = setInterval(function(){
+			$("#btn_next").click();
+		}, 10000);
+		
+		$(".main_visual").hover(function(){
+			clearInterval(timer);
+		},function(){
+			timer = setInterval(function(){
+				$("#btn_next").click();
+			},10000);
+		});
+		
+		$(".main_image").bind("touchstart",function(){
+			clearInterval(timer);
+		}).bind("touchend", function(){
+			timer = setInterval(function(){
+				$("#btn_next").click();
+			}, 10000);
+		});
+	}
+	//----------------------end------------------------
+	//----------------------天气----------------
+	var weatherUrl = "http://rococo1999.com/portal/index/getWeather";
+	$.post(weatherUrl, function(data){
+		var today = jQuery.parseJSON(data);
+		var photo = today.weather;
+		var photos = photo.split("转");
+		var a = new Array("暴雪", "暴雨", "大雪", "大雨","多云","浮尘","晴","沙尘暴","雾","小雪","小雨","阴","雨夹雪","阵雪","阵雨","中雪","中雨","雷阵雨");
+		var b = 0;
+		for (var i = 0;i < a.length;i++) {
+			if(photos[0]==a[i]){b++;}	
+		}
+		if(b==0){photos[0]="晴";}//没有的话就设为默认值为晴天。
+		$("#img_title1 img").attr("src", "__STATICS__/images/wea/"+ photos[0] + ".png");
+		var s = today.temperature;
+		$("#low").html(s);
+	});
+	//--------------------------end---------------
+});
+</script>
+<body>
+<!------------------网站轮播-->
+<div class="main_visual">
+	<!--头部-->
+	<div class="visual_head">
+		<!--天气-->
+		<div id="weather">
+			<img src="__STATICS__images/wea/晴.png" alt="" />
+			<em id="low">-4C~15C</em>
+		</div>
+		<!--站点-->
+		<ul class="site">
+			<li class="drop">
+				<a class="main down" target="_self" href="#url">
+					<font>大连</font>
+				</a>
+				<div class="box_c">
+					<div class="box_c_title">
+						<a target="_self" href="#">
+							三亚</a>
+					</div>
+					<div class="box_c_title">
+						<a target="_self" href="#">
+							三亚</a>
+					</div>
+				</div>
+			</li>
+		</ul>
+		<script type="text/javascript">
+			$(function () {
+				var nav_cLi = $(".visual_head .site li");
+				var left = $(".site").offset().left+50;
+				nav_cLi.click(function() {
+					var isdisplay=$(".box_c").css("display");
+					if(isdisplay=='block'){
+						$(this).find("a").removeClass("current");
+						$(this).find(".box_c").stop().slideUp();
+					}else{
+						$(this).find("a").addClass("current");
+						$(this).find(".box_c").stop().slideDown();
+					}
+				})
+			})
+		</script>
+	</div>
+	<div class="flicking_con">
+		<foreach name="m_home_head" item="item" key="key">
+			<a href="#">{$key}</a>
+		</foreach>
+	</div>
+	<div class="main_image">
+		<ul>
+			<foreach name="m_home_head" item="item">
+				<li><a href="{$item.ad_url}"><span style="background:url('{$item.ad_pic}') center top no-repeat"></span></a></li>
+			</foreach>
+		</ul>
+		<a href="javascript:;" id="btn_prev"></a>
+		<a href="javascript:;" id="btn_next"></a>
+	</div>
+</div>   
+<div class="visual_bottom"></div>
+<!------------------end-->
+<!------------------导航-->
+<ul class="ul-navi">
+	<li>
+		<a href="{:U('Portal/Photo/index')}">作品欣赏</a>
+	</li>
+	<li>
+		<a href="{:U('Portal/PCustom/index')}">客片欣赏</a>
+	</li>
+	<li>
+		<a href="{:U('Portal/Article/index')}">婚嫁资讯</a>
+	</li>
+	<li>
+		<a href="{:U('Portal/coco/index')}">可可之星</a>
+	</li>
+</ul>
+<!------------------end-->
+<!------------------container-->
+<div class="home-container">
+	<div class="clear"></div>
+	<!--外景作品-->
+	<div class="container-item">
+		<div class="item-title"><a href="#"><img src="__STATICS__phone/images/home_title_outer.jpg"/></a></div>
+		<div class="items">
+			<foreach name="outer" item="item">
+				<div class="item-one">
+					<a href="{:U('Portal/Photo/info')}/id/{$item.id}">
+					<img src="__ROOT__/{$item.post_pic}"/>
+					<div class="one-title">&gt;{$item.post_title|msubstr=0,5}</div></a>
+				</div>
+			</foreach>
+			<div class="clear"></div>
+		</div>
+	</div>
+	<!--中部广告-->
+	<div class="mid-ad"><img src="__STATICS__phone/images/mid-ad.png"/></div>
+	<!--内景作品-->
+	<div class="container-item">
+		<div class="item-title"><a href="#"><img src="images/home_title_inter.jpg"/></a></div>
+		<div class="items">
+			<div class="item-one">
+				<a href="#">
+					<img src="__STATICS__phone/images/201502071718221822.jpg"/>
+					<div class="one-title">&gt;1月第三季</div>
+				</a>
+			</div>
+			<div class="item-one">
+				<a href="#">
+					<img src="__STATICS__phone/images/201502071718221822.jpg"/>
+					<div class="one-title">&gt;1月第三季</div>
+				</a>
+			</div>
+			<div class="item-one">
+				<a href="#">
+					<img src="__STATICS__phone/images/201502071718221822.jpg"/>
+					<div class="one-title">&gt;1月第三季</div>
+				</a>
+			</div>
+			<div class="item-one">
+				<a href="#">
+					<img src="__STATICS__phone/images/201502071718221822.jpg"/>
+					<div class="one-title">&gt;1月第三季</div>
+				</a>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</div>
+	<!--客照-->
+	<div class="container-item">
+		<div class="item-title"><a href="#"><img src="__STATICS__phone/images/home_title_photo.jpg"/></a></div>
+		<div class="items">
+			<div class="item-one">
+				<a href="#">
+					<img src="__STATICS__phone/images/201502071718221822.jpg"/>
+					<div class="one-title">&gt;1月第三季</div>
+				</a>
+			</div>
+			<div class="item-one">
+				<a href="#">
+					<img src="__STATICS__phone/images/201502071718221822.jpg"/>
+					<div class="one-title">&gt;1月第三季</div>
+				</a>
+			</div>
+			<div class="item-one">
+				<a href="#">
+					<img src="__STATICS__phone/images/201502071718221822.jpg"/>
+					<div class="one-title">&gt;1月第三季</div>
+				</a>
+			</div>
+			<div class="item-one">
+				<a href="#">
+					<img src="__STATICS__phone/images/201502071718221822.jpg"/>
+					<div class="one-title">&gt;1月第三季</div>
+				</a>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</div>
+</div>
+<!--------------------------container end-->
+<tc_include file="Public:phoneFooter"/>

@@ -21,51 +21,67 @@ class IndexController extends HomeBaseController {
     //首页
 	public function index() {
 		try{
-// 			dump($this->_getAd("home_head"));exit;
-			//首页头部轮播
-			$this->assign("home_head",$this->_getAd("home_head"));
-			//首页中部轮播
-			$this->assign("home_middle",$this->_getAd("home_middle"));
-			//首页中部广告
-			$this->assign("home_mid_pic",$this->_getAd("home_mid_pic"));
-			//最新活动
-			$active = $this->_getAd("home_active");
-			//$active = $this->getHomeContent("Active",false,array(),5);
-			$this->assign("active",$active);
-			//作品
-			$ptheme = $this->getHomeContent("Photo",true);
-			$this->assign("photo",$ptheme);
-			//团购套系
-			$group = $this->getHomeContent("Group",true,array("post_price","post_num"));
- 			$this->assign("group",$group);
-			//客照
-			$this->assign("pcustom",$this->getHomeContent("Pcustom",true));
-			//婚纱礼服
-			$this->assign("dress",$this->getHomeContent("Dress",false,array("rent","sale_price")));
-			//好评
-			$this->assign("good",$this->getHomeContent("Good",false,array("head_img","post_excerpt"),30));
-			//婚嫁常识
-			$article_cat 	= D("ArticleCat");
-			$model_article	= D("Article");
-			$articleCat 	= $article_cat->select();
-			$articleC 		= $article_cat->limit(0,5)->select();
-			$list 			= $this->getHomeContent("Article",false,array("post_excerpt","post_date","cid"),6);
-			$articles 		= array();
-			
-			foreach ($articleC as $item){
-				$item['article'] 	= $model_article->field("id,post_title,post_pic,post_excerpt,post_date")
-										->where("cid = ".$item['id']." and status=1")
-										->order("listorder")->limit(0,6)
-										->select();
-				array_push($articles, $item);
+			if(!sp_is_mobile()){
+				//首页头部轮播
+				$this->assign("m_home_head",$this->_getAd("m_home_head"));
+				//中部广告
+				$this->assign("m_home_middle",$this->_getAd("m_home_middle"));
+				//外景作品
+				$outer = $this->getHomeContent("Photo",true,array(),4,array("cid=3"));
+				$this->assign("outer",$outer);
+				//内景作品
+				$inner = $this->getHomeContent("Photo",true,array(),4,array("cid=1"));
+				$this->assign("inner",$inner);
+				//客照
+				$this->assign("pcustom",$this->getHomeContent("Pcustom",true,array(),4));
+			}else{
+				//首页头部轮播
+				$this->assign("home_head",$this->_getAd("home_head"));
+				//首页中部轮播
+				$this->assign("home_middle",$this->_getAd("home_middle"));
+				//首页中部广告
+				$this->assign("home_mid_pic",$this->_getAd("home_mid_pic"));
+				//最新活动
+				$active = $this->_getAd("home_active");
+				//$active = $this->getHomeContent("Active",false,array(),5);
+				$this->assign("active",$active);
+				//作品
+				$ptheme = $this->getHomeContent("Photo",true);
+				$this->assign("photo",$ptheme);
+				//团购套系
+				$group = $this->getHomeContent("Group",true,array("post_price","post_num"));
+				$this->assign("group",$group);
+				//客照
+				$this->assign("pcustom",$this->getHomeContent("Pcustom",true));
+				//婚纱礼服
+				$this->assign("dress",$this->getHomeContent("Dress",false,array("rent","sale_price")));
+				//好评
+				$this->assign("good",$this->getHomeContent("Good",false,array("head_img","post_excerpt"),30));
+				//婚嫁常识
+				$article_cat 	= D("ArticleCat");
+				$model_article	= D("Article");
+				$articleCat 	= $article_cat->select();
+				$articleC 		= $article_cat->limit(0,5)->select();
+				$list 			= $this->getHomeContent("Article",false,array("post_excerpt","post_date","cid"),6);
+				$articles 		= array();
+					
+				foreach ($articleC as $item){
+					$item['article'] 	= $model_article->field("id,post_title,post_pic,post_excerpt,post_date")
+					->where("cid = ".$item['id']." and status=1")
+					->order("listorder")->limit(0,6)
+					->select();
+					array_push($articles, $item);
+				}
+					
+				$this->assign("articleCat",$articleCat);//分类
+				$this->assign("articles",$articles);
+				$this->assign('index','index');
+				//广告位
+				$this->assign("promise",$this->_getAd("promise"));
+				$this->assign("servePromise",$this->_getAd("servePromise"));
 			}
+// 			dump($this->_getAd("home_head"));exit;
 			
-			$this->assign("articleCat",$articleCat);//分类
-			$this->assign("articles",$articles);
-			$this->assign('index','index');
-			//广告位
-			$this->assign("promise",$this->_getAd("promise"));
-			$this->assign("servePromise",$this->_getAd("servePromise"));
 		}catch (\Exception $e){
 			$this->error($e->getMessage());
 		}
@@ -79,11 +95,11 @@ class IndexController extends HomeBaseController {
      * @param array	  $extra	       额外字段,自带字段：id,post_pic,post_title,post_url
      * @param int	  $limitNumber 数据条数，默认：20条
      */
-    public function getHomeContent($model_class,$siteCharge=false,$extra=array(),$limitNumber=20){
+    public function getHomeContent($model_class,$siteCharge=false,$extra=array(),$limitNumber=20,$extraWhere=array()){
     	$model		= D($model_class);
     	$fieldArr	= array("id","post_pic","post_title","post_url");
     	//istop:置顶，status：是否显示
-    	$whereArr	= array("istop=1","status=1",);
+    	$whereArr	= array_merge($extraWhere,array("istop=1","status=1"));;
     	if($siteCharge){
     		array_push($whereArr, "site_id=$this->siteId");
     	}

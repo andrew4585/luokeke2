@@ -47,7 +47,7 @@
 	            <th width="80">站点</th>
                 <th width="50">缩略图</th>
 	            <th width="120"><span>发布时间</span></th>
-	            <th width="120">操作</th>
+	            <th width="140">操作</th>
 	          </tr>
         </thead>
         	<foreach name="list" item="vo">
@@ -68,7 +68,8 @@
 		            <td>{$vo.post_date|date="Y-m-d H:i:s",###}</td>
 		            <td>
 		            	<a href="{:U('PCustom/sf_edit')}/id/{$vo.id}">修改</a>|
-		            	<a href="{:U('PCustom/delete')}/id/{$vo.id}" class="J_ajax_del" >删除</a>
+		            	<a href="{:U('PCustom/delete')}/id/{$vo.id}" class="J_ajax_del" >删除</a>|
+		            	<a href="{:U('PCustom/sf2custom')}/id/{$vo.id}" class="J_ajax_dialog_btn" data-msg="您确定转移吗？">转移到客照</a>
 					</td>
 	          	</tr>
           </foreach>

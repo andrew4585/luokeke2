@@ -97,9 +97,9 @@ class PCustomController extends AdminbaseController {
 		}
 	}
 	
-	private  function _lists(){
+	private  function _lists($cid=0){
 		//status=1,表示文章未删除，0表示文章已删除
-		$where_ands =array("status=1");
+		$where_ands =array("status=1","cid=$cid");
 		//istop:首页置顶，recommended：推荐，listorder：排序，post_date:发布时间
 		$order		="istop desc,recommended desc,listorder ASC,post_date DESC";
 		$fields=array(
@@ -225,6 +225,34 @@ class PCustomController extends AdminbaseController {
 			} else {
 				$this->error("fail");
 			}
+		}
+	}
+	
+	//--------------------------------------幸福抢先看
+	function sf_index(){
+		//列表数据
+		$this->_lists(1);
+		$this->commonParam();
+		$this->display();
+	}
+	
+	function sf_add(){
+		$this->add();
+	}
+	
+	public function sf_edit(){
+		if(IS_POST){
+			$this->edit();
+		}else{
+			$id=  $_REQUEST['id'];
+			if(empty($id)){
+				$this->redirect("PCustom/sf_index");
+			}
+			$info = $this->model_obj->where("id=$id")->find();
+			$this->assign($info);
+			$this->assign("smeta",json_decode($info['smeta'],true));
+			$this->commonParam();
+			$this->display();
 		}
 	}
 	

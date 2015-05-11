@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBliC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<tc_include file="Public:head_info"/>
+	<link rel="stylesheet" type="text/css" href="__STATICS__css/info.css">
+	<script type="text/javascript" src="__STATICS__js/jqueryPhoto.js"></script>
+	<style>
+	#info-func ul li {
+	display: block;
+	float: left;
+	width: 115px;
+	height: 30px;
+	background: #4C4D4F;
+	border-radius: 4px;
+	behavior: url(__STATICS__css/iecss3.htc);
+	position:relative;
+	z-index:2;
+	margin-left: 11px;
+	color: #ffffff;
+	}
+	</style>
+</head>
+<body>
+	<div class="head">
+	<!--头部导航标题js-->
+	<tc_include file="Public:nav"/>
+	<!-- banner轮播 -->
+	<tc_include file="Public:banner"/>	
+	<!--内容部分	-->
+	<div id="conter" style="background: #f3f3f3">
+		<div id="info">
+			<!--头内容（标题、摘要、属性）-->
+	        <div id="info-head" style="width:900px;min-height:92px;">
+	        	<div id="info-title" align="center">{$info.post_title}</div>
+	        	<div id="info-excerpt" align="center">{$info.post_excerpt}</div>
+	        </div>
+    	</div>
+           <!--轮播开始-->
+		<div class="main_kz">
+		<img src="__STATICS__images/tpl/grey_bottom.png" style="margin:-1px auto 0"/>
+		<img src="__STATICS__images/tpl/grey_bottom.png" style="margin:-18px auto 0"/>
+			<div class="left">
+				<div class="mod18"> <span id="prevTop" class="btn prev"></span> <span id="nextTop" class="btn next"></span>
+					<div id="picBox" class="picBox">
+						<ul class="cf">
+							<foreach name="photo" item="item">
+								<li><img src="__ROOT__/{$item.url}" alt="" style="width:640px;height:640px;"><span>{$k}</span></li>
+							</foreach>
+						</ul>
+					</div>
+					<div class="zz_list">
+					<span id="prev" class="btn prev"></span> <span id="next" class="btn next"></span>
+					<div id="listBox" class="listBox">
+						<ul style="width: 1992px;" class="cf">
+							<foreach name="photo" item="item">
+								<li class=""><i class="arr2"></i><img src="__ROOT__/{$item.url}" alt="" style="width:137px;height:137px;"></li>
+							</foreach>
+						</ul>
+					</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--滚动向上-->
+		<div class="digg" id="roll_top" style="width:1200px;margin:0 auto 20px;" align="center">
+			<img src="__STATICS__images/tpl/dress/scoll_top.png" style="cursor:pointer;"/>
+		</div>
+		<script type="text/javascript" src="__STATICS__js/97zzw.js"></script>
+		
+		<!--结束-->
+		<!-- 分割线 -->
+		<div class="foot_border_kz" align="center">
+			<img src="__STATICS__images/tpl/grey_bottom.png" style="margin-top:-1px">
+		</div>
+		<!-- 蕴含美态 -->
+		<div class="title_foot_01"></div>
+		<div align="center" style="margin-bottom:40px;">
+			<img src="__ROOT__/{$desc_beautiful.0.ad_pic}">
+		</div>
+		<!--广告位置-->
+		<tc_include file="Public:second_page_3"/>
+	</div>
+		<!--轮播结束-->
+		<!--服务承诺-->
+		<tc_include file="Public:servePromise"/>
+		<!--底部的图片-->
+		<div class="i_003" >
+			<img src="__STATICS__images/tpl/ad_04_01.jpg" alt="" />
+		</div>
+		<!--@@@@@@@-->
+		<div class="clears"></div>
+	</div>
+	<!--底部-->
+	<tc_include file="Public:footer"/>
+</body>
+
+</html>

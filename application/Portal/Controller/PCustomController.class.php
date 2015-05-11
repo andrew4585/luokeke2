@@ -19,15 +19,15 @@ class PCustomController extends IndexController {
 		if(empty($id)){
 			$this->error("参数丢失");
 		}
-		$where		= "id=$id and status=1";
+		$where		= "id=$id and status=1 and cid=0";
 		$info		= $this->model_pcustom->where($where)->find();
 		if(!empty($info['post_url'])){
 			header("location:".$info['post_url']);exit;
 		}
 		//上一组
-		$prev	 	= $this->model_pcustom->where("id>$id and status=1")->order("id asc")->getField("id");
+		$prev	 	= $this->model_pcustom->where("id>$id and status=1 and cid=0")->order("id asc")->getField("id");
 		//下一组
-		$next		= $this->model_pcustom->where("id<$id and status=1")->order("id DESC")->getField("id");
+		$next		= $this->model_pcustom->where("id<$id and status=1 and cid=0")->order("id DESC")->getField("id");
 		$this->assign("prev",$prev);
 		$this->assign("next",$next);
 		
@@ -55,7 +55,7 @@ class PCustomController extends IndexController {
 		$this->display();
 	}
 	public function lists(){
-		$this->_list($this->model_pcustom,true,array(),array(),16,"recommended desc,listorder");
+		$this->_list($this->model_pcustom,true,array(),array("cid=0"),16,"recommended desc,listorder,id desc");
 		$this->assign("ad_dress",$this->_getAd("dress"));
 		$this->assign("desc_beautiful",$this->_getAd("desc_beautiful"));
 		//banner
@@ -66,6 +66,37 @@ class PCustomController extends IndexController {
 		$this->assign("servePromise",$this->_getAd("servePromise"));
 
 		$this->display("list");
+	}
+	
+	/**
+	 * 幸福抢先看
+	 */
+	public function sf_info(){
+		$id			= I("get.id");
+		if(empty($id)){
+			$this->error("参数丢失");
+		}
+		$where		= "keywords='$id' and status=1 and cid=1";
+		$info		= $this->model_pcustom->where($where)->find();
+		if(!$info) $this->error("无效链接");
+		if(!empty($info['post_url'])){
+			header("location:".$info['post_url']);exit;
+		}
+	
+		//banner
+		$this->assign("home_head",$this->_getAd("banner_pcustom"));
+		//3个摆放在一起的二级页面广告位
+		$this->assign("second_page_3",$this->_getAd("second_page_3"));
+		//服务承诺
+		$this->assign("servePromise",$this->_getAd("servePromise"));
+		//广告位--蕴含美态
+		$this->assign("desc_beautiful",$this->_getAd("desc_beautiful"));
+		//详细内容
+		$this->assign("info",$info);
+		//图片信息
+		$photo	= json_decode($info['smeta'],true);
+		$this->assign("photo",$photo['photo']);
+		$this->display();
 	}
 	
 	/**

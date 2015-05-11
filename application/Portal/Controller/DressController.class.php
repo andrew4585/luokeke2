@@ -81,7 +81,7 @@ class DressController extends IndexController {
 		if(empty($category)){
 			$category = 1;
 		}
-		$this->_list($this->model_dress,false,array(),array("category={$category}"));
+		$this->_list($this->model_dress,false,array("sale_price","rent"),array("category={$category}"));
 		$this->assign("ad_dress",$this->_getAd("dress"));
 		//banner
 		$this->assign("home_head",$this->_getAd("banner_dress"));

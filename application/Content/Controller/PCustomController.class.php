@@ -256,4 +256,16 @@ class PCustomController extends AdminbaseController {
 		}
 	}
 	
+	function sf2custom(){
+		if(isset($_GET['id'])){
+			$id = intval(I("get.id"));
+			$data['cid']=0;
+			if ($this->model_obj->where("id=$id")->save($data)) {
+				$this->success("转移成功！");
+			} else {
+				$this->error("转移失败！");
+			}
+		}
+	}
+	
 }

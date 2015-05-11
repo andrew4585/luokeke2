@@ -7,23 +7,19 @@
 <body>
 <tc_include file="Public:phonebanner"/>
 
-<div class="phoneContent articleContent ">
-    <foreach name="list" item="item">
-    <div class="phoneArticle">
-        <h2><a href="{:U('Portal/Article/info')}/id/{$item.id}">{$item.post_title|msubstr=0,16}</a></h2>
-        <div class="groupimg">
-            <img src="__ROOT__/{$item.post_pic}" width="582" alt=""/>
-            <a href="{:U('Portal/Article/info')}/id/{$item.id}"><img src="__STATICS__/phone/images/phone-03.png" class="phoneicon" alt=""/></a>
-        </div>
-        <p>{$item.post_excerpt}</p>
-        <ul>
-            <li class="phoneDate">{$item.post_date|date='Y年m月d日',###}</li>
-            <li class="phoneHeart">{$item.cat.cat_name}</li>
-            <li class="phoneAuthor">{$item.post_author}</li>
-        </ul>
-    </div>
-    </foreach>
-</div>
+<div class="wuhan_list">
+    <ul>
+        <foreach name="list" item="item">
+            <li>
+                <a href="{:U('Portal/dress/info')}/id/{$item.id}" style="margin-bottom: 10px;">
+                <ins><img src="__ROOT__/{$item.post_pic}" width="290" height="430" /></ins>
+                    <span> 出租价格：{$item.rent}元/件</span><br>
+                    <span> 出售价格：{$item.sale_price}元/件</span>
+                </a>
+            </li>
+        </foreach>
+    </ul>
+</div><!--wuhan_list -->
 <div class="page">
     <a class="prev" href=""></a>
 
@@ -32,6 +28,7 @@
     </div>
     <a class="next" href=""></a>
 </div>
+<tc_include file="Public:phoneCon"/>
 <script>
     $(document).ready(function(){
         //var pageCount = {$totalpage};

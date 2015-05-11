@@ -45,7 +45,7 @@
                         <empty name="user.avatar">
                             <img  class="headerImg"  src="__STATICS__images/tpl/comment/user_default.png" alt=""/>
                             <else/>
-                            <img class="headerImg" src="{:sp_get_user_avatar_url($user.avatar)}" alt=""/>
+                            <img class="headerImg" src="{$user.avatar|sp_get_user_avatar_url}" alt=""/>
                         </empty>
                         <p>
                             <b>您好，{$user.user_login}</b><br>

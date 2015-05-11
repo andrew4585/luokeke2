@@ -75,7 +75,6 @@ function sp_get_theme_path(){
  * 获取用户头像相对网站根目录的地址
  */
 function sp_get_user_avatar_url($avatar){
-	
 	if($avatar){
 		if(strpos($avatar, "http")===0){
 			return $avatar;

@@ -519,3 +519,34 @@ dl.about02 li i a:hover{ color:#000;}
 .cocoList ul li p.cocodesc {
     font-size:20px ;
 }
+/**dress**/
+.phonemenu{
+    text-align: center;
+}
+.phonemenu ul{
+    width:100%;
+    overflow: hidden;
+}
+.phonemenu ul li{
+    width: 120px;
+}
+.phonemenu ul li a{
+    width: 90%;
+    margin: 0 auto;
+    display: block;
+    line-height: 90px;
+    height: 90px;
+    white-space: nowrap;
+    color: #181818;
+    font-size: 30px;
+    text-align: center;
+}
+.phonefix{
+    position: fixed;
+    bottom: 0px;
+    z-index: 1000;
+}
+.phonefix img {
+    display: block;
+    float: left;
+}

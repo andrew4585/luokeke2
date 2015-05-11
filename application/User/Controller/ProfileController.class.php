@@ -12,7 +12,12 @@ class ProfileController extends MemberbaseController {
 		parent::_initialize();
 		$this->users_model=D("Common/Users");
 	}
-	
+
+	function __construct(){
+		parent::__construct();
+		$this->assign("home_head",$this->_getAd("banner_user"));
+	}
+
     //编辑用户资料
 	public function edit() {
 		$userid=sp_get_current_userid();

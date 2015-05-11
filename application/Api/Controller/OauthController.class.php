@@ -14,7 +14,7 @@ class OauthController extends HomeBaseController {
 	//登录地址
 	public function login($type = null){
 		empty($type) && $this->error('参数错误');
-		$_SESSION['login_http_referer']=$_SERVER["HTTP_REFERER"];
+		//$_SESSION['login_http_referer']=$_SERVER["HTTP_REFERER"];
 		//加载ThinkOauth类并实例化一个对象
 		import("ThinkOauth");
 		$sns  = \ThinkOauth::getInstance($type);
@@ -28,7 +28,7 @@ class OauthController extends HomeBaseController {
 		(empty($type)) && $this->error('参数错误');
 		
 		if(empty($code)){
-			redirect(__ROOT__."/");
+			redirect(U('user/center/index'));
 		}
 	
 		//加载ThinkOauth类并实例化一个对象
@@ -77,7 +77,7 @@ class OauthController extends HomeBaseController {
 	}
 	
 	private function _get_login_redirect(){
-		return empty($_SESSION['login_http_referer'])?__ROOT__."/":$_SESSION['login_http_referer'];
+		return empty($_SESSION['login_http_referer'])?U('user/center/index'):$_SESSION['login_http_referer'];
 	}
 	
 	//绑定第三方账号

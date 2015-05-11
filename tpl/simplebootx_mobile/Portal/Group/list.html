@@ -6,26 +6,9 @@
 </head>
 <body>
 <tc_include file="Public:phonebanner"/>
+<h1>sale<span>团购套系</span></h1>
+<div class="grouplist">
 
-<div class="menu wuhan_menu">
-    <ul id="_case">
-        <li><a href="{:U('Portal/Photo/lists')}/cid/{$cateList.0}">内景作品</a></li>
-        <li><a href="{:U('Portal/Photo/lists')}/cid/{$cateList.1}">外景作品</a></li>
-        <!-- <li><a href="">主题作品</a></li> -->
-    </ul>
-</div><!--wuhan_menu -->
-
-<div class="wuhan_list">
-    <ul>
-        <foreach name="list" item="item">
-        <li>
-            <a href="{:U('Portal/Photo/info')}/id/{$item.id}">
-                <ins><img src="__ROOT__/{$item.post_pic}" width="290" height="430" /></ins>
-                <b>{$item.post_title}</b><b class="phoneEng">ROCOCO WEDDING PHOTO</b>
-            </a>
-        </li>
-        </foreach>
-    </ul>
 </div><!--wuhan_list -->
 
 

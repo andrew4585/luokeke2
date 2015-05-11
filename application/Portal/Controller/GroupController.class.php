@@ -9,7 +9,12 @@ class GroupController extends IndexController {
 		$this->model_group=D("Group");
 	}
 	
-	
+	public function lists(){
+		$group = $this->getHomeContent("Group",true,array("post_price","post_num"));
+		$this->assign("group",$group);
+		$this->display("list");
+	}
+
 	public function info(){
 		$id			= I("get.id",0,'intval');
 		$where		= "site_id=$this->siteId and status=1";

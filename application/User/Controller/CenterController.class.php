@@ -31,9 +31,11 @@ class CenterController extends MemberbaseController {
 		$this->share_point = D('Config')->val('pc_share');
 		$this->assign('user',$this->user);
 		$this->assign("servePromise",$this->_getAd("servePromise"));
+		$this->assign("home_head",$this->_getAd("banner_user"));
 	}
     //会员中心type = 2 为 签到 =3 是分享
 	public function index() {
+		$this->assign("home_head",$this->_getAd("home_head"));
 		$signPointSum = $this->exchange->where(array("uid"=>$this->userid,"type"=>2))->sum('point');
 		$this->assign('signPointSum',$signPointSum);
 		$sharePointSum = $this->exchange->where(array("uid"=>$this->userid,"type"=>3))->sum('point');

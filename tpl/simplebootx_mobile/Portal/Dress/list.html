@@ -6,7 +6,13 @@
 </head>
 <body>
 <tc_include file="Public:phonebanner"/>
-
+<div class="menu wuhan_menu">
+    <ul id="phonemenu">
+        <li><a href="{:U('Portal/Dress/lists')}/category/2">礼服</a></li>
+        <li><a href="{:U('Portal/Dress/lists')}/category/1">婚纱</a></li>
+        <!-- <li><a href="">主题作品</a></li> -->
+    </ul>
+</div><!--wuhan_menu -->
 <div class="wuhan_list">
     <ul>
         <foreach name="list" item="item">
@@ -42,6 +48,14 @@
 
 </script>
 <tc_include file="Public:phoneFooter"/>
+<script type="text/javascript">
+    var cate = {$Think.get.category};
+    if(cate == 2){
+        $("#phonemenu li:first").addClass("hover");
+    }else{
+        $("#phonemenu li:eq(1)").addClass("hover");
+    }
+</script>
 </body>
 </html>
 

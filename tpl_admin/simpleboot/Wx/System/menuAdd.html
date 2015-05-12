@@ -1,0 +1,85 @@
+<admintpl file="header"/>
+<style>
+label{float: left;line-height:40px;margin:0 10px 0 0;}
+input[type=radio]{vertical-align: inherit;}
+#content input{width:400px;}
+.hidden{display:none;}
+form tr{height: 50px}
+</style>
+<body class="J_scroll_fixed">
+<div class="wrap jj">
+  <ul class="nav nav-tabs">
+     <li><a href="{:U('System/menu')}">后台菜单</a></li>
+     <li class="active"><a href="{:U('System/menuAdd')}">添加菜单</a></li>
+  </ul>
+  <div class="common-form">
+    <form method="post" class="form-horizontal J_ajaxForm" action="{:U('System/menuAdd')}">
+      <div class="table_list">
+        <table cellpadding="2" cellspacing="2" width="100%">
+          <tbody>
+          	<tr>
+              <td>名称:</td>
+              <td><input type="text" class="input" name="name" value=""><span class="must_red">*</span></td>
+            </tr>
+            <tr>
+              <td width="100">上级:</td>
+              <td><select name="parentid" class="normal_select">
+                  <option value="0">作为一级菜单</option>
+                  <foreach name="first" item="item">
+                  	 <option value="{$item.nav_id}">{$item.name}</option>
+                  </foreach>
+                </select></td>
+            </tr>
+            <tr>
+              <td>类型:</td>
+              <td>
+              	<label onclick='changeType("click")'><input type="radio" name="type" value="click" checked/>点击事件</label>
+            		<label onclick='changeType("view")'><input type="radio" name="type" value="view"/>网页链接</label>
+            		<label onclick='changeType("scancode_push")'><input type="radio" name="type" value="scancode_push"/>扫一扫</label>
+              </td>
+            </tr>
+            <tr class="check-tips">
+              <td id="tips">关键字:</td>
+              <td id="content"><input type="text" class="input" name="content"  value=""></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary btn_submit  J_ajax_submit_btn">添加</button>
+        <a class="btn" href="__URL__">返回</a>
+      </div>
+    </form>
+  </div>
+</div>
+<script src="__ROOT__/statics/js/common.js"></script>
+<script>
+$(function(){
+	changeType('click');
+});
+
+var clickObj={
+		'title'	:	'关键字:',
+		'tips'	:	'请填写关键字，如果是特殊功能，请填写对应内容',
+};
+var viewObj={
+		'title'	:	'链接网址:',
+		'tips'	:	'请填写网址',
+};
+function changeType(type){
+	var html='';
+	if(type=='click'){ 
+		$("#tips").html(clickObj.title);
+		$("#content input").attr("placeholder",clickObj.tips);
+		$(".check-tips").removeClass('hidden');
+	}else if(type=='view'){
+		$("#tips").html(viewObj.title);
+		$("#content input").attr("placeholder",viewObj.tips);
+		$(".check-tips").removeClass('hidden');
+	}else if(type=='scancode_push'){
+		$(".check-tips").addClass('hidden');
+	}
+}
+</script>
+</body>
+</html>

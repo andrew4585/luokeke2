@@ -1,0 +1,155 @@
+<admintpl file="header" />
+<style>input{width:500px;}</style>
+<body class="J_scroll_fixed">
+	<div class="wrap J_check_wrap">
+	 	
+		<ul class="nav nav-tabs">
+	        <li class="active"><a href="#A" data-toggle="tab">微信账号</a></li>
+	    </ul>
+		
+		<form class="J_ajaxForms" name="myform" id="myform" action="{:u('setting/site_post')}" method="post">
+		 <input type="hidden" value="simplebootx" name="options[site_tpl]"/>
+		 <input type="hidden" value="2" name="options[urlmode]"/>
+		 <fieldset>
+		<div class="tabbable">
+        <div class="tab-content"> 
+          <div class="tab-pane active" id="A">
+            <table cellpadding="2" cellspacing="2" class="table_form" width="100%">
+				<tbody>
+					<tr>
+						<td width="100">网站域名：</td>
+						<td><input type="text" class="input" name="web" value="{$info.web}" placeholder="请以http://开头"></td>
+					</tr>
+					<tr>
+						<td>关注链接：</td>
+						<td><input type="text" class="input" name="subscribe_url" value="{$info.subscribe_url}"></td>
+					</tr>
+					<tr>
+						<td>appId：</td>
+						<td><input type="text" class="input" name="appid" value="{$info.appid}"></td>
+					</tr>
+					<tr>
+						<td>appSecret：</td>
+						<td><input type="text" class="input" name="appsecret" value="{$info.appsecret}"></td>
+					</tr>
+					<tr>
+						<td>token：</td>
+						<td><input type="text" class="input" name="token" value="{$info.token}"></td>
+					</tr>
+				</tbody>
+			</table>
+          </div>
+        </div>
+      </div>
+      
+      	<div class="form-actions">
+            <button type="submit" class="btn btn-primary btn_submit  J_ajax_submit_btn">提交</button>
+          </div>
+           </fieldset>
+		</form>
+		
+	</div>
+	<script type="text/javascript" src="__ROOT__/statics/js/common.js"></script>
+	<script>
+/////---------------------
+	 Wind.use('validate', 'ajaxForm', 'artDialog', function () {
+			//javascript
+	        var form = $('form.J_ajaxForms');
+	        //ie处理placeholder提交问题
+	        if ($.browser.msie) {
+	            form.find('[placeholder]').each(function () {
+	                var input = $(this);
+	                if (input.val() == input.attr('placeholder')) {
+	                    input.val('');
+	                }
+	            });
+	        }
+	        //表单验证开始
+	        form.validate({
+				//是否在获取焦点时验证
+				onfocusout:false,
+				//是否在敲击键盘时验证
+				onkeyup:false,
+				//当鼠标掉级时验证
+				onclick: false,
+	            //验证错误
+	            showErrors: function (errorMap, errorArr) {
+					//errorMap {'name':'错误信息'}
+					//errorArr [{'message':'错误信息',element:({})}]
+					try{
+						$(errorArr[0].element).focus();
+						art.dialog({
+							id:'error',
+							icon: 'error',
+							lock: true,
+							fixed: true,
+							background:"#CCCCCC",
+							opacity:0,
+							content: errorArr[0].message,
+							cancelVal: '确定',
+							cancel: function(){
+								$(errorArr[0].element).focus();
+							}
+						});
+					}catch(err){
+					}
+	            },
+	            //验证规则
+	            rules: {'options[web_name]':{required:1},'options[site_host]':{required:1},'options[site_root]':{required:1}},
+	            //验证未通过提示消息
+	            messages: {'options[web_name]':{required:'请输入网站名称！'},'options[site_host]':{required:'请输入网站域名！'},'options[site_root]':{required:'请输入安装路径！'}},
+	            //给未通过验证的元素加效果,闪烁等
+	            highlight: false,
+	            //是否在获取焦点时验证
+	            onfocusout: false,
+	            //验证通过，提交表单
+	            submitHandler: function (forms) {
+	                $(forms).ajaxSubmit({
+	                    url: form.attr('action'), //按钮上是否自定义提交地址(多按钮情况)
+	                    dataType: 'json',
+	                    beforeSubmit: function (arr, $form, options) {
+	                        
+	                    },
+	                    success: function (data, statusText, xhr, $form) {
+	                        if(data.status){
+								setCookie("refersh_time",1);
+								//添加成功
+								Wind.use("artDialog", function () {
+								    art.dialog({
+								        id: "succeed",
+								        icon: "succeed",
+								        fixed: true,
+								        lock: true,
+								        background: "#CCCCCC",
+								        opacity: 0,
+								        content: data.info,
+										button:[
+											{
+												name: '确定',
+												callback:function(){
+													return true;
+												},
+												focus: true
+											},{
+												name: '关闭',
+												callback:function(){
+													return true;
+												}
+											}
+										]
+								    });
+								});
+							}else{
+								alert(data.info);
+							}
+	                    }
+	                });
+	            }
+	        });
+	    });
+	////-------------------------
+	
+	
+	</script>
+</body>
+</html>

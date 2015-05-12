@@ -6,29 +6,56 @@
 </head>
 <body>
 <tc_include file="Public:phonebanner"/>
-<h1>sale<span>团购套系</span></h1>
+<h1 class="phonesale">SALE<span>团购</span>套系</h1>
 <div class="grouplist">
+    <ul>
+        <foreach name="group" item="item">
+            <li>
+                <div class="phoneconter">
+                    <a href="{:U('Portal/Group/info')}/id/{$item.id}" target="_blank">
+                        <img src="__ROOT__/{$item.post_pic}" alt="" width="274" />
+                    </a>
+                    <div class="title_i">
+                        <div class="title_momeny">
+                            <span  class="s_001">￥{$item.post_price}</span></br>
+                            <span  class="s_002">{$item.post_num}人购买</span>
+                        </div>
+                        <div class="title_true"><a href="{:U('Portal/Group/info')}/id/{$item.id}"><img src="__STATICS__/images/tpl/ico_true_03.png" alt=""/></a></div>
 
-</div><!--wuhan_list -->
-
-
-<div class="page">
-    <a class="prev" href=""></a>
-    <div class="phonePage">
-        {$phonepage}
-    </div>
-    <a class="next" href="""></a>
+                    </div>
+                </div>
+                <p><span class="surplus-time"  data-time="{$item.post_deadline|strtotime}"></span></p>
+            </li>
+        </foreach>
+    </ul>
 </div>
 
+
 <tc_include file="Public:phoneCon"/>
-<script>
-    var cate = {$Think.get.cid};
-    if(cate == {$cateList.0}){
-        $("#_case li:first a").addClass("hover");
-    }else if(cate == {$cateList.1}){
-        $("#_case li:eq(1) a").addClass("hover");
-    }
-</script>
 <tc_include file="Public:phoneFooter"/>
+<script>
+    setInterval('get_time()',1000);
+    function get_time(){
+        $('.surplus-time').each(function(){
+            var time_val = $(this).attr('data-time');
+            var timestamp = Date.parse(new Date())/1000;
+            var leaveTime = time_val-timestamp;
+            if(timestamp>time_val){
+                $(this).html("<span style='color:red'>已结束</span>");
+            }else{
+                $(this).attr('value',leaveTime-1);
+                var day  = parseInt(leaveTime/86400);
+                leaveTime= leaveTime-day*86400;
+                var hour = parseInt((leaveTime/3600));
+                leaveTime= leaveTime-hour*3600;
+                var minu = parseInt((leaveTime/60));
+                var sec	 = leaveTime%60;
+                var str  = "剩"+day+"天"+hour+'时'+minu+'分'+sec+'秒';
+                $(this).html(str);
+            }
+        })
+    }
+
+</script>
 </body>
 </html>

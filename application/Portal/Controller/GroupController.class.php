@@ -10,7 +10,7 @@ class GroupController extends IndexController {
 	}
 	
 	public function lists(){
-		$group = $this->getHomeContent("Group",true,array("post_price","post_num"));
+		$group = $this->getHomeContent("Group",true,array("post_price","post_num",'post_deadline'));
 		$this->assign("group",$group);
 		$this->display("list");
 	}

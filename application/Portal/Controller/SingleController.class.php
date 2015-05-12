@@ -18,34 +18,42 @@ class SingleController extends IndexController {
 		}
 		$type	= $this->model->where($where)->getField("cid");
 		$smeta	= $this->model->where($where)->getField("smeta");
+		$title  = $this->model->where($where)->getField('post_title');
+		$this->assign('title',$title);
 		$smeta	= json_decode($smeta,true);
 		$photo	= $smeta['photo'];
 		$display= '';
-		if($type==1){
-			$this->assign("home_head",$this->_getAd("banner_single"));
+		if(sp_is_mobile()){
 			$this->assign("photo",$photo);
-			$display  = "single2";
-		}elseif ($type==2){
-			$newPhoto = array();
-			foreach ($photo as $item){
-				array_push($newPhoto, "'".__ROOT__."/{$item['url']}'");
-			}
-			$photoStr = join(",", $newPhoto);
-			$this->assign("photo",$photoStr);
-			$display  = "single1";
-		}elseif ($type==3){
-			$this->assign("photo",$photo);
-			$display  = "single3";
+			$this->display("single1");
 		}else{
-			$this->error("文章出错");
+			if($type==1){
+				$this->assign("home_head",$this->_getAd("banner_single"));
+				$this->assign("photo",$photo);
+				$display  = "single2";
+			}elseif ($type==2){
+				$newPhoto = array();
+				foreach ($photo as $item){
+					array_push($newPhoto, "'".__ROOT__."/{$item['url']}'");
+				}
+				$photoStr = join(",", $newPhoto);
+				$this->assign("photo",$photoStr);
+				$display  = "single1";
+			}elseif ($type==3){
+				$this->assign("photo",$photo);
+				$display  = "single3";
+			}else{
+				$this->error("文章出错");
+			}
+
+			$this->assign("desc_beautiful",$this->_getAd("desc_beautiful"));
+			//3个摆放在一起的二级页面广告位
+			$this->assign("second_page_3",$this->_getAd("second_page_3"));
+			//服务承诺
+			$this->assign("servePromise",$this->_getAd("servePromise"));
+			$this->display($display);
 		}
-		
-		$this->assign("desc_beautiful",$this->_getAd("desc_beautiful"));
-		//3个摆放在一起的二级页面广告位
-		$this->assign("second_page_3",$this->_getAd("second_page_3"));
-		//服务承诺
-		$this->assign("servePromise",$this->_getAd("servePromise"));
-		$this->display($display);
+
 	}
 
 	public function nav_index(){

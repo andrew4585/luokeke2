@@ -21,7 +21,7 @@
 </div>
 <div class="custom">
 	<foreach name="photo" item="item">
-		<img src="__ROOT__/{$item.url}" alt="" style="width:640px;">
+		<img src="__ROOT__/{$item.url|sp_check_thumb}" alt="" style="width:640px;">
 	</foreach>
 </div>
 

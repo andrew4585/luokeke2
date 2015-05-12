@@ -33,7 +33,7 @@ class AssetController extends AdminbaseController {
             		'exts'       =>    array('jpg', 'gif', 'png', 'jpeg',"txt",'zip'),
             		'autoSub'    =>    false,
             );
-			$upload = new \Think\Upload($config);// 
+			$upload = new \Think\Upload($config);
 			$info=$upload->upload();
             //开始上传
             if ($info) {
@@ -76,30 +76,30 @@ class AssetController extends AdminbaseController {
     				'exts'       =>    array('jpg', 'gif', 'png', 'jpeg',"txt",'zip'),
     				'autoSub'    =>    false,
     		);
-    		$upload = new \Think\Upload($config);//
+    		$upload = new \Think\Upload($config);
     		$info=$upload->upload();
     		//开始上传
     		if ($info) {
-    		//上传成功
-    		//写入附件数据库信息
+    			//上传成功
+    			//写入附件数据库信息
     			$first=array_shift($info);
     			if(!empty($first['url'])){
-    			$url=$first['url'];
-    		}else{
-    		$url=C("TMPL_PARSE_STRING.__UPLOAD__").$first['savename'];
-    		}
-    		//裁剪图片
-    		import("Resizeimage",UTIl);
+    				$url=$first['url'];
+    			}else{
+    				$url=C("TMPL_PARSE_STRING.__UPLOAD__").$first['savename'];
+    			}
+    			//裁剪图片
+    			import("Resizeimage",UTIl);
     			$resize=new \Resizeimage();
-    					$resize->initAttribute($config['rootPath'], 200, 200, 2);
+    					$resize->initAttribute($config['rootPath'], 600, 600, 1);
     			$cutimg=$resize->resize($first['savename']);
     			echo "1," . $url.",".'1,'.$first['name'];
     			exit;
     		} else {
-    		//上传失败，返回错误
-    				exit("0," . $upload->getError());
+    			//上传失败，返回错误
+    			exit("0," . $upload->getError());
     		}
-    		} else {
+    	} else {
     		$this->display(':swfupload2');
     	}
     }

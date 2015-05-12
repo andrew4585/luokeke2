@@ -23,6 +23,10 @@ class SingleController extends IndexController {
 		$smeta	= json_decode($smeta,true);
 		$photo	= $smeta['photo'];
 		$display= '';
+		if(sp_is_mobile()){
+			$this->assign("photo",$photo);
+			$this->display("single1");
+		}
 		if($type==1){
 			$this->assign("home_head",$this->_getAd("banner_single"));
 			$this->assign("photo",$photo);

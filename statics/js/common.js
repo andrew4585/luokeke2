@@ -248,18 +248,9 @@
                         return true;
                     },
                     ok: function () {
-                    	
-                        $.getJSON(href).done(function (data) {
-                            if (data.state === 'success') {
-                                if (data.referer) {
-                                    location.href = data.referer;
-                                } else {
-                                    reloadPage(window);
-                                }
-                            } else if (data.state === 'fail') {
-                                art.dialog.alert(data.info);
-                            }
-                        });
+                    	$.get(href,function(data){
+                    		ajax_alert(data);
+                    	});
                     },
                     cancelVal: '关闭',
                     cancel: true
@@ -709,7 +700,7 @@ function open_map_dialog(url,title,options,callback){
 
 function ajax_alert(data){
 	var content='';
-	if (data.state) {
+	if (data.status) {
 		Wind.use("artDialog",function(){
 	        art.dialog({
 	            id:'success',

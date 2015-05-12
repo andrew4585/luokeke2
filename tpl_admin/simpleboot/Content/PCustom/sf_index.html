@@ -1,0 +1,88 @@
+<admintpl file="header" />
+<style>
+	.recommended,.istop{cursor:pointer;font-size:15px;}
+</style>
+<body class="J_scroll_fixed">
+<div class="wrap J_check_wrap">
+  <ul class="nav nav-tabs">
+     <li class="active"><a href="javascript:;">幸福抢先看</a></li>
+     <li><a href="{:U('PCustom/sf_add')}"  target="_self">添加图片</a></li>
+  </ul>
+  <form class="well form-search" method="post" action="{:u('PCustom/sf_index')}">
+    <div class="search_type cc mb10">
+      <div class="mb10"> 
+             <!-- 站点-->
+		  <select class="select_2" name="site_id" style="width:160px">
+			  <option value=''>全部站点</option>
+			  <foreach name="siteList" item="vo">
+				  <php>$id_select=$vo['id']==$formget['site_id']?"selected":"";</php>
+				  <option value="{$vo.id}" {$id_select}>{$vo.site_name}</option>
+			  </foreach>
+		  </select>
+        &nbsp;&nbsp;时间：
+        <input type="text" name="start_time" class="input length_2 J_date" value="{$formget.start_time|default=''}" style="width:100px;" autocomplete="off"> -
+        <input type="text" class="input length_2 J_date" name="end_time" value="{$formget.end_time}" style="width:100px;" autocomplete="off">
+        <!-- 
+        <select class="select_2" name="searchtype" style="width:70px;">
+          <option value='0' >标题</option>
+        </select>
+         -->
+               &nbsp; &nbsp;关键字：
+        <input type="text" class="input length_2" name="keyword" style="width:200px;" value="{$formget.keyword}" placeholder="请输入关键字...">
+        <input type="submit" class="btn" value="搜索"/>
+        </span>
+      </div>
+    </div>
+  </form>
+  <form class="J_ajaxForm" action="" method="post">
+    <div class="table_list">
+      <table width="100%" class="table table-hover">
+        <thead>
+	          <tr>
+	            <th width="16"><label><input type="checkbox" class="J_check_all" data-direction="x" data-checklist="J_check_x"></label></th>
+	            <th width="50">排序</th>
+	            <th>ID</th>
+	            <th>标题</th>
+	            <th>验证码</th>
+	            <th width="80">站点</th>
+                <th width="50">缩略图</th>
+	            <th width="120"><span>发布时间</span></th>
+	            <th width="140">操作</th>
+	          </tr>
+        </thead>
+        	<foreach name="list" item="vo">
+	        	<tr>
+		            <td><input type="checkbox" class="J_check" data-yid="J_check_y" data-xid="J_check_x" name="ids[]" value="{$vo.id}" ></td>
+		            <td><input name='listorders[{$vo.id}]' class="input input-order"  type='text' size='3' value='{$vo.listorder}'></td>
+		            <td><a>{$vo.id}</a></td>
+		            <td>
+		            	<a href="{:U('Portal/PCustom/sf_info',array('id'=>$vo['keywords']))}" target="_blank" title="{$vo.post_excerpt}">
+		            		<span>{$vo.post_title}</span>
+		            	</a>
+		            </td>
+		            <td>{$vo.keywords}</td>
+		            <td>{$vo.site.site_name}</td>
+    	            <td>
+    	            	<a href="#"  onclick="image_priview('__ROOT__/{$vo.post_pic}');"><img src="__ROOT__/{$vo.post_pic}" style="width:200px;"/></a>
+    	            </td>
+		            <td>{$vo.post_date|date="Y-m-d H:i:s",###}</td>
+		            <td>
+		            	<a href="{:U('PCustom/sf_edit')}/id/{$vo.id}">修改</a>|
+		            	<a href="{:U('PCustom/delete')}/id/{$vo.id}" class="J_ajax_del" >删除</a>|
+		            	<a href="{:U('PCustom/sf2custom')}/id/{$vo.id}" class="J_ajax_dialog_btn" data-msg="您确定转移吗？">转移到客照</a>
+					</td>
+	          	</tr>
+          </foreach>
+          </table>
+          <div class="pagination">{$Page}</div>
+     
+    </div>
+    <div class="form-actions">
+        <button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('PCustom/delete')}" data-subcheck="true" data-msg="你确定删除吗？">删除</button>
+      </div>
+  </form>
+</div>
+<script src="__ROOT__/statics/js/common.js"></script>
+<script type="text/javascript" src="__ROOT__/statics/js/content_addtop.js"></script>
+</body>
+</html>

@@ -1327,4 +1327,26 @@ function sp_is_sae(){
 		return false;
 	}
 }
+/**缩略图过滤**/
+function sp_check_thumb($url){
+	$file 		= explode("/",$url);
+	$count 		= count($file);
+	$fileName 	= $file[$count-1];
+	$fileCata 	= $file[$count-2];
+	$fileThumb 	= './data/upload/'.$fileCata.'/thumb/'.$fileName;
+	if(!file_exists($fileThumb)){
+		import("Resizeimage",UTIl);
+		$resize=new \Resizeimage();
+		$path = './data/upload/'.$fileCata.'/';
+		$resize->initAttribute($path, 640, 640, 1);
+		$result=$resize->resize($fileName);
+		if($result){
+			return $fileThumb;
+		}else{
+			return $url;
+		}
+	}else{
+		return $fileThumb;
+	}
 
+}

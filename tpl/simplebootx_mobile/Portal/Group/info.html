@@ -8,7 +8,8 @@
 <tc_include file="Public:phonebanner"/>
 <div class="phoneGroup">
     <foreach name="photo" item="item">
-        <img src="__ROOT__/{$item.url}"  width="640"  alt=""/>
+
+        <img src="__ROOT__/{$item.url|sp_check_thumb}"  width="640"  alt=""/>
     </foreach>
 </div>
 <tc_include file="Public:phoneCon"/>

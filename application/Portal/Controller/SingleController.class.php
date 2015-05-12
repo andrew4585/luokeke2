@@ -18,6 +18,8 @@ class SingleController extends IndexController {
 		}
 		$type	= $this->model->where($where)->getField("cid");
 		$smeta	= $this->model->where($where)->getField("smeta");
+		$title  = $this->model->where($where)->getField('post_title');
+		$this->assign('title',$title);
 		$smeta	= json_decode($smeta,true);
 		$photo	= $smeta['photo'];
 		$display= '';

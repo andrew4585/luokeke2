@@ -108,7 +108,7 @@ class SystemController extends IndexController {
 	 * 将编辑好的菜单上传到微信
 	 */
 	public function uploadWX(){
-	    $model_nav=D("Navigation");
+	    $model_nav=D("WxMenu");
 	    $list=$model_nav->where("fid=0")->select();
 	    $newList=array();
 	    foreach($list as $item){
@@ -133,7 +133,6 @@ class SystemController extends IndexController {
 	        }
 	        array_push($newList, $newItem);
 	    }
-	    import("@.ORG.ThinkWechat");
 	    $this->getThinkWechat();
 	    $body['button']=$newList;
 	    $body=json_encode($body);
@@ -143,6 +142,7 @@ class SystemController extends IndexController {
 	    if(0==$mess['errcode']){
 	        $this->success("设置成功",U("System/navigation2"));
 	    }else{
+	        Log::record($mess_json);
 	        $this->error($mess['errmsg']);
 	    }
 	}

@@ -162,7 +162,7 @@ class ThinkWechat {
 	 * @param  string $news 要回复的图文内容
 	 */
 	private function sendnews($news){
-		$model_system=D("Wx\Model\WxConfigModel");
+		$model_system=D("WxConfig");
 		$web=$model_system->val("web");
 		$articles = array();
 		foreach ($news as $key => $value) {
@@ -246,7 +246,7 @@ class ThinkWechat {
 	 * @param  string $news 要回复的图文内容
 	 */
 	private function news($news){
-		$model_system=D("Wx\Model\WxConfigModel");
+		$model_system=D("WxConfig");
 		$web=$model_system->val("web");
 		$articles = array();
 		foreach ($news as $key => $value) {
@@ -310,7 +310,7 @@ class ThinkWechat {
 	 * @return boolean       true-签名正确，false-签名错误
 	 */
 	private function auth(){
-		$model_system=D("Wx\Model\WxConfigModel");
+		$model_system=D("WxConfig");
 		$token=$model_system->val("token");
 		
 		$signature = $_GET["signature"];

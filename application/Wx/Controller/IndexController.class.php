@@ -37,7 +37,7 @@ class IndexController extends AdminbaseController {
 	function getThinkWechat(){
 		if(!$this->thinkWechat){
 			import("Think.WX.ThinkWechat");
-			$this->thinkWechat = new \ThinkWechat();
+			$this->thinkWechat = new \ThinkWechat($this->getAppid(),$this->getAppsecret());
 		}
 	}
 	

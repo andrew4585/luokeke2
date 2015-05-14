@@ -3,6 +3,7 @@
  * 微信系统信息
  */
 namespace Wx\Controller;
+use Think\Log;
 class SystemController extends IndexController {
 	
 	function _initialize() {
@@ -24,8 +25,12 @@ class SystemController extends IndexController {
 	 * 保存公众账号账号信息
 	 */
 	public function modifyBaseInfo(){
-		$this->model_config->modify($_POST);
-		$this->success("保存成功",U("System/index"));
+	    try{
+	        $this->model_config->modify($_POST);
+	        $this->success("保存成功",U("System/index"));
+	    }catch (\Exception $e){
+	        $this->error($e->getMessage());
+	    }
 	}
 	
 	//-------------------------------微信导航

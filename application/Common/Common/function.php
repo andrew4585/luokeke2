@@ -1338,7 +1338,7 @@ function sp_check_thumb($url){
 		import("Resizeimage",UTIl);
 		$resize=new \Resizeimage();
 		$path = './data/upload/'.$fileCata.'/';
-		$resize->initAttribute($path, 640, 640, 1);
+		$resize->initAttribute($path, 640, 640, 2);
 		$result=$resize->resize($fileName);
 		if($result){
 			return $fileThumb;

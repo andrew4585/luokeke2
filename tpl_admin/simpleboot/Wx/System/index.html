@@ -7,9 +7,7 @@
 	        <li class="active"><a href="#A" data-toggle="tab">微信账号</a></li>
 	    </ul>
 		
-		<form class="J_ajaxForms" name="myform" id="myform" action="{:u('setting/site_post')}" method="post">
-		 <input type="hidden" value="simplebootx" name="options[site_tpl]"/>
-		 <input type="hidden" value="2" name="options[urlmode]"/>
+		<form class="J_ajaxForms" name="myform" id="myform" action="{:U('System/modifyBaseInfo')}" method="post">
 		 <fieldset>
 		<div class="tabbable">
         <div class="tab-content"> 
@@ -94,10 +92,6 @@
 					}catch(err){
 					}
 	            },
-	            //验证规则
-	            rules: {'options[web_name]':{required:1},'options[site_host]':{required:1},'options[site_root]':{required:1}},
-	            //验证未通过提示消息
-	            messages: {'options[web_name]':{required:'请输入网站名称！'},'options[site_host]':{required:'请输入网站域名！'},'options[site_root]':{required:'请输入安装路径！'}},
 	            //给未通过验证的元素加效果,闪烁等
 	            highlight: false,
 	            //是否在获取焦点时验证

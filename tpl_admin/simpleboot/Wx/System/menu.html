@@ -5,6 +5,7 @@
      <li class="active"><a href="{:U('System/menu')}">后台菜单</a></li>
      <li><a href="{:U('System/menuAdd')}">添加菜单</a></li>
   </ul>
+  <a class="btn btn-primary J_ajax_dialog_btn" href="{:U('System/uploadWX')}" data-msg="您确定将菜单上传到微信吗？">上传微信</a>
   <form class="J_ajaxForm" action="{:U('System/listorders')}" method="post">
     <div class="table_list">
       <table width="100%" class="table table-hover" id="menus-table">
@@ -22,12 +23,12 @@
 		        <tr>
 		        	<td><input name='listorders[{$item.nav_id}]' class="input input-order"  type='text' size='3' value='{$item.listorder}'></td>
 		        	<td>{$item.nav_id}</td>
-		           <td>{$item.name}</td>
+		           <td style="font-weight: bold;">{$item.name}</td>
 		           <td>{$item.type}</td>
 		           <td>{$item.content}</td>
 				   <td>
-				   	   <a class="" href="{:U('System/nav_edit','method=toEdit&nav_id='.$item['nav_id'])}">编辑</a>
-					   <a class="ajax-get confirm" href="{:U('System/nav_del','nav_id='.$item['nav_id'])}">删除</a>
+				   	   <a class="" href="{:U('System/menuEdit','nav_id='.$item['nav_id'])}">编辑</a>
+					   <a class="J_ajax_del" href="{:U('System/menuDel','nav_id='.$item['nav_id'])}">删除</a>
 				   </td>        
 				 </tr>
 				 <notempty name="item['child']">
@@ -39,8 +40,8 @@
 				           <td>{$j.type}</td>
 				           <td>{$j.content}</td>
 						   <td>
-						   	   <a class="" href="{:U('System/nav_edit','method=toEdit&nav_id='.$j['nav_id'])}">编辑</a>
-							   <a class="ajax-get confirm" href="{:U('System/nav_del','nav_id='.$j['nav_id'])}">删除</a>
+						   	   <a class="" href="{:U('System/menuEdit','nav_id='.$j['nav_id'])}">编辑</a>
+							   <a class="J_ajax_del" href="{:U('System/menuDel','nav_id='.$j['nav_id'])}">删除</a>
 						   </td>        
 						 </tr>
 				 	

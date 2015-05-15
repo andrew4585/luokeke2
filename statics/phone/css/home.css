@@ -1,6 +1,4 @@
 @charset "utf-8";
-a:visited {color:#000000;}
-a:link {color:#000000;} 
 /* main_image */
 .main_visual{height:521px;overflow:hidden;position:relative;}
 .main_image{height:521px;overflow:hidden;position:relative;}

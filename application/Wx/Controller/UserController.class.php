@@ -17,20 +17,23 @@ class UserController extends IndexController {
 	 * 用户列表页
 	 */
 	public function index(){
-	    
+	    //分组列表
+	    $model_group = D("WxGroup");
+	    $groups = $model_group->select();
+	    $this->assign("groups",$groups);
+	    //用户列表
+	    $this->_lists();
 	    $this->display();
 	}
 	
 	private  function _lists(){
-	    //status=1,表示文章未删除，0表示文章已删除
-	    $where_ands =array("status=1","category=".$this->cate_id);
-	    //istop:首页置顶，recommended：推荐，listorder：排序，post_date:发布时间
-	    $order		="istop desc,recommended desc,listorder ASC,post_date DESC";
+	    
+	    $where_ands =array("is_subscribe=1");
+	    $order		=empty($_POST['order_type'])?"subscribe_time":$_POST['order_type'];
+	    $order     .=" desc";
 	    $fields=array(
-	        'cid'		=> array("field"=>'cid','operator'=>'=','type'=>'int'),
-	        'start_time'=> array("field"=>"post_date","operator"=>">=",'type'=>'time'),
-	        'end_time'  => array("field"=>"post_date","operator"=>"<=",'type'=>'time'),
-	        'keyword'   => array("field"=>"post_title","operator"=>"like",'type'=>'string'),
+	        'groupid'		=> array("field"=>'groupid','operator'=>'=','type'=>'int'),
+	        'nick_name'   => array("field"=>"nick_name","operator"=>"like",'type'=>'string'),
 	    );
 	    foreach ($fields as $param =>$val){
 	        if (!empty($_REQUEST[$param])) {
@@ -51,11 +54,15 @@ class UserController extends IndexController {
 	    }
 	    $where= join(" and ", $where_ands);
 	    	
-	    $count=$this->model_obj->where($where)->count();
+	    $count=$this->model_user->where($where)->count();
 	    	
 	    $page = $this->page($count, 20);
 	    	
-	    $list =$this->model_obj ->relation(true)->where($where)
+	    $list =$this->model_user->alias('u')
+	                ->field("u.*,u1.score,u1.id,g.name group_name")
+	                ->join("sp_users    u1 on u.openid = u1.openid ")
+	                ->join("sp_wx_group g  on g.id = u.groupid")
+	                ->where($where)
             	    ->limit($page->firstRow, $page->listRows)
             	    ->order($order)->select();
 	    $this->assign("Page", $page->show('Admin'));
@@ -217,6 +224,7 @@ class UserController extends IndexController {
 	        }
 	        $this->success("成功初始化{$count}个用户");
 	    }catch (\Exception $e){
+	        Log::record($e->getMessage());
 	        $this->error($e->getMessage());
 	    }
 	}

@@ -121,19 +121,18 @@ class WechatController extends IndexController{
     private function getSubscribe($openid = ''){
         $web=$this->getConfigValue("web");
         if(empty($openid))exit;
-        $ch = curl_init();
-        $url=$web.'index.php/Api/User/registerWeixinUser/openid/'.$openid;
-        $curl_opt = array(CURLOPT_URL=>$url,CURLOPT_RETURNTRANSFER=>1,CURLOPT_TIMEOUT=>1,);
-        curl_setopt_array($ch, $curl_opt);
-        curl_exec($ch);
-        curl_close($ch);
+        $model_user = D("WxUser");
+        $model_user->subscribe($openid);
+		$model_group=D("Group");
+		$model_group->where("id=0")->setInc("count",1);
+		exit();
         //回复信息
-        $model_system=D("SystemInfo");
-        $article_id=$model_system->getValue("sub_reply");
-        if($article_id){
-            $reply=$this->autoReply($article_id);
-            return $reply;
-        }
+//         $model_system=D("SystemInfo");
+//         $article_id=$model_system->getValue("sub_reply");
+//         if($article_id){
+//             $reply=$this->autoReply($article_id);
+//             return $reply;
+//         }
     }
     
     /**
@@ -141,10 +140,7 @@ class WechatController extends IndexController{
      * @param unknown_type $openid
      */
     private function delSubscribe($openid=''){
-        $model_user=D("User");
-        $model_score=D("ScoreHistory");
-        $user_id=$model_user->getUserId($openid);
-        $model_score->where("user_id=$user_id")->delete();
+        $model_user=D("WxUser");
         $result=$model_user->delSubscribe($openid);
         if(!$result)exit;//修改数据失败
         echo '';exit;

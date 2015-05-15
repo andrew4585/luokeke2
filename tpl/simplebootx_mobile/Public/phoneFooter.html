@@ -36,7 +36,11 @@
         <h2><a href="{:U('Portal/Index/index')}">首页</a></h2>
         <volist name="menuData" id="vo" key="k">
         <dl>
-            <dt><a href="{$vo.href}">{$vo.label}</a><i><img src="__STATICS__phone/images/bg08.png" width="30" height="30"></i></dt>
+            <dt><a href="{$vo.href}">{$vo.label}</a> <if condition="$vo['child'] neq NULL">
+                <i>
+                    <img src="__STATICS__phone/images/bg08.png" width="30" height="30">
+                </i>
+            </if></dt>
             <if condition="$vo['child'] neq NULL">
             <dd>
                 <volist name="vo['child']" id="f">

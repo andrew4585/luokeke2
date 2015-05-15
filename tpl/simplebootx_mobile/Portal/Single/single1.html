@@ -9,7 +9,7 @@
 <div class="phoneContent">
     <h1>{$title}</h1>
     <foreach name="photo" item="item">
-        <img src="__ROOT__/{$item.url|sp_check_thumb}"  width="640" class="small" alt=""/>
+        <img src="__ROOT__/{$item.url|sp_check_thumb}"  width="640" class="small" style="margin: 0" alt=""/>
     </foreach>
 </div>
 <tc_include file="Public:phoneFooter"/>

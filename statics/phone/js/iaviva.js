@@ -11,7 +11,7 @@ $(".daydaymenu ins").click(function(){
 
 
 $(".foot_nav dt i").click(function(){
-   var i=$(".foot_nav dt i").index($(this));
+   var i=$(".foot_nav dt i").index($(this)[0]);
   $(".foot_nav dd").eq(i).slideToggle(500,function(){
 	 if($(".foot_nav dd").eq(i).is(":visible")){
     $(".foot_nav dt a").eq(i).addClass("hover");

@@ -230,3 +230,11 @@ table { border-collapse: collapse; border-spacing: 0; }
  width: 40px;
  background:url(../images/tpl/home.png) no-repeat center center;
 }
+
+/*-------头部（登陆、注册）-------*/
+.nav-user{
+	float: right;
+  	color: #ffffff;
+}
+.nav-user li{display:inline;margin-left:20px}	
+.nav-user a{color:#FFFFFF;font-size:15px;line-height:50px;}

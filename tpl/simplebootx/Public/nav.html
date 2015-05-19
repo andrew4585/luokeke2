@@ -18,21 +18,7 @@
 			<div class="toper">
 				<!--<b>新娘咨询热线：4000-999-136</b>-->
                       <div class="head_top"></div>
-				<script type="text/javascript">
-					/* $(function() {
-						var as = $("a");
-						as.each(function() {
-							var href = $(this).attr("href");
-							if (href == "#" || href == "javascript:;") {} else {
-								if(!($(this).attr("target"))){
-									$(this).attr("target", "_blank");
-								}
-								
-							}
-						});
-					}) */
-				</script>
-				<div class="tr">
+				<div class="tr" style="float:left;margin-left:150px">
 					<b><img src="__STATICS__/images/bg/bg74.gif" alt="洛可可摄影" /></b>
 					<i class="mouth">
 						<img src="__STATICS__/images/bg/t{$num[0]}.gif" alt="洛可可摄影" />
@@ -67,6 +53,17 @@
 					})
 						
 					</script>
+				</div>
+				<div class="nav-user">
+					<ul>
+						<empty name="user">
+							<li><a href="{:U('User/register/index')}">注册</a></li>
+							<li><a href="{:U('User/login/index')}">登陆</a></li>
+						<else/>
+							<li>{$Think.session.user.user_login}</li>
+							<li><a href="{:U('User/Center/index')}">用户中心</a></li>
+						</empty>
+					</ul>
 				</div>
 			</div>
 		</div>

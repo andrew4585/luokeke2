@@ -9,7 +9,6 @@
 		this.each(function(){
 			var container=$(this),
 				mover=container.find(settings.mover),
-				w=1200,
 				c=settings.moverW || mover.width(),
 				maxLeft = c-600<0?0:c-600;
 			mover.css("width",c);
@@ -21,10 +20,10 @@
 				var nowLeft = $(this).offset().left-20;
 				var left = (e.pageX || e.originalEvent.touches[0].pageX)-this._startX;
 				left = 	nowLeft+left;
-				left=nowLeft+left>0?0:(-nowLeft-left>=maxLeft?-maxLeft:nowLeft+left);
-					mover.stop().animate({
-						left:left			
-					},200);
+				left=left>0?0:(-left>=maxLeft?-maxLeft:left);
+				mover.stop().animate({
+					left:left			
+				},200);
 				return false;
 			});
 			container.unbind();//避免多次初始化时的事件重复绑定;

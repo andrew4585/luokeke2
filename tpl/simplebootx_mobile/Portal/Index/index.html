@@ -238,11 +238,27 @@ $(document).ready(function(){
 <!--滚动条js-->
 <script type="text/javascript" src="__STATICS__js/hScrollPane1.js"></script>
 <script type="text/javascript">
-$(".items").hScrollPane({
+$(".outer").hScrollPane({
 	mover: ".item-list",
 	dragable:true,
 	moverW: function() {
 		return $(".outer .item-one").length*200;
+	}(),
+	handleCssAlter: "draghandlealter"
+});
+$(".inner").hScrollPane({
+	mover: ".item-list",
+	dragable:true,
+	moverW: function() {
+		return $(".inner .item-one").length*200;
+	}(),
+	handleCssAlter: "draghandlealter"
+});
+$(".pcustom").hScrollPane({
+	mover: ".item-list",
+	dragable:true,
+	moverW: function() {
+		return $(".pcustom .item-one").length*200;
 	}(),
 	handleCssAlter: "draghandlealter"
 });

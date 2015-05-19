@@ -58,12 +58,16 @@ div.flicking_con a.on{background-position:0 -21px}
 
 /*container*/
 .home-container{background: #d8d8d8;display: block;}
-.container-item{margin-top:15px}
-.items{background: #FFFFFF;padding:13px 20px 20px}
+.container-item{margin-top:15px;height:435px; background: #FFFFFF}
+.items{margin:13px 20px 20px;height:321px;overflow: hidden;position: relative;}
+.item-list{position: absolute;}
 .item-one{float:left;margin-right: 5px;}
 .items .item-one:last-child{margin-right: 0;}
-.item-one img{width:145px;}
+.item-one img{width:195px;}
 .item-one .one-title{font-size:20px;}
 /*中间广告*/
 .mid-ad{margin-top:15px;}
 .mid-ad img{width:640px;}
+
+.hScrollPane_dragbar{width:1200px; position: absolute; height: 24px; /*border-bottom:#83CC32 1px solid; left:-15px;*/ top:460px; z-index:1; padding:0 23px; background: url("../../images/tpl/gundong.png") no-repeat;}
+.hScrollPane_draghandle{position:absolute; width:30px; height:30px; overflow:hidden; background:url(../../images/tpl/gunbar.png) no-repeat left top; cursor:pointer;left:0;}

@@ -27,13 +27,13 @@ class IndexController extends HomeBaseController {
 				//中部广告
 				$this->assign("m_home_middle",$this->_getAd("m_home_middle"));
 				//外景作品
-				$outer = $this->getHomeContent("Photo",true,array(),4,array("cid=3"));
+				$outer = $this->getHomeContent("Photo",true,array(),10,array("cid=3"));
 				$this->assign("outer",$outer);
 				//内景作品
-				$inner = $this->getHomeContent("Photo",true,array(),4,array("cid=1"));
+				$inner = $this->getHomeContent("Photo",true,array(),10,array("cid=1"));
 				$this->assign("inner",$inner);
 				//客照
-				$this->assign("pcustom",$this->getHomeContent("Pcustom",true,array(),4));
+				$this->assign("pcustom",$this->getHomeContent("Pcustom",true,array(),10));
 			}else{
 				//首页头部轮播
 				$this->assign("home_head",$this->_getAd("home_head"));

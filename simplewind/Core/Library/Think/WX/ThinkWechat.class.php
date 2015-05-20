@@ -428,6 +428,22 @@ class ThinkWechat {
 		$restr= http ( $url, $data, 'POST', array ( "Content-type: text/html; charset=utf-8" ), true );
 		return $restr;
 	}
+	
+	/**
+	 * 删除用户分组
+	 * @param unknown $data
+	 */
+	public function delete_group($data){
+	    $access_token = $this->getToken();
+	    $url="https://api.weixin.qq.com/cgi-bin/groups/delete?access_token=$access_token";
+	    $data=array(
+	        'group'=>array("id"=>$data['id']),
+	    );
+	    $data=json_encode($data);
+	    $data=urldecode($data);
+	    $restr= http ( $url, $data, 'POST', array ( "Content-type: text/html; charset=utf-8" ), true );
+	    return $restr;
+	}
 	/**
 	 * 获取用户所在分组
 	 * @param unknown_type $openid

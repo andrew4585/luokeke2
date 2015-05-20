@@ -34,10 +34,10 @@ class WechatController extends IndexController{
                 $text=$data ['Content'];
                 $reply=$this->autoReply($text,false);
                 if(empty($reply)){
-                    $model_system=D("SystemInfo");
-                    $is_dkf=$model_system->getValue("is_dkf");
+                    $model_config=D("WxConfig");
+                    $is_dkf=$model_config->val("is_dkf");
                     if(0==$is_dkf){
-                        $key=$model_system->getValue("error_text");		//回复错误的关键字
+                        $key=$model_config->val("error_text");		//回复错误的关键字
                         if($key)$reply=$this->autoReply($key);
                     }elseif(1==$is_dkf){
                         $reply=array("","transfer_customer_service");
@@ -57,7 +57,7 @@ class WechatController extends IndexController{
                         $reply = $this->getTaskEvent ( $data ['EventKey'], $data ['FromUserName'] );
                         break;
                     case 'MASSSENDJOBFINISH':
-                        $model_mass=D("MassResult");
+                        $model_mass=D("WxMass");
                         $mass['msg_id']		=$data['MsgID'];
                         $mass['status']		=$data['Status'];
                         $mass['total_count']=$data['TotalCount'];

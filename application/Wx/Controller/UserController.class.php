@@ -222,6 +222,7 @@ class UserController extends IndexController {
 	                $count++;
 	            }
 	        }
+	        $this->diffOpenid($openidList);
 	        $this->success("成功初始化{$count}个用户");
 	    }catch (\Exception $e){
 	        Log::record($e->getMessage());
@@ -232,8 +233,7 @@ class UserController extends IndexController {
 	/**
 	 * 检查是否含有应该标记为‘取消关注’的用户
 	 */
-	public function diffOpenid(){
-	    $openidList=$this->model_user->getOpenidList();										//微信实际openid列表
+	public function diffOpenid($openidList){
 	    $userList=$this->model_user->field("openid")->where("is_subscribe=1")->select();
 	    $openids=array();																	//数据库存储openid列表
 	    foreach ($userList as $item){
@@ -241,15 +241,10 @@ class UserController extends IndexController {
 	    }
 	    $common=array_intersect($openidList, $openids);										//共同的openid列表
 	    $diff=array_diff($openids, $common);												//数据库中，应该标记为取消关注的openid
-	    if(empty($diff)){
-	        $this->success("不含有应该标记为取消关注的用户");
-	    }else{
-	        $count = 0 ;
+	    if(!empty($diff)){
 	        foreach ($diff as $openid){
 	            $this->model_user->where("openid = '$openid'")->setField("is_subscribe",0);
-	            $count++;
 	        }
-	        $this->success("成功处理{$count}个用户");
 	    }
 	}
 	
@@ -267,65 +262,95 @@ class UserController extends IndexController {
 	}
 	/************用户分组 ******************/
 	
+	/**
+	 * 分组列表
+	 */
 	public function group(){
-	    $model_group=D("Group");
+	    $model_group=D("WxGroup");
 	    $list=$model_group->order("id")->select();
 	    $this->assign("list",$list);
-	    $this->leftNav($this->nav, 2, 1);
 	    $this->display();
+	}
+	
+	/**
+	 * 添加分组
+	 */
+	public function groupAdd(){
+	    if(IS_POST){
+	        $this->getThinkWechat();
+	        $data['name'] = I("post.name");
+	        $restr=$this->thinkWechat->create_group($data['name']);
+	        $rearr=json_decode($restr,true);
+	        if(isset($rearr['errcode']))
+	            $this->error("errcode：".$rearr['errcode']."\\n errmsg:".$rearr['errmsg']);
+	        $data['id']=$rearr['group']['id'];
+	        $data['count']=0;
+	        $model_group = D("WxGroup");
+	        $result=$model_group->add($data);
+	        $this->success("添加成功");
+	    }else{
+	        $this->display();
+	    }
+	}
+	
+	/**
+	 * 编辑分组
+	 */
+	public function groupEdit(){
+	    $model_group = D("WxGroup");
+	    if(IS_POST){
+	        $this->getThinkWechat();
+	        $restr=$this->thinkWechat->update_group($_POST);
+	        $rearr=json_decode($restr,true);
+	        if(0==$rearr['errcode']){
+	            $model_group->save($_POST);
+	            $this->success("修改成功");
+	        }else{//微信修改分组失败
+	            $this->error("errcode：".$rearr['errcode']."\n errmsg:".$rearr['errmsg']);
+	        }
+	    }else{
+	        $id = I("get.id",0,'intval');
+	        if(empty($id))
+	            $this->error("参数缺失");
+	        $info = $model_group->where("id=$id")->find();
+	        $this->assign($info);
+	        $this->display();
+	    }
 	}
 	//分组初始化，从微信获取用户分组信息
 	public function group_init(){
-	    $model_group=D("Group");
-	    $model_group->where('id<>-1')->delete();
-	    $this->getThinkWechat();
-	    $json_group=$this->wechat->check_allgroup();
-	    $groups=json_decode($json_group,true);
-	    if(isset($groups['errcode']))
-	        $this->error($groups['errcode'].":".$groups['errmsg']);
-	    foreach($groups['groups'] as $item){
-	        $model_group->add($item);
+	    try{
+	        $model_group=D("WxGroup");
+	        $model_group->where('id<>-1')->delete();
+	        $this->getThinkWechat();
+	        $json_group=$this->thinkWechat->check_allgroup();
+	        $groups = json_decode($json_group,true);
+	        if(isset($groups['errcode']))
+	            $this->error($groups['errcode'].":".$groups['errmsg']);
+	        foreach($groups['groups'] as $item){
+	            $model_group->add($item);
+	        }
+	        $this->success("初始化成功");
+	    }catch (\Exception $e){
+	        $this->error($e->getMessage());
 	    }
-	    $this->success("初始化成功");
 	}
 	/**
-	 * 添加、修改分组
+	 * 删除分组
 	 */
-	public function group_modify(){
-	    $model_group = D("Group");
-	    $method		 = I("get.method");
-	    $data['name']= I("post.name");
-	    //验证分组名称
-	    if(empty($data['name']))alert("分组名称不能为空");
-	    $hasName=$model_group->where("`name`='{$data['name']}'")->find();
-	    if($hasName)alert("分组名称已存在");
-	
-	    import("@.ORG.ThinkWechat");
-	    $wechat	= new ThinkWechat();
-	
-	    switch($method){
-	        case 'add':
-	            $restr=$wechat->create_group($data['name']);
-	            $rearr=json_decode($restr,true);
-	            if(isset($rearr['errcode']))alert("errcode：".$rearr['errcode']."\\n errmsg:".$rearr['errmsg']);
-	            $data['id']=$rearr['group']['id'];
-	            $data['count']=0;
-	            $result=$model_group->add($data);
-	            alert("创建成功",false,U("User/group"));
-	            break;
-	        case 'update':
-	            $data['id']=I("post.id");
-	            $restr=$wechat->update_group($data);
-	            $rearr=json_decode($restr,true);
-	            if(0==$rearr['errcode']){
-	                $model_group->save($data);
-	                alert("修改成功",false,U("User/group"));
-	            }else{//微信修改分组失败
-	                alert("errcode：".$rearr['errcode']."\n errmsg:".$rearr['errmsg']);
-	            }
-	            break;
-	        default:
-	            alert("操作错误");
+	public function groupDel(){
+	    $data['id'] = I("get.id",0,'intval');
+	    if(empty($data['id']))
+	        $this->error("参数缺失");
+	    $this->getThinkWechat();
+	    $json_res = $this->thinkWechat->delete_group($data);
+	    $res = json_decode($json_res,true);
+	    if(isset($res['errcode'])){
+	        $this->error($res['errcode'].":".$res['errmsg']);
+	    }else{
+	        $model_group = D("WxGroup");
+	        $model_group->where("id={$data['id']}")->delete();
+	        $this->success("删除成功");
 	    }
 	}
 	/**

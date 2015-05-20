@@ -49,7 +49,7 @@ class WxUserModel extends CommonModel{
                 $data1['avatar']    = $user['headimgurl'];
                 $data1['sex']		= $user['sex'];
                 $data1['user_type'] = 2;
-                $data1['create_time']=$user['subscribe_time'];
+                $data1['create_time']=date('Y-m-d H:i:s',$user['subscribe_time']);
                 $useradd = $model_user->add($data1);
                 if($useradd){
                     return true;

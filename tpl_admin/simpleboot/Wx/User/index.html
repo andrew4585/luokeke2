@@ -53,7 +53,7 @@
 		            <td>{$vo.subscribe_time|date='Y-m-d H:i:s',###}</td>
     	            <td>{$vo.group_name}</td>
 		            <td>
-		            	<a href="#">详情</a>
+		            	<a href="#" onclick="open_iframe_dialog('{:u('User/Indexadmin/info')}/id/{$vo.id}','详情')">详情</a>
 					</td>
 	          	</tr>
           </foreach>

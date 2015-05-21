@@ -2,18 +2,39 @@
 <body class="J_scroll_fixed">
 <div class="wrap jj">
   <div class="common-form">
-    <form method="post" class="J_ajaxForm" action="#">
+  <form class="well form-search" method="post" action="">
+    <div class="search_type cc mb10">
+      <div class="mb10"> 
+          <!--类别-->
+         <select class="select_2" name="user_from" style="width:160px;" id="">
+           <option value=''>全部来源</option>
+           <option value="本地用户" <if condition="$formget['user_from'] eq '本地用户'">selected</if>>本地用户</option>
+           <option value="qq" <if condition="$formget['user_from'] eq 'qq'">selected</if>>QQ用户</option>
+           <option value="sina" <if condition="$formget['user_from'] eq 'sina'">selected</if>>新浪用户</option>
+           <option value="wechat" <if condition="$formget['user_from'] eq 'wechat'">selected</if>>微信用户</option>
+         </select>
+        <select class="select_2" name="order_type"style="width:160px;" id="">
+          <option value='create_time'>默认排序</option>
+          <option value="score" <if condition="$formget['order_type'] eq 'score'">selected</if>>按积分</option>
+         </select>
+        <input type="text" class="input length_2" name="user_login" style="width:200px;" value="{$formget.user_login}" placeholder="请输入用户名...">
+        <input type="submit" class="btn" value="搜索"/>
+        </span>
+      </div>
+    </div>
+  </form>
       <div class="table_list">
 	    <table class="table table-hover">
 	        <thead>
 	          <tr>
 	            <th align='center'>ID</th>
+	            <th>头像</th>
 	            <th>来源</th>
 	            <th>用户名</th>
+	            <th>电话</th>
+	            <th>积分</th>
 	            <th>注册时间</th>
-	            <th>最后登录时间</th>
-	            <th>最后登录IP</th>
-	            <th>状态</th>
+	           <!--  <th>状态</th> -->
 	            <th align='center'>操作</th>
 	          </tr>
 	        </thead>
@@ -22,15 +43,26 @@
 	        	<foreach name="lists" item="vo">
 	        	<tr>
 	            <td align='center'>{$vo.id}</td>
+	            <td>
+	            	<empty name="vo.avatar">
+                        <img  class="headerImg"  src="__STATICS__images/tpl/comment/user_default.png" alt="" style="width: 40px"/>
+                        <else/>
+                        <img class="headerImg" src="{$vo.avatar|sp_get_user_avatar_url}" alt="" style="width: 40px"/>
+                    </empty>
+	            </td>
 	            <td>{$vo.user_from}</td>
-	            <td>{$vo.user_login|default='第三方用户'}</td>
+	            <td>{$vo.user_login|default=''}</td>
+	            <td>{$vo.user_phone}</td>
+	            <td>{$vo.score}</td>
 	            <td>{$vo.create_time}</td>
-	            <td>{$vo.last_login_time}</td>
-	            <td>{$vo.last_login_ip}</td>
-	            <td>{$user_statuses[$vo['user_status']]}</td>
+	            <!-- <td>{$user_statuses[$vo['user_status']]}</td> -->
 	            <td align='center'>
+	            <!-- 
 		            <a href="{:U('indexadmin/ban',array('id'=>$vo['id']))}" class="J_ajax_dialog_btn" data-msg="您确定要拉黑此用户吗？">拉黑</a>|
 		            <a href="{:U('indexadmin/cancelban',array('id'=>$vo['id']))}" class="J_ajax_dialog_btn" data-msg="您确定要启用此用户吗？">启用</a>
+		         -->
+		         <a href="#" onclick="open_iframe_dialog('{:U('indexadmin/info')}/id/{$vo.id}','用户详情')">详情</a>
+		         | <a href="#" onclick="open_iframe_dialog('{:u('User/Indexadmin/modifyScore')}/id/{$vo.id}','修改积分')">积分</a>
 		        </td>
 	          	</tr>
 	          	</foreach>
@@ -38,7 +70,6 @@
 	      </table>
 	      <div class="pagination">{$page}</div>
   </div>
-    </form>
   </div>
 </div>
 <script src="__ROOT__/statics/js/common.js"></script>

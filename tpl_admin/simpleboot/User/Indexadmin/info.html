@@ -1,0 +1,91 @@
+<admintpl file="header"/>
+<style>
+label{float: left;line-height:40px;margin:0 10px 0 0;}
+input[type=radio]{vertical-align: inherit;}
+#content input{width:400px;}
+.hidden{display:none;}
+form tr{height: 50px}
+</style>
+<body class="J_scroll_fixed">
+<div class="wrap jj">
+  <div class="common-form">
+    <form method="post" class="form-horizontal J_ajaxForm" action="{:U('Indexadmin/modifyScore')}">
+		<input type="hidden" name="id" value="{$id}"/>
+      <div class="table_list">
+        <table cellpadding="2" cellspacing="2" width="100%">
+          <tbody>
+          	<tr>
+          		<th width="80">头像：</th>
+          		<td width="200">
+          			<empty name="avatar">
+                        <img  class="headerImg"  src="__STATICS__images/tpl/comment/user_default.png" alt=""/>
+                        <else/>
+                        <img class="headerImg" src="{$avatar|sp_get_user_avatar_url}" alt="" style="max-width: 60px"/>
+                    </empty>
+          		</td>
+          		<th width="80">昵称：</th>
+          		<td>{$user_login}</td>
+          	</tr>
+          	<tr>
+          		<th>来源：</th>
+          		<td>{$user_from}</td>
+          		<th>电话：</th>
+          		<td>{$user_photo}</td>
+          	</tr>
+          	<tr>
+              <th>积分:</th>
+              <td>{$score}</td>
+            </tr>
+            <tr>
+              <th>省市:</th>
+              <td>{$province}{$city}</td>
+              <th>详细地址:</th>
+              <td>{$address}</td>
+            </tr>
+            <tr>
+              <th>微博名:</th>
+              <td>{$weibo}</td>
+              <th>QQ号:</th>
+              <td>{$qq}</td>
+            </tr>
+            <tr>
+              <th>微信名:</th>
+              <td>{$wechat}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </form>
+  </div>
+</div>
+<script src="__ROOT__/statics/js/common.js"></script>
+<script>
+$(function(){
+	changeType('click');
+});
+
+var clickObj={
+		'title'	:	'关键字:',
+		'tips'	:	'请填写关键字，如果是特殊功能，请填写对应内容',
+};
+var viewObj={
+		'title'	:	'链接网址:',
+		'tips'	:	'请填写网址',
+};
+function changeType(type){
+	var html='';
+	if(type=='click'){ 
+		$("#tips").html(clickObj.title);
+		$("#content input").attr("placeholder",clickObj.tips);
+		$(".check-tips").removeClass('hidden');
+	}else if(type=='view'){
+		$("#tips").html(viewObj.title);
+		$("#content input").attr("placeholder",viewObj.tips);
+		$(".check-tips").removeClass('hidden');
+	}else if(type=='scancode_push'){
+		$(".check-tips").addClass('hidden');
+	}
+}
+</script>
+</body>
+</html>

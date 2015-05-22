@@ -19,7 +19,7 @@ class UserController extends IndexController {
 	public function index(){
 	    //分组列表
 	    $model_group = D("WxGroup");
-	    $groups = $model_group->select();
+	    $groups = $model_group->order("id")->select();
 	    $this->assign("groups",$groups);
 	    //用户列表
 	    $this->_lists();
@@ -357,20 +357,34 @@ class UserController extends IndexController {
 	 * 用户修改分组
 	 */
 	public function changeGroup(){
-	    $model_group=D("Group");
-	    $ids	= I("post.box");
-	    $group	= I("get.group");
-	    import("@.ORG.ThinkWechat");
-	    $wechat	= new ThinkWechat();
+	    $ids	= I("post.ids");
+	    $groupid	= I("post.join_group",0,"intval");
+	    if(!$ids) $this->error("请选择需要修改分组的用户");
+	    $model_group=D("WxGroup");
+	    $model_user = D("WxUser");
+	    $this->getThinkWechat();
+	    //修改成功数
+	    $succNo = 0;
 	    foreach($ids as $id){
-	        $user=$this->model_user->field("openid,groupid")->where("user_id=$id")->find();
-	        $restr=$wechat->changeUserGroup($user['openid'], $group);
-	        $restr=json_decode($restr,true);
-	        if('ok'==$restr['errmsg']){
-	            $model_group->where("id=$group")->setInc("count",1);
-	            $model_group->where("id=".$user['groupid'])->setDec("count",1);
-	            $this->model_user->where("user_id=$id")->setField("groupid", $group);
+	        $user=$model_user->field("openid,groupid,nick_name")->where("openid='$id'")->find();
+	        if($user){
+	           //判断是否修改的分组与原分组相同
+	           if($groupid != $user['groupid']) {
+	               $restr=$this->thinkWechat->changeUserGroup($user['openid'], $groupid);
+	               $restr=json_decode($restr,true);
+	               if('ok'==$restr['errmsg']){
+	                   $model_group->where("id=$groupid")->setInc("count",1);
+	                   $model_group->where("id=".$user['groupid'])->setDec("count",1);
+	                   $model_user->where("openid='$id'")->setField("groupid", $groupid);
+	                   $succNo ++;
+	               }
+	           }
 	        }
+	    }
+	    if($succNo>0){
+	        $this->success("成功数：$succNo");
+	    }else{
+	        $this->error("修改失败");
 	    }
 	}
 }

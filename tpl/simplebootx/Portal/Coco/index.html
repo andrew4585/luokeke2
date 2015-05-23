@@ -32,8 +32,10 @@
                         <a href="{$vo.href}" data-spm-protocol="i">{$vo.label}</a>
                     </li>
                     </volist>
-
-
+                    <li class="nav-item nav-active" data-index="0" data-type="0" data-cata="index">
+					<a href="#" data-spm-protocol="i" onclick="is_login('{:U('Portal/PCustom/sf_index')}')">幸福抢先看</a></li>
+					<li class="nav-item nav-active" data-index="0" data-type="0" data-cata="index">
+					<a href="#" data-spm-protocol="i" onclick="is_login('{:U('User/Center/index')}')">用户中心</a></li>
                 </ul>
             </div>
             <div class="like-box">
@@ -229,6 +231,18 @@ $(function() {
             });
         });
     })
+    
+    function is_login(redirectUrl){
+    	var url = "{:U('Portal/coco/ajax_check_login')}";
+    	 $.post(url,{},function(data){
+             if(data.status){
+            	 location.href = redirectUrl;
+             }else{
+                 artDialog_alert(data.info,1);
+             }
+         });
+    	
+    }
 </script>
 </body>
 

@@ -237,6 +237,7 @@ class PCustomController extends AdminbaseController {
 	}
 	
 	function sf_add(){
+	    $_POST['keywords']=time();
 		$this->add();
 	}
 	

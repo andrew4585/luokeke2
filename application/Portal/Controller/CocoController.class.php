@@ -41,7 +41,7 @@ class CocoController extends IndexController {
                 $this->check_login();
                 //喜欢的成员编号
                 $id	= I("post.id",0,'intval');
-                if(empty($id)) throw new Exception("成员编号丢失");
+                if(empty($id)) throw new \Exception("成员编号丢失");
                 $userid = $_SESSION['user']['id'];
                 $uservote = M('vote');
                 $res = $uservote->where("enroll_id = $id and userid = $userid")->find();

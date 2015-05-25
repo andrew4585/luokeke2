@@ -160,7 +160,7 @@ class ProfileController extends MemberbaseController {
 	 */
 	public function logout(){
 	    unset($_SESSION["user"]);
-	    $url = U("User/Login/index");
+	    $url = U("Portal/Index/index");
 	    header("location:$url");
 	    exit;
 	}

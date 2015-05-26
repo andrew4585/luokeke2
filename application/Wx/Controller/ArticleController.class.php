@@ -74,6 +74,7 @@ class ArticleController extends IndexController {
     function add(){
         if(IS_POST){
             if($this->model_obj->create()){
+                $_POST['post_date'] = time();
                 $result = $this->model_obj->add($_POST);
                 if($result){
                     if($_POST['type'] == 3){
@@ -92,7 +93,6 @@ class ArticleController extends IndexController {
     function addWords(){
       if(I('get.uid')){
           if(IS_POST){
-              $_POST['post_date'] = time();
               $_POST['cid'] = I('get.uid');
               $result = $this->model_article->add($_POST);
               if ($result) {
@@ -145,11 +145,16 @@ class ArticleController extends IndexController {
         if($type==3){
             $this->redirect("Wx/Article/editArticle/id/$id");
         }else{
-            $this->redirect("Wx/Article/editwords/id/$id");
+            $this->redirect("Wx/Article/editWords/id/$id");
         }
     }
     function editArticle($id){
         if(IS_POST){
+
+            $data['post_title']         = $_POST['post_title'];
+            $data['cid']                = $_POST['cid'];
+            $data['post_date']          = time();
+            $res = $this->model_obj->where(array('id'=>$id))->save($data);
             $reply = $this->model_article->where("cid=$id")->getField('id',true);
             $replies = array_flip($reply);
             $replyids = array_keys($replies);
@@ -172,7 +177,7 @@ class ArticleController extends IndexController {
                 $replies = implode(',', $replies);
                 $this->model_article->where('id in('.$replies.')')->delete();
             }
-            if($result){
+            if($res||$result){
                 $this->success('更新成功',U('Article/index'));
             }else{
                 $this->error('更新失败');
@@ -189,6 +194,7 @@ class ArticleController extends IndexController {
         if(IS_POST){
             $data['post_title']         = $_POST['source_post_title'];
             $data['cid']                = $_POST['cid'];
+            $data['post_date']          = time();
             $wordsData['post_title']    = $_POST['words_post_title'];
             $wordsData['post_content']  = $_POST['post_content'];
             $result = $this->model_obj->where(array('id'=>$id))->save($data);

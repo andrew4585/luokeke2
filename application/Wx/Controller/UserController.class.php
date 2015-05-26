@@ -5,7 +5,7 @@
 namespace Wx\Controller;
 use Think\Log;
 class UserController extends IndexController {
-	
+
     public $model_user;
 	function _initialize() {
 		parent::_initialize();
@@ -25,9 +25,9 @@ class UserController extends IndexController {
 	    $this->_lists();
 	    $this->display();
 	}
-	
+
 	private  function _lists(){
-	    
+
 	    $where_ands =array("is_subscribe=1");
 	    $order		=empty($_POST['order_type'])?"subscribe_time":$_POST['order_type'];
 	    $order     .=" desc";
@@ -37,7 +37,7 @@ class UserController extends IndexController {
 	    );
 	    foreach ($fields as $param =>$val){
 	        if (!empty($_REQUEST[$param])) {
-	
+
 	            $operator=$val['operator'];		//操作
 	            $type	 =$val['type'];			//参数类型
 	            $field   =$val['field'];		//字段名
@@ -53,11 +53,11 @@ class UserController extends IndexController {
 	        }
 	    }
 	    $where= join(" and ", $where_ands);
-	    	
+
 	    $count=$this->model_user->where($where)->count();
-	    	
+
 	    $page = $this->page($count, 20);
-	    	
+
 	    $list =$this->model_user->alias('u')
 	                ->field("u.*,u1.score,u1.id,g.name group_name")
 	                ->join("sp_users    u1 on u.openid = u1.openid ")
@@ -69,9 +69,9 @@ class UserController extends IndexController {
 	    $this->assign("formget",$_REQUEST);
 	    $this->assign("list",$list);
 	}
-	
-	
-	
+
+
+
 	/**
 	 * 签到列表
 	 */
@@ -79,7 +79,7 @@ class UserController extends IndexController {
 	    $prefix=C("DB_PREFIX");
 	    $model_score=D("ScoreHistory");
 	    $where="get_type=0 and u.user_id<>0";
-	
+
 	    $nick_name	= I("get.nick_name");
 	    if(!empty($nick_name)){
 	        $where.=" and u.nick_name like '%$nick_name%'";
@@ -117,7 +117,7 @@ class UserController extends IndexController {
 	    $model_group= D("Group");
 	    $groupList=$model_group->order("id")->select();
 	    $where="get_type=1 and u.user_id<>0";
-	
+
 	    $nick_name	= I("get.nick_name");
 	    if(!empty($nick_name)){
 	        $where.=" and u.nick_name like '%$nick_name%'";
@@ -170,7 +170,7 @@ class UserController extends IndexController {
 	    $prefix=C("DB_PREFIX");
 	    $model_score=D("ScoreHistory");
 	    $where="get_type=2 and u.user_id<>0";
-	
+
 	    $nick_name	= I("get.nick_name");
 	    if(!empty($nick_name)){
 	        $where.=" and u.nick_name like '%$nick_name%'";
@@ -206,7 +206,7 @@ class UserController extends IndexController {
 	    $this->leftNav($this->nav,1,1);
 	    $this->display();
 	}
-	
+
 	/**
 	 * 获取用户openid，初始化
 	 */
@@ -228,7 +228,7 @@ class UserController extends IndexController {
 	        $this->error($e->getMessage());
 	    }
 	}
-	
+
 	/**
 	 * 检查是否含有应该标记为‘取消关注’的用户
 	 */
@@ -252,7 +252,7 @@ class UserController extends IndexController {
 	        $this->success("成功处理{$count}个用户");
 	    }
 	}
-	
+
 	//修改用户积分
 	public function ajax_score(){
 	    $user_id=I("post.user_id");
@@ -263,10 +263,10 @@ class UserController extends IndexController {
 	    }else{
 	        echo 1;		//修改失败
 	    }
-	
+
 	}
 	/************用户分组 ******************/
-	
+
 	public function group(){
 	    $model_group=D("Group");
 	    $list=$model_group->order("id")->select();
@@ -299,10 +299,10 @@ class UserController extends IndexController {
 	    if(empty($data['name']))alert("分组名称不能为空");
 	    $hasName=$model_group->where("`name`='{$data['name']}'")->find();
 	    if($hasName)alert("分组名称已存在");
-	
+
 	    import("@.ORG.ThinkWechat");
 	    $wechat	= new ThinkWechat();
-	
+
 	    switch($method){
 	        case 'add':
 	            $restr=$wechat->create_group($data['name']);
@@ -349,4 +349,3 @@ class UserController extends IndexController {
 	    }
 	}
 }
-

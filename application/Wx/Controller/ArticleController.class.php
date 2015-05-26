@@ -23,6 +23,8 @@ class ArticleController extends IndexController {
     function index(){
         //$data = $this->model_obj->relation(true)->select();
         $this->_lists();
+        $type = array(0=>'文字',3=>'多图文');
+        $this->assign('type',$type);
     		$this->commonParam();
     		$this->display();
     }

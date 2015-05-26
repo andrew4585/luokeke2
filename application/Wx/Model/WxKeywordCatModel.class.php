@@ -31,8 +31,13 @@ class WxKeywordCatModel extends CommonModel
      */
     public function updateCat($id,$data)
     {
-        $result = $this->where("id='".intval($id)."'")->save($data);
-        return $result;
+        if($this->create($data)){
+            return $this->where("id='".intval($id)."'")->save();
+        }else{
+            return $this->getError();
+        }
+        /*$result = $this->where("id='".intval($id)."'")->save($data);
+        return $result;*/
     }
 
     /**增加一个分类
@@ -44,7 +49,7 @@ class WxKeywordCatModel extends CommonModel
         if($this->create($data)){
             return $this->add();
         }else{
-            return $this->error($this->getError());
+            return $this->getError();
         }
     }
 

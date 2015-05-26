@@ -413,10 +413,10 @@ dl.about02 li i a:hover{ color:#000;}
 /**custom**/
 .custom{
     overflow: hidden;
-    background-color: #CDCCCC;
 }
 .custom img{
-    margin-bottom: 20px;
+    margin: 10px auto;
+	
 }
 .phoneContact{
     width: 640px;

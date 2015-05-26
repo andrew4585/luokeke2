@@ -89,7 +89,7 @@ class RegisterController extends IndexController {
 			$user_phone=I("post.user_phone");
 			$model_user=D("Users");
 			$hasUser=$model_user->where("user_phone='$user_phone'")->find();
-			if($hasUser)$this->returnfalse("该手机号已经注册");
+			if($hasUser)$this->error("该手机号已经注册");
 			$code=rand(1000, 9999);
 			$content="您好，您的验证码是:".$code.",感谢您注册大连洛可可婚纱摄影，如非本人操作请忽略【大连洛可可婚纱摄影】";
 			$reply=$this->authcode($user_phone, $content);

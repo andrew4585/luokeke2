@@ -45,6 +45,18 @@ class HomeBaseController extends AppframeController {
 		
 	}
 	
+	/**
+	 * ajax判断用户是否登陆
+	 */
+	public function ajax_check_login(){
+	    if(!isset($_SESSION["user"])){
+	        //$this->error('您还没有登录！',__ROOT__."/");
+	        $this->error('您还没有登录！',__ROOT__."/user/login");
+	    }else{
+	        $this->success("已登录");
+	    }
+	}
+	
 	protected function  check_user(){
 		
 		if($_SESSION["user"]['user_status']==2){

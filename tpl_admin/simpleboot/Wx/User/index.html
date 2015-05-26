@@ -27,7 +27,7 @@
       </div>
     </div>
   </form>
-  <form class="J_ajaxForm" action="" method="post">
+  <form class="J_ajaxForm" action="{:U('User/changeGroup')}" method="post">
     <div class="table_list">
       <table width="100%" class="table table-hover">
         <thead>
@@ -45,7 +45,7 @@
         <php>$sex=array("0"=>'未知',1=>'男',2=>'女');</php>
         	<foreach name="list" item="vo">
 	        	<tr>
-		            <td><input type="checkbox" class="J_check" data-yid="J_check_y" data-xid="J_check_x" name="ids[]" value="{$vo.id}" ></td>
+		            <td><input type="checkbox" class="J_check" data-yid="J_check_y" data-xid="J_check_x" name="ids[]" value="{$vo.openid}" ></td>
 		            <td><img src="{$vo.headimgurl}" style="height:40px;"/></td>
 		            <td><a>{$vo.nick_name}</a></td>
 		            <td>{$sex[$vo['sex']]}</td>
@@ -53,7 +53,7 @@
 		            <td>{$vo.subscribe_time|date='Y-m-d H:i:s',###}</td>
     	            <td>{$vo.group_name}</td>
 		            <td>
-		            	<a href="#">详情</a>
+		            	<a href="#" onclick="open_iframe_dialog('{:u('User/Indexadmin/info')}/id/{$vo.id}','详情')">详情</a>
 					</td>
 	          	</tr>
           </foreach>
@@ -62,14 +62,53 @@
      
     </div>
     <div class="form-actions">
-      <select class="J_ajax_submit_btn">
-       		<option>aa</option>
+      <select id="join_group" name="join_group" class="J_ajax_submit_btn" style="height:35px;margin:0;width:150px;" disabled>
+       		<foreach name="groups" item="vo">
+          	<php>$cid_select=$vo['id']==$formget['groupid']?"selected":"";</php>
+          	<option value="{$vo.id}" {$cid_select}>{$vo.name}</option>
+          </foreach>
        </select>
-       <button class="btn btn-primary " type="submit" data-action="{:u($controlName.'/listorders')}">加入分组</button>
+       <button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:U('User/changeGroup')}">加入分组</button>
       </div>
   </form>
 </div>
 <script src="__ROOT__/statics/js/common.js"></script>
 <script type="text/javascript" src="__ROOT__/statics/js/content_addtop.js"></script>
+<script>
+if ($('.J_check_wrap').length) {
+    var total_check_all = $('input.J_check_all');
+    var check_items = $("input.J_check");
+  	//点击全选框
+    total_check_all.change(function (e) {
+        if ($(this).attr('checked')) {
+            //全选状态
+            check_items.attr('checked', true);
+            $("#join_group").removeAttr("disabled");
+        } else {
+            //非全选状态
+            check_items.removeAttr('checked');
+            $("#join_group").attr("disabled","disabled");
+        }
+    });
+    //点击非全选时判断是否全部勾选
+    check_items.change(function () {
+    	var checkedLength = check_items.filter(':checked').length
+        if ($(this).attr('checked')) {
+            if (checkedLength === check_items.length) {
+                //已选择和未选择的复选框数相等
+                total_check_all.attr('checked', true);
+            }
+            $("#join_group").removeAttr("disabled");
+        } else {
+        	total_check_all.removeAttr('checked');
+            if(checkedLength===0){
+	            $("#join_group").attr("disabled","disabled");
+            }
+        }
+    });
+}
+
+
+</script>
 </body>
 </html>

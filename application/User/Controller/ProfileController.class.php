@@ -153,9 +153,18 @@ class ProfileController extends MemberbaseController {
 				}
 			}
 		}
-
-
 	}
+	
+	/**
+	 * 用户退出登陆
+	 */
+	public function logout(){
+	    unset($_SESSION["user"]);
+	    $url = U("Portal/Index/index");
+	    header("location:$url");
+	    exit;
+	}
+	
 
 }
     

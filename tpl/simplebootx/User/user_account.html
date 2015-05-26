@@ -87,25 +87,23 @@
                         <th> 金额(积分)</th>
                         <th> 数量</th>
                         <th> 总额(积分)</th>
-                        <th>余额(积分)</th>
                     </tr>
                     <foreach name="list" item="item">
                     <tr>
-                        <td>{$item.post_date|date="Y-m-d h:i:s",###}</td>
+                        <td>{$item.post_date|date="Y-m-d H:i:s",###}</td>
                         <if condition="$item.gid eq 0">
-                            <td>
-                                {$item.memo}
-                            </td>
-                            <td class="score">+{$item.point}</td>
+                                <td>{$item.memo}</td>
+                                <if condition="$item.type eq 5">
+                                	<td class="score" style="color:red">-{$item.point}</td>
+                                <else/>
+                                	<td class="score">+{$item.point}</td>
+                                </if>
                             <else/>
-                            <td>
-                                兑换礼品{$item.Shop.post_title}
-                            </td>
-                            <td class="score">-{$item.Shop.post_score}</td>
-                        </if>
+                                <td>兑换礼品{$item.Shop.post_title}</td>
+                                <td class="score" style="color:red">-{$item.Shop.post_score}</td>
+                            </if>
                         <td>1</td>
                         <td>{$item.sumpoint}</td>
-                        <td>{$item.user.score}</td>
                     </tr>
                     </foreach>
                     </tbody>

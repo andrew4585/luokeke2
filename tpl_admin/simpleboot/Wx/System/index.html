@@ -1,10 +1,16 @@
 <admintpl file="header" />
-<style>input{width:500px;}</style>
+<style>
+input{width:500px;}
+label{float:left;width:60px;line-height: 30px;}
+label input[type=radio]{margin:0;}
+.hidden{display:none}
+</style>
 <body class="J_scroll_fixed">
 	<div class="wrap J_check_wrap">
 	 	
 		<ul class="nav nav-tabs">
 	        <li class="active"><a href="#A" data-toggle="tab">微信账号</a></li>
+	        <li><a href="#B" data-toggle="tab">回复设置</a></li>
 	    </ul>
 		
 		<form class="J_ajaxForms" name="myform" id="myform" action="{:U('System/modifyBaseInfo')}" method="post">
@@ -33,6 +39,34 @@
 					<tr>
 						<td>token：</td>
 						<td><input type="text" class="input" name="token" value="{$info.token}"></td>
+					</tr>
+				</tbody>
+			</table>
+          </div>
+          <div class="tab-pane" id="B">
+            <table cellpadding="2" cellspacing="2" class="table_form" width="100%">
+				<tbody>
+					<tr>
+						<td width="100">首次关注回复：</td>
+						<td><input type="text" class="input" name="sub_reply" value="{$info.sub_reply}" placeholder="请填写回复关键字"></td>
+					</tr>
+					<tr>
+						<td>签到回复：</td>
+						<td><input type="text" class="input" name="sign_reply" value="{$info.sign_reply}" placeholder="请填写回复关键字"></td>
+					</tr>
+					<tr>
+						<td>多客服系统：</td>
+						<td><label><input type="radio" name="is_dkf" value="1" <if condition="$info['is_dkf'] eq 1">checked</if> onclick="dkf_reply(1)"/>开启</label>
+							<label><input type="radio" name="is_dkf" value="0" <if condition="$info['is_dkf'] eq 0">checked</if> onclick="dkf_reply(0)"/>关闭</label>
+							<a href="http://dkf.qq.com/" style="line-height: 30px;">多客服使用说明</a>
+						</td>
+					</tr>
+					<php>
+						$hidden=$info['is_dkf']?'hidden':'';
+					</php>
+					<tr class="error_reply {$hidden}">
+						<td>错误提示：</td>
+						<td><input type="text" class="input" name="error_text" value="{$info.error_text}" placeholder="请填写回复关键字，可不填"></td>
 					</tr>
 				</tbody>
 			</table>
@@ -142,8 +176,13 @@
 	        });
 	    });
 	////-------------------------
-	
-	
+	function dkf_reply(status){
+		if(status==1){
+			$(".error_reply").addClass("hidden");
+		}else if(status==0){
+			$(".error_reply").removeClass("hidden");
+		}
+	}
 	</script>
 </body>
 </html>

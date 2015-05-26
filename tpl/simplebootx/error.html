@@ -2,7 +2,7 @@
 	<html lang="en">
 	<head>
 		<title>跳转提示</title>
-		<tc_include file="Public/head"/>
+		<tc_include file="Public/head_info"/>
 		<style type="text/css">
 		*{ padding: 0; margin: 0; }
 		body{ background: #fff; font-family: '微软雅黑'; color: #333; font-size: 16px; }
@@ -14,6 +14,10 @@
 		</style>
 	</head>
 <body class="body-white">
+<php>
+	$topTime = date('md');
+	$num = str_split($topTime,1);
+</php>
 	<tc_include file="Public/nav"/>
 	<div class="system-message">
 	<present name="message">

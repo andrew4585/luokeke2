@@ -16,6 +16,17 @@
 				behavior: url(__STATICS__css/iecss3.htc);
 				cursor:pointer;
 			}
+			.reg-3 p {
+			  margin-top: 25px;
+			}
+			.submit{
+			  width: 100%;
+			  line-height: 40px;
+			  height: 40px;
+			  font-size: 16px;
+			  color: #FFFFFF;
+			  margin-top:20px;
+			}
 		</style>
 		<script type="text/javascript">
 		
@@ -33,23 +44,19 @@
 				$(this).find(".box_c").stop().slideUp();
 			});
 		});
-		$(function(){
-			$("form[name='regform']").submit(function(){
-				var url = $(this).attr('action');
-				var username 	= $("input[name='username']").val();
-				var password 	= $("input[name='password']").val();
-				var repassword	= $("input[name='repassword']").val();
-				var mobile		= $("input[name='mobile']") .val();
-				$.post(url,{username:username,password:password,repassword:repassword,mobile:mobile},function(data){
-					if(data.status){	
-						location.href = data.url;
-					}else{
-						artDialog_alert(data.info);
-					}
-				});
-				return false;
-			})
-		})
+		
+		function form_submit(){
+			var url =$("form[name='regform']").attr('action');
+			var mobile		= $("input[name='mobile']") .val();
+			var messcode	= $("input[name='messcode']").val();
+			$.post(url,{mobile:mobile,messcode:messcode},function(data){
+				if(data.status){	
+					location.href = data.url;
+				}else{
+					artDialog_alert(data.info);
+				}
+			});
+		}
 		/*获取短信验证码js效果*/
 			var time = 25;
 			$(function(){
@@ -64,11 +71,11 @@
 					$("#mobile").attr("placeholder","请检查您的手机号码格式！")
 				}else{
 					codeTime();
-					$.post("{:U('User/Register/sendRegisterSMS')}",{user_phone:phone},function(data){
+					$.post("{:U('Portal/PCustom/sendXFSMS')}",{user_phone:phone},function(data){
 						if(data.status==1){
 							
 						}else{
-							alert(data.info);
+							artDialog_alert(data.info,1);
 						}
 					});
 				}
@@ -123,27 +130,19 @@
 
 			<div class="login-4">
 				<div class="reg-3">
-					<form id="regform" name="regform" action="{:U('user/register/doregister')}" method="post">
+					<form id="regform" name="regform" action="{:U('PCustom/sf_index')}" method="post">
 
-					<p><label for="username"><font color="#f79646">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</font>用户名：</label><input class="line-height" type="text" name="username" id="username" value=""/><img class="ico8" src="__STATICS__images/tpl/ico7.png" /></p>
-					<p><label for="password"><font color="#f79646">*</font>请设置密码：</label><input class="line-height" type="password" name="password" id="password" value=""/><img class="ico8" src="__STATICS__images/tpl/ico6.png" /></p>
-					<p><label for="repassword"><font color="#f79646">*</font>请确认密码：</label><input class="line-height" type="password" name="repassword"  id="repassword" value=""/><img class="ico8" src="__STATICS__images/tpl/ico6.png" /></p>
-					<p><label for="mobile"><font color="#f79646">*</font>验证手机：</label><input class="line-height" type="text" name="mobile" id="mobile" value=""/><img class="ico8" src="__STATICS__images/tpl/ico6.png" /></p>
+					<p><label for="mobile">请输入手机号：</label><input class="line-height" type="text" name="mobile" id="mobile" value=""/><img class="ico8" src="__STATICS__images/tpl/ico6.png" /></p>
+					<p style="width:280px"><button class="phone-c" type="button" style="float: left">获取短信验证码</button></p>
 					<p class="reg-phone">
-						<label for="messcode" style="margin-left:18px;"><font color="#f79646">*</font>短信验证码：</label>
+						<label for="messcode" style="margin-left:14px;">请输入验证码：</label>
 						<input type="text" class="line-height"  style="width: 125px;" name="messcode" id="messcode" value=""/>
 						<!--<a class="phone-c" href="">获取短信验证码</a>-->
-						<button class="phone-c" type="button">获取短信验证码</button>
 					</p>
 				</div>
 				<div class="clears"></div>
 				<div class="reg-4">
-					<div class="reg-5 reg-all">
-						<a href="{:U('User/login/index')}">登陆</a>
-					</div>
-					<div class="reg-6 reg-all">
-						<input class="logsub" type="submit" style="cursor:pointer;" value="立即注册" />
-					</div>
+					<a class="reg-6 reg-all submit" onclick="form_submit()">查看我的抢先看</a>
 				</div>
 					</form>
 			</div>

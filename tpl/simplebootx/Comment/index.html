@@ -20,7 +20,7 @@
 	               <li><a href="{:U('api/oauth/login',array('type'=>'qq'))}"><img src="__STATICS__images/tpl/comment/qq.png" width="25" height="25"></a></li>
                    <li><a href="{:U('api/oauth/login',array('type'=>'sina'))}"><img src="__STATICS__images/tpl/comment/wo.png" width="25" height="25"></a></li>
 				<else/>
-	           	   <li style="margin-bottom:25px;font-size:15px"><a href="{:U('User/Center/index')}">{$Think.session.user.user_nicename}</a></li>
+	           	   <li style="margin-bottom:25px;font-size:15px"><a href="{:U('User/Center/index')}">{$Think.session.user.user_login}</a></li>
 	           </empty>
 	           </ul>
 	          

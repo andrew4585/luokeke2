@@ -5,7 +5,7 @@
 <body class="J_scroll_fixed">
 <div class="wrap J_check_wrap">
     <ul class="nav nav-tabs">
-        <li class=""><a href="{:U('Exchange/index')}">所有兑换记录</a></li>
+        <li class="active"><a href="{:U('Exchange/index')}">所有兑换记录</a></li>
     </ul>
     <form class="well form-search" method="post" action="{:u('Exchange/index')}">
         <div class="search_type cc mb10">
@@ -42,6 +42,7 @@
                     <th width="120">是否兑换</th>
                 </tr>
                 </thead>
+                 <php>$ex_type = array(0=>'店家邮寄',1=>'自取');</php>
                 <foreach name="list" item="vo">
                     <tr>
                         <td><input type="checkbox" class="J_check" data-yid="J_check_y" data-xid="J_check_x" name="ids[]" value="{$vo.id}" ></td>
@@ -60,7 +61,9 @@
                             <a href="#"  onclick="image_priview('__ROOT__/{$vo.Shop.post_pic}');"><img src="__ROOT__/{$vo.Shop.post_pic}" style="width:200px;"/></a>
                         </td>
                         <td>{$vo.post_date|date="Y-m-d H:i:s",###}</td>
-                        <td>{$vo.type}</td>
+                        <td>
+	                        <php>echo $ex_type[$vo['type']];</php>
+                        </td>
                         <td>{$vo.address}</td>
                         <td align="center">
                             <if condition="$vo.status eq 1">

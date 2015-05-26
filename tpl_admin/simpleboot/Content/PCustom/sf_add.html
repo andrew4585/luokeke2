@@ -78,12 +78,6 @@ body fieldset legend {
               </td>
             </tr>
             <tr>
-              <th width="80">验证码</th>
-              <td>
-              	<input type="text" style="width:400px;" name="keywords" id="keywords" value=""  class="input input_hd J_title_color" placeholder="请输入验证码" onkeyup="strlen_verify(this, 'title_len', 160)" />
-              </td>
-            </tr>
-            <tr>
             <th width="80">站点</th>
 			  <td>
 				  <select name="site_id" class="normal_select">
@@ -93,6 +87,18 @@ body fieldset legend {
 				  </select>
 			  </td>
 		  </tr>
+		   <tr>
+              <th>电话1：</th>
+              <td>
+              	<input type="text" style="width:400px;" name="tel1" id="tel1" value=""  class="input input_hd J_title_color" placeholder="请输入联系电话" onkeyup="strlen_verify(this, 'title_len', 160)" />
+              </td>
+            </tr>
+            <tr>
+              <th>电话2：</th>
+              <td>
+              	<input type="text" style="width:400px;" name="tel2" id="tel2" value=""  class="input input_hd J_title_color" placeholder="请输入联系电话" onkeyup="strlen_verify(this, 'title_len', 160)" />
+              </td>
+            </tr>
             <tr>
               <th width="80">摘要 </th>
               <td><textarea name='post_excerpt' id='description'  style='width:98%;height:50px;' placeholder='请填写摘要'></textarea> </td>

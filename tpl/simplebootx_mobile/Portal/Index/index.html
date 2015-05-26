@@ -172,10 +172,10 @@ $(document).ready(function(){
 		<a href="{:U('Portal/PCustom/lists')}">客片欣赏</a>
 	</li>
 	<li>
-		<a href="{:U('Portal/Article/lists')}">婚嫁资讯</a>
+		<a href="{:U('Portal/Dress/lists')}">婚纱/礼服</a>
 	</li>
 	<li>
-		<a href="{:U('Portal/coco/index')}">可可之星</a>
+		<a href="{:U('Portal/Article/lists')}">婚嫁资讯</a>
 	</li>
 </ul>
 <!------------------end-->
@@ -185,7 +185,8 @@ $(document).ready(function(){
 	<!--外景作品-->
 	<div class="container-item">
 		<div class="item-title"><a href="{:U('Portal/Photo/lists')}/cid/3"><img src="__STATICS__phone/images/home_title_outer.jpg"/></a></div>
-		<div class="items">
+		<div class="items outer">
+			<div class="item-list">
 			<foreach name="outer" item="item">
 				<div class="item-one">
 					<a href="{:U('Portal/Photo/info')}/id/{$item.id}">
@@ -193,15 +194,17 @@ $(document).ready(function(){
 					<div class="one-title">&gt;{$item.post_title|msubstr=0,5}</div></a>
 				</div>
 			</foreach>
+			</div>
 			<div class="clear"></div>
 		</div>
 	</div>
 	<!--中部广告-->
-	<div class="mid-ad"><img src="__ROOT__/{$m_home_middle.0.ad_pic}"/></div>
+	<div class="mid-ad"><a href="{$m_home_middle.0.ad_url}"><img src="__ROOT__/{$m_home_middle.0.ad_pic}"/></a></div>
 	<!--内景作品-->
 	<div class="container-item">
 		<div class="item-title"><a href="{:U('Portal/Photo/lists')}/cid/1"><img src="__STATICS__phone/images/home_title_inter.jpg"/></a></div>
-		<div class="items">
+		<div class="items inner">
+			<div class="item-list">
 			<foreach name="inner" item="item">
 				<div class="item-one">
 					<a href="{:U('Portal/Photo/info')}/id/{$item.id}">
@@ -210,12 +213,14 @@ $(document).ready(function(){
 				</div>
 			</foreach>
 			<div class="clear"></div>
+			</div>
 		</div>
 	</div>
 	<!--客照-->
 	<div class="container-item">
 		<div class="item-title"><a href="{:U('Portal/PCustom/lists')}"><img src="__STATICS__phone/images/home_title_photo.jpg"/></a></div>
-		<div class="items">
+		<div class="items pcustom">
+			<div class="item-list">
 			<foreach name="pcustom" item="item">
 				<div class="item-one">
 					<a href="{:U('Portal/PCustom/info')}/id/{$item.id}">
@@ -224,10 +229,39 @@ $(document).ready(function(){
 				</div>
 			</foreach>
 			<div class="clear"></div>
+			</div>
 		</div>
 	</div>
 </div>
 <!--------------------------container end-->
 <tc_include file="Public:phoneFooter"/>
+<!--滚动条js-->
+<script type="text/javascript" src="__STATICS__js/hScrollPane1.js"></script>
+<script type="text/javascript">
+$(".outer").hScrollPane({
+	mover: ".item-list",
+	dragable:true,
+	moverW: function() {
+		return $(".outer .item-one").length*200;
+	}(),
+	handleCssAlter: "draghandlealter"
+});
+$(".inner").hScrollPane({
+	mover: ".item-list",
+	dragable:true,
+	moverW: function() {
+		return $(".inner .item-one").length*200;
+	}(),
+	handleCssAlter: "draghandlealter"
+});
+$(".pcustom").hScrollPane({
+	mover: ".item-list",
+	dragable:true,
+	moverW: function() {
+		return $(".pcustom .item-one").length*200;
+	}(),
+	handleCssAlter: "draghandlealter"
+});
+</script>
 </body>
 </html>

@@ -1,0 +1,49 @@
+<admintpl file="header"/>
+<body class="J_scroll_fixed">
+<div class="wrap jj">
+    <ul class="nav nav-tabs">
+        <li><a href="{:U('Article/index')}">素材列表</a></li>
+        <li class="active"><a href="">修改文字素材 </a></li>
+    </ul>
+    <div class="common-form">
+        <form method="post" class="form-horizontal J_ajaxForm" action="{:U('Wx/Article/editwords/id')}/{$info.id}')}">
+            <div class="table_list">
+                <table cellpadding="2" cellspacing="2"  width="40%">
+                    <tbody>
+                    <tr>
+                        <td>素材名称:</td>
+                        <td><input type="text" class="input" name="source_post_title" value="{$info.post_title}"><span class="must_red">*</span></td>
+                    </tr>
+                    <tr>
+                        <td>分类:</td>
+                        <td>
+                            <select name="cid" class="normal_select">
+                                <foreach name="cats" item="item">
+                                    <option value="{$item.id}" <if condition="$info['cid'] eq $item['id']">selected</if>>{$item.cat_name}</option>
+                                </foreach>
+
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>名称:</td>
+                        <td><input type="text" class="input" name="words_post_title" value="{$info.article.0.post_title}"><span class="must_red">*</span></td>
+                    </tr>
+                    <tr>
+                        <td>文字:</td>
+                        <td><textarea class="input" name="post_content" value="" style="width:400px;height:200px;line-height:25px;">{$info.article.0.post_content|}</textarea></td>
+                    </tr>
+                    <input type="hidden" name="aid" value="{$info.article.0.id}"/>
+                    </tbody>
+                </table>
+            </div>
+            <div class="form-actions">
+                <button class="btn btn-primary btn_submit J_ajax_submit_btn" type="submit">更新</button>
+                <a class="btn" href="{:U('Article/add')}">返回</a>
+            </div>
+        </form>
+    </div>
+</div>
+<script src="__ROOT__/statics/js/common.js"></script>
+</body>
+</html>

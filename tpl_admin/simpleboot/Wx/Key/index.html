@@ -1,0 +1,81 @@
+<admintpl file="header" />
+<style>
+    .recommended,.istop{cursor:pointer;font-size:15px;}
+</style>
+<body class="J_scroll_fixed">
+<div class="wrap J_check_wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="javascript:;">所有关键字</a></li>
+        <li><a href="{:U('Key/add')}"  target="_self">添加关键字</a></li>
+        <li><a href="{:U('Key/cindex')}"  target="_self">关键字分类</a></li>
+    </ul>
+    <form class="well form-search" method="post" action="{:u('Key/index')}">
+        <div class="search_type cc mb10">
+            <div class="mb10">
+                <!--类别-->
+                <select class="select_2" name="cid" style="width:160px;" id="">
+                    <option value=''>全部类别</option>
+                    <foreach name="category" item="vo">
+                        <php>$cid_select=$vo['id']==$formget['cid']?"selected":"";</php>
+                        <option value="{$vo.id}" {$cid_select}>{$vo.cat_name}</option>
+                    </foreach>
+                </select>
+                <!-- 站点-->
+                &nbsp;&nbsp;时间：
+                <input type="text" name="start_time" class="input length_2 J_date" value="{$formget.start_time|default=''}" style="width:100px;" autocomplete="off"> -
+                <input type="text" class="input length_2 J_date" name="end_time" value="{$formget.end_time}" style="width:100px;" autocomplete="off">
+                &nbsp; &nbsp;关键字：
+                <input type="text" class="input length_2" name="keyword" style="width:200px;" value="{$formget.keyword}" placeholder="请输入关键字...">
+                <input type="submit" class="btn" value="搜索"/>
+                </span>
+            </div>
+        </div>
+    </form>
+    <form class="J_ajaxForm" action="" method="post">
+        <div class="table_list">
+            <table width="100%" class="table table-hover">
+                <thead>
+                <tr>
+                    <th width="16"><label><input type="checkbox" class="J_check_all" data-direction="x" data-checklist="J_check_x"></label></th>
+                    <th width="50">排序</th>
+                    <th>ID</th>
+                    <th>标题</th>
+                    <th width="300">类别</th>
+                    <th width='80'>类型</th>
+                    <th width="120"><span>发布时间</span></th>
+                    <th width="120">操作</th>
+                </tr>
+                </thead>
+                <foreach name="list" item="vo">
+                    <tr>
+                        <td><input type="checkbox" class="J_check" data-yid="J_check_y" data-xid="J_check_x" name="ids[]" value="{$vo.id}" ></td>
+                        <td><input name='listorders[{$vo.id}]' class="input input-order"  type='text' size='3' value='{$vo.listorder}'></td>
+                        <td><a>{$vo.id}</a></td>
+                        <td>
+                            <span>{$vo.post_title}</span>
+                        </td>
+                        <td>
+                            {$keycat[$vo['cid']]}
+                        </td>
+                        <td>{$type[$vo['type']]}</td>
+                        <td>{$vo.post_date|date="Y-m-d H:i:s",###}</td>
+                        <td>
+                            <a href="{:U('Key/edit')}/id/{$vo.id}">修改</a>|
+                            <a href="{:U('Key/delete')}/id/{$vo.id}" class="J_ajax_del" >删除</a>
+                        </td>
+                    </tr>
+                </foreach>
+            </table>
+            <div class="pagination">{$Page}</div>
+
+        </div>
+        <div class="form-actions">
+            <button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('Key/listorders')}">排序</button>
+            <button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('Key/delete')}" data-subcheck="true" data-msg="你确定删除吗？">删除</button>
+        </div>
+    </form>
+</div>
+<script src="__ROOT__/statics/js/common.js"></script>
+<script type="text/javascript" src="__ROOT__/statics/js/content_addtop.js"></script>
+</body>
+</html>

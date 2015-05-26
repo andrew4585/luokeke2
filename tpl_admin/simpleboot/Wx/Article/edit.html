@@ -28,10 +28,10 @@
 <div class="wrap J_check_wrap">
     <ul class="nav nav-tabs">
         <li><a href="{:U('Article/index')}">所有素材</a></li>
-        <li class="active"><a href="{:U('Article/add')}"  target="_self">添加素材</a></li>
+        <li class="active"><a href="{:U('Article/edit')}"  target="_self">编辑素材</a></li>
         <li class=""><a href="{:U('Article/cindex')}">素材类别</a></li>
     </ul>
-    <form name="myform" id="myform" action="{:u('Article/add')}" method="post" class="form-horizontal J_ajaxForms" enctype="multipart/form-data">
+    <form name="myform" id="myform" action="{:u('Wx/Article/edit/id')}/{$info.id}" method="post" class="form-horizontal J_ajaxForms" enctype="multipart/form-data">
 
         <div class="col-auto">
             <div class="table_full">
@@ -39,7 +39,7 @@
                     <tr>
                         <th width="80">标题 </th>
                         <td>
-                            <input type="text" width="80" name="post_title" id="title" value=""  class="input input_hd J_title_color" placeholder="请输入标题" onkeyup="strlen_verify(this, 'title_len', 160)" />
+                            <input type="text" width="80" name="post_title" id="title" value="{$info.post_title}"  class="input input_hd J_title_color" placeholder="请输入标题" onkeyup="strlen_verify(this, 'title_len', 160)" />
                             <span class="must_red">*</span>
                         </td>
                     </tr>
@@ -48,7 +48,7 @@
                         <td>
                             <select name="cid" class="normal_select">
                                 <foreach name="cats" item="item">
-                                    <option value="{$item.id}">{$item.cat_name}</option>
+                                    <option value="{$item.id}" <if condition="$info['cid'] eq $item['id']">selected</if>>{$item.cat_name}</option>
                                 </foreach>
 
                             </select>
@@ -57,7 +57,7 @@
                     <tr>
                         <th width="80">素材类型</th>
                         <td>
-                            <input type="radio" name="type" value="0" checked="checked">文字
+                            <input type="radio" name="type" value="0">文字
                             <input type="radio" name="type" value="3">图文
                         </td>
                     </tr>
@@ -73,6 +73,12 @@
 </div>
 <script type="text/javascript" src="__ROOT__/statics/js/common.js"></script>
 <script type="text/javascript" src="__ROOT__/statics/js/content_addtop.js"></script>
+<script type="text/javascript">
+    var checktype = {$info.type};
+    $(".reply-item[style!='display: none;']")
+    $("input[name='type'][value="+checktype+"]").attr('checked','checked');
+    $("input[name='type'][value!="+checktype+"]").attr('disabled','false');
+</script>
 <script type="text/javascript">
     $(function () {
         Wind.use('validate', 'ajaxForm', 'artDialog', function () {

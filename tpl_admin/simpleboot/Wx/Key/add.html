@@ -27,27 +27,27 @@
 <body class="J_scroll_fixed">
 <div class="wrap J_check_wrap">
     <ul class="nav nav-tabs">
-        <li><a href="{:U('Article/index')}">所有素材</a></li>
-        <li class="active"><a href="{:U('Article/add')}"  target="_self">添加素材</a></li>
-        <li class=""><a href="{:U('Article/cindex')}">素材类别</a></li>
+        <li><a href="{:U('Key/index')}">所有关键字</a></li>
+        <li class="active"><a href="{:U('Key/add')}"  target="_self">添加关键字</a></li>
+        <li class=""><a href="{:U('Key/cindex')}">关键字类别</a></li>
     </ul>
-    <form name="myform" id="myform" action="{:u('Article/add')}" method="post" class="form-horizontal J_ajaxForms" enctype="multipart/form-data">
+    <form name="myform" id="myform" action="{:u('Key/add')}" method="post" class="form-horizontal J_ajaxForms" enctype="multipart/form-data">
 
         <div class="col-auto">
             <div class="table_full">
                 <table width="100%" cellpadding="2" cellspacing="2">
                     <tr>
-                        <th width="80">标题 </th>
+                        <th width="80">关键字 </th>
                         <td>
                             <input type="text" width="80" name="post_title" id="title" value=""  class="input input_hd J_title_color" placeholder="请输入标题" onkeyup="strlen_verify(this, 'title_len', 160)" />
                             <span class="must_red">*</span>
                         </td>
                     </tr>
                     <tr>
-                        <th width="80">素材分类</th>
+                        <th width="80">关键字分类</th>
                         <td>
                             <select name="cid" class="normal_select">
-                                <foreach name="cats" item="item">
+                                <foreach name="category" item="item">
                                     <option value="{$item.id}">{$item.cat_name}</option>
                                 </foreach>
 
@@ -55,10 +55,25 @@
                         </td>
                     </tr>
                     <tr>
-                        <th width="80">素材类型</th>
+                        <th width="80">关键字类型</th>
                         <td>
                             <input type="radio" name="type" value="0" checked="checked">文字
                             <input type="radio" name="type" value="3">图文
+                        </td>
+                    </tr>
+                    <tr>
+                        <th width="80">选择素材</th>
+                        <td>
+                            <select name="uid" class="normal_select source">
+                                <option value="0">请选择分类</option>
+                                <foreach name="sourcecat" item="item">
+                                    <option value="{$item.id}">{$item.cat_name}</option>
+                                </foreach>
+                            </select>
+                            <select name="sourcetitle" class="normal_select sourcelist">
+
+                            </select>
+
                         </td>
                     </tr>
                     </tbody>
@@ -66,8 +81,8 @@
             </div>
         </div>
         <div class="form-actions" style="padding-left: 100px;">
-            <button class="btn btn-primary btn_submit J_ajax_submit_btn" type="submit">下一步</button>
-            <a class="btn" href="{:U('Article/index')}">返回</a>
+            <button class="btn btn-primary btn_submit J_ajax_submit_btn" type="submit">提交</button>
+            <a class="btn" href="{:U('Key/index')}">返回</a>
         </div>
     </form>
 </div>
@@ -125,10 +140,74 @@
                 //是否在获取焦点时验证
                 onfocusout: false,
                 //验证通过，提交表单
+                submitHandler: function (forms) {
+                    $(forms).ajaxSubmit({
+                        url: form.attr('action'), //按钮上是否自定义提交地址(多按钮情况)
+                        dataType: 'json',
+                        beforeSubmit: function (arr, $form, options) {
+
+                        },
+                        success: function (data, statusText, xhr, $form) {
+                            if(data.status){
+                                setCookie("refersh_time",1);
+                                //添加成功
+                                Wind.use("artDialog", function () {
+                                    art.dialog({
+                                        id: "succeed",
+                                        icon: "succeed",
+                                        fixed: true,
+                                        lock: true,
+                                        background: "#CCCCCC",
+                                        opacity: 0,
+                                        content: data.info,
+                                        button:[
+                                            {
+                                                name: '继续添加？',
+                                                callback:function(){
+                                                    reloadPage(window);
+                                                    return true;
+                                                },
+                                                focus: true
+                                            },{
+                                                name: '返回列表页',
+                                                callback:function(){
+                                                    location="{:U('Key/index')}";
+                                                    return true;
+                                                }
+                                            }
+                                        ]
+                                    });
+                                });
+                            }else{
+                                isalert(data.info);
+                            }
+                        }
+                    });
+                }
             });
         });
         ////-------------------------
     });
+</script>
+<script type="text/javascript">
+    $(".source").change(function(){
+        $('.sourcelist').html("");
+        var cid = $(this).val();
+        var type = $("input[type='radio']:checked").val();
+        var url = "{:U('Key/getSource')}";
+        var key;
+        $.post(url,{cid:cid,type:type},function(data){
+            if(data) {
+                var obj = eval('(' + data + ')');;
+                for (key in obj){
+                    $('.sourcelist').append("<option value='"+obj[key].id+"'>"+obj[key].post_title+"</option>")
+                }
+            }
+        });
+        return false;
+    })
+
+
 </script>
 </body>
 </html>

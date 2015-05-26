@@ -179,7 +179,7 @@ class KeyController extends IndexController
     {
         if(IS_POST){
             $result = $this->model_cat->addCat($_POST);
-            return $result ? $this->success('添加成功!', U("Key/cindex")) : $this->error('添加失败！');
+            return is_numeric($result) ? $this->success('添加成功!', U("Key/cindex")) : $this->error($result);
         }else{
             $this->display();
         }
@@ -189,7 +189,7 @@ class KeyController extends IndexController
     {
         if(IS_POST){
             $result = $this->model_cat->updateCat($id,$_POST);
-            return $result ? $this->success('更新成功!', U("Key/cindex")) : $this->error('更新失败!');
+            return is_numeric($result) ? $this->success('更新成功!', U("Key/cindex")) : $this->error($result);
         }else{
             $cat = $this->model_cat->getcat($id);
             $this->assign($cat);

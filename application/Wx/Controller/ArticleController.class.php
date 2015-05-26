@@ -200,7 +200,7 @@ class ArticleController extends IndexController {
             $result = $this->model_obj->where(array('id'=>$id))->save($data);
             $res    = $this->model_article->where(array('id'=>$_POST['aid']))->save($wordsData);
             if($result || $res){
-                $this->success('更新成功',U('Article/add'));
+                $this->success('更新成功',U('Article/index'));
             }else{
                 $this->error('更新失败');
             }
@@ -251,6 +251,9 @@ class ArticleController extends IndexController {
 
     function cadd(){
         if(IS_POST){
+            if($_POST['post_title'] == ""){
+                $this->error('添加失败');
+            }
             if ($this->model_cate->create()) {
                 if ($this->model_cate->add($_POST)) {
                     $this->success("添加成功！", U("Article/cindex"));
@@ -277,6 +280,9 @@ class ArticleController extends IndexController {
     //编辑分类
     function cedit(){
         if(IS_POST){
+            if($_POST['post_title'] == ""){
+                $this->error('更新失败');
+            }
             if ($this->model_cate->create()) {
                 if ($this->model_cate->save($_POST)) {
                     $this->success("保存成功！", U("Article/cindex"));

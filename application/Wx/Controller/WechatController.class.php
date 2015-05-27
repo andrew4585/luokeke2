@@ -95,8 +95,7 @@ class WechatController extends IndexController{
         switch ($key['type']){
             case 0:
                 $sourceId=$key['sourceid'];
-                $content=$model_art->relation('article')->where("id=$sourceId")->getField("article");
-                $content = $content['post_content'];
+                $content=$model_article->where("cid = $sourceId")->getField("post_content");
                 $reply=array($content,"text");
                 break;
             case 3:

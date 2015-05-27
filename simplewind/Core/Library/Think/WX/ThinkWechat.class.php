@@ -174,7 +174,7 @@ class ThinkWechat {
 				$articles[$key]['url']=$value['url'];
 			}
 			$articles[$key]['picurl']=$web."/Upload/article/".$value['pic'];
-			if($key >= 9) { break; } //最多只允许10调新闻
+			if($key >= 9) { break; } //最多只允许8条新闻
 		}
 		$this->send['news']['articles'] = $articles;
 	}

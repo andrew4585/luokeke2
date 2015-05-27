@@ -83,27 +83,28 @@ class WechatController extends IndexController{
      * @param bool $type	是否只精确查询 ，默认只精确查询
      */
     private function autoReply($text,$type=true){
-        $model_key=D("key");
-        $model_art=D("Article");
+        $model_key=D("WXKeyword");
+        $model_art=D("WxSource");
+        $model_article = D("WxArticle");
         $sql="select *
-        from (select k.article_id,LENGTH(k.`name`) len,k.`name`,k.type
-        from lkk_key k WHERE k.`name` LIKE '%$text%') l
+        from (select k.sourceid,LENGTH(k.`post_title`) len,k.`post_title`,k.type
+        from sp_wx_keyword k WHERE k.`post_title` LIKE '%$text%') l
         order by l.len limit 0,1";
         $key=$model_key->query($sql);
         $key=$key[0];
         switch ($key['type']){
-            case '文字':
-                $article_id=$key['article_id'];
-                $content=$model_art->where("article_id=$article_id")->getField("content");
+            case 0:
+                $sourceId=$key['sourceid'];
+                $content=$model_art->where("id=$sourceId")->getField("article");
+                $content = $content['post_content'];
                 $reply=array($content,"text");
                 break;
-            case '图文':
-            case '多图文':
-                $article_id=$key['article_id'];
-                $artArr=explode(",", $article_id);
+            case 3:
+                $sourceId=$key['sourceid'];
+                $artArr = $model_article->where("cid = $sourceId")->getField("id");
                 $article=array();
                 foreach ($artArr as $item){
-                    $article[]=$model_art->field("article_id,title,brief,pic,url")->where("article_id=$item")->find();
+                    $article[]=$model_article->field("id,post_title,post_excerpt,post_pic,post_url")->where("id=$item")->find();
                 }
                 // 				$article=$model_art->field("article_id,title,brief,pic,url")->where("article_id in ($article_id)")->select();
                 $reply=array($article,"news");
@@ -119,20 +120,17 @@ class WechatController extends IndexController{
      * @return array; 响应的数据
      */
     private function getSubscribe($openid = ''){
-        $web=$this->getConfigValue("web");
+        //$web=$this->getConfigValue("web");
         if(empty($openid))exit;
         $model_user = D("WxUser");
         $model_user->subscribe($openid);
 		$model_group=D("Group");
 		$model_group->where("id=0")->setInc("count",1);
-		exit();
-        //回复信息
-//         $model_system=D("SystemInfo");
-//         $article_id=$model_system->getValue("sub_reply");
-//         if($article_id){
-//             $reply=$this->autoReply($article_id);
-//             return $reply;
-//         }
+        $model_Config=D("Config");
+        $article_id=$model_Config->val("sub_reply");
+        if($article_id){
+             return $reply=$this->autoReply($article_id);
+         }
     }
     
     /**

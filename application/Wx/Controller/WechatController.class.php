@@ -83,7 +83,7 @@ class WechatController extends IndexController{
      * @param bool $type	是否只精确查询 ，默认只精确查询
      */
     private function autoReply($text,$type=true){
-        $model_key=D("WXKeyword");
+        $model_key=D("WxKeyword");
         $model_art=D("WxSource");
         $model_article = D("WxArticle");
         $sql="select *
@@ -124,9 +124,9 @@ class WechatController extends IndexController{
         if(empty($openid))exit;
         $model_user = D("WxUser");
         $model_user->subscribe($openid);
-		$model_group=D("Group");
+		$model_group=D("WxGroup");
 		$model_group->where("id=0")->setInc("count",1);
-        $model_Config=D("Config");
+        $model_Config=D("WxConfig");
         $article_id=$model_Config->val("sub_reply");
         if($article_id){
              return $reply=$this->autoReply($article_id);

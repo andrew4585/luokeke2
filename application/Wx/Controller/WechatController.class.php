@@ -100,7 +100,7 @@ class WechatController extends IndexController{
                 break;
             case 3:
                 $sourceId=$key['sourceid'];
-                $artArr = $model_article->where("cid = $sourceId")->getField("id");
+                $artArr = $model_article->where("cid = $sourceId")->getField("id",true);
                 $article=array();
                 foreach ($artArr as $item){
                     $article[]=$model_article->field("id,post_title,post_excerpt,post_pic,post_url")->where("id=$item")->find();

@@ -166,14 +166,14 @@ class ThinkWechat {
 		$web=$model_system->val("web");
 		$articles = array();
 		foreach ($news as $key => $value) {
-			$articles[$key]['title']=$value['title'];
-			$articles[$key]['description']=$value['brief'];
-			if(empty($value['url'])){
+			$articles[$key]['title']=$value['post_title'];
+			$articles[$key]['description']=$value['post_excerpt'];
+			if(empty($value['post_url'])){
 				$articles[$key]['url']=$web."/index.php/Api/Article/index/article_id/".$value['article_id']."/id/".$this->data['ToUserName'];
 			}else{
-				$articles[$key]['url']=$value['url'];
+				$articles[$key]['url']=$value['post_url'];
 			}
-			$articles[$key]['picurl']=$web."/Upload/article/".$value['pic'];
+			$articles[$key]['picurl']=$web."/Upload/article/".$value['posst_pic'];
 			if($key >= 9) { break; } //最多只允许8条新闻
 		}
 		$this->send['news']['articles'] = $articles;

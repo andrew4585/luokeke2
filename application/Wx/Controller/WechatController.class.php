@@ -195,7 +195,7 @@ class WechatController extends IndexController{
                         $sumPoint = $exchange->where("uid=%d and gid=%d and post_date<%d", array($userid, 0, $data['post_date']))->sum('point');
                         $sumPoint = $sumPoint ? $sumPoint : 0;
                         $data['sumPoint'] = (int)$sumPoint + $data['point'];
-                        $result = $model_user->sign($userid, $data);
+                        $result = $model_user->sign($exchange, $data);
                         if ($result) {
                             $where = "id=$userid";
                             $model_user->where($where)->setInc("score", $data['point']);

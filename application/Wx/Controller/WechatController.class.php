@@ -176,7 +176,7 @@ class WechatController extends IndexController{
      * @return array; 响应的数据
      */
     private function getTaskEvent($taskevent = '', $openid = '') {
-        $model_user	  = D("User");
+        $model_user	  = D("Users");
         $model_system = D("WxConfig");
         $userid=$model_user->getUserId($openid);// 绑定的用户ID
         if ($openid && $userid > 0) {

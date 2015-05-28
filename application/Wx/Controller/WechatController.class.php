@@ -190,11 +190,11 @@ class WechatController extends IndexController{
                         $data['uid'] = $userid;
                         $data['point'] = 10;
                         $data['type'] = 2;
-                        $data['memo'] = '网站签到';
+                        $data['memo'] = '微信签到';
                         $data['post_date'] = time();
+                        Log::write('data',$data);
                         $sumPoint = $exchange->where("uid=%d and gid=%d and post_date<%d", array($userid, 0, $data['post_date']))->sum('point');
-                        Log::write("sumPoint:".$sumPoint);
-                        $data['sumPoint'] = $sumPoint + $data['point'];
+                        $data['sumPoint'] = (int)$sumPoint + $data['point'];
                         $result = $model_user->sign($userid, $data);
                         if ($result) {
                             $where = "id=$userid";

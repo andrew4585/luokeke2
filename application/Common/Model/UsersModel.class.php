@@ -16,7 +16,11 @@ class UsersModel extends CommonModel
 	function mGetDate() {
 		return date('Y-m-d H:i:s');
 	}
-	
+
+	public function  getUserInfo($id){
+		return $this->where("id = $id")->select();
+	}
+
 	protected function _before_write(&$data) {
 		parent::_before_write($data);
 		
@@ -24,6 +28,17 @@ class UsersModel extends CommonModel
 			$data['user_pass']=sp_password($data['user_pass']);
 		}
 	}
-	
+
+	public function sign($score,$data=array()){
+		return $result = $score->add($data);
+	}
+	public function isSign($uid,$score) {
+		$message = $score->where("uid = $uid")->order('post_date DESC')->find();
+		if ($message and date('y-m-d', $message['post_date'])==date('y-m-d', time())) {
+			return false;
+		}else{
+			return true;
+		}
+	}
 }
 

@@ -177,12 +177,43 @@ class WechatController extends IndexController{
      */
     private function getTaskEvent($taskevent = '', $openid = '') {
         $model_user	  = D("User");
-        $model_system = D("SystemInfo");
+        $model_system = D("WxConfig");
         $userid=$model_user->getUserId($openid);// 绑定的用户ID
         if ($openid && $userid > 0) {
             switch ($taskevent) {
                 case 'SIGN_TODAY' : // 每日签到
+                    $exchange = D('Exchange');
+                    $res = $model_user -> isSign($userid,$exchange);
+                    if(!$res){
+                        return $reply = array("您今天已经签到",'text');
+                    }else {
+                        $data['uid'] = $userid;
+                        $data['point'] = 10;
+                        $data['type'] = 2;
+                        $data['memo'] = '网站签到';
+                        $data['post_date'] = time();
+                        $sumPoint = $exchange->where("uid=%d and gid=%d and post_date<%d", array($userid, 0, $data['post_date']))->sum('point');
+                        $data['sumPoint'] = $sumPoint + $data['point'];
+                        $result = $model_user->sign($userid, $data);
+                        if ($result) {
+                            $where = "id=$userid";
+                            $model_user->where($where)->setInc("score", $data['point']);
+                            $reply = array("签到成功", 'text');
+                        }
+                        $sign_reply = $model_system->val("sign_reply");
+                        if (!empty($sign_reply)) {
+                            list ($content, $type) = $reply;
+                            $restr = $this->send($content, $openid, $type);
+                            $reply1 = $this->autoReply($sign_reply);
+                            list ($content1, $type1) = $reply1;
+                            $restr = $this->send($content1, $openid, $type1);
+                            exit;
+                        }
+                    }
+                    /*}
+                    $model_user ->sign($userid,$exchange);
                     $model_history=D("ScoreHistory");
+
                     $total_socre=$model_user->where("user_id=$userid")->getField("score");
                     $data['user_id'] =$userid;
                     $data['score']	 =$model_system->getValue("today_score");
@@ -214,7 +245,7 @@ class WechatController extends IndexController{
                         list ( $content1, $type1 ) =$reply1;
                         $restr=$this->send($content1,$openid,$type1);
                         exit;
-                    }
+                    }*/
                     break;
                 default :
                     $reply=$this->autoReply($taskevent,true);

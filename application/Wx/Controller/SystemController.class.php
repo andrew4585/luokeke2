@@ -140,7 +140,7 @@ class SystemController extends IndexController {
 	    $mess_json=$this->thinkWechat->setMenu($body);
 	    $mess=json_decode($mess_json,true);
 	    if(0==$mess['errcode']){
-	        $this->success("设置成功",U("System/navigation2"));
+	        $this->success("设置成功");
 	    }else{
 	        Log::record($mess_json);
 	        $this->error($mess['errmsg']);

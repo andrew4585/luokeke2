@@ -40,5 +40,11 @@ class UsersModel extends CommonModel
 			return true;
 		}
 	}
+
+	public function getUserId($openid){
+		$where="openid='$openid'";
+		$user_id=$this->where($where)->getField("id");
+		return $user_id;
+	}
 }
 

@@ -40,7 +40,8 @@
 				var password 	= $("input[name='password']").val();
 				var repassword	= $("input[name='repassword']").val();
 				var mobile		= $("input[name='mobile']") .val();
-				$.post(url,{username:username,password:password,repassword:repassword,mobile:mobile},function(data){
+				var messcode	= $("input[name='messcode']") .val();
+				$.post(url,{username:username,password:password,repassword:repassword,mobile:mobile,messcode:messcode},function(data){
 					if(data.status){	
 						location.href = data.url;
 					}else{

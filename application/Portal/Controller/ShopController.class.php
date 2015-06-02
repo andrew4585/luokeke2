@@ -16,6 +16,8 @@ class ShopController extends IndexController
 
     private function common()
     {
+        //banner
+        $this->assign("home_head",$this->_getAd("banner_shop"));
         //广告
         $this->assign("servePromise",$this->_getAd("servePromise"));
         //分类显示

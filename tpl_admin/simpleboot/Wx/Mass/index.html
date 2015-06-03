@@ -6,7 +6,7 @@
     <ul class="nav nav-tabs">
         <li class="active"><a href="javascript:;">群发管理</a></li>
     </ul>
-    <form class="J_ajaxForm" action="{:U('Wx/Mass/massmessage')}" method="post">
+    <form class="" action="{:U('Wx/Mass/massmessage')}" method="post">
         <div class="table_full">
             <table width="100%" cellspacing="0" id="dnd-example">
                 <tbody>
@@ -21,7 +21,7 @@
                 <foreach name="category" item="item">
                     <tr>
                         <td>
-                            <input type="checkbox" name="groupid[]"/>{$item.name}({$item.count}人)
+                            <input type="checkbox" name="group[]" value="{$item.id}"/>{$item.name}({$item.count}人)
                         </td>
                     </tr>
                 </foreach>

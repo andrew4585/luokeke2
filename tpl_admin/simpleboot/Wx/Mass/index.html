@@ -1,0 +1,25 @@
+<admintpl file="header"/>
+<style>.expander{margin-left: -20px;}</style>
+</head>
+<body class="J_scroll_fixed">
+<div class="wrap J_check_wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="javascript:;">群发管理</a></li>
+    </ul>
+    <form class="J_ajaxForm" action="{:U('Rbac/authorize_post')}" method="post">
+        <div class="table_full">
+            <table width="100%" cellspacing="0" id="dnd-example">
+                <tbody>
+                {$categorys}
+                </tbody>
+            </table>
+        </div>
+        <div class="form-actions">
+            <input type="hidden" name="roleid" value="{$roleid}" />
+            <button class="btn btn_submit btn-primary mr10 J_ajax_submit_btn" type="submit">群发</button>
+            <a class="btn" href="__URL__">返回</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>

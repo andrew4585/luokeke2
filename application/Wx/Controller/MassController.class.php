@@ -42,7 +42,7 @@ class MassController extends IndexController
         switch($type){
             case '0'://为0是文字素材
                 $id = $articleId[0];
-                $content = $this->modelArticle->where("id = $id)->getField('content");
+                $content = $this->modelArticle->where("id = $id")->getField('post_content');
                 $i = $this->thinkWechat->mass_text ( $content, $group);
                 break;
             //case '3':

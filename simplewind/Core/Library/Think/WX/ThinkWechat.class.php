@@ -510,7 +510,7 @@ class ThinkWechat {
 			$data=json_encode($data);
 			Think\Log::record($data,'WARN');
 			$data=urldecode($data);
-			$restr = http ( $url, $data, 'POST', array ( "Content-type: text/html; charset=utf-8" ), true );
+			$restr = http_post ( $url, $data);
 			$restr = json_decode($restr,true);
 			if($restr['errcode']==0)$i++;
 		}

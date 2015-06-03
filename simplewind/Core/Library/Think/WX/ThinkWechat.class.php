@@ -502,7 +502,7 @@ class ThinkWechat {
 // 			}
 // 			';
 			$data=array(
-					"filter"=>array("is_to_all"=>false,"group_id"=>$item),
+					"filter"=>array("is_to_all"=>true),
 					"text"=>array("content"=>urlencode($content)),
 					"msgtype"=>"text"
 					);

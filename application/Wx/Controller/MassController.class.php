@@ -42,7 +42,7 @@ class MassController extends IndexController
             case '0':
                 $id = $articleId[0];
                 $content = $this->modelArticle->where("id=$id")->getField("post_content");
-                $i = $wechat->mass_text($content, $group);
+                $i = $this->thinkWechat->mass_text($content, $group);
                 break;
             default:
                 $this->error("素材类型错误");

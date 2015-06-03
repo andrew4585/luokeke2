@@ -501,7 +501,6 @@ class ThinkWechat {
 // 				 "msgtype":"text"
 // 			}
 // 			';
-			Think\Log::record($item,'WARN');
 			$data=array(
 					"filter"=>array("is_to_all"=>false,"group_id"=>$item),
 					"text"=>array("content"=>urlencode($content)),
@@ -509,10 +508,10 @@ class ThinkWechat {
 					);
 			$data=json_encode($data);
 			$data=urldecode($data);
-			Think\Log::record($data,'WARN');
 			$restr = http ( $url, $data, 'POST', array ( "Content-type: text/html; charset=utf-8" ), true );
-			$restr = json_decode($restr,true);
 			Think\Log::record($restr,'WARN');
+			$restr = json_decode($restr,true);
+			//Think\Log::record($restr,'WARN');
 			if($restr['errcode']==0)$i++;
 		}
 		return $i;

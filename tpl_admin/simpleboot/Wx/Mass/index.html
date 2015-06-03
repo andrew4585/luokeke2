@@ -30,12 +30,12 @@
             <div style="margin-top: 15px">
                 <span>选择素材：</span>
                 <input type="text" name="mass" id="mass" value="" onclick="javascript:open_iframe_dialog('{:u('Wx/Mass/source')}','素材列表','tip')" readonly/>
-                <input type="hidden" name="hiddenid" />
+                <input type="hidden" name="hiddenid" value="" />
                 <a href="javascript:open_iframe_dialog('{:u('Wx/Mass/source')}','素材列表')" >查找</a>
             </div>
         </div>
         <div class="form-actions">
-            <input type="hidden" name="roleid" value="{$roleid}" />
+
             <button class="btn btn_submit btn-primary mr10 J_ajax_submit_btn" type="submit">群发</button>
             <a class="btn" href="__URL__">返回</a>
         </div>
@@ -46,7 +46,7 @@
 <script type="text/javascript">
     function add_article_id(str,title){
         $("input[name=mass]").val(title);
-        $("input[name=hidden]").val(str);
+        $("input[name=hiddenid]").val(str);
     }
 
     $('.checkAll').click(function(){

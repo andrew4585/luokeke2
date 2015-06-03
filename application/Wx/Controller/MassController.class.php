@@ -31,16 +31,18 @@ class MassController extends IndexController
 
     public function massmessage()
     {
-        $group = I("post.groupid");
-        $sourceId = I("post.hiddenid");
+        $group = $_POST['groupid'];
+        $sourceId = $_POST['hiddenid'];
         if(empty($group)) $this->error("请选择用户分组");
-        if($sourceId) $this->error("素材不存在");
+        if(!$sourceId) $this->error("素材不存在");
         $articleId = $this->modelArticle->where("cid = $sourceId")->getField('id',true);
         if(!$sourceId)$this->error("该素材没有相关文章！");
-        $type = $this->modelSource->where("id=$sopurceId")->getField('type');
+        $type = $this->modelSource->where("id=$sourceId")->getField('type');
+        //dump($articleId);
         switch($type){
             case '0'://为0是文字素材
-                $content = $modelArticle->where("id = $article[0]")->getField("content");
+                $id = $articleId[0];
+                $content = $this->modelArticle->where("id = $id)->getField('content");
                 $i = $this->thinkWechat->mass_text ( $content, $group);
                 break;
             //case '3':

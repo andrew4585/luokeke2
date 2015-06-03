@@ -487,7 +487,6 @@ class ThinkWechat {
 	 * @return int $i   发送的用户分组的个数
 	 */
 	public function mass_text($content,$groups){
-		Think\Log::record('测试日志信息，这是警告级别','WARN');
 		$access_token = $this->getToken ();
 		$url="https://api.weixin.qq.com/cgi-bin/message/mass/sendall?access_token=$access_token";
 		$i=0;
@@ -502,6 +501,7 @@ class ThinkWechat {
 // 				 "msgtype":"text"
 // 			}
 // 			';
+			Think\Log::record($item,'WARN');
 			$data=array(
 					"filter"=>array("group_id"=>$item),
 					"text"=>urlencode($content),

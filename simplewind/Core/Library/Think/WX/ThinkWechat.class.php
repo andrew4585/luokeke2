@@ -503,8 +503,8 @@ class ThinkWechat {
 // 			';
 			Think\Log::record($item,'WARN');
 			$data=array(
-					"filter"=>array("group_id"=>$item),
-					"text"=>urlencode($content),
+					"filter"=>array("is_to_all"=>false,"group_id"=>$item),
+					"text"=>array("content"=>urlencode($content)),
 					"msgtype"=>"text"
 					);
 			$data=json_encode($data);

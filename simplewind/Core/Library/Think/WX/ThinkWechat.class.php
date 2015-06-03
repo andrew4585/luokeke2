@@ -503,7 +503,7 @@ class ThinkWechat {
 // 			';
 			$data=array(
 					"filter"=>array("group_id"=>$item),
-					"text"=>array("content"=>urlencode($content)),
+					"text"=>urlencode($content),
 					"msgtype"=>"text"
 					);
 			$data=json_encode($data);

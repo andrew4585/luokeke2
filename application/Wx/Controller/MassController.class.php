@@ -41,7 +41,7 @@ class MassController extends IndexController
         switch($type) {
             case '0':
                 $id = $articleId[0];
-                $content = $model_article->where("id=$id")->getField("post_content");
+                $content = $this->modelArticle->where("id=$id")->getField("post_content");
                 $i = $wechat->mass_text($content, $group);
                 break;
             default:

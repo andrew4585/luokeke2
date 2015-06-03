@@ -488,7 +488,9 @@ class ThinkWechat {
 	 */
 	public function mass_text($content,$groups){
 		$access_token = $this->getToken ();
+		Log::write($access_token);
 		$url="https://api.weixin.qq.com/cgi-bin/message/mass/sendall?access_token=$access_token";
+		Log::write($url.$groups);
 		$i=0;
 		foreach($groups as $item){
 // 			$data='{

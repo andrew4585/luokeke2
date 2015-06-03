@@ -47,5 +47,10 @@ class MassController extends IndexController
                 break;
             //case '3':
         }
+        if($i>0){
+            $this->success("群发任务提交成功");
+        }else{
+            $this->error("群发任务提交失败");
+        }
     }
 }

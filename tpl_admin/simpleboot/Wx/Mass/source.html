@@ -3,13 +3,7 @@
 	.recommended,.istop{cursor:pointer;font-size:15px;}
 </style>
 <body class="J_scroll_fixed">
-<div class="wrap J_check_wrap">
-  <ul class="nav nav-tabs">
-     <li class="active"><a href="javascript:;">所有素材</a></li>
-     <li><a href="{:U('Article/add')}"  target="_self">添加素材</a></li>
-     <li><a href="{:U('Article/cindex')}"  target="_self">素材分类</a></li>
-  </ul>
-  <form class="well form-search" method="post" action="{:u('Article/index')}">
+  <form class="well form-search" method="post" action="{:u('Mass/source')}">
     <div class="search_type cc mb10">
       <div class="mb10">
           <!--类别-->
@@ -36,51 +30,56 @@
       </div>
     </div>
   </form>
-  <form class="J_ajaxForm" action="" method="post">
+  <form class="J_ajaxForm" action="{:U('Mass/index')}" method="post">
     <div class="table_list">
       <table width="100%" class="table table-hover">
         <thead>
 	          <tr>
-	            <th width="16"><label><input type="checkbox" class="J_check_all" data-direction="x" data-checklist="J_check_x"></label></th>
-	            <th width="50">排序</th>
+	            <th width="60">选择</th>
 	            <th>ID</th>
 	            <th>标题</th>
 	            <th width="300">类别</th>
-							<th width='80'>类型</th>
+                  <th width='80'>类型</th>
 	            <th width="120"><span>发布时间</span></th>
-	            <th width="120">操作</th>
 	          </tr>
         </thead>
         	<foreach name="list" item="vo">
 	        	<tr>
-		            <td><input type="checkbox" class="J_check" data-yid="J_check_y" data-xid="J_check_x" name="ids[]" value="{$vo.id}" ></td>
-		            <td><input name='listorders[{$vo.id}]' class="input input-order"  type='text' size='3' value='{$vo.listorder}'></td>
+		            <td><input type="radio" class="J_check" data-yid="J_check_y" data-xid="J_check_x" name="box" value="{$vo.id}" ></td>
 		            <td><a>{$vo.id}</a></td>
 		            <td>
-		            	<a href="{:U('Portal/Article/info')}/id/{$vo.id}" target="_blank" title="{$vo.post_excerpt}">
-		            		<span>{$vo.post_title}</span>
-		            	</a>
+                        <span>{$vo.post_title}</span>
 		            </td>
 		            <td>{$vo.cat.cat_name}</td>
                     <td>{$type[$vo['type']]}</td>
 		            <td>{$vo.post_date|date="Y-m-d H:i:s",###}</td>
-		            <td>
-		            	<a href="{:U('Article/edit')}/id/{$vo.id}">修改</a>|
-		            	<a href="{:U('Article/delete')}/id/{$vo.id}" class="J_ajax_del" >删除</a>
-					</td>
 	          	</tr>
           </foreach>
           </table>
           <div class="pagination">{$Page}</div>
-
+        <div class="form-actions">
+            <a class="btn btn-primary sourceAdd " id="" href="javascript:;" onclick="sourceAdd()" >添加</a>
+        </div>
     </div>
-    <div class="form-actions">
-        <button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('Article/listorders')}">排序</button>
-        <button class="btn btn-primary J_ajax_submit_btn" type="submit" data-action="{:u('Article/delete')}" data-subcheck="true" data-msg="你确定删除吗？">删除</button>
-      </div>
   </form>
 </div>
 <script src="__ROOT__/statics/js/common.js"></script>
 <script type="text/javascript" src="__ROOT__/statics/js/content_addtop.js"></script>
+  <script type="text/javascript">
+      function sourceAdd(){
+          var str =$("input[name='box']:checked").val();
+          var title = $("input[name='box']:checked").parent().next().next().find("span").text();
+          if(str){
+              parent.window.add_article_id(str,title);
+              Wind.use('artDialog','iframeTools',function(){
+                  art.dialog.close();
+              });
+          }else{
+              art.dialog({content:'请选择一项！',
+                  cancelVal: '确定',
+                  cancel: true })
+          }
+      }
+  </script>
 </body>
 </html>

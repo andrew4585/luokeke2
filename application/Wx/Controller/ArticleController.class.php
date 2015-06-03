@@ -28,6 +28,14 @@ class ArticleController extends IndexController {
     		$this->commonParam();
     		$this->display();
     }
+    //外部群发引用的方法
+    public function massSource()
+    {
+        $this->_lists();
+        $type = array(0=>'文字',3=>'多图文');
+        $this->assign('type',$type);
+        $this->commonParam();
+    }
 
     private  function _lists(){
       //status=1,表示文章未删除，0表示文章已删除

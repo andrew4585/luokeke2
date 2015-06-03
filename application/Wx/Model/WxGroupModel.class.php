@@ -6,15 +6,15 @@ use Think\Model\RelationModel;
 class WxGroupModel extends RelationModel
 {
     protected $_link = array(
-        'WxSource' => array(
+        'WxUser' => array(
             'mapping_type'  => self::HAS_MANY,
-            'class_name'    =>'Wx',
-            'foreign_key'   =>'cid',
-            'mapping_name'  =>'Source',
+            'class_name'    =>'WxUser',
+            'foreign_key'   =>'groupid',
+            'mapping_name'  =>'users',
         )
     );
-    public function getCategories()
+    public function getCats()
     {
-        return $this->order('listorder')->select();
+        return $this->select();
     }
 }

@@ -506,9 +506,9 @@ class ThinkWechat {
 					"text"=>array("content"=>urlencode($content)),
 					"msgtype"=>"text"
 					);
-			/*$data=json_encode($data);
+			$data=json_encode($data);
 			$data=urldecode($data);
-			Think\Log::record($data,'WARN');*/
+			Think\Log::record($data,'WARN');
 			$restr = http_post ( $url, $data);
 			Think\Log::record($restr,'WARN');
 			$restr = json_decode($restr,true);

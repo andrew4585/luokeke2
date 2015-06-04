@@ -488,6 +488,7 @@ class ThinkWechat {
 	 */
 	public function mass_text($content,$groups){
 		$access_token = $this->getToken ();
+		Think\Log::record($access_token,'WARN');
 		$url="https://api.weixin.qq.com/cgi-bin/message/mass/sendall?access_token=$access_token";
 		$i=0;
 		foreach($groups as $item){
@@ -508,8 +509,7 @@ class ThinkWechat {
 					);
 			$data=json_encode($data);
 			$data=urldecode($data);
-			Think\Log::record($data,'WARN');
-			$restr = http_post ( $url, $data);
+			$restr = http ( $url, $data, 'POST', array ( "Content-type: text/html; charset=utf-8" ), true );
 			Think\Log::record($restr,'WARN');
 			$restr = json_decode($restr,true);
 			//Think\Log::record($restr,'WARN');

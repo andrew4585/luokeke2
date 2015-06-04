@@ -44,6 +44,7 @@ class MassController extends IndexController
         if(!$sourceId)$this->error("该素材没有相关文章！");
         $type = $this->modelSource->where("id=$sourceId")->getField('type');
         $users = $this->checkuser();
+        Log::record($users,'WARN');
         $wxrestr = json_decode($users,true);
         Log::record($wxrestr,'WARN');
         switch($type) {

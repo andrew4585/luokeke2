@@ -45,7 +45,7 @@ class MassController extends IndexController
         $type = $this->modelSource->where("id=$sourceId")->getField('type');
         $users = $this->checkuser();
         $wxrestr = json_decode($users,true);
-        Think\Log::record($wxrestr,'WARN');
+        Log::record($wxrestr,'WARN');
         switch($type) {
             case '0':
                 $id = $articleId[0];

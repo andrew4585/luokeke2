@@ -29,6 +29,11 @@ class MassController extends IndexController
         $this->display();
     }
 
+    public function checkuser()
+    {
+        return $res = $this->thinkWechat->check_allgroup();
+    }
+
     public function massmessage()
     {
         $group=I("post.group");
@@ -38,6 +43,9 @@ class MassController extends IndexController
         $articleId = $this->modelArticle->where("cid = $sourceId")->getField('id',true);
         if(!$sourceId)$this->error("该素材没有相关文章！");
         $type = $this->modelSource->where("id=$sourceId")->getField('type');
+        $users = $this->checkuser();
+        $wxrestr = json_decode($users,true);
+        Think\Log::record($wxrestr,'WARN');
         switch($type) {
             case '0':
                 $id = $articleId[0];

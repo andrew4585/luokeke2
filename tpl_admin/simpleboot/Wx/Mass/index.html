@@ -1,0 +1,57 @@
+<admintpl file="header"/>
+<style>.expander{margin-left: -20px;}</style>
+</head>
+<body class="J_scroll_fixed">
+<div class="wrap J_check_wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="javascript:;">群发管理</a></li>
+    </ul>
+    <form class="" action="{:U('Wx/Mass/massmessage')}" method="post">
+        <div class="table_full">
+            <table width="100%" cellspacing="0" id="dnd-example">
+                <tbody>
+                <label for="item">
+                    用户分组：<span style="color: #aaa">请选择用户分组</span>
+                </label>
+                <tr>
+                    <td>
+                        <input type="checkbox" name="checkAll" class="checkAll"/>全选
+                    </td>
+                </tr>
+                <foreach name="category" item="item">
+                    <tr>
+                        <td>
+                            <input type="checkbox" name="group[]" value="{$item.id}"/>{$item.name}({$item.count}人)
+                        </td>
+                    </tr>
+                </foreach>
+                </tbody>
+            </table>
+            <div style="margin-top: 15px">
+                <span>选择素材：</span>
+                <input type="text" name="mass" id="mass" value="" onclick="javascript:open_iframe_dialog('{:u('Wx/Mass/source')}','素材列表','tip')" readonly/>
+                <input type="hidden" name="hiddenid" value="" />
+                <a href="javascript:open_iframe_dialog('{:u('Wx/Mass/source')}','素材列表')" >查找</a>
+            </div>
+        </div>
+        <div class="form-actions">
+
+            <button class="btn btn_submit btn-primary mr10 J_ajax_submit_btn" type="submit">群发</button>
+            <a class="btn" href="__URL__">返回</a>
+        </div>
+    </form>
+</div>
+<script src="__ROOT__/statics/js/common.js"></script>
+<script type="text/javascript" src="__ROOT__/statics/js/content_addtop.js"></script>
+<script type="text/javascript">
+    function add_article_id(str,title){
+        $("input[name=mass]").val(title);
+        $("input[name=hiddenid]").val(str);
+    }
+
+    $('.checkAll').click(function(){
+        $("input[name='groupid[]']").prop("checked", this.checked);
+    })
+</script>
+</body>
+</html>

@@ -166,15 +166,16 @@ class ThinkWechat {
 		$web=$model_system->val("web");
 		$articles = array();
 		foreach ($news as $key => $value) {
-			$articles[$key]['title']=$value['title'];
-			$articles[$key]['description']=$value['brief'];
-			if(empty($value['url'])){
+			$articles[$key]['title']=$value['post_title'];
+			$articles[$key]['description']=$value['post_excerpt'];
+			if(empty($value['post_url'])){
+				//需要修改
 				$articles[$key]['url']=$web."/index.php/Api/Article/index/article_id/".$value['article_id']."/id/".$this->data['ToUserName'];
 			}else{
-				$articles[$key]['url']=$value['url'];
+				$articles[$key]['url']=$value['post_url'];
 			}
-			$articles[$key]['picurl']=$web."/Upload/article/".$value['pic'];
-			if($key >= 9) { break; } //最多只允许10调新闻
+			$articles[$key]['picurl']=$web.$value['posst_pic'];
+			if($key >= 9) { break; } //最多只允许8条新闻
 		}
 		$this->send['news']['articles'] = $articles;
 	}
@@ -250,9 +251,9 @@ class ThinkWechat {
 		$web=$model_system->val("web");
 		$articles = array();
 		foreach ($news as $key => $value) {
-			$articles[$key]['Title']=$value['title'];
-			$articles[$key]['Description']=$value['brief'];
-			$articles[$key]['PicUrl']=$web."/Upload/article/".$value['pic'];
+			$articles[$key]['Title']=$value['post_title'];
+			$articles[$key]['Description']=$value['post_excerpt'];
+			$articles[$key]['PicUrl']=$_SERVER['DOCUMENT_ROOT'].$value['post_pic'];
 			if(empty($value['url'])){
 				$articles[$key]['Url']=$web."/index.php/Api/Article/index/article_id/".$value['article_id']."/id/".$this->data['ToUserName'];			
 			}else{
@@ -487,6 +488,7 @@ class ThinkWechat {
 	 */
 	public function mass_text($content,$groups){
 		$access_token = $this->getToken ();
+		Think\Log::record($access_token,'WARN');
 		$url="https://api.weixin.qq.com/cgi-bin/message/mass/sendall?access_token=$access_token";
 		$i=0;
 		foreach($groups as $item){
@@ -508,7 +510,9 @@ class ThinkWechat {
 			$data=json_encode($data);
 			$data=urldecode($data);
 			$restr = http ( $url, $data, 'POST', array ( "Content-type: text/html; charset=utf-8" ), true );
+			Think\Log::record($restr,'WARN');
 			$restr = json_decode($restr,true);
+			//Think\Log::record($restr,'WARN');
 			if($restr['errcode']==0)$i++;
 		}
 		return $i;
@@ -518,25 +522,25 @@ class ThinkWechat {
 	 * @param unknown_type $article_id
 	 */
 	public function mass_news($article_id,$groups){
-		$model_art=D("Article");
-		$model_system=D("SystemInfo");
+		$model_art=D("WxArticle");
+		$model_system=D("WxConfig");
 // 		$model_user=D("User");
-		$needle=strstr($article_id,",");
+		$needle=count($article_id);
 		$media_data["articles"]=array();
-		$web=$model_system->getValue("web");
-		if ($needle){	//含有多个id
-			$artidList=explode(",", $article_id);
-			foreach ($artidList as $item){
-				$article=$model_art->where("article_id=$item")->find();
-				$media_id=$this->create_img_media_id($article['pic']);
+		$web=$model_system->Val("web");
+		if ($needle > 1){	//含有多个id
+			foreach ($article_id as $item){
+				$article=$model_art->where("id=$item")->find();
+				$media_id=$this->create_img_media_id($article['post_pic']);
 				if($media_id){
 					$media=$this->create_news_media_data($media_id, $article,$web);
 					array_push($media_data["articles"], $media);
 				}
 			}
 		}else{			//只有一个id
-			$article=$model_art->where("article_id=$article_id")->find();
-			$media_id=$this->create_img_media_id($article['pic']);
+			$id = $article_id[0];
+			$article=$model_art->where("id=$id")->find();
+			$media_id=$this->create_img_media_id($article['post_pic']);
 			if($media_id){
 				$media=$this->create_news_media_data($media_id, $article,$web);
 				array_push($media_data["articles"], $media);
@@ -574,17 +578,17 @@ class ThinkWechat {
 	 */
 	public function create_news_media_data($media_id,$article,$web){
 		if(empty($article['url'])){
-			$url=$web."/index.php/Api/Article/index/article_id/".$article['article_id'];
+			$url=$web."/index.php/Api/Article/index/article_id/".$article['id'];
 		}else{
-			$url=$article['url'];
+			$url=$article['post_url'];
 		}
 		$data=array(
 				"thumb_media_id"	=>	$media_id,
 				"author"			=>	"",
-				"title"				=>	urlencode($article['title']),
+				"title"				=>	urlencode($article['post_title']),
 				"content_source_url"=>	$url,
-				"content"			=>	" ",
-				"digest"			=>	urlencode($article['brief']),
+				"content"			=>	urlencode($article['post_content']),
+				"digest"			=>	urlencode($article['post_excerpt']),
 				"show_cover_pic"	=>	1
 				);
 		return $data;
@@ -614,8 +618,8 @@ class ThinkWechat {
 	public function create_img_media_id($img){
 		$access_token = $this->getToken ();
 		$url="http://file.api.weixin.qq.com/cgi-bin/media/upload?access_token=$access_token&type=image";
-		$filepath=$_SERVER['DOCUMENT_ROOT'].C("APP_BASE")."Upload/article/".$img;
-		$data=array("media"=>"@".$filepath);
+		$filePath=$_SERVER['DOCUMENT_ROOT'].$img;
+		$data=array("media"=>"@".$filePath);
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $url);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);

@@ -43,7 +43,7 @@
                 </empty>
             </div>
             <div class="share-comment">
-                <textarea class="share-comment-textarea" name="sharecomment" id="sharecomment" rows="3">说点什么...</textarea>
+                <textarea class="share-comment-textarea" name="sharecomment" id="sharecomment" rows="3" placeholder="说点什么..."></textarea>
             </div>
         </div>
         <div class="share-photo-container clear">
@@ -85,6 +85,10 @@
             $("#SharePhotoToWeiBo").click(function () {
                 var table  = $("#shareMess").attr("data-model");
                 var id	   = $("#shareMess").attr("data-id");
+                var comm   = $("#sharecomment").val();
+                if(comm=='') {
+                	alert("请说点什么...");return;
+                }
                 var url = "{:U('Api/share/sina/')}/table/"+table+"/id/"+id;
                 $("form[name='share']").attr("action", url).submit();
             });
@@ -92,6 +96,10 @@
             $("#SharePhotoToQQ").click(function () {
                 var table  = $("#shareMess").attr("data-model");
                 var id	   = $("#shareMess").attr("data-id");
+                var comm   = $("#sharecomment").val();
+                if(comm=='') {
+                	alert("请说点什么...");return;
+                }
                 var url = "{:U('Api/share/tencent/')}/table/"+table+"/id/"+id;
                 $("form[name='share']").attr("action", url).submit();
             });

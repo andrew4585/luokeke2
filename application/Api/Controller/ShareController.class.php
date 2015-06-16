@@ -57,9 +57,8 @@ class ShareController extends OauthController {
 			if ( isset($ret['error_code']) && $ret['error_code'] > 0 ) {
 				echo "<p>发送失败，错误：{$ret['error_code']}:{$ret['error']}</p>";
 			} else {
-				echo "<p>发送成功</p>";
+				$this->share();
 			}
-			$this->share();
 			exit;
 		}
 		
@@ -206,13 +205,13 @@ class ShareController extends OauthController {
 				$data['uid'] = $_SESSION['user']['id'];
 				$data['point'] = $model_config->val('pc_share');
 				$sumPoint = $model_score->where("uid={$data['uid']}")->order('post_date desc')->limit(1)->find();
-				dump($sumPoint);
 				$data['sumpoint'] = $sumPoint['sumpoint']+$data['point'];
 				$data['memo'] = "分享".$this->tblName[$this->table]."到".$this->weibo[$this->type];
 				$data['type'] = 3;//为分享
 				$data['post_date'] = time();
 				$result = $model_score->add($data);
 			}
+			alert("分享成功");
 		}catch(\Exception $e){
 			Log::record("OAuthor:".$e->getMessage());
 

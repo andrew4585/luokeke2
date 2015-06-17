@@ -178,7 +178,7 @@ class ShareController extends OauthController {
 				);
 				$findWhere = " uid={$data['uid']}           AND
 				               post_id={$data['post_id']}   AND
-				               post_table={$this->table}    AND
+				               post_table='{$this->table}'    AND
 				               type=3";
 				//检查是否已经分享
 				$hasExchange  = $model_score->where($findWhere)->find();

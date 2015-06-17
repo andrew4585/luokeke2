@@ -28,13 +28,13 @@ class QC extends Oauth{
         //如果access_token和openid为空，则从session里去取，适用于demo展示情形
         if($access_token === "" || $openid === ""){
             $this->keysArr = array(
-                "oauth_consumer_key" => (int)$this->recorder->readInc("appid"),
+                "oauth_consumer_key" => (int)$this->recorder->read("appid"),
                 "access_token" => $this->recorder->read("access_token"),
                 "openid" => $this->recorder->read("openid")
             );
         }else{
             $this->keysArr = array(
-                "oauth_consumer_key" => (int)$this->recorder->readInc("appid"),
+                "oauth_consumer_key" => (int)$this->recorder->read("appid"),
                 "access_token" => $access_token,
                 "openid" => $openid
             );
@@ -147,7 +147,16 @@ class QC extends Oauth{
             )
         );
     }
-
+    /**
+     * 参数重新初始化
+     */
+    public function reInit(){
+        $this->keysArr = array(
+            "oauth_consumer_key" => (int)$this->recorder->read("appid"),
+            "access_token" => $this->recorder->read("access_token"),
+            "openid" => $this->recorder->read("openid")
+        );
+    }
     //调用相应api
     private function _applyAPI($arr, $argsList, $baseUrl, $method){
         $pre = "#";

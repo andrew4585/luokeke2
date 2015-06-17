@@ -16,7 +16,7 @@ class Oauth{
     const GET_ACCESS_TOKEN_URL = "https://graph.qq.com/oauth2.0/token";
     const GET_OPENID_URL = "https://graph.qq.com/oauth2.0/me";
 
-    protected $recorder;
+    public $recorder;
     public $urlUtils;
     protected $error;
     
@@ -28,8 +28,8 @@ class Oauth{
     }
 
     public function qq_login(){
-        $appid = $this->recorder->readInc("appid");
-        $callback = $this->recorder->readInc("callback");
+        $appid = $this->recorder->read("appid");
+        $callback = $this->recorder->read("callback");
         $scope = $this->recorder->readInc("scope");
 
         //-------生成唯一随机串防CSRF攻击
@@ -61,9 +61,9 @@ class Oauth{
         //-------请求参数列表
         $keysArr = array(
             "grant_type" => "authorization_code",
-            "client_id" => $this->recorder->readInc("appid"),
-            "redirect_uri" => urlencode($this->recorder->readInc("callback")),
-            "client_secret" => $this->recorder->readInc("appkey"),
+            "client_id" => $this->recorder->read("appid"),
+            "redirect_uri" => urlencode($this->recorder->read("callback")),
+            "client_secret" => $this->recorder->read("appkey"),
             "code" => $_GET['code']
         );
 

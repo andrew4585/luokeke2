@@ -71,7 +71,7 @@ class ShareController extends OauthController {
 				vendor("sina.sina");
 				$o			 = new \SaeTOAuthV2($this->AppKey, $this->AppSecret);
 				$this->token = $o->getAccessToken( 'code', $keys ) ;
-			} catch (OAuthException $e) {
+			} catch (\OAuthException $e) {
 				exit($e->getMessage());
 			}
 		}else{
@@ -103,55 +103,28 @@ class ShareController extends OauthController {
 		$this->type = 'QQ';
 		$this->getConfig();
 		vendor('qq.Tencent');
-		\OAuth::init($this->AppKey,$this->AppSecret);
-		if ($_SESSION['t_access_token'] || ($_SESSION['t_openid'] && $_SESSION['t_openkey'])){
-
+		$QC = new \QC();
+		$QC->recorder->write("appid", $this->AppKey);
+		$QC->recorder->write("appkey", $this->AppSecret);
+		$QC->recorder->write("callback", $this->_getUri());
+		$QC->reInit();
+		if (empty($QC->recorder->read("access_token"))
+		    ||empty($QC->recorder->read("openid"))){
+		    if ($_GET['code']) {//已获得code
+		        $QC->qq_callback();
+		        $QC->get_openid();
+		    } else {//获取授权code
+		        $QC->qq_login();
+		    }
 		}else{
-			$callback = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];
-			if ($_GET['code']) {//已获得code
-				$code = $_GET['code'];
-				$openid = $_GET['openid'];
-				$openkey = $_GET['openkey'];
-				//获取授权token
-				$url = \OAuth::getAccessToken($code, $callback);
-				$r = \Http::request($url);
-				parse_str($r, $out);
-				//存储授权数据
-				if ($out['access_token']) {
-					$_SESSION['t_access_token'] = $out['access_token'];
-					$_SESSION['t_refresh_token'] = $out['refresh_token'];
-					$_SESSION['t_expire_in'] = $out['expires_in'];
-					$_SESSION['t_code'] = $code;
-					$_SESSION['t_openid'] = $openid;
-					$_SESSION['t_openkey'] = $openkey;
-
-					//验证授权
-					$r = \OAuth::checkOAuthValid();
-					if ($r) {
-						header('Location: ' . $callback);//刷新页面
-					} else {
-						exit('<h3>授权失败,请重试</h3>');
-					}
-				} else {
-					exit($r);
-				}
-			} else {//获取授权code
-				if ($_GET['openid'] && $_GET['openkey']){//应用频道
-					$_SESSION['t_openid'] = $_GET['openid'];
-					$_SESSION['t_openkey'] = $_GET['openkey'];
-					//验证授权
-					$r = \OAuth::checkOAuthValid();
-					if ($r) {
-						header('Location: ' . $callback);//刷新页面
-					} else {
-						exit('<h3>授权失败,请重试</h3>');
-					}
-				} else{
-					$url =\OAuth::getAuthorizeURL($callback);
-					header('Location: ' . $url);
-				}
+		    $_FILES['pic']="@.".$_REQUEST['picurl'];
+		    $_POST['content'] = $_REQUEST['sharecomment'];
+			$ret = $QC->add_pic_t($_POST);
+			if($ret['ret'] == 0){
+			    $this->share();
+			}else{
+			    alert("发表失败");
 			}
-
 		}
 	}
 	
@@ -172,9 +145,6 @@ class ShareController extends OauthController {
 					exit;
 				//qq互联登陆
 				case 'QQ':
-					vendor('qq.Tencent');
-					\OAuth::init($this->AppKey,$this->AppSecret);
-					$oc = new \OAuth();
 					exit;
 				default:
 					throw new \Exception("非法操作");
@@ -191,27 +161,41 @@ class ShareController extends OauthController {
 	function share(){
 		try{
 			$contentModel = D("{$this->table}");
+			//分享数+1
 			$result	= $contentModel->where("id={$this->id}")->setInc("post_share",1);
-			if($result){
-				$this->assign("msg","分享成功");
-			}else{
-				$this->assign("msg","分享失败");
-			}
+			if(!$result) alert("分享失败");
+				
 			$this->display("share");
 			if(!empty($_SESSION['user'])){
 				$model_score = D("Exchange");
 				$model_config = D("Config");
 				$model_user = D("Users");
-				$data['uid'] = $_SESSION['user']['id'];
-				$data['point'] = $model_config->val('pc_share');
+				$data = array(
+				    "uid"        =>  $_SESSION['user']['id'],
+				    "type"       =>  3,
+				    "post_table" =>  $this->table,
+				    "post_id"    =>  $this->id,
+				    "point"      =>  $model_config->val('pc_share'),
+				    "memo"       =>  "分享".$this->tblName[$this->table]."到".$this->weibo[$this->type],
+				    'post_date'  =>  time()
+				);
+				$findWhere = " uid={$data['uid']}           AND
+				               post_id={$data['post_id']}   AND
+				               post_table={$this->table}    AND
+				               type=3";
+				//检查是否已经分享
+				$hasExchange  = $model_score->where($findWhere)->find();
+				if($hasExchange){
+				    alert("您已经分享该".$this->tblName[$this->table]);
+				}
 				$sumPoint = $model_score->where("uid={$data['uid']}")->order('post_date desc')->limit(1)->find();
 				$data['sumpoint'] = $sumPoint['sumpoint']+$data['point'];
-				$data['memo'] = "分享".$this->tblName[$this->table]."到".$this->weibo[$this->type];
-				$data['type'] = 3;//为分享
-				$data['post_date'] = time();
 				$result = $model_score->add($data);
+				alert("分享成功");
+			}else{
+			    alert("分享成功,登陆后分享可获取积分");
 			}
-			alert("分享成功");
+			
 		}catch(\Exception $e){
 			Log::record("OAuthor:".$e->getMessage());
 

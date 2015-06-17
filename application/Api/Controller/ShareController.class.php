@@ -99,7 +99,7 @@ class ShareController extends OauthController {
 	function tencent(){
 		$this->type = 'QQ';
 		$this->getConfig();
-		vendor('qq.Tencent');
+		vendor('qq.qq');
 		$QC = new \QC();
 		$QC->recorder->write("appid", $this->AppKey);
 		$QC->recorder->write("appkey", $this->AppSecret);

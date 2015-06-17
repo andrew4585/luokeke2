@@ -82,18 +82,15 @@ class ShareController extends OauthController {
 		if ($this->token) {
 			$_SESSION['sina_token'] = $this->token;
 			$c = new \SaeTClientV2($this->AppKey, $this->AppSecret, $_SESSION['sina_token']['access_token']);
-
-			$ret = $c->upload_url_text( $_REQUEST['sharecomment'],'http://'.$_SERVER['HTTP_HOST'].$_REQUEST['picurl']);
+			$ret = $c->upload( $_REQUEST['sharecomment'],'http://'.$_SERVER['HTTP_HOST'].$_REQUEST['picurl']);
 			if ( isset($ret['error_code']) && $ret['error_code'] > 0 ) {
-				echo "<p>发送失败，错误：{$ret['error_code']}:{$ret['error']}</p>";
+				alert("<p>发送失败，错误：{$ret['error_code']}:{$ret['error']}</p>");
 			} else {
-				echo "<p>发送成功</p>";
+				$this->share();
 			}
-			$this->share();
 		}else{
 			exit("授权失败！");
 		}
-		
 	}
 	
 	/**

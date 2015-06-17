@@ -7,4 +7,4 @@ session_start();
  */
 
 require_once(dirname(__FILE__)."API/comm/config.php");
-require_once(CLASS_PATH."QC.class.php");
+require_once(dirname(__FILE__)."API/class/QC.class.php");

@@ -62,6 +62,7 @@ class ShareController extends OauthController {
 			exit;
 		}
 		
+		$this->callback .= "/sharecomment/{$_REQUEST['sharecomment']}/picurl/{$_REQUEST['picurl']}"; 
 		if (isset($_REQUEST['code'])) {
 			//获取accessToken
 			$keys = array();

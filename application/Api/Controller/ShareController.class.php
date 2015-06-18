@@ -103,8 +103,22 @@ class ShareController extends OauthController {
 		$QC = new \QC();
 		$QC->recorder->write("appid", $this->AppKey);
 		$QC->recorder->write("appkey", $this->AppSecret);
-		$QC->recorder->write("callback", $this->_getUri());
+		$QC->recorder->write("callback", 'http://'.$_SERVER['HTTP_HOST']."Api/Share/tencent");
 		$QC->reInit();
+		
+		//由于qq互联奇葩的回调地址规则，必须要完整的回调地址并且不能带有参数
+		//所以将参数以session的形式存储
+		//作者按：腾讯你个sb
+		if($_REQUEST['picurl'])
+		    session("share_picurl",$_REQUEST['picurl']);
+		if($_REQUEST['sharecomment'])
+		    session("share_sharecomment",$_REQUEST['sharecomment']);
+		if($_GET['table'])
+		    session("share_table",$this->table);
+		if($_GET['id'])
+		    session("share_id",$this->id);
+		//==============================================
+		
 		if (empty($QC->recorder->read("access_token"))
 		    ||empty($QC->recorder->read("openid"))){
 		    if ($_GET['code']) {//已获得code
@@ -114,8 +128,8 @@ class ShareController extends OauthController {
 		        $QC->qq_login();
 		    }
 		}else{
-		    $_FILES['pic']="@.".$_REQUEST['picurl'];
-		    $_POST['content'] = $_REQUEST['sharecomment'];
+		    $_FILES['pic']="@.".session("share_picurl");
+		    $_POST['content'] = session("share_sharecomment");
 			$ret = $QC->add_pic_t($_POST);
 			if($ret['ret'] == 0){
 			    $this->share();

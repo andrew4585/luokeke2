@@ -191,10 +191,10 @@ class QC extends Oauth{
                     $arr[$tmpKey] = $tmpVal;
                 }else{
                     if($v = $_FILES[$tmpKey]){
-
-                        $filename = dirname($v['tmp_name'])."/".$v['name'];
-                        move_uploaded_file($v['tmp_name'], $filename);
-                        $arr[$tmpKey] = "@$filename";
+                        $arr[$tmpKey] = $_FILES[$tmpKey];
+//                         $filename = dirname($v['tmp_name'])."/".$v['name'];
+//                         move_uploaded_file($v['tmp_name'], $filename);
+//                         $arr[$tmpKey] = "@$filename";
 
                     }else{
                         $this->error->showError("api调用参数错误","未传入参数$tmpKey");

@@ -124,6 +124,14 @@ class ShareController extends OauthController {
 		    if ($_GET['code']) {//已获得code
 		        $QC->qq_callback();
 		        $QC->get_openid();
+		        $_FILES['pic']="@.".session("share_picurl");
+		        $_POST['content'] = session("share_sharecomment");
+		        $ret = $QC->add_pic_t($_POST);
+		        if($ret['ret'] == 0){
+		            $this->share();
+		        }else{
+		            alert("发表失败");
+		        }
 		    } else {//获取授权code
 		        $QC->qq_login();
 		    }

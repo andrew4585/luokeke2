@@ -103,7 +103,7 @@ class ShareController extends OauthController {
 		$QC = new \QC();
 		$QC->recorder->write("appid", $this->AppKey);
 		$QC->recorder->write("appkey", $this->AppSecret);
-		$QC->recorder->write("callback", 'http://'.$_SERVER['HTTP_HOST']."Api/Share/tencent");
+		$QC->recorder->write("callback", 'http://'.$_SERVER['HTTP_HOST']."/Api/Share/tencent");
 		$QC->reInit();
 		
 		//由于qq互联奇葩的回调地址规则，必须要完整的回调地址并且不能带有参数

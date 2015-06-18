@@ -29,7 +29,7 @@ class Oauth{
 
     public function qq_login(){
         $appid = $this->recorder->read("appid");
-        $callback = $this->recorder->read("callback");
+        $callback = urlencode($this->recorder->read("callback"));
         $scope = $this->recorder->readInc("scope");
 
         //-------生成唯一随机串防CSRF攻击

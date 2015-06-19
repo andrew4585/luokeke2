@@ -1,0 +1,21 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>积分记录</title>
+    <include file="./Public/home/head.html" />
+    <link rel="stylesheet" href="{$Think.config.APP_BASE}/Public/home/css/pagination.css" />
+</head>
+<body>
+<div id="MyMoney"><span>总积分:</span><b class="jifen1">{$tscore}</b><span>剩余积分:</span><b class="jifen2">{$hscore}</b><span>已兑换积分:</span><b class="jifen3">{$sscore}</b></div>
+	<foreach name="list" item="item">
+		<div class="record_item">
+	        <p>{$item.add_time|date='Y-m-d H:i:s',###}</p>
+	        <div>
+	           	<if condition="$item['get_type'] eq 0"> 微信签到赠送积分<else/>微信分享赠送积分</if>
+	            <b>{$item.score}</b>分<span>总积分</span><strong>{$item.total_score}</strong>分</div>
+	    </div>
+	</foreach>
+     <include file="./Public/home/page.html" />
+     <include file="./Public/home/foot.html" />
+</body>
+</html>

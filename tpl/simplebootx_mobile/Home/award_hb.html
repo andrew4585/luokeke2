@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>红包记录</title>
+    <include file="./Public/home/head.html" />
+</head>
+<body>
+    <div id="MyMoney">
+        <span>红包总金额:</span><b class="jifen1">{$all_money}</b>
+        <span>剩余金额:</span><b class="jifen2">{$has_money}</b>
+        <span>已使用金额:</span><b class="jifen3">{$use_money}</b></div>
+    <foreach name="hbList" item="item">
+	    <div class="record_item">
+	        <p>{$item.create_time|date='Y-m-d H:i:s',###}
+	            <if condition="$item['is_get'] eq 1"><b class="go">已使用</b></if></p>
+	        <div>红包金额<b>{$item.get_money}</b>元<span>验证码</span><strong>{$item.code}</strong></div>
+	    </div>
+    </foreach>
+     <include file="./Public/home/foot.html" />
+</body>
+</html>

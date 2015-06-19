@@ -778,3 +778,11 @@ function decrypt($data, $key = ''){
 	}
 	return base64_decode($str);
 }
+
+/**
+ * 获取当前页面网址
+ */
+function getUri(){
+    $url = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+    return $url;
+}

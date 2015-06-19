@@ -1,0 +1,196 @@
+﻿body,html 
+{ 
+  background: -moz-linear-gradient(0deg, #ace, #cab9bb);
+  background: -webkit-gradient(linear,0 50%,100% 60%,from(#ace),to(#cab9bb));
+  background: -webkit-linear-gradient(0deg, #ace, #cab9bb);
+  background: -o-linear-gradient(0deg, #ace, #cab9bb); 
+  margin:0; 
+  padding:0;
+  font-size:12px;
+  font-family:Microsoft Yahei,Arial,Sans-Serif;
+  padding-bottom:10px;
+}
+h1,h2,h3,p,ul,ol,p
+{ padding:0; margin:0;}
+ul
+{ list-style:none;}
+a
+{ text-decoration:none; color:#000000;}
+
+
+
+#main
+{ background:#fff;  margin:3px; border-radius:8px; box-shadow: 2px 2px 3px #888888;}
+#main div,p
+{ line-height:30px; padding:5px;}
+
+
+
+#tools
+{ width:100%; background:#f0f0f0; position:fixed; bottom:0; height:50px; border-top:1px #ccc solid; filter:alpha(opacity=90); -moz-opacity:0.9; opacity:0.9;}
+#tools ul li
+{ float:left; text-align:center; border-left:1px #ccc solid; height:50px; font-size:0.9em;}
+#tools ul li img
+{ border:none; width:20px; margin:5px; margin-bottom:0px;}
+#tools ul li p
+{ line-height:16px;}
+#tools ul li.menu
+{ border:none; width:50px;}
+#tools ul li.item
+{ width:28%;}
+
+
+.item_tools
+{ margin:3px; margin-top:10px;}
+
+
+#MyMoney
+{ width:100%; background:#fff;  filter:alpha(opacity=90); -moz-opacity:0.9; opacity:0.9; line-height:40px; }
+#MyMoney span
+{ margin-left:10px; font-size:1em;}
+#MyMoney b
+{ font-weight:normal; color:#f60; font-size:1.4em;}
+#MyMoney b.jifen1
+{ color:green;}
+#MyMoney b.jifen2
+{ color:#28c;}
+#MyMoney b.jifen3
+{ color:red;}
+
+.record_item
+{ margin:5px;  border-radius:3px; background:#fff; line-height:36px; border:1px #bbb solid; margin-bottom:5px; font-size:1.2em;}
+.record_item p
+{ border-bottom:1px #ccc solid;}
+.record_item p b.come
+{ display:block; float:right; width:50px; background:green; text-align:center; color:#fff; border-radius:3px; font-size:1em; font-weight:normal;}
+.record_item p b.go
+{ display:block; float:right; width:50px; background:#f60; text-align:center; color:#fff; border-radius:3px; font-size:1em; font-weight:normal;}
+.record_item div
+{ padding-left:5px;}
+.record_item div b
+{ color:green; padding-left:5px; font-weight:normal;}
+.record_item div b.jian
+{ color:red; padding-left:5px; font-weight:normal;}
+.record_item div strong
+{ color:Red; font-weight:normal;}
+.record_item div span
+{ margin-left:10px;}
+
+
+.dh_item
+{ margin:5px; border-radius:3px; background:#fff; border:1px #bbb solid; margin-bottom:5px; font-size:1.2em; height:100px;}
+.dh_item ul
+{ height:100px; width:100%;}
+.dh_item ul li
+{ float:left;}
+.dh_item ul li.img
+{ width:100px;   padding:10px;}
+.dh_item ul li.img img
+{ width:100px; height:70px;}
+.dh_item ul li.title
+{  width:60%;}
+.dh_item ul li.title p
+{ line-height:20px;}
+
+.dhBtn
+{ width:60px; line-height:30px; border-radius:5px; background:#00a4e9; display:block; text-align:center; float:right; color:#fff;}
+.dhBtn2
+{ display:block;  line-height:36px; border-radius:5px; background:#00a4e9; display:block; text-align:center; float:right; color:#fff; width:100%; font-size:1.2em;}
+
+
+.formTable
+{ width:100%; background:#fff; margin-top:10px;}
+.formTable tr td
+{ padding-top:5px; padding-bottom:5px; border-bottom:1px #ccc solid; line-height:32px;}
+.formTable tr td.txt
+{ width:70px; text-align:right;}
+.formTable tr td.input
+{ padding-left:10px;}
+.txtbox
+{ width:160px; height:30px; background:#f0f0f0; border:none;}
+.txtbox1
+{ width:160px; height:120px; background:#f0f0f0; border:none;}
+.formTable h2
+{ padding-left:10px; font-size:1.2em; background:#f0f0f0; line-height:35px;}
+
+#actimg
+{ width:100%;}
+
+#content
+{ padding:5px;}
+
+
+#user_table
+{ width:100%; background:#fff; margin-top:10px; border-top:1px #ccc solid; border-bottom:1px #ccc solid;}
+#user_table tr td
+{ padding-top:10px; padding-bottom:10px;}
+#user_table tr td#user_img
+{ width:80px;}
+.header_img
+{ width:60px; border-radius:8px; display:block; margin:0 auto;}
+#user_table tr td#uesr_name
+{ padding-left:5px; font-size:1.2em;}
+#user_table tr td#uesr_name b
+{ font-size:1.4em; color:Green; font-weight:normal;}
+#usertools1
+{ margin-top:20px; border-top:1px #ccc solid; }
+.usertools
+{ width:100%; height:40px;  border-bottom:1px #ccc solid; clear:both; background:#fff url(../images/arrowico.png) no-repeat 90%;}
+.usertools ul li
+{ float:left; line-height:40px; }
+.usertools ul li img
+{ width:30px; vertical-align:middle; margin-top:5px; margin-left:10px; margin-right:10px;}
+.usertools ul li a
+{ display:block; font-size:1.1em;}
+.usertools ul li.txtlink
+{ width:80%;}
+
+#paper
+{ width:100%; background:#fff; height:30px; padding-top:5px; padding-bottom:5px;}
+#paper ul li
+{ float:left; margin-left:5px;}
+#paper ul li span
+{ display:block; padding-left:3px; padding-right:3px; background:#f0f0f0; color:#333; text-align:center;}
+#paper ul li a
+{ display:block; padding-left:3px; padding-right:3px; background:#28c; color:#fff;}
+#paper ul li a.
+
+/***********************选项卡和积分列表********************/
+.exchange_item
+{ width:95%; background:#fff; margin-top:20px;  padding-top:8px; padding-bottom:8px; margin:0 auto;} 
+.exchange_img
+{ position:relative; width:98%; margin:0 auto; }
+.exchange_img img
+{ width:100%; margin:0 auto; display:block; border:none;}
+.exchange_img h3
+{ background:#000; line-height:36px; font-size:1em; position:absolute; bottom:0px; color:#fff; opacity: 0.6;  width:100%;}
+.exchange_img h3 a
+{ padding-left:20px; color:#fff;}
+
+.exchange_item ul
+{ width:98%; margin:0 auto;height:35px; background:#f0f0f0;}
+.exchange_item ul li
+{ float:left; line-height:35px; width:50%; text-align:center;}
+.exchange_item ul li a
+{ display:block; color:#f60; text-decoration:none; border-left:1px #aaa solid;}
+.exchange_item ul li span
+{ display:block; color:#f60; text-decoration:none; border-left:1px #aaa solid;}
+
+
+.exchange_box { width:320px; background:#fff; margin:0 auto; padding-bottom:10px; margin-bottom:10px;}
+.exchange_box h2 { font-size:1.2em; line-height:36px; padding-left:10px;}
+.exchange_box ul { clear:both; height:36px;}
+.exchange_box ul li { float:left; line-height:36px;}
+.exchange_box ul li.img { width:50px; text-align:center;}
+.exchange_box ul li img { vertical-align:middle;}
+.txtbox { width:220px; background:#f0f0f0; border:none; border-radius:5px; line-height:28px;}
+
+#bottom_tools
+{ position:fixed; bottom:0; width:100%; padding-bottom:5px;}
+.btn_one
+{ width:310px; line-height:55px; background:#322a33; border-radius:5px; text-align:center; color:#fff; display:block; text-decoration:none; margin:0 auto; font-size:1.2em;}
+#exchange_content { width:320px; overflow:hidden; padding:5px;}
+#exchange_content img { width:300px; display:block; margin:0 auto;}
+/*##########兑换中心#########*/
+.shadow{position: fixed; left:0; top:0;width:100%;height:100%;z-index:100;background:url("../images/shadow.png");background-size:100% 100%;}
+.hidden{display:none}

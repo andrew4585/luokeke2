@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>我</title>
+	<include file="__STATICS__/phone/home/head.html" />
+</head>
+<body>
+    <table cellpadding="0" cellspacing="0" id="user_table">
+        <tr>
+            <td id="user_img">
+                <img alt="头像" src="{$user.headimgurl}" class="header_img" />
+            </td>
+            <td id="uesr_name">
+                {$user.nick_name}<p>可用积分:<b>{$user.score}</b></p>
+            </td>
+        </tr>
+    </table>
+    
+    <div class="usertools" id="usertools1">
+        <ul>
+            <li><a href="{:U('Home/record')}/openid/{$openid}">
+                <img src="{$Think.config.APP_BASE}/Public/home/images/writeico.png" /></a></li><li class="txtlink"><a href="{:U('Home/record')}/openid/{$openid}">积分记录</a></li></ul>
+    </div>
+    <div class="usertools">
+        <ul>
+            <li><a href="{:U('Home/award_hb')}/openid/{$openid}">
+                <img src="{$Think.config.APP_BASE}/Public/home/images/moneyico.png" /></a></li><li class="txtlink"><a href="{:U('Home/award_hb')}/openid/{$openid}">红包记录</a></li></ul>
+    </div>
+    <div class="usertools">
+        <ul>
+            <li><a href="{:U('Home/exchange')}/openid/{$openid}">
+                <img src="{$Think.config.APP_BASE}/Public/home/images/mallico.png" /></a></li><li class="txtlink"><a href="{:U('Home/exchange')}/openid/{$openid}">兑换中心</a></li></ul>
+    </div>
+    <include file="./Public/home/foot.html" />
+</body>
+</html>

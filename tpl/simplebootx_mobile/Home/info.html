@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>完善个人信息</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+     <link href="{$Think.config.APP_BASE}Public/css/wechat.css" type="text/css" rel="stylesheet" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+        <!--[if lt IE 9]>
+<script type="text/javascript" src="{$Think.config.APP_BASE}Public/js/jquery-1.10.2.min.js"></script>
+<![endif]--><!--[if gte IE 9]><!-->
+<script type="text/javascript" src="{$Think.config.APP_BASE}Public/js/jquery-2.0.3.min.js"></script>
+</head>
+<body>
+    <div id="title">
+        <ul id="title_ul">
+            <li class="tools"><a href="#" onclick="javascript:history.back(-1);return false;">
+                <img alt="返回" src="{$Think.config.APP_BASE}Public/images/wechat/arrow.png" /></a></li>
+            <li class="text">
+                <h2>完善个人信息</h2>
+            </li>
+            <li class="tools"><a href="#" onclick="ShowMenu2()">
+                <img alt="菜单" src="{$Think.config.APP_BASE}Public/images/wechat/menu.png" /></a></li>
+        </ul>
+    </div>
+    <form action="{:U('Home/info')}/openid/{$openid}" method="post">
+    	<input name="user_id" type="hidden" value="{$user.user_id}"/>
+    <div class="exchange_box">
+        <h2>个人信息</h2>
+        <ul>
+            <li class="img">
+                <img src="{$Think.config.APP_BASE}Public/images/wechat/ico_chat.png" /></li>
+            <li>{$user.nick_name}</li>
+        </ul>
+        <ul>
+            <li class="img">
+                <img src="{$Think.config.APP_BASE}Public/images/wechat/ico_user.png" /></li>
+            <li>
+                <input id="txtUser" type="text" class="txtbox" placeholder="请填写您的姓名" name="real_name" value="{$user.real_name}"/></li>
+        </ul>
+        <ul>
+            <li class="img">
+                <img src="{$Think.config.APP_BASE}Public/images/wechat/ico_phone.png" /></li>
+            <li>
+                <input id="txtPhone" type="text" class="txtbox" value="{$user.tel}" placeholder="请填写您的联系电话" name="tel"/></li>
+        </ul>
+        <ul>
+            <li class="img">
+                <img src="{$Think.config.APP_BASE}Public/images/wechat/ico_address.png" /></li>
+            <li>
+                <input id="txtAddress" type="text" class="txtbox" value="{$user.address}" placeholder="请填写您的地址" name="address"/></li>
+        </ul>
+    </div>
+    <div id="bottom_tools">
+        <a href="#" class="btn_one" onclick="sub_form()">提交</a>
+    </div>
+    </form>
+       <script type="text/javascript">
+       var menuWidth = $(document).width() * 0.5;
+       var menuHeight = $(document).height(); 
+       function ShowMenu2() {
+           $(".rightMenu").css("right", "0px");
+           $(".rightMenu").show();
+           $(".leftMenu").animate({ width: 0 });
+           $(".rightMenu").animate({ width: menuWidth });
+           $(".rightMenu").height("100%");
+       }
+       function CloseMenu2() {
+           $(".rightMenu").animate({ width: 0 }, function () { $(".rightMenu").hide(); });
+       }
+       function sub_form(){
+    	   $("form").submit();
+       }
+   </script>
+<include file="./Public/html/rightMenu.html" />
+</body>
+</html>

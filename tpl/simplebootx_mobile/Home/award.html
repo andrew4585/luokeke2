@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>奖励记录</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="{$Think.config.APP_BASE}Public/css/wechat.css" type="text/css" rel="stylesheet" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <!--[if lt IE 9]>
+<script type="text/javascript" src="{$Think.config.APP_BASE}Public/js/jquery-1.10.2.min.js"></script>
+<![endif]--><!--[if gte IE 9]><!-->
+<script type="text/javascript" src="{$Think.config.APP_BASE}Public/js/jquery-2.0.3.min.js"></script>
+</head>
+<body> 
+    <div id="title">
+        <ul id="title_ul">
+        	<li class="tools"><a href="#" onclick="javascript:history.back(-1);return false;">
+                <img alt="返回" src="{$Think.config.APP_BASE}Public/images/wechat/arrow.png" /></a></li>
+            <li class="text">
+                <h2>奖励信息</h2>
+            </li>
+            <li class="tools"><a href="#" onclick="ShowMenu2()">
+                <img alt="菜单" src="{$Think.config.APP_BASE}Public/images/wechat/menu.png" /></a></li>
+        </ul>
+    </div>
+    <!-------####################################----------------------------标题--------------------------###############################----------------->
+    <div id="header">
+        <ul>
+            <li>
+                <img alt="头像" <empty name="user['headimg']">src="{$user.headimgurl}"<else/>src="{$Think.config.APP_BASE}Upload/head/{$user.headimg}"</empty> /></li>
+            <li>{$user.nick_name}</li>
+            <!-- li><a href="#">设置头像</a></li> -->
+        </ul>
+    </div>
+    <!-------####################################----------------------------头部--------------------------###############################----------------->
+    <div id="tabs">
+        <ul>
+            <li class="tags_at" onclick="Show_list_div(1,2)" id="tags_title_1">转盘记录</li>
+            <li class="tags_none" onclick="Show_list_div(2,2)" id="tags_title_2">红包记录</li>
+        </ul>
+    </div>
+    <div id="tags_content_1" class="tabs_content">
+       	<foreach name="zpList" item="item">
+       		<div class="record_item">
+	           <p>{$item.zjdate|date='Y-m-d H:i:s',###}</p>
+	           <ul>
+	               <li>获取{$item.name}</li>
+	               <li><span class="positive">{$item.title}</span></li>
+	               <li></li>
+	           </ul>
+       		</div>
+       	</foreach>
+    </div>
+    <div id="tags_content_2" class="tabs_content" style="display: none;">
+        <foreach name="hbList" item="item">
+       		<div class="record_item">
+	           <p>{$item.create_time|date='Y-m-d H:i:s',###}</p>
+	           <ul>
+	               <li>获取代金劵</li>
+	               <li><span class="positive">{$item.get_money}</span>元</li>
+	               <li>验证码:<span class="positive">{$item.code}</span></li>
+	           </ul>
+       		</div>
+       	</foreach>
+        <div class="clear"></div>
+    </div>
+    <script type="text/javascript">
+        function Show_list_div($z, $kk) {
+            for ($i = 1; $i <= $kk; $i++) {
+                $div_name = "tags_content_" + $i;
+                $title_name = "tags_title_" + $i;
+                $object = document.getElementById($div_name);
+                $objects = document.getElementById($title_name);
+                if ($i == $z) {
+                    $object.style.display = 'block';
+                    $objects.className = 'tags_at';
+                }
+                else {
+                    $object.style.display = 'none';
+                    $objects.className = 'tags_none';
+                }
+            }
+        }
+    </script>
+
+<script type="text/javascript">
+       var menuWidth = $(document).width() * 0.5;
+       var menuHeight = $(document).height(); 
+       function ShowMenu() {
+           $(".rightMenu").animate({ width: 0 }, function () { $(".rightMenu").hide(); });
+           $(".leftMenu").animate({ width: menuWidth });
+           $(".leftMenu").height("100%"); 
+       }
+       function CloseMenu() {
+           $(".leftMenu").animate({ width: 0 });
+       }
+       function ShowMenu2() {
+           $(".rightMenu").css("right", "0px");
+           $(".rightMenu").show();
+           $(".leftMenu").animate({ width: 0 });
+           $(".rightMenu").animate({ width: menuWidth });
+           $(".rightMenu").height("100%");
+       }
+       function CloseMenu2() {
+           $(".rightMenu").animate({ width: 0 }, function () { $(".rightMenu").hide(); });
+       }
+   </script>
+<include file="./Public/html/rightMenu.html" />
+</body>
+</html>

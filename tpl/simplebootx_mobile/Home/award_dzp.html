@@ -1,0 +1,19 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>转盘记录</title>
+    <include file="./Public/home/head.html" />
+</head>
+<body>
+	<div id="MyMoney">
+        <span>中奖次数:</span><b class="jifen1">{$zjcount}</b></div>
+    <foreach name="zpList" item="item">
+	    <div class="record_item">
+	        <p>{$item.zjdate|date='Y-m-d H:i:s',###}
+	            <if condition="$item['state'] eq 1"><b class="go">已使用</b></if></p>
+	        <div>获取{$item.name}<b>{$item.title}</b></div>
+	    </div>
+    </foreach>
+    <include file="./Public/home/foot.html" />
+</body>
+</html>

@@ -1,0 +1,35 @@
+ <!-- 底部导航 start -->
+    <div class="nav4">
+
+        <nav>
+            <div id="nav4_ul" class="nav_4">
+                <ul class="box">
+                    <li>
+                        <a href="{:U('Home/exchange')}/openid/{$openid}" class=""><span>兑换中心</span></a>     
+                    </li>
+                     <li>
+                        <a href="javascript:;" class=""><span>活动奖励</span></a>
+                        <dl>
+                        	<dd><a href="{:U('Home/award_hb')}/openid/{$openid}"><span>红包记录</span></a></dd>
+                            <dd><a href="{:U('Home/award_dzp')}/openid/{$openid}"><span>转盘记录</span></a></dd>
+                        </dl>
+                    </li>
+                   <li>
+                        <a href="javascript:;" class=""><span>个人中心</span></a>
+                        <dl>
+                        	<dd><a href="{:U('Home/user')}/openid/{$openid}"><span>个人信息</span></a></dd>
+                            <dd><a href="{:U('Home/sign_record')}/openid/{$openid}"><span>签到记录</span></a></dd>
+                            <dd><a href="{:U('Home/share_record')}/openid/{$openid}"><span>分享记录</span></a></dd>
+                        </dl>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+		<div id="nav4_masklayer" class="masklayer_div on">&nbsp;</div>
+    </div>
+    
+    <script src="{$Think.config.APP_BASE}/Public/home/js/nav4.js"></script>
+    <script type="text/javascript">
+    nav4.bindClick(document.getElementById("nav4_ul").querySelectorAll("li>a"), document.getElementById("nav4_masklayer"));
+    </script>		
+    <!-- 底部导航 end -->

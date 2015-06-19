@@ -1,0 +1,23 @@
+<!-- 分页 start--> 
+    <script type="text/javascript" src="{$Think.config.APP_BASE}/Public/js/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="{$Think.config.APP_BASE}/Public/home/js/jquery.pagination.js"></script>
+	<script type="text/javascript">
+    function pageselectCallback(page_id){
+        location.href=window.location.href+"/p/"+page_id;
+    }
+    $(document).ready(function(){
+    	
+        // 创建分页元素
+        $("#Pagination").pagination({$total}, {
+        	items_per_page:10,
+            num_edge_entries: 2,
+            num_display_entries: 4,
+            callback: pageselectCallback,  //回调函数
+            prev_text:'上一页',
+            next_text:'下一页',
+            current_page:{$p}
+        });
+    });
+    </script>
+    <div id="Pagination" class="pagination" ></div>
+    <!-- 分页 end--> 

@@ -1,0 +1,8 @@
+@charset "utf-8";
+/* pagination */
+.pagination{font-size:80%;padding-left:5px;padding-top:10px;}    
+.pagination a{text-decoration:none;border:solid 1px #AAE;color:#15B;}
+.pagination a, .pagination span{display:inline-block;float:left;padding:0.3em 0.5em;margin-right:5px;margin-bottom:5px;}
+.pagination .current{background:#26B;color:#fff;border:solid 1px #AAE;}
+.pagination .prev{border:solid 1px #AAE;color:#15B;background:none}
+.pagination .next{border:solid 1px #AAE;color:#15B;background:none}

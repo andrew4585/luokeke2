@@ -1,0 +1,25 @@
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>{$web_name} {$site_seo_title}</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=8">
+    <meta name="Description" content="{$site_seo_description}">
+    <meta name="Keywords" content="{$site_seo_keywords}">
+    <script type="text/javascript">
+        if(/Android (\d+\.\d+)/.test(navigator.userAgent)){
+            var version = parseFloat(RegExp.$1);
+            if(version>2.3){
+                var phoneScale = parseInt(window.screen.width)/640;
+                document.write('<meta name="viewport" content="width=640, minimum-scale = '+ phoneScale +', maximum-scale = '+ phoneScale +', target-densitydpi=device-dpi">');
+            }else{
+                document.write('<meta name="viewport" content="width=640, target-densitydpi=device-dpi">');
+            }
+        }else{
+            document.write('<meta name="viewport" content="width=640, user-scalable=no, target-densitydpi=device-dpi">');
+        }
+    </script><meta name="viewport" content="width=640, user-scalable=no, target-densitydpi=device-dpi">
+    <link href="__STATICS__phone/css/rococo.css" rel="stylesheet" type="text/css">
+    <script src="__STATICS__phone/js/jquery-1.8.3.min.js" type="text/javascript"></script>
+    <style>[touch-action="none"]{ -ms-touch-action: none; touch-action: none; }[touch-action="pan-x"]{ -ms-touch-action: pan-x; touch-action: pan-x; }[touch-action="pan-y"]{ -ms-touch-action: pan-y; touch-action: pan-y; }[touch-action="scroll"],[touch-action="pan-x pan-y"],[touch-action="pan-y pan-x"]{ -ms-touch-action: pan-x pan-y; touch-action: pan-x pan-y; }</style>
+
+
+

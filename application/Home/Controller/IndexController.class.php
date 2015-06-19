@@ -14,7 +14,7 @@ class IndexController extends HomeBaseController {
         header("Content-Type: text/html; charset=utf-8");
         $this->setModelConfig();
         $this->setModelUser();
-        $this->Oauth();
+//         $this->Oauth();
     }
     //用户中心
     public function user(){
@@ -213,6 +213,7 @@ class IndexController extends HomeBaseController {
                 }
                 
                 $this->user			= $this->model_user->where("openid='$this->openid' and is_subscribe=1")->find();
+                $this->user['score']= D("Users")->where("openid='$this->openid'")->getField("score");
                 if(!$this->user)	E("请微信关注我们");
             }
         } catch (\Exception $e) {

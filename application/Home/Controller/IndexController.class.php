@@ -19,7 +19,7 @@ class IndexController extends HomeBaseController {
     //用户中心
     public function user(){
         $this->assign("user",$this->user);
-        $this->display();
+        $this->display(":user");
     }
     
     //积分记录

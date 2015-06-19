@@ -171,7 +171,7 @@ class IndexController extends HomeBaseController {
     
     
     public function access_token($appid,$code,&$i=0){
-        $appsecret=$this->model_config->val("app_secret");
+        $appsecret=$this->model_config->val("appsecret");
         $appsecret=trim($appsecret);
         $appid=trim($appid);
         $url="https://api.weixin.qq.com/sns/oauth2/access_token";
@@ -200,7 +200,7 @@ class IndexController extends HomeBaseController {
             $this->user = cookie("weixin_user");
             
             if(empty($this->user)){
-                $appid = $this->model_config->val("app_id");
+                $appid = $this->model_config->val("appid");
                 $code			= I("get.code");
                 if(empty($code)){
                     $url=getUri();
@@ -226,19 +226,19 @@ class IndexController extends HomeBaseController {
         $this->assign("msg",$msg);
         $this->assign("isback",$isback);
         $this->assign("url",$url);
-        $this->display("alert");
+        $this->display(":alert");
         exit;
     }
     
     public function setModelConfig() {
         if(!$this->model_config){
-            $this->model_config = D("WxConfig");
+            $this->model_config = D("Wx/WxConfig");
         }
     }
     
     public function setModelUser() {
         if(!$this->model_user){
-            $this->model_user = D("WxUser");
+            $this->model_user = D("Wx/WxUser");
         }
     }
     

@@ -3,16 +3,27 @@
 <head>
     <title>积分记录</title>
     <include file="./statics/phone/home/head.html" />
-    <link rel="stylesheet" href="{$Think.config.APP_BASE}/Public/home/css/pagination.css" />
+    <link rel="stylesheet" href="__STATICS__phone/home/css/pagination.css" />
 </head>
 <body>
-<div id="MyMoney"><span>总积分:</span><b class="jifen1">{$tscore}</b><span>剩余积分:</span><b class="jifen2">{$hscore}</b><span>已兑换积分:</span><b class="jifen3">{$sscore}</b></div>
+<div id="MyMoney"><span>总积分:</span><b class="jifen1">&nbsp;{$user.score}</b><span>已兑换积分:&nbsp;</span><b class="jifen3">{$sscore}</b></div>
 	<foreach name="list" item="item">
 		<div class="record_item">
-	        <p>{$item.add_time|date='Y-m-d H:i:s',###}</p>
+	        <p>{$item.post_date|date='Y-m-d H:i:s',###}</p>
 	        <div>
-	           	<if condition="$item['get_type'] eq 0"> 微信签到赠送积分<else/>微信分享赠送积分</if>
-	            <b>{$item.score}</b>分<span>总积分</span><strong>{$item.total_score}</strong>分</div>
+	        	<if condition="$item.gid eq 0">
+                    {$item.memo}:<b>
+                    <if condition="$item.type eq 5">
+                    	-{$item.point}
+                    <else/>
+                    	+{$item.point}
+                    </if>
+                    </b>
+                <else/>
+                                                             兑换礼品{$item.Shop.post_title}:&nbsp;
+                    <b>-{$item.Shop.post_score}</b>
+                </if>
+	            <span>总积分:&nbsp;</span><strong>{$item.sumpoint}</strong></div>
 	    </div>
 	</foreach>
      <include file="./statics/phone/home/page.html" />

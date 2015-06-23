@@ -33,12 +33,18 @@ class IndexController extends HomeBaseController {
         $first_num=$p*10;
         $model_exchange = D("Exchange");
         $order = 'post_date DESC';
-        $count=$model_exchange->count();
+        $where = "uid = ".$this->user['uid'];
+        $count=$model_exchange->where($where)->count();
         $where = "uid=".$this->user['uid'];
-        $list =$model_exchange ->relation(true)->where($where)
-        ->limit($first_num,10)
-        ->order($order)->select();
+        $list =$model_exchange->where($where)
+                                ->limit($first_num,10)
+                                ->order($order)->select();
+        $sscore = $model_exchange->where($where." and gid<>0")->sum("point");
+        $sscore = empty($sscore)?0:$sscore;
         $this->assign("list",$list);
+        $this->assign("total",$count);
+        $this->assign("user",$this->user);
+        $this->assign("sscore",$sscore);
         $this->assign("p",$p);
         $this->display(":record");
     }
@@ -48,17 +54,17 @@ class IndexController extends HomeBaseController {
         $p=I("get.p");
         $p=empty($p)?0:$p;
         $first_num=$p*10;
-        $model_score=D("ScoreHistory");
-        $where		="user_id={$this->user['user_id']} and get_type=0";
+        $model_score=D("Exchange");
+        $where		="uid={$this->user['uid']} and type=2";
         $total		=$model_score->where($where)->count();
-        $score		=$model_score->where($where)->sum("score");
-        $signList	=$model_score->where($where)->order("add_time desc")->limit($first_num,10)->select();
+        $score		=$model_score->where($where)->sum("point");
+        $signList	=$model_score->where($where)->order("post_date desc")->limit($first_num,10)->select();
         $score  = empty($score)?0:$score;
         $this->assign("list",$signList);
         $this->assign("score",$score);
         $this->assign("total",$total);
         $this->assign("p",$p);
-        $this->display();
+        $this->display(":sign_record");
     }
     
     //分享记录
@@ -66,48 +72,53 @@ class IndexController extends HomeBaseController {
         $p=I("get.p");
         $p=empty($p)?0:$p;
         $first_num=$p*10;
-        $model_score=D("ScoreHistory");
-        $where		="user_id={$this->user['user_id']} and get_type=1";
+        $model_score=D("Exchange");
+        $where		="uid={$this->user['uid']} and type=3";
         $total		=$model_score->where($where)->count();
-        $score		=$model_score->where($where)->sum("score");
-        $socreList	=$model_score->where($where)->order("add_time desc")->limit($first_num,10)->select();
+        $score		=$model_score->where($where)->sum("point");
+        $signList	=$model_score->where($where)->order("post_date desc")->limit($first_num,10)->select();
         $score  = empty($score)?0:$score;
-        $this->assign("list",$socreList);
+        $this->assign("list",$signList);
         $this->assign("score",$score);
         $this->assign("total",$total);
         $this->assign("p",$p);
-        $this->display();
+        $this->display(":sign_record");
     }
     
     //兑换中心
     public function exchange(){
-        $model_goods=D("Goods");
-        $byscore=$model_goods->field("goods_id,title,img,score")->order("score ")->select();
+        $model_goods=D("Shop");
+        $byscore=$model_goods->field("id,post_title,post_pic,post_price")->where("status=1")->order("post_price")->select();
         // 		$byseal=$model_goods->field("goods_id,title,img,score")->order("seal_num desc")->select();
         $this->assign("byscore",$byscore);
         // 		$this->assign("byseal",$byseal);
-        $this->display();
+        $this->display(":exchange");
     }
     //兑换表单
     public function exchange2(){
-        $model_goods=D("Goods");
+        $model_goods=D("Shop");
         $goods_id=I("get.goods_id");
         if(empty($goods_id))$this->error("数据丢失");
-        $goods=$model_goods->field("goods_id,title,score,memo")->where("goods_id=$goods_id")->find();
-        if(!$goods)$this->layer_alert("获取奖品信息失败");
-        if($this->user['score']<$goods['score'])$this->layer_alert("您的积分不够，无法兑换该奖品");
+        $goods=$model_goods->field("id,title,score,memo")->where("goods_id=$goods_id")->find();
+        if(!$goods)$this->layer_alert("获取商品信息失败");
+        if($this->user['score']<$goods['score'])$this->layer_alert("您的积分不足，无法兑换该商品");
         $this->assign("goods",$goods);
         $this->assign("user",$this->user);
         $this->display();
     }
     //兑换商品详细页
     public function exchangeview(){
-        $model_goods=D("Goods");
-        $goods_id=I("get.goods_id");
-        if(empty($goods_id))$this->error("数据丢失");
-        $goods=$model_goods->field("goods_id,content,score")->where("goods_id=$goods_id")->find();
-        $this->assign("goods",$goods);
-        $this->display();
+         $id         = I('get.goods_id',0,'intval');
+        if(empty($id)) $this->error('参数丢失');
+        $where      = "id=$id and status=1";
+        $model_shop = D("Shop");
+        $info = $model_shop->where($where)->find();
+        if(!$info) $this->error('商品不存在 ！');
+        $this->assign('info',$info);
+        //图片信息
+		$photo	= json_decode($info['smeta'],true);
+		$this->assign("photo",$photo['photo']);
+        $this->display(":exchangeview");
     }
     //兑换操作
     public function seal(){
@@ -156,7 +167,7 @@ class IndexController extends HomeBaseController {
             $data['address']	=I("post.address");
             $result=$this->model_user->save($data);
             if($result){
-                $this->layer_alert("提交成功",false,U("Home/info","openid=".$openid));
+                $this->layer_alert("提交成功",false,U("Home/info"));
             }else{
                 $this->layer_alert("提交失败");
             }

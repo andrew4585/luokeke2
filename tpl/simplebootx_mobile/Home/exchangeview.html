@@ -3,11 +3,15 @@
 <head>
  <title>兑换详情</title> 
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <include file="./Public/home/head.html" />
+    <include file="./statics/phone/home/head.html" />
 </head>
 <body>
-    <div id="main">{$goods.content|htmlspecialchars_decode}</div>
-	<div class="item_tools"><a href="{:U('Home/exchange2')}/goods_id/{$goods.goods_id}" class="dhBtn2">兑换</a></div>
-	<include file="./Public/home/foot.html" />
+    <div id="main" style="margin:0">
+		<foreach name="photo" item="item">
+			<img src="__ROOT__/{$item.url}" style="width:100%"/>
+		</foreach>
+	</div>
+	<div class="item_tools"><a href="{:U('Home/Index/exchange2')}/goods_id/{$info.id}" class="dhBtn2">兑换</a></div>
+	<include file="./statics/phone/home/foot.html" />
 </body>
 </html>

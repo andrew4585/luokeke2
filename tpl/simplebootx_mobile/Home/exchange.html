@@ -2,25 +2,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>兑换中心</title>
-    <include file="./Public/home/head.html" />
-    <link href="zwechat.css" type="text/css" rel="stylesheet" />
+    <include file="./statics/phone/home/head.html" />
 </head>
 <body>
 	<foreach name="byscore" item="item">
-		<div class="exchange_item" id="main" style="margin-top:20px;">
+		<div class="exchange_item" id="main" style="margin:1em 10px 10px;">
 			<div class="clear"></div>
             <div class="exchange_img" style="padding:0">
-                <a href="{:U('Home/exchangeview')}/goods_id/{$item.goods_id}/openid/{$openid}"><img alt="图片" src="{$Think.config.APP_BASE}/Upload/goods/{$item.img}" /></a>
+                <a href="{:U('Home/Index/exchangeview')}/goods_id/{$item.id}"><img alt="图片" src="__ROOT__/{$item.post_pic}" /></a>
                 <h3>
-                    <a href="{:U('Home/exchangeview')}/goods_id/{$item.goods_id}/openid/{$openid}">{$item.title|truncate=20}</a></h3>
+                    <a href="{:U('Home/Index/exchangeview')}/goods_id/{$item.id}">{$item.post_title|msubstr=0,20}</a></h3>
             </div>
             <ul>
-                <li>{$item.score}积分</li>
-                <li><a href="{:U('Home/exchangeview')}/goods_id/{$item.goods_id}/openid/{$openid}">点击兑换</a></li>
+                <li>{$item.post_price|intval}积分</li>
+                <li><a href="{:U('Home/exchangeview')}/goods_id/{$item.id}">点击查看</a></li>
             </ul>
-            <div class="clear"></div>
+            <div class="clear" style="padding:0"></div>
         </div>
 	</foreach>
-	<include file="./Public/home/foot.html" />
+	<include file="./statics/phone/home/foot.html" />
 </body>
 </html>

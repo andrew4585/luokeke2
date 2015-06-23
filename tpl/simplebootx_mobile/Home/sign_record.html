@@ -2,19 +2,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>签到记录</title>
-    <include file="./Public/home/head.html" />
-    <link rel="stylesheet" href="{$Think.config.APP_BASE}/Public/home/css/pagination.css" />
+    <include file="./statics/phone/home/head.html" />
+    <link rel="stylesheet" href="__STATICS__phone/home/css/pagination.css" />
 </head>
 <body>
 <div id="MyMoney"><span>签到总积分:</span><b class="jifen1">{$score}</b></div>
 	<foreach name="list" item="item">
 		<div class="record_item">
-	        <p>{$item.add_time|date='Y-m-d H:i:s',###}</p>
+	        <p>{$item.post_date|date='Y-m-d H:i:s',###}</p>
 	        <div>
-	            微信签到赠送积分<b>{$item.score}</b>分<span>总积分</span><strong>{$item.total_score}</strong>分</div>
+	            {$item.memo}:&nbsp;<b>{$item.point}</b><span>总积分:&nbsp;</span><strong>{$item.sumpoint}</strong></div>
 	    </div>
 	</foreach>
-     <include file="./Public/home/page.html" />
-     <include file="./Public/home/foot.html" />
+     <include file="./statics/phone/home/page.html" />
+     <include file="./statics/phone/home/foot.html" />
 </body>
 </html>

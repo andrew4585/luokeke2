@@ -1,6 +1,6 @@
 <!-- 分页 start--> 
-    <script type="text/javascript" src="{$Think.config.APP_BASE}/Public/js/jquery-1.10.2.min.js"></script>
-    <script type="text/javascript" src="{$Think.config.APP_BASE}/Public/home/js/jquery.pagination.js"></script>
+    <script type="text/javascript" src="__STATICS__js/jquery.js"></script>
+    <script type="text/javascript" src="__STATICS__phone/home/js/jquery.pagination.js"></script>
 	<script type="text/javascript">
     function pageselectCallback(page_id){
         location.href=window.location.href+"/p/"+page_id;
@@ -13,8 +13,8 @@
             num_edge_entries: 2,
             num_display_entries: 4,
             callback: pageselectCallback,  //回调函数
-            prev_text:'上一页',
-            next_text:'下一页',
+            prev_text:'&lt',
+            next_text:'&gt',
             current_page:{$p}
         });
     });

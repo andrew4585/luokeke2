@@ -14,6 +14,10 @@ class IndexController extends HomeBaseController {
         header("Content-Type: text/html; charset=utf-8");
         $this->setModelConfig();
         $this->setModelUser();
+        $this->openid = 'ox1QntxmnsVy0UYOxIDOGUfPCgqE';
+        $this->user			= $this->model_user->where("openid='$this->openid' and is_subscribe=1")->find();
+        $this->user['score']= D("Users")->where("openid='$this->openid'")->getField("score");
+        $this->user['uid']= D("Users")->where("openid='$this->openid'")->getField("id");
 //         $this->Oauth();
     }
     //用户中心
@@ -27,24 +31,16 @@ class IndexController extends HomeBaseController {
         $p=I("get.p");
         $p=empty($p)?0:$p;
         $first_num=$p*10;
-        $model_score	= D("ScoreHistory");
-        $model_seal		= D("SealHistory");
-        $where			= "user_id={$this->user['user_id']}";
-        $total			=$model_score->where($where)->count();
-        $list			=$model_score->where($where)->order("add_time desc")->limit($first_num,10)->select();
-        $sealScore		=$model_seal->where("user_id={$this->user['user_id']}")->sum("score");
-        $sealScore		=empty($sealScore)?0:$sealScore;
-        $total			=empty($total)?0:$total;
-        $totalScore		=empty($totalScore)?0:$totalScore;
-        $totalScore		=$sealScore+$this->user['score'];
+        $model_exchange = D("Exchange");
+        $order = 'post_date DESC';
+        $count=$model_exchange->count();
+        $where = "uid=".$this->user['uid'];
+        $list =$model_exchange ->relation(true)->where($where)
+        ->limit($first_num,10)
+        ->order($order)->select();
         $this->assign("list",$list);
-        $this->assign("tscore",$totalScore);
-        $this->assign("sscore",$sealScore);
-        $this->assign("total",$total);
-        $this->assign("hscore",$this->user['score']);
         $this->assign("p",$p);
-        $this->display();
-    
+        $this->display(":record");
     }
     
     //签到记录
@@ -214,6 +210,7 @@ class IndexController extends HomeBaseController {
                 
                 $this->user			= $this->model_user->where("openid='$this->openid' and is_subscribe=1")->find();
                 $this->user['score']= D("Users")->where("openid='$this->openid'")->getField("score");
+                $this->user['uid']  = D("Users")->where("openid='$this->openid'")->getField("id");
                 if(!$this->user)	E("请微信关注我们");
             }
         } catch (\Exception $e) {

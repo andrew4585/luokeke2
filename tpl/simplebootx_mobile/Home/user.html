@@ -18,18 +18,15 @@
     
     <div class="usertools" id="usertools1">
         <ul>
-            <li><a href="{:U('Home/record')}/openid/{$openid}">
-                <img src="{$Think.config.APP_BASE}/Public/home/images/writeico.png" /></a></li><li class="txtlink"><a href="{:U('Home/record')}/openid/{$openid}">积分记录</a></li></ul>
+            <li><a href="{:U('Home/Index/record')}">
+                <img src="__STATICS__/phone/home/images/writeico.png" /></a></li>
+            <li class="txtlink"><a href="{:U('Home/Index/record')}">积分记录</a></li></ul>
     </div>
     <div class="usertools">
         <ul>
-            <li><a href="{:U('Home/award_hb')}/openid/{$openid}">
-                <img src="{$Think.config.APP_BASE}/Public/home/images/moneyico.png" /></a></li><li class="txtlink"><a href="{:U('Home/award_hb')}/openid/{$openid}">红包记录</a></li></ul>
-    </div>
-    <div class="usertools">
-        <ul>
-            <li><a href="{:U('Home/exchange')}/openid/{$openid}">
-                <img src="{$Think.config.APP_BASE}/Public/home/images/mallico.png" /></a></li><li class="txtlink"><a href="{:U('Home/exchange')}/openid/{$openid}">兑换中心</a></li></ul>
+            <li><a href="{:U('Home/Index/exchage')}">
+                <img src="__STATICS__/phone/home/images/moneyico.png" /></a></li>
+            <li class="txtlink"><a href="{:U('Home/Index/exchage')}">兑换中心</a></li></ul>
     </div>
     <include file="./statics/phone/home/foot.html" />
 </body>

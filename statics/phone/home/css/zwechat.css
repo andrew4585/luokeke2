@@ -107,7 +107,7 @@ a:hover {
 
 
 .formTable
-{ width:100%; background:#fff; margin-top:10px;}
+{ width:100%; background:#fff; margin-top:10px;color:#4d4d4d}
 .formTable tr td
 { padding-top:5px; padding-bottom:5px; border-bottom:1px #ccc solid; line-height:32px;}
 .formTable tr td.txt
@@ -119,8 +119,15 @@ a:hover {
 .txtbox1
 { width:160px; height:120px; background:#f0f0f0; border:none;}
 .formTable h2
-{ padding-left:10px; font-size:1.2em; background:#f0f0f0; line-height:35px;}
-
+{ padding-left:10px; font-size:1.2em;line-height:35px;}
+.formTable #goods_info{
+	color:#d0a03c;
+	background:#e6e4d8;
+}
+.formTable #user_info{
+	color:#9ba7b5;
+	background:#dbe0e3;
+}
 #actimg
 { width:100%;}
 

@@ -4,11 +4,8 @@
 <meta charset="utf8">
 <title>提示信息</title>
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
-<!--[if lt IE 9]>
-<script type="text/javascript" src="{$Think.config.APP_BASE}Public/js/jquery-1.10.2.min.js"></script>
-<![endif]--><!--[if gte IE 9]><!-->
-<script type="text/javascript" src="{$Think.config.APP_BASE}Public/js/jquery-2.0.3.min.js"></script>
-<script type="text/javascript" src="{$Think.config.APP_BASE}Public/js/layer/layer.min.js"></script>
+<script type="text/javascript" src="__STATICS__/js/jquery.js"></script>
+<script type="text/javascript" src="__STATICS__/js/layer.m/layer.m.js"></script>
 </head>
 <body>
 <script>
@@ -16,18 +13,17 @@ $(function(){
 	var isback='{$isback}';
 	var url='{$url}';
 	var msg='{$msg}';
-	 $.layer({
-		   	type: 0,
-		   	title: '错误信息',
-		   	btns:0,
-		   	dialog: {type: -1,msg: msg},
-		   	yes: function(index){
-				if(isback){
+	 layer.open({
+		    content: msg,
+		    btn: ['OK'],
+		    shadeClose: false,
+		    yes: function(){
+		    	if(isback){
 					history.back();
 				}else{
 					location.href=url;
 				}
-			}
+		    }
 		});
 });
 </script>

@@ -14,11 +14,11 @@ class IndexController extends HomeBaseController {
         header("Content-Type: text/html; charset=utf-8");
         $this->setModelConfig();
         $this->setModelUser();
-        $this->openid = 'ox1QntxmnsVy0UYOxIDOGUfPCgqE';
-        $this->user			= $this->model_user->where("openid='$this->openid' and is_subscribe=1")->find();
-        $this->user['score']= D("Users")->where("openid='$this->openid'")->getField("score");
-        $this->user['uid']= D("Users")->where("openid='$this->openid'")->getField("id");
-//         $this->Oauth();
+//         $this->openid = 'ox1QntxmnsVy0UYOxIDOGUfPCgqE';
+//         $this->user			= $this->model_user->where("openid='$this->openid' and is_subscribe=1")->find();
+//         $this->user['score']= D("Users")->where("openid='$this->openid'")->getField("score");
+//         $this->user['uid']= D("Users")->where("openid='$this->openid'")->getField("id");
+        $this->Oauth();
     }
     //用户中心
     public function user(){
@@ -88,7 +88,7 @@ class IndexController extends HomeBaseController {
     //兑换中心
     public function exchange(){
         $model_goods=D("Shop");
-        $byscore=$model_goods->field("id,post_title,post_pic,post_price")->where("status=1")->order("post_price")->select();
+        $byscore=$model_goods->field("id,post_title,post_pic,post_score")->where("status=1")->order("post_price")->select();
         // 		$byseal=$model_goods->field("goods_id,title,img,score")->order("seal_num desc")->select();
         $this->assign("byscore",$byscore);
         // 		$this->assign("byseal",$byseal);
@@ -96,24 +96,25 @@ class IndexController extends HomeBaseController {
     }
     //兑换表单
     public function exchange2(){
+        dump($this->user);
         $model_goods=D("Shop");
         $goods_id=I("get.goods_id");
-        if(empty($goods_id))$this->error("数据丢失");
-        $goods=$model_goods->field("id,title,score,memo")->where("goods_id=$goods_id")->find();
+        if(empty($goods_id))$this->layer_alert("数据丢失");
+        $goods=$model_goods->field("id,post_title,post_score,post_price")->where("id=$goods_id")->find();
         if(!$goods)$this->layer_alert("获取商品信息失败");
-        if($this->user['score']<$goods['score'])$this->layer_alert("您的积分不足，无法兑换该商品");
+        if($this->user['score']<$goods['post_score'])$this->layer_alert("您的积分不足，无法兑换该商品");
         $this->assign("goods",$goods);
         $this->assign("user",$this->user);
-        $this->display();
+        $this->display(":exchange2");
     }
     //兑换商品详细页
     public function exchangeview(){
          $id         = I('get.goods_id',0,'intval');
-        if(empty($id)) $this->error('参数丢失');
+        if(empty($id)) $this->layer_alert('参数丢失');
         $where      = "id=$id and status=1";
         $model_shop = D("Shop");
         $info = $model_shop->where($where)->find();
-        if(!$info) $this->error('商品不存在 ！');
+        if(!$info) $this->layer_alert('商品不存在 ！');
         $this->assign('info',$info);
         //图片信息
 		$photo	= json_decode($info['smeta'],true);
@@ -122,6 +123,43 @@ class IndexController extends HomeBaseController {
     }
     //兑换操作
     public function seal(){
+        try {
+            $id = I('get.id', 0, 'intval');
+            if (!$id) E('参数缺失！');
+            
+            $data['name']=I("post.real_name");
+            if(empty($data['name'])) E("请填写您的姓名");
+            $data['phone']	=	I("post.tel");
+            if(empty($data['phone'])) E("请填写您的电话");
+            $data['address']=	I("post.address");
+            if(empty($data['address'])) E("请填写您的地址");
+            
+            $remain = D('Shop')->where("id = $id")->getField("remain");
+            if($remain<1)  E('余量不足！');
+            $shop_score = I("post.post_score");
+            $users = D('Users');
+            if ($this->user['score'] < $shop_score)E('您积分不足！');
+                
+            $data['gid']       = $id;
+            $data['uid']       = $this->user['id'];
+            $data['post_date'] = time();
+            $data['point']     = $shop_score;
+            
+            $model_exchange = D("Exchange");
+            $data['sumPoint'] = $this->user['score']-$shop_score;
+            $result = $model_exchange->add($data);
+            if ($result) {
+                $data['score'] = ($user_score['score']-$shop_score);
+                $rs = $users->where("id = $user_id")->save($data);
+                $result	= D('Shop')->where("id=$id")->setDec("remain",1);
+                if($result&&$rs) $this->success("提交成功!");
+            } else {
+                $this->error("提交失败！");
+            }
+        } catch (\Exception $e) {
+        }
+        
+        
         $data['goods_id']	=I("post.goods_id");
         $data['user_id']	=I("post.user_id");
         $data['title']		=I("post.title");
@@ -130,13 +168,7 @@ class IndexController extends HomeBaseController {
         foreach($data as $item){
             if(empty($item))$this->layer_alert("数据丢失");
         }
-        $data['real_name']=I("post.real_name");
-        if(empty($data['real_name']))$this->layer_alert("请填写您的姓名");
-        $data['tel']	=	I("post.tel");
-        if(empty($data['tel']))$this->layer_alert("请填写您的电话");
-        $data['address']=	I("post.address");
-        if(empty($data['address']))$this->layer_alert("请填写您的地址");
-        $data['get_type']=I("post.get_type");
+        
         $data['add_time']=time();
         $model_seal=D("SealHistory");
         if($this->user['score']<$data['score'])$this->layer_alert("您的积分不足");
@@ -150,32 +182,11 @@ class IndexController extends HomeBaseController {
         if($result){
             $this->model_user->where("user_id=".$data['user_id'])->setDec("score",$data['score']);
             $model_goods->where("goods_id=".$data['goods_id'])->setInc("seal_num",1);
-            $this->layer_alert("提交成功",false,U("Home/exchange"));
+            $this->layer_alert("提交成功",false,U("Home/Index/exchange"));
         }else{
             $this->layer_alert("提交失败");
         }
     }
-    //完善用户信息
-    public function info(){
-        if(IS_GET){
-            $this->assign("user",$this->user);
-            $this->display();
-        }elseif (IS_POST){
-            $data['user_id']	=I("post.user_id");
-            $data['real_name']	=I("post.real_name");
-            $data['tel']		=I("post.tel");
-            $data['address']	=I("post.address");
-            $result=$this->model_user->save($data);
-            if($result){
-                $this->layer_alert("提交成功",false,U("Home/info"));
-            }else{
-                $this->layer_alert("提交失败");
-            }
-        }else{
-            $this->layer_alert("未知错误");
-        }
-    }
-    
     
     public function access_token($appid,$code,&$i=0){
         $appsecret=$this->model_config->val("appsecret");

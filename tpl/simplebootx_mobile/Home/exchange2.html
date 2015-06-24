@@ -3,31 +3,35 @@
 <head>
     <title>兑换表单</title>
     <include file="./statics/phone/home/head.html" />
+    <script type="text/javascript" src="__STATICS__/js/jquery.js"></script>
+<script type="text/javascript" src="__STATICS__/js/layer.m/layer.m.js"></script>
 </head>
 <body>
     <table cellpadding="0" cellspacing="0" class="formTable">
-    	<tr><td colspan="2" style="padding:0"><h2>产品信息</h2></td></tr>
+    	<tr><td colspan="2" style="padding:0"><h2 id="goods_info">产品信息</h2></td></tr>
         <tr>
             <td class="txt">产品名：</td>
-            <td class="input">{$goods.title}</td>
+            <td class="input">{$goods.post_title}</td>
         </tr>
         <tr>
             <td class="txt">所需积分：</td>
-            <td class="input">{$goods.score}&nbsp;积分</td>
+            <td class="input">{$goods.post_score}</td>
+        </tr>
+        <tr>
+            <td class="txt">市场价格：</td>
+            <td class="input">￥{$goods.post_price}</td>
         </tr>
         <tr>
             <td class="txt">备注：</td>
-            <td class="input">{$goods.memo}</td>
+            <td class="input">请微信联系我们</td>
         </tr>
     </table>
-    <form action="{:U('Home/seal')}/openid/{$openid}" method="post" name="form">
-	    <input name="goods_id" type="hidden" value="{$goods.goods_id}"/>
-	   	<input name="user_id" type="hidden" value="{$user.user_id}"/>
-	   	<input name="title" type="hidden" value="{$goods.title}"/>
-	   	<input name="score" type="hidden" value="{$goods.score}"/>
+    <form action="{:U('Home/Index/seal')}" method="post" name="form">
+	    <input name="id" type="hidden" value="{$goods.id}"/>
+	   	<input name="post_score" type="hidden" value="{$goods.post_score}"/>
 	   	<input name="nick_name" type="hidden" value="{$user.nick_name}"/>
     <table cellpadding="0" cellspacing="0" class="formTable">
-    	<tr><td colspan="2" style="padding:0"><h2>兑换信息</h2></td></tr>
+    	<tr><td colspan="2" style="padding:0"><h2 id="user_info">兑换信息</h2></td></tr>
         <tr>
             <td class="txt">
                 昵称：</td>
@@ -53,8 +57,32 @@
                 <input id="Text2" type="text" class="txtbox" value="{$user.address}" name="address"/></td>
         </tr>
     </table>            
-    <div class="item_tools"><a  class="dhBtn2" href="javascript:form.submit();">兑换</a></div>
+    <div class="item_tools"><a  class="dhBtn2" href="javascript:submitCheck()">兑换</a></div>
     </form>
    <include file="./statics/phone/home/foot.html" />
+   <script>
+	function submitCheck(){
+		if($("#txtUserName1").val().trim()==''){
+			layer_alert("请填写姓名");
+			return false;
+		}else if($("#Text1").val().trim()==''){
+			layer_alert("请填写联系电话");
+			return false;
+		}else if($("#Text2").val().trim()==''){
+			layer_alert("请填写地址");
+			return false;
+		}
+		form.submit();
+	}
+   
+	function layer_alert(msg){
+		layer.open({
+		    content: msg,
+		    btn: ['OK'],
+		    shadeClose: false,
+		    yes: function(index){layer.close(index);}
+		});
+	}
+	</script>
 </body>
 </html>

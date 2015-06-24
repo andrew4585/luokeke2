@@ -14,8 +14,8 @@
                     <a href="{:U('Home/Index/exchangeview')}/goods_id/{$item.id}">{$item.post_title|msubstr=0,20}</a></h3>
             </div>
             <ul>
-                <li>{$item.post_price|intval}积分</li>
-                <li><a href="{:U('Home/exchangeview')}/goods_id/{$item.id}">点击查看</a></li>
+                <li>{$item.post_score|intval}积分</li>
+                <li><a href="{:U('Home/Index/exchangeview')}/goods_id/{$item.id}">点击查看</a></li>
             </ul>
             <div class="clear" style="padding:0"></div>
         </div>

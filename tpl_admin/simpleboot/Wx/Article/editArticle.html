@@ -68,12 +68,17 @@
         width: 100%;
         border-top: 1px solid #e7e7eb;
     }
+    
     .appmsg_item h2{
-        color: #1abc9c;
+        color: #000;
         position: absolute;
         top: 50px;
         font-weight: normal;
         font-size: 20px;
+    	text-indent: 10px
+    }
+    .appmsg_item:FIRST-CHILD h2{
+		color: #ffffff;
     }
     .appmsg_item img{
         margin-top: 40px;
@@ -150,8 +155,8 @@
         <li class="active"><a href=""  target="_self">编辑图文</a></li>
     </ul>
     <form name="myform" id="myform" action="{:u('Wx/Article/editArticle/id')}/{$info.id}" method="post" class="form-horizontal J_ajaxForms" style="width: 75%; float: left" enctype="multipart/form-data">
-        <div class="source" style="border: 1px solid #c2d1d8;border-bottom: 0">
-            <table width="100%" cellpadding="2" cellspacing="2">
+        <div class="source" style="border: 1px solid #c2d1d8;">
+            <table width="100%" cellpadding="2" cellspacing="2" style="margin:10px 0">
 
                 <tr>
                     <th width="60">素材标题 </th>
@@ -265,9 +270,7 @@
             <div id="wxlist">
                 <div id="appmsgitem1" style="display: none;" class="appmsg_item">
                     <img src="" alt=""/>
-                    <h2>
-                        标题
-                    </h2>
+                    <h2> 标题</h2>
                     <div class="appmsg_edit_mask" >
                         <a class="icon18_common edit_gray js_edit" data-id="1" onclick="javascript:wxedit('appmsgitem1','(item-add-form)');" href="javascript:void(0);">编辑</a>
                         <a class="icon18_common del_gray js_del" data-id="1" onclick="javascript:wxdel('appmsgitem1','(item-add-form)');" href="javascript:void(0);">删除</a>

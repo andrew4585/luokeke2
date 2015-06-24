@@ -41,7 +41,7 @@ class ArticleController extends IndexController {
       //status=1,表示文章未删除，0表示文章已删除
       $where_ands =array("status=1");
       //istop:首页置顶，recommended：推荐，listorder：排序，post_date:发布时间
-      $order		="listorder ASC,post_date DESC";
+      $order		="post_date DESC";
       $fields=array(
           'cid'		=> array("field"=>'cid','operator'=>'=','type'=>'int'),
           'start_time'=> array("field"=>"post_date","operator"=>">=",'type'=>'time'),
@@ -83,6 +83,7 @@ class ArticleController extends IndexController {
         if(IS_POST){
             if($this->model_obj->create()){
                 $_POST['post_date'] = time();
+                $_POST['status']    = 0;
                 $result = $this->model_obj->add($_POST);
                 if($result){
                     if($_POST['type'] == 3){
@@ -105,6 +106,7 @@ class ArticleController extends IndexController {
               $_POST['post_date'] = time();
               $result = $this->model_article->add($_POST);
               if ($result) {
+                $this->model_obj->where("id={$_POST['cid']}")->setField("status",1);
                 $this->success("添加成功！");
               } else {
                 $this->error("添加失败！");
@@ -122,8 +124,9 @@ class ArticleController extends IndexController {
     function addArticle (){
         if(I('get.uid')){
             if(IS_POST){
+                $uid = I('get.uid');
                 foreach ($_POST as $key => $value) {
-                  $value['cid'] = I('get.uid');
+                  $value['cid'] = $uid;
                   $value['post_date'] = time();
                   $value['post_content'] = htmlspecialchars($value['post_content']);
                   $value['post_pic'] = $this->removeUploadImage($this->imgFolder, $value['post_pic']);
@@ -133,10 +136,11 @@ class ArticleController extends IndexController {
                   $result = $this->model_article->add($value);
                 }
                 if ($result) {
-          				$this->success("添加成功！");
-          			} else {
-          				$this->error("添加失败！");
-          			}
+                    $this->model_obj->where("id=$uid")->setField("status",1);
+      				$this->success("添加成功！");
+      			} else {
+      				$this->error("添加失败！");
+      			}
             }else{
                 $uid = I('get.uid');
                 $this->assign('uid',$uid);

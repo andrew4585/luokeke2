@@ -132,7 +132,7 @@ class KeyController extends IndexController
             $type           = $_POST['type'];
             $cid            = $_POST['cid'];
             $modelSource    = D("WxSource");
-            $sourcelist     = $modelSource->where("cid = $cid and type = $type")->order('listorder')->select();
+            $sourcelist     = $modelSource->where("cid = $cid and type = $type and status=1")->order('listorder')->select();
             echo  json_encode($sourcelist);
         }
 

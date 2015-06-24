@@ -21,7 +21,8 @@
     .list-dot li a.close,.list-dot-othors li a.close{ background: url("__ROOT__/statics/images/cross.png") no-repeat left 3px; display:block; width:16px; height:16px;position: absolute;outline:none;right:5px; bottom:5px}
     .list-dot li a.close:hover,.list-dot-othors li a.close:hover{background-position: left -46px}
     .list-dot-othors li{float:left;width:24%;overflow:hidden;}
-
+	label{float:left;line-height:40px;margin:0 10px 0 0;letter-spacing: 2px;}
+	label input[type=radio]{margin:-2px 2px 0 0;}
 </style>
 </head>
 <body class="J_scroll_fixed">
@@ -57,8 +58,8 @@
                     <tr>
                         <th width="80">关键字类型</th>
                         <td>
-                            <input type="radio" name="type" value="0" checked="checked">文字
-                            <input type="radio" name="type" value="3">图文
+                            <label><input type="radio" name="type" value="0" checked="checked">文字</label>
+                            <label><input type="radio" name="type" value="3">图文</label>
                         </td>
                     </tr>
                     <tr>
@@ -190,6 +191,11 @@
     });
 </script>
 <script type="text/javascript">
+	$("input[type=radio]").click(function(){
+		$(".source").val("");
+		$('.sourcelist').html("");
+	});
+
     $(".source").change(function(){
         $('.sourcelist').html("");
         var cid = $(this).val();
@@ -206,8 +212,6 @@
         });
         return false;
     })
-
-
 </script>
 </body>
 </html>

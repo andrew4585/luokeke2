@@ -96,7 +96,6 @@ class IndexController extends HomeBaseController {
     }
     //兑换表单
     public function exchange2(){
-        dump($this->user);
         $model_goods=D("Shop");
         $goods_id=I("get.goods_id");
         if(empty($goods_id))$this->layer_alert("数据丢失");
@@ -149,42 +148,14 @@ class IndexController extends HomeBaseController {
             $data['sumPoint'] = $this->user['score']-$shop_score;
             $result = $model_exchange->add($data);
             if ($result) {
-                $data['score'] = ($user_score['score']-$shop_score);
-                $rs = $users->where("id = $user_id")->save($data);
+                $rs = $users->where("id = {$this->user['uid']}")->setDec("score",$shop_score);
                 $result	= D('Shop')->where("id=$id")->setDec("remain",1);
                 if($result&&$rs) $this->success("提交成功!");
             } else {
-                $this->error("提交失败！");
+                E("领取失败！");
             }
         } catch (\Exception $e) {
-        }
-        
-        
-        $data['goods_id']	=I("post.goods_id");
-        $data['user_id']	=I("post.user_id");
-        $data['title']		=I("post.title");
-        $data['score']		=I("post.score");
-        $data['nick_name']	=I("post.nick_name");
-        foreach($data as $item){
-            if(empty($item))$this->layer_alert("数据丢失");
-        }
-        
-        $data['add_time']=time();
-        $model_seal=D("SealHistory");
-        if($this->user['score']<$data['score'])$this->layer_alert("您的积分不足");
-        $data1['user_id']	=$data['user_id'];
-        $data1['real_name']	=$data['real_name'];
-        $data1['tel']		=$data['tel'];
-        $data1['address']	=$data['address'];
-        $this->model_user->save($data1);
-        $model_goods=D("Goods");
-        $result=$model_seal->add($data);
-        if($result){
-            $this->model_user->where("user_id=".$data['user_id'])->setDec("score",$data['score']);
-            $model_goods->where("goods_id=".$data['goods_id'])->setInc("seal_num",1);
-            $this->layer_alert("提交成功",false,U("Home/Index/exchange"));
-        }else{
-            $this->layer_alert("提交失败");
+            $this->layer_alert($e->getMessage());
         }
     }
     

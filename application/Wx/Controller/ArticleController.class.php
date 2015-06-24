@@ -288,7 +288,7 @@ class ArticleController extends IndexController {
     //编辑分类
     function cedit(){
         if(IS_POST){
-            if($_POST['post_title'] == ""){
+            if($_POST['cat_name'] == ""){
                 $this->error('更新失败');
             }
             if ($this->model_cate->create()) {

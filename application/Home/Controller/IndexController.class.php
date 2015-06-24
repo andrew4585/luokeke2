@@ -123,7 +123,7 @@ class IndexController extends HomeBaseController {
     //兑换操作
     public function seal(){
         try {
-            $id = I('get.id', 0, 'intval');
+            $id = I('post.id', 0, 'intval');
             if (!$id) E('参数缺失！');
             
             $data['name']=I("post.real_name");
@@ -140,7 +140,7 @@ class IndexController extends HomeBaseController {
             if ($this->user['score'] < $shop_score)E('您积分不足！');
                 
             $data['gid']       = $id;
-            $data['uid']       = $this->user['id'];
+            $data['uid']       = $this->user['uid'];
             $data['post_date'] = time();
             $data['point']     = $shop_score;
             
@@ -150,7 +150,7 @@ class IndexController extends HomeBaseController {
             if ($result) {
                 $rs = $users->where("id = {$this->user['uid']}")->setDec("score",$shop_score);
                 $result	= D('Shop')->where("id=$id")->setDec("remain",1);
-                if($result&&$rs) $this->success("提交成功!");
+                if($result&&$rs) $this->layer_alert("提交成功!",false,U('Index/exchange'));
             } else {
                 E("领取失败！");
             }

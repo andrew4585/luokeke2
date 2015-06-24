@@ -102,6 +102,7 @@ class ArticleController extends IndexController {
       if(I('get.uid')){
           if(IS_POST){
               $_POST['cid'] = I('get.uid');
+              $_POST['post_date'] = time();
               $result = $this->model_article->add($_POST);
               if ($result) {
                 $this->success("添加成功！");

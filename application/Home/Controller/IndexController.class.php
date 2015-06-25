@@ -6,8 +6,8 @@ class IndexController extends HomeBaseController {
 
     public $model_config;
     private $model_user;
-    private $openid;
-    private $user;
+    public $openid;
+    public $user;
     
     public function __construct(){
         parent::__construct();

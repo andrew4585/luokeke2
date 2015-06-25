@@ -36,54 +36,11 @@ class ArticleController extends IndexController {
             $this->assign("info",$info);
             $this->assign("subscribe_url",$subscribe_url);
             $this->assign("signPackage",$signPackage);
+            $this->assign("uid",$this->user['uid']);
             $this->assign("web",$web);
             $this->display("index");
         } catch (\Exception $e) {
             $this->layer_alert($e->getMessage());
-        }
-    }
-    
-    public function share_score(){
-        try {
-            $id     = I("get.article_id");
-            $table  = I("get.table");
-            if(!empty($table)){
-                $contentModel = D($table);
-                //分享数+1
-                $result	= $contentModel->where("id=$id")->setInc("post_share",1);
-                if(!$result) $this->error("分享失败");
-            }else{
-                $table="wx_article";
-            }
-            
-            $model_score = D("Exchange");
-            $model_config = D("Config");
-            $model_user = D("Users");
-            $point = $model_config->val('wx_share');
-            if(!$point) exit;
-            $data = array(
-                "uid"        =>  $this->user['uid'],
-                "type"       =>  3,
-                "post_id"    =>  $id,
-                "post_table" =>  $table,
-                "point"      =>  $point,
-                "memo"       =>  "分享文章到朋友圈",
-                'post_date'  =>  time()
-            );
-            $findWhere = " uid={$data['uid']}           AND
-            post_id={$data['post_id']}   AND
-            post_table='{$this->table}'    AND
-            type=3";
-            //检查是否已经分享
-            $hasExchange  = $model_score->where($findWhere)->find();
-            if($hasExchange)exit();
-                
-            $sumPoint = $model_score->where("uid={$data['uid']}")->order('post_date desc')->limit(1)->find();
-            $data['sumpoint'] = $sumPoint['sumpoint']+$data['point'];
-            $result = $model_score->add($data);
-            $this->success("获得分享积分+".$point);
-        } catch (\Exception $e) {
-            $this->error($e->getMessage());
         }
     }
     

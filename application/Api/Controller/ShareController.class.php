@@ -223,7 +223,47 @@ class ShareController extends OauthController {
 		}
 	}
 	
+	public function wx_share_score(){
+	    try {
+	        if(!empty($this->table)){
+	            $contentModel = D($this->table);
+	            //分享数+1
+	            $result	= $contentModel->where("id={$this->id}")->setInc("post_share",1);
+	            if(!$result) $this->error("分享失败");
+	        }else{
+	            $this->table="wx_article";
+	        }
 	
+	        $model_score = D("Exchange");
+	        $model_config = D("Config");
+	        $model_user = D("Users");
+	        $point = $model_config->val('wx_share');
+	        if(!$point) exit;
+	        $data = array(
+	            "uid"        =>  I("get.uid"),
+	            "type"       =>  3,
+	            "post_id"    =>  $this->id,
+	            "post_table" =>  $this->table,
+	            "point"      =>  $point,
+	            "memo"       =>  "分享文章到朋友圈",
+	            'post_date'  =>  time()
+	        );
+	        $findWhere = " uid={$data['uid']}           AND
+	        post_id={$data['post_id']}   AND
+	        post_table='{$this->table}'    AND
+	        type=3";
+	        //检查是否已经分享
+	        $hasExchange  = $model_score->where($findWhere)->find();
+	        if($hasExchange)exit();
+	
+	        $sumPoint = $model_score->where("uid={$data['uid']}")->order('post_date desc')->limit(1)->find();
+	        $data['sumpoint'] = $sumPoint['sumpoint']+$data['point'];
+	        $result = $model_score->add($data);
+	        $this->success("获得分享积分+".$point);
+	    } catch (\Exception $e) {
+	        $this->error($e->getMessage());
+	    }
+	}
 	/**
 	 * 获取应用配置信息
 	 * @throws Exception

@@ -25,7 +25,7 @@ form tr{height: 50px}
             </tr>
             <tr>
               <td width="100">上级:</td>
-              <td><select name="parentid" class="normal_select">
+              <td><select name="fid" class="normal_select">
                   <option value="0">作为一级菜单</option>
                   <foreach name="first" item="item">
                   	 <option value="{$item.nav_id}" <if condition="$item['nav_id'] eq $fid">selected</if>>{$item.name}</option>

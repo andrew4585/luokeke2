@@ -253,9 +253,9 @@ class ThinkWechat {
 		foreach ($news as $key => $value) {
 			$articles[$key]['Title']=$value['post_title'];
 			$articles[$key]['Description']=$value['post_excerpt'];
-			$articles[$key]['PicUrl']=$_SERVER['DOCUMENT_ROOT'].$value['post_pic'];
+			$articles[$key]['PicUrl']=$web."/".$value['post_pic'];
 			if(empty($value['url'])){
-				$articles[$key]['Url']=$web."/index.php/Api/Article/index/article_id/".$value['article_id']."/id/".$this->data['ToUserName'];			
+				$articles[$key]['Url']=$web."/Home/Article/index/article_id/".$value['id'];			
 			}else{
 				$articles[$key]['Url']=$value['url'];
 			}

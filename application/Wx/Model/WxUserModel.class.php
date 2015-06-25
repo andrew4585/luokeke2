@@ -36,7 +36,8 @@ class WxUserModel extends CommonModel{
             $this->getThinkWechat();
             $user	= $this->wechat->user($openid);
             $data['openid']			= $openid;
-            $data['nick_name']		= $user['nickname'];
+            //存在utf8mb4格式的字符串
+            $data['nick_name']		= preg_replace('/[\x{10000}-\x{10FFFF}]/u', '', $user['nickname']);
             $data['sex']			= $user['sex'];
             $data['headimgurl']		= $user['headimgurl'];
             $data['subscribe_time']	= $user['subscribe_time'];
@@ -45,7 +46,7 @@ class WxUserModel extends CommonModel{
                 //将用户存入用户表中
                 $data1['openid']    = $openid;
                 $data1['user_from'] = 'wechat';
-                $data1['user_login']= $user['nickname'];
+                $data1['user_login']= preg_replace('/[\x{10000}-\x{10FFFF}]/u', '', $user['nickname']);
                 $data1['avatar']    = $user['headimgurl'];
                 $data1['sex']		= $user['sex'];
                 $data1['user_type'] = 2;

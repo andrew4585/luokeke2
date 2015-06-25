@@ -4,7 +4,7 @@ use Common\Controller\HomeBaseController;
 
 class IndexController extends HomeBaseController {
 
-    private $model_config;
+    public $model_config;
     private $model_user;
     private $openid;
     private $user;
@@ -202,9 +202,9 @@ class IndexController extends HomeBaseController {
                 }
                 
                 $this->user			= $this->model_user->where("openid='$this->openid' and is_subscribe=1")->find();
+                if(!$this->user)	E("请微信关注我们");
                 $this->user['score']= D("Users")->where("openid='$this->openid'")->getField("score");
                 $this->user['uid']  = D("Users")->where("openid='$this->openid'")->getField("id");
-                if(!$this->user)	E("请微信关注我们");
             }
         } catch (\Exception $e) {
             $this->layer_alert($e->getMessage());
@@ -213,7 +213,7 @@ class IndexController extends HomeBaseController {
     }
     
     //弹出提示框
-    private function layer_alert($msg,$isback=true,$url=''){
+    public function layer_alert($msg,$isback=true,$url=''){
         $this->assign("msg",$msg);
         $this->assign("isback",$isback);
         $this->assign("url",$url);

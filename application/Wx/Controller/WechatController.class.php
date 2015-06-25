@@ -181,7 +181,7 @@ class WechatController extends IndexController{
         $userid=$model_user->getUserId($openid);// 绑定的用户ID
         if ($openid && $userid > 0) {
             switch ($taskevent) {
-                case 'SIGN_TODAY' : // 每日签到
+                case '签到' : // 每日签到
                     $exchange = D('Exchange');
                     $res = $model_user -> isSign($userid,$exchange);
                     if(!$res){

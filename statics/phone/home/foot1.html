@@ -12,11 +12,10 @@
                         <a href="javascript:share();" class=""><span>分享</span></a>
                     </li>
                    <li>
-                        <a href="javascript:;" class=""><span>个人中心</span></a>
+                        <a href="#"><span>个人中心</span></a>
                         <dl>
-                        	<dd><a href="{:U('Home/user')}"><span>个人信息</span></a></dd>
-                            <dd><a href="{:U('Home/sign_record')}"><span>签到记录</span></a></dd>
-                            <dd><a href="{:U('Home/share_record')}"><span>分享记录</span></a></dd>
+                        	<dd><a href="{:U('Home/Index/user')}"><span>个人信息</span></a></dd>
+                            <dd><a href="{:U('Home/Index/exchange')}"><span>兑换中心</span></a></dd>
                         </dl>
                     </li>
                 </ul>
@@ -24,8 +23,8 @@
         </nav>
 		<div id="nav4_masklayer" class="masklayer_div on">&nbsp;</div>
     </div>
-    <script src="{$Think.config.APP_BASE}/Public/home/js/nav4.js"></script>
-    <script type="text/javascript" src="{$Think.config.APP_BASE}/Public/js/jquery-1.10.2.min.js"></script>
+    <script src="__STATICS__/phone/home/js/nav4.js"></script>
+    <script type="text/javascript" src="__STATICS__/js/jquery.js"></script>
     <script type="text/javascript">
     nav4.bindClick(document.getElementById("nav4_ul").querySelectorAll("li>a"), document.getElementById("nav4_masklayer"));
     function share(){

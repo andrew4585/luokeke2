@@ -211,6 +211,9 @@ class ShareController extends OauthController {
 				$sumPoint = $model_score->where("uid={$data['uid']}")->order('post_date desc')->limit(1)->find();
 				$data['sumpoint'] = $sumPoint['sumpoint']+$data['point'];
 				$result = $model_score->add($data);
+				if($result){
+				    $model_user->where("id={$data['uid']}")->setInc("score",$data['point']);
+				}
 				alert("分享成功");
 			}else{
 			    alert("分享成功,登陆后分享可获取积分");
@@ -259,7 +262,11 @@ class ShareController extends OauthController {
 	        $sumPoint = $model_score->where("uid={$data['uid']}")->order('post_date desc')->limit(1)->find();
 	        $data['sumpoint'] = $sumPoint['sumpoint']+$data['point'];
 	        $result = $model_score->add($data);
-	        $this->success("获得分享积分+".$point);
+	        if($result){
+	            $model_user->where("id={$data['uid']}")->setInc("score",$data['point']);
+	            $this->success("获得分享积分+".$point);
+	        }
+	        
 	    } catch (\Exception $e) {
 	        $this->error($e->getMessage());
 	    }

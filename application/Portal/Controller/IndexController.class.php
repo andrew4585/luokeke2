@@ -24,7 +24,8 @@ class IndexController extends HomeBaseController {
 		    if(ACTION_NAME=='info'){
 		        $this->Oauth();
 		        import("Think.WX.jssdk");
-		        $this->jssdk= new \JSSDK($this->getAppid(), $this->getAppsecret());
+		        $model_config = D("WxConfig");
+		        $this->jssdk= new \JSSDK($model_config->val("appid"),$model_config->val("appsecret"));
 		        $signPackage = $this->jssdk->GetSignPackage();
 		        $this->assign("signPackage",$signPackage);
 		        $web = D("WxConfig")->val("web");
@@ -485,9 +486,9 @@ class IndexController extends HomeBaseController {
                     $this->access_token($appid, $code);
                 }
     
-                $this->wx_user			= D("wx_users")->where("openid='$this->openid' and is_subscribe=1")->find();
+                $this->wx_user			= D("wx_user")->where("openid='$this->openid' and is_subscribe=1")->find();
                 if(!$this->wx_user)	return;
-                $this->wx_user['score']= D("wx_users")->where("openid='$this->openid'")->getField("score");
+                $this->wx_user['score']= D("Users")->where("openid='$this->openid'")->getField("score");
                 $this->wx_user['uid']  = D("Users")->where("openid='$this->openid'")->getField("id");
             }
         } catch (\Exception $e) {

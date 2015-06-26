@@ -254,10 +254,10 @@ class ThinkWechat {
 			$articles[$key]['Title']=$value['post_title'];
 			$articles[$key]['Description']=$value['post_excerpt'];
 			$articles[$key]['PicUrl']=$web."/".$value['post_pic'];
-			if(empty($value['url'])){
+			if(empty($value['post_url'])){
 				$articles[$key]['Url']=$web."/Home/Article/index/article_id/".$value['id'];			
 			}else{
-				$articles[$key]['Url']=$value['url'];
+				$articles[$key]['Url']=$value['post_url'];
 			}
 			if($key >= 9) { break; } //最多只允许10调新闻
 		}

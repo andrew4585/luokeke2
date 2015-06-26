@@ -340,7 +340,7 @@ class ThinkWechat {
 		if (is_array ( $stoken )) {
 			$nowtime = time ();
 			$difftime = $nowtime - $stoken ['tokentime']; // 判断缓存里面的TOKEN保存了多久；
-			if ($difftime > 7000||empty($stoken ['token'])) { // TOKEN有效时间7200 判断超过7000就重新获取;
+			if ($difftime > 1000||empty($stoken ['token'])) { // TOKEN有效时间7200 判断超过7000就重新获取;
 				$accesstoken = $this->getAcessToken (); // 去微信获取最新ACCESS_TOKEN
 				$stoken ['tokentime'] = time ();
 				$stoken ['token'] = $accesstoken;

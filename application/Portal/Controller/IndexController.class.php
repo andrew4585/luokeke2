@@ -25,10 +25,12 @@ class IndexController extends HomeBaseController {
 		        $this->Oauth();
 		        import("Think.WX.jssdk");
 		        $model_config = D("WxConfig");
-		        $this->jssdk= new \JSSDK($model_config->val("appid"),$model_config->val("appsecret"));
+				$appid = $model_config->where("`key`='appid'")->getField("value");
+				$appsecret = $model_config->where("`key`='appsecret'")->getField("value");
+		        $this->jssdk= new \JSSDK($appid,$appsecret);
 		        $signPackage = $this->jssdk->GetSignPackage();
 		        $this->assign("signPackage",$signPackage);
-		        $web = D("WxConfig")->val("web");
+		        $web = $model_config->where("`key`='web'")->getField("value");
 		        $this->assign("table",MODULE_NAME);
 		        $this->assign("web",$web);
 		        $this->assign("uid",$this->wx_user['uid']);

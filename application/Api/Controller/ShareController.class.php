@@ -16,7 +16,9 @@ class ShareController extends OauthController {
 								'Pcustom'	=> '客照',
 								'Photo'		=> '作品',
 								'Dress'		=> '婚纱礼服',
-								'Article'	=> '婚嫁常识');	
+								'Article'	=> '婚嫁常识',
+	                            'wx_article'=> '微信文章'
+	);	
 	
 	public $id;				//数据编号
 	
@@ -248,7 +250,7 @@ class ShareController extends OauthController {
 	            "post_id"    =>  $this->id,
 	            "post_table" =>  $this->table,
 	            "point"      =>  $point,
-	            "memo"       =>  "分享文章到朋友圈",
+	            "memo"       =>  "分享".$this->tblName[$this->table]."到朋友圈",
 	            'post_date'  =>  time()
 	        );
 	        $findWhere = " uid={$data['uid']}           AND

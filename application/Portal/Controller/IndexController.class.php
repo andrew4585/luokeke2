@@ -10,12 +10,30 @@ class IndexController extends HomeBaseController {
 	
 	protected $siteId ;			//站点编号
 	protected $model_single;
+	public     $wx_user;
+	public     $openid;
 	public function __construct(){
 		parent::__construct();
 		$this->setSiteId();
 		$this->getMenuData();
 		$this->getSiteData();
 		$this->getDate();
+		//判断是否微信访问
+		if($this->_isWeiXin()){
+		    //判断是否进入详细页面
+		    if(ACTION_NAME=='info'){
+		        $this->Oauth();
+		        import("Think.WX.jssdk");
+		        $this->jssdk= new \JSSDK($this->getAppid(), $this->getAppsecret());
+		        $signPackage = $this->jssdk->GetSignPackage();
+		        $this->assign("signPackage",$signPackage);
+		        $web = D("WxConfig")->val("web");
+		        $this->assign("table",MODULE_NAME);
+		        $this->assign("web",$web);
+		        $this->assign("uid",$this->wx_user['uid']);
+		        $this->assign("is_weixin",true);
+		    }
+		}
 	}
 	
     //首页
@@ -436,6 +454,78 @@ class IndexController extends HomeBaseController {
     }
     
     /**
+     * 判断是否是微信客户端访问
+     * @return boolean
+     */
+    public function _isWeiXin(){
+        $user_agent = $_SERVER['HTTP_USER_AGENT'];
+        if (strpos($user_agent, 'MicroMessenger') === false) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    /**
+     * 网页授权
+     */
+    public function Oauth(){
+        try {
+            $this->wx_user = cookie("weixin_user");
+            $model_config = D("Wx/WxConfig");
+            if(empty($this->wx_user)){
+                $appid = $model_config->val("appid");
+                $code			= I("get.code");
+                if(empty($code)){
+                    $url=getUri();
+                    $url=urlencode($url);
+                    $url="https://open.weixin.qq.com/connect/oauth2/authorize?appid=$appid&redirect_uri=$url&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect";
+                    header("Location:". $url);
+                    exit;
+                }else{
+                    $this->access_token($appid, $code);
+                }
+    
+                $this->wx_user			= D("wx_users")->where("openid='$this->openid' and is_subscribe=1")->find();
+                if(!$this->wx_user)	return;
+                $this->wx_user['score']= D("wx_users")->where("openid='$this->openid'")->getField("score");
+                $this->wx_user['uid']  = D("Users")->where("openid='$this->openid'")->getField("id");
+            }
+        } catch (\Exception $e) {
+            $this->layer_alert($e->getMessage());
+        }
+    
+    }
+    public function access_token($appid,$code,&$i=0){
+        $model_config = D("Wx/WxConfig");
+        $appsecret=$model_config->val("appsecret");
+        $appsecret=trim($appsecret);
+        $appid=trim($appid);
+        $url="https://api.weixin.qq.com/sns/oauth2/access_token";
+        $param=array(
+            "appid"=>$appid,
+            "secret"=>$appsecret,
+            "code"=>$code,
+            "grant_type"=>"authorization_code"
+        );
+        $httpstr = http($url,$param);
+        $harr = json_decode ( $httpstr, true );
+    
+        if(empty($harr['access_token'])){
+            if ($i>5) E("获取access_token失败");
+            $i++;
+            $this->access_token($appid,$code,$i);
+        }
+        $this->openid = $harr['openid'];
+    }
+    //弹出提示框
+    public function layer_alert($msg,$isback=true,$url=''){
+        $this->assign("msg",$msg);
+        $this->assign("isback",$isback);
+        $this->assign("url",$url);
+        $this->display(":alert");
+        exit;
+    }
+    /**
      * 获取当前页面网址
      */
     public function _getUri(){
@@ -453,5 +543,10 @@ class IndexController extends HomeBaseController {
     	$smeta = $this->model_single->where("id=$id")->getField("smeta");
     	$photo = json_decode($smeta,true);
     	return $photo['photo'];
+    }
+    
+    public function __destruct(){
+        if(!$this->wx_user)
+            cookie("weixin_user");
     }
 }

@@ -84,13 +84,8 @@ class ShareController extends OauthController {
 		//判断是否授权成功
 		if ($this->token) {
 			$_SESSION['sina_token'] = $this->token;
-			$c = new \SaeTClientV2($this->AppKey, $this->AppSecret, $_SESSION['sina_token']['access_token']);
-			$ret = $c->upload( $_REQUEST['sharecomment'],'http://'.$_SERVER['HTTP_HOST'].$_REQUEST['picurl']);
-			if ( isset($ret['error_code']) && $ret['error_code'] > 0 ) {
-				header("Location:".$this->callback);exit;
-			} else {
-				$this->share();
-			}
+			header("Content-type:text/html;charset=utf-8");
+			echo "新浪微博登陆成功，请重新分享";
 		}else{
 			exit("授权失败！");
 		}

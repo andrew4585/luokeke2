@@ -87,7 +87,7 @@ class ShareController extends OauthController {
 			$c = new \SaeTClientV2($this->AppKey, $this->AppSecret, $_SESSION['sina_token']['access_token']);
 			$ret = $c->upload( $_REQUEST['sharecomment'],'http://'.$_SERVER['HTTP_HOST'].$_REQUEST['picurl']);
 			if ( isset($ret['error_code']) && $ret['error_code'] > 0 ) {
-				alert("<p>发送失败，错误：{$ret['error_code']}:{$ret['error']}</p>");
+				header("Location:".$this->callback);exit;
 			} else {
 				$this->share();
 			}
@@ -127,10 +127,13 @@ class ShareController extends OauthController {
 		    if ($_GET['code']) {//已获得code
 		        $QC->qq_callback();
 		        $QC->get_openid();
+		        $QC->reInit();
 		        $_FILES['pic']="@.".session("share_picurl");
 		        $_POST['content'] = session("share_sharecomment");
 		        $ret = $QC->add_pic_t($_POST);
 		        if($ret['ret'] == 0){
+		            $this->table=session("share_table");
+		            $this->id = session("share_id");
 		            $this->share();
 		        }else{
 		            alert("发表失败");

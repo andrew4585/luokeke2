@@ -189,6 +189,18 @@ class ShareController extends OauthController {
 			if(!empty($_SESSION['user'])){
 				$model_score = D("Exchange");
 				$model_config = D("Config");
+				
+				//获取今天用户的分享总积分
+				$stime = strtotime(date('Y-m-d 00:00:00'));
+				$etime = strtotime(date('Y-m-d 23:59:59'));
+				$sumWhere = "uid = {$_SESSION['user']['id']}
+				              and type=3
+				              and post_date>$stime
+				              and post_date<$etime";
+				$total = $model_score->where($sumWhere)->sum("point");
+				$share_max = $model_config->val("share_max");
+				if($total>=$share_max) alert("您已经达到每日分享积分的上限");
+				
 				$model_user = D("Users");
 				$data = array(
 				    "uid"        =>  $_SESSION['user']['id'],
@@ -251,6 +263,18 @@ class ShareController extends OauthController {
 	            "memo"       =>  "分享".$this->tblName[$this->table]."到朋友圈",
 	            'post_date'  =>  time()
 	        );
+	        
+	        //获取今天用户的分享总积分
+	        $stime = strtotime(date('Y-m-d 00:00:00'));
+	        $etime = strtotime(date('Y-m-d 23:59:59'));
+	        $sumWhere = "uid = {$data['uid']}
+                	        and type=3
+                	        and post_date>$stime
+                	        and post_date<$etime";
+	        $total = $model_score->where($sumWhere)->sum("point");
+	        $share_max = $model_config->val("share_max");
+	        if($total>=$share_max) E("您已经达到每日分享积分的上限");
+	        
 	        $findWhere = " uid={$data['uid']}           AND
 	        post_id={$data['post_id']}   AND
 	        post_table='{$this->table}'    AND

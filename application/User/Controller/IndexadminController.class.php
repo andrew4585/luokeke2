@@ -51,7 +51,7 @@ class IndexadminController extends AdminbaseController {
         ->where($where)
         ->limit($page->firstRow, $page->listRows)
         ->order($order)->select();
-        $this->assign("Page", $page->show('Admin'));
+        $this->assign("page", $page->show('Admin'));
         $this->assign("formget",$_REQUEST);
         $this->assign("lists",$list);
     }

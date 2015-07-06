@@ -114,8 +114,6 @@ a:hover {
 { width:70px; text-align:right;}
 .formTable tr td.input
 { padding-left:10px;}
-.txtbox
-{ width:160px; height:30px; background:#f0f0f0; border:none;}
 .txtbox1
 { width:160px; height:120px; background:#f0f0f0; border:none;}
 .formTable h2
@@ -210,7 +208,7 @@ a:hover {
 .exchange_box ul li { float:left; line-height:36px;}
 .exchange_box ul li.img { width:50px; text-align:center;}
 .exchange_box ul li img { vertical-align:middle;}
-.txtbox { width:220px; background:#f0f0f0; border:none; border-radius:5px; line-height:28px;}
+.txtbox { width:220px; background:#f0f0f0;height:30px; border:none; border-radius:5px; line-height:28px;}
 
 #bottom_tools
 { position:fixed; bottom:0; width:100%; padding-bottom:5px;}

@@ -15,10 +15,14 @@ class IndexController extends HomeBaseController {
         $this->setModelConfig();
         $this->setModelUser();
 //         $this->openid = 'ox1QntxmnsVy0UYOxIDOGUfPCgqE';
-//         $this->user			= $this->model_user->where("openid='$this->openid' and is_subscribe=1")->find();
-//         $this->user['score']= D("Users")->where("openid='$this->openid'")->getField("score");
-//         $this->user['uid']= D("Users")->where("openid='$this->openid'")->getField("id");
-        $this->Oauth();
+        if($_GET['openid']&&IS_AJAX){
+            $this->openid       = $_GET['openid'];
+            $this->user			= $this->model_user->where("openid='$this->openid' and is_subscribe=1")->find();
+            $this->user['score']= D("Users")->where("openid='$this->openid'")->getField("score");
+            $this->user['uid']  = D("Users")->where("openid='$this->openid'")->getField("id");
+        }else{
+            $this->Oauth();
+        }
     }
     //用户中心
     public function user(){

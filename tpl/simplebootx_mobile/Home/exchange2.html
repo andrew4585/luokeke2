@@ -81,7 +81,7 @@
 						post_score:post_score,
 						tel:tel,
 						address:address};
-		$.post("{:U('Home/Index/seal')}",serialize,function(data){
+		$.post("{:U('Home/Index/seal')}/openid/{$user.openid}",serialize,function(data){
 			layer_alert(data.info,data.url);
 		});
 		//form.submit();

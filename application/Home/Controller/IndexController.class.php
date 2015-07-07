@@ -150,12 +150,12 @@ class IndexController extends HomeBaseController {
             if ($result) {
                 $rs = $users->where("id = {$this->user['uid']}")->setDec("score",$shop_score);
                 $result	= D('Shop')->where("id=$id")->setDec("remain",1);
-                if($result&&$rs) $this->layer_alert("提交成功!",false,U('Index/exchange'));
+                if($result&&$rs) $this->success("提交成功!",U('Index/exchange'));
             } else {
                 E("领取失败！");
             }
         } catch (\Exception $e) {
-            $this->layer_alert($e->getMessage());
+            $this->error($e->getMessage());
         }
     }
     

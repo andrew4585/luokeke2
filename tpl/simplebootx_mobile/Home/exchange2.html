@@ -27,9 +27,6 @@
         </tr>
     </table>
     <form action="{:U('Home/Index/seal')}" method="post" name="form">
-	    <input name="id" type="hidden" value="{$goods.id}"/>
-	   	<input name="post_score" type="hidden" value="{$goods.post_score}"/>
-	   	<input name="nick_name" type="hidden" value="{$user.nick_name}"/>
     <table cellpadding="0" cellspacing="0" class="formTable">
     	<tr><td colspan="2" style="padding:0"><h2 id="user_info">兑换信息</h2></td></tr>
         <tr>
@@ -63,25 +60,45 @@
    <include file="./statics/phone/home/foot.html" />
    <script>
 	function submitCheck(){
-		if($("#txtUserName1").val().trim()==''){
+		var id		  = {$goods.id};
+		var post_score= {$goods.post_score};
+		var real_name = $("#txtUserName1").val().trim();
+		var tel		  = $("#Text1").val().trim();
+		var address   = $("#Text2").val().trim()
+		if(real_name==''){
 			layer_alert("请填写姓名");
 			return false;
-		}else if($("#Text1").val().trim()==''){
+		}else if(tel==''){
 			layer_alert("请填写联系电话");
 			return false;
-		}else if($("#Text2").val().trim()==''){
+		}else if(address==''){
 			layer_alert("请填写地址");
 			return false;
 		}
-		form.submit();
+		
+		var serialize = {id:id,
+						real_name:real_name,
+						post_score:post_score,
+						tel:tel,
+						address:address};
+		$.post("{:U('Home/Index/seal')}",serialize,function(data){
+			layer_alert(data.info,data.url);
+		});
+		//form.submit();
 	}
    
-	function layer_alert(msg){
+	function layer_alert(msg,url){
 		layer.open({
 		    content: msg,
 		    btn: ['OK'],
 		    shadeClose: false,
-		    yes: function(index){layer.close(index);}
+		    yes: function(index){
+		    	if(url){
+		    		location.href=url
+		    	}else{
+			    	layer.close(index);
+		    	}
+		    }
 		});
 	}
 	</script>

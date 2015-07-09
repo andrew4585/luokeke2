@@ -188,7 +188,7 @@ class WechatController extends IndexController{
                         return $reply = array("您今天已经签到",'text');
                     }else {
                         $data['uid'] = $userid;
-                        $data['point'] = 10;
+                        $data['point'] = D("Config")->val("wx_sign");
                         $data['type'] = 2;
                         $data['memo'] = '微信签到';
                         $data['post_date'] = time();

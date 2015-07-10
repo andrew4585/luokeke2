@@ -39,7 +39,6 @@ class IndexController extends HomeBaseController {
         $order = 'post_date DESC';
         $where = "uid = ".$this->user['uid'];
         $count=$model_exchange->where($where)->count();
-        $where = "uid=".$this->user['uid'];
         $list =$model_exchange->where($where)
                                 ->limit($first_num,10)
                                 ->order($order)->select();
@@ -206,7 +205,7 @@ class IndexController extends HomeBaseController {
                 }
                 
                 $this->user			= $this->model_user->where("openid='$this->openid' and is_subscribe=1")->find();
-                if(!$this->user)	return;
+                if(!$this->user)	E("请关注我们");
                 $this->user['score']= D("Users")->where("openid='$this->openid'")->getField("score");
                 $this->user['uid']  = D("Users")->where("openid='$this->openid'")->getField("id");
             }

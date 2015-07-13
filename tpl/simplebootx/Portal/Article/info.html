@@ -103,13 +103,14 @@
                             });
                         });
                         $('#parentIframe').click(function(){
+                        	var id	   = {$info.id};
                             layer.open({
                                 type: 2,
                                 title: '分享给好友',
                                 maxmin: true,
                                 shadeClose: true, //点击遮罩关闭层
                                 area : ['556px' , '470px'],
-                                content: ["{:U('Portal/Share/shareWindow')}", 'no']
+                                content: ["{:U('Portal/Share/shareWindow')}/model/Article/id/"+id, 'no']
                             });
                         });
                     });

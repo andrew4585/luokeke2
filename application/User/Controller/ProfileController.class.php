@@ -107,6 +107,7 @@ class ProfileController extends MemberbaseController {
 			try{
 				$userid		= session("user.id");
 				list($a,$type) = explode("/", $_FILES['__avatar1']['type']);
+				if($type=="jpeg") $type="jpg";
 				$savename = "$userid.$type";
     			//上传处理类
         		$config=array(

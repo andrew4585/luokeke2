@@ -119,11 +119,13 @@ class ProfileController extends MemberbaseController {
         		);
         		if(file_exists($config['rootPath'].$savename))
         		    unlink($config['rootPath'].$savename);
-        		    
         		$upload = new \Think\Upload($config);
         		$info=$upload->uploadOne($_FILES["__avatar1"]);
         		//开始上传
         		if ($info) {
+        		    if($info['savename']==$savename."."){
+        		        rename($config["rootPath"].$info['savename'], $config["rootPath"].$savename);
+        		    }
         		    D("Users")->where("id=$userid")->setField("avatar",$savename);
         		} else {
         			//上传失败，返回错误

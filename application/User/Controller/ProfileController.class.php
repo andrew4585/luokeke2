@@ -102,33 +102,37 @@ class ProfileController extends MemberbaseController {
     function avatar_upload(){
 
 		if(IS_POST){
+		    $result = array();
+		    $result['success'] = false;
 			try{
 				$userid		= session("user.id");
-				$file_src 	= "src.png";
-				$upload		= "./data/upload/avatar/$userid";
-				$filename162= $upload."_1.png";
-				$filename48 = $upload."_2.png";
-				$filename20 = $upload."_3.png";
-
-				$src=base64_decode($_POST['pic']);
-				$pic1=base64_decode($_POST['pic1']);
-				$pic2=base64_decode($_POST['pic2']);
-				$pic3=base64_decode($_POST['pic3']);
-
-				if($src) {
-					file_put_contents($file_src,$src);
-				}
-
-				file_put_contents($filename162,$pic1);
-				file_put_contents($filename48,$pic2);
-				file_put_contents($filename20,$pic3);
-
-				$rs['status'] = 1;
-				echo json_encode($rs);
+				list($a,$type) = explode("/", $_FILES['__avatar1']['type']);
+				$savename = "$userid.$type";
+    			//上传处理类
+        		$config=array(
+        				'rootPath' => './data/upload/avatar/',
+        				'savePath' => '',
+        				'maxSize' => 11048576,
+        				'saveName'   =>    $savename,
+        				'autoSub'    =>    false,
+        		);
+        		if(file_exists($config['rootPath'].$savename))
+        		    unlink($config['rootPath'].$savename);
+        		    
+        		$upload = new \Think\Upload($config);
+        		$info=$upload->uploadOne($_FILES["__avatar1"]);
+        		//开始上传
+        		if ($info) {
+        		    D("Users")->where("id=$userid")->setField("avatar",$savename);
+        		} else {
+        			//上传失败，返回错误
+        			E($upload->getError());
+        		}
+				$result['success'] = true;
+				echo json_encode($result);
 			}catch (\Exception $e){
-				Log::record("头像上传失败：".$e->getMessage());
-				$rs['status'] = $e->getMessage();
-				echo json_encode($rs);
+				$result['msg'] = $e->getMessage();
+				echo json_encode($result);
 			}
 
 		}

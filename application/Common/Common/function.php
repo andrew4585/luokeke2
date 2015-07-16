@@ -79,7 +79,7 @@ function sp_get_user_avatar_url($avatar){
 		if(strpos($avatar, "http")===0){
 			return $avatar;
 		}else {
-			return sp_get_asset_upload_path("avatar/".$avatar);
+			return sp_get_asset_upload_path("../avatar/".$avatar);
 		}
 		
 	}else{

@@ -34,6 +34,7 @@
 	          <tr>
 	            <th width="16"><label><input type="checkbox" class="J_check_all" data-direction="x" data-checklist="J_check_x"></label></th>
 	            <th>头像</th>
+	            <th width="230">openid</th>
 	            <th>昵称</th>
 	            <th>性别</th>
 	            <th>总积分</th>
@@ -47,6 +48,7 @@
 	        	<tr>
 		            <td><input type="checkbox" class="J_check" data-yid="J_check_y" data-xid="J_check_x" name="ids[]" value="{$vo.openid}" ></td>
 		            <td><img src="{$vo.headimgurl}" style="height:40px;"/></td>
+		            <td>{$vo.openid}</td>
 		            <td><a>{$vo.nick_name}</a></td>
 		            <td>{$sex[$vo['sex']]}</td>
 		            <td>{$vo.score}</td>

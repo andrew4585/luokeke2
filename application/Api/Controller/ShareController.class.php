@@ -55,7 +55,10 @@ class ShareController extends OauthController {
 			$_SESSION['sina_token'] = $this->token;
 			vendor("sina.sina");
 			$c = new \SaeTClientV2($this->AppKey, $this->AppSecret, $_SESSION['sina_token']['access_token']);
-			$ret = $c->upload( $_REQUEST['sharecomment'],'http://'.$_SERVER['HTTP_HOST'].$_REQUEST['picurl']);
+			$sharecomment = "{$_REQUEST['sharecomment']}http://".$_SERVER['HTTP_HOST']."/Portal/{$this->table}/info/id/{$this->id}";
+			$sharecomment = urlencode($sharecomment);
+			$ret = $c->upload( $sharecomment,'http://'.$_SERVER['HTTP_HOST'].$_REQUEST['picurl']);
+			//$ret = $c->upload( $_REQUEST['sharecomment'],'http://'.$_SERVER['HTTP_HOST'].$_REQUEST['picurl']);
 			if ( isset($ret['error_code']) && $ret['error_code'] > 0 ) {
 				echo "<p>发送失败，错误：{$ret['error_code']}:{$ret['error']}</p>";
 			} else {
@@ -124,7 +127,7 @@ class ShareController extends OauthController {
 		        $QC->get_openid();
 		        $QC->reInit();
 		        $_FILES['pic']="@.".session("share_picurl");
-		        $_POST['content'] = session("share_sharecomment");
+		        $_POST['content'] = session("share_sharecomment")."http://".$_SERVER['HTTP_HOST']."/Portal/".session("share_table")."/info/id/".session("share_id");
 		        $ret = $QC->add_pic_t($_POST);
 		        if($ret['ret'] == 0){
 		            $this->table=session("share_table");

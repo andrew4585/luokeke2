@@ -42,6 +42,9 @@ class SingleController extends IndexController {
 			}elseif ($type==3){
 				$this->assign("photo",$photo);
 				$display  = "single3";
+			}elseif ($type==4){
+			    $this->assign("photo",$photo);
+			    $display  = "single4";
 			}else{
 				$this->error("文章出错");
 			}

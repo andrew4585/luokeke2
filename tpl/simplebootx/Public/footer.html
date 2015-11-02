@@ -24,28 +24,6 @@
 	</div>
 	<div class="clears"></div>
 </div>
-<!--jquery左侧随滚动条浮动导航代码-->
-<div id="izl_rmenu" class="izl-rmenu" >
-	<a target="_blank" href="{$swt_url}" class="btn btn-qq"></a>
-	<a target="_blank" href="{:U('Portal/Single/info/id/32')}" class="btn btn-wo">
-	</a>
-	<a target="_blank" href="{:U('Portal/Single/info/id/31')}" class="btn btn-wx">
-	</a>
-	<!-- 
-	<div class="btn btn-phone">
-		<div class="phone">4000-999-136</div>
-	</div>
-	 -->
-	 <a target="_blank" href="{$swt_url}" class="btn btn-phone" style="display:block;">
-	</a>
-	<script type="text/javascript">
-		$(".i_003").find("img").hover(function(){
-			$(this).css("cursor","pointer").click(function(){
-				window.open('{$swt_url}');
-			})
-		});
-	</script>
-</div>
 <div style="background:#2E3339"><php>$jscode = sp_get_js();</php>
 <foreach name="jscode" item="item">
 	{$item}

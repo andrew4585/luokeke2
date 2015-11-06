@@ -84,9 +84,11 @@ class Page {
     private $linkwraper_pre="";
     private $linkwraper_after="";
     private $searching=false;
-
+    //参数
+    public $param;
     //Page([总记录数=1]，   [分页大小=20]，     [当前页=1]，         [显示页数=6]，     [分页参数='page'],      [分页链接=当前页面],[是否静态=FALSE])
     function __construct($Total_Size = 1, $Page_Size = 20, $Current_Page = 1, $List_Page = 6, $PageParam = 'p', $PageLink = '', $Static = FALSE) {
+        $this->param = "";
         $this->Page_size = intval($Page_Size);
         $this->Total_Size = intval($Total_Size);
         if (!$Current_Page) {
@@ -180,7 +182,7 @@ class Page {
         if ($this->Total_Pages <= 1) {
             return;
         }
-        return $this->Pager($this->Page_tpl [$Tpl_Name]);
+        return $this->Pager($this->Page_tpl[$Tpl_Name]);
     }
 
     public function GetCurrentPage() {
@@ -200,6 +202,7 @@ class Page {
                     $cfg [$key] = $val;
             }
         }
+        $cfg['link'] .= $this->param;
 		//判断listlong是否为偶数
 		/*if( (int)$cfg ['listlong']%2 != 0  ){
 		   $cfg ['listlong'] = $cfg ['listlong']+1;

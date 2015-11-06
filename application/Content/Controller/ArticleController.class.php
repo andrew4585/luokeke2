@@ -83,6 +83,7 @@ class ArticleController extends AdminbaseController{
 				'end_time'  => array("field"=>"post_date","operator"=>"<=",'type'=>'time'),
 				'keyword'   => array("field"=>"post_title","operator"=>"like",'type'=>'string'),
 		);
+		$parameter = "";
 		foreach ($fields as $param =>$val){
 			if (!empty($_REQUEST[$param])) {
 	
@@ -97,6 +98,7 @@ class ArticleController extends AdminbaseController{
 				}elseif ($type=='string'){
 					$get="'$get'";
 				}
+				$parameter.="/$field/$get";
 				array_push($where_ands, "$field $operator $get");
 			}
 		}
@@ -105,7 +107,7 @@ class ArticleController extends AdminbaseController{
 		$count=$this->model_obj->where($where)->count();
 			
 		$page = $this->page($count, 20);
-			
+		$page->param = $parameter;
 		$list =$this->model_obj ->relation(true)->where($where)
 		->limit($page->firstRow, $page->listRows)
 		->order($order)->select();

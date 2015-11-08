@@ -88,7 +88,7 @@ class WechatController extends IndexController{
         $model_article = D("WxArticle");
         $sql="select *
         from (select k.sourceid,LENGTH(k.`post_title`) len,k.`post_title`,k.type
-        from sp_wx_keyword k WHERE k.`post_title` LIKE '%$text%') l
+        from sp_wx_keyword k WHERE k.`status`=1 and k.`post_title` LIKE '%$text%') l
         order by l.len limit 0,1";
         $key=$model_key->query($sql);
         $key=$key[0];

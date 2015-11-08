@@ -92,6 +92,7 @@ class WechatController extends IndexController{
         order by l.len limit 0,1";
         $key=$model_key->query($sql);
         $key=$key[0];
+        if(empty($key)) return null;
         switch ($key['type']){
             case 0:
                 $sourceId=$key['sourceid'];

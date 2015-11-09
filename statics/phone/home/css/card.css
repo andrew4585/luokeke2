@@ -1,0 +1,77 @@
+@CHARSET "UTF-8";
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+*:after{clear: both;}
+.blue-bg{
+	background:#d3e5e9;
+}
+.container{
+	padding:0 8px;
+}
+#title_write_card_info{
+	text-align: center;
+	font-weight:100;
+	background:#eff1f0;
+	font-size:16px;
+	line-height:50px;
+}
+#title_write_card_info img{
+	position: relative;
+	top: 10px;
+	width: 35px;
+	left: -3px;
+}
+.form-card tr td{
+	border:none;
+	padding:0 10px;
+	text-align:left;
+	font-size:15px;
+	color:#666666;
+}
+.form-card input{
+	width:100%;
+	background:#eff1f0;
+	border:1px solid #dce0e1;
+	font-size:15px;
+	line-height:30px;
+	border-radius:5px;
+}
+.radio{margin-right:15px;}
+.form-card input[type="radio"]{
+	width:20px;
+}
+
+.form-card input[type="submit"]{
+	font-family: "微软雅黑";
+	color:#FFFFFF;
+	background:#82d7d0;
+	margin:10px 0;
+	line-height:40px;
+	border:none;
+	border-radius:0;
+}
+
+.form-card .sep{
+	padding:15px 10px 5px;
+}
+
+.silver-group{
+	background:#FFFFFF;
+	border-top:3px solid #82d7d0;
+}
+.silver-group:first-child{
+	border-top:none;
+}
+
+.silver-group .silver-item{width:100%;padding:2px 10px;font-size:14px;line-height:35px;border-bottom:1px solid #CCCCCC;}
+.silver-group .silver-item:after{content:" ";display: table;}
+.silver-group .silver-item li{float:left;}
+.silver-group .silver-item li:first-child{width:110px;text-align: right;}
+.silver-group .silver-item li.silver-li-img{float:right;height:35px;}
+.silver-li-img img{width:35px;}
+.txt-success{color:#82d7d0}
+.txt-default{color:#b7b7b7}

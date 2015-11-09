@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>双11抢红包</title>
+	<include file="./statics/phone/home/head.html" />
+	    <link rel="stylesheet" type="text/css" href="__STATICS__/phone/home/css/card.css" />
+	<style>body,html{padding:0}.form-card input[type="submit"] {background:#ffd800;color:#79501f}</style>
+</head>
+<body>
+   <div class="card">
+   		<img class="no-card-1" src="__STATICS__/phone/home/hongbao/double11.jpg"/>
+   </div>
+   <div class="container">
+	<form action="{:U('Home/Index/receive_gold_card')}" method="post" name="form" onsubmit="return false;" style="background:#FFFFFF;">
+    <table cellpadding="0" cellspacing="0" class="formTable form-card"  style="margin:0">
+        <tr>
+            <td>手机号</td>
+        </tr>
+        <tr>
+            <td><input type="text" name="tel" /></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+        	<td>
+        		<input type="submit" value="领取红包" onclick="submitCheck(this)"/>
+        	</td>
+        </tr>
+    </table>            
+    </form>
+	</div>
+    <script>
+    var height 	= $(window).height();
+	$(function(){
+		container();
+	});
+	
+	$(window).resize(function(){
+		width 	= $(window).height();
+		container();
+	});
+	
+	function container(){
+		$("form").css("min-height",height);
+	}
+	
+	function submitCheck(obj){
+		var serialize = $("form").serialize();
+		$(obj).prop('disabled', true).val("领取中...");
+		$.post("{:U('Home/HongBao/double11')}/openid/{$user.openid}",serialize,function(data){
+			layer_alert(data.info,data.url);
+			$(obj).prop('disabled', false).val("领取红包");
+		});
+		//form.submit();
+	}
+	
+	function layer_alert(msg,url){
+		layer.open({
+		    content: msg,
+		    btn: ['OK'],
+		    shadeClose: false,
+		    yes: function(index){
+		    	if(url){
+		    		location.href=url
+		    	}else{
+			    	layer.close(index);
+		    	}
+		    }
+		});
+	}
+    </script>
+</body>
+</html>

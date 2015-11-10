@@ -88,15 +88,15 @@ class HongBaoController extends HomeBaseController {
             if(empty($this->user)){
                 $appid = $this->model_config->val("appid");
                 $code			= I("get.code");
-//                 if(empty($code)){
-//                     $url=getUri();
-//                     $url=urlencode($url);
-//                     $url="https://open.weixin.qq.com/connect/oauth2/authorize?appid=$appid&redirect_uri=$url&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect";
-//                     header("Location:". $url);
-//                     exit;
-//                 }else{
-//                     $this->access_token($appid, $code);
-//                 }
+                if(empty($code)){
+                    $url=getUri();
+                    $url=urlencode($url);
+                    $url="https://open.weixin.qq.com/connect/oauth2/authorize?appid=$appid&redirect_uri=$url&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect";
+                    header("Location:". $url);
+                    exit;
+                }else{
+                    $this->access_token($appid, $code);
+                }
                 
                 $this->user			= $this->model_user->where("openid='$this->openid' and is_subscribe=1")->find();
                 if(!$this->user)	E("请关注我们");

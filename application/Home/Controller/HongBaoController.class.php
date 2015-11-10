@@ -49,6 +49,7 @@ class HongBaoController extends HomeBaseController {
                     $this->error("系统繁忙，请稍后再试");
                 }
             }else{
+                $this->assign("openid",$this->openid);
                 $this->display();
             }
         } catch (\Exception $e) {

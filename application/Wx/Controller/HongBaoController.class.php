@@ -26,8 +26,11 @@ class HongBaoController extends IndexController {
 	    $model = D("HongbaoDouble11");
 	    $count = $model->alias("h")->where($where)->count();
 	    $page = $this->page($count,20);
+	    $page->param = $parameter;
 	    $list = $model->alias("h")->where($where)->order("add_time desc")->select();
 	    $this->assign("list",$list);
+	    $this->assign("admin",$page->show("Admin"));
+	    $this->assign("formget",$_POST);
 	    $this->display();
 	}
 	

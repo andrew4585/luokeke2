@@ -38,7 +38,7 @@ class HongBaoController extends HomeBaseController {
                 $model_hb = D("HongbaoDouble11");
                 if(empty($_POST['tel'])) E("请填写手机号");
                 $haveUser = $model_hb->where("openid='{$this->openid}' or tel='{$_POST['tel']}'")->find();
-                if($haveUser) E("您已经领取红包");
+                if($haveUser) E("您已参与  敬请期待");
                 $result = $model_hb->add(array(
                     "openid" => $this->openid,
                     "tel"    => $_POST['tel']

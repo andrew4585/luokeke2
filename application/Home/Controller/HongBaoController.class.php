@@ -14,7 +14,7 @@ class HongBaoController extends HomeBaseController {
         header("Content-Type: text/html; charset=utf-8");
         $this->setModelConfig();
         $this->setModelUser();
-         $this->openid = 'ox1QntxmnsVy0UYOxIDOGUfPCgqE';
+         //$this->openid = 'ox1QntxmnsVy0UYOxIDOGUfPCgqE';
         if($_GET['openid']&&IS_AJAX){
             $this->openid       = $_GET['openid'];
             $this->user			= $this->model_user->where("openid='$this->openid' and is_subscribe=1")->find();

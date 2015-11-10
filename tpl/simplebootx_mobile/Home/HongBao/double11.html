@@ -4,11 +4,13 @@
     <title>双11抢红包</title>
 	<include file="./statics/phone/home/head.html" />
 	    <link rel="stylesheet" type="text/css" href="__STATICS__/phone/home/css/card.css" />
-	<style>body,html{padding:0}.form-card input[type="submit"] {background:#ffd800;color:#79501f}</style>
+	<style>body,html{padding:0}.form-card input[type="submit"] {background:#ffd800;color:#79501f}
+	.submit-btn{background: #ffd800;color: #79501f;margin: 10px 0;line-height: 40px;border: none;border-radius: 0;display:block;width:100%;text-align:center}
+	</style>
 </head>
 <body>
    <div class="card">
-   		<img class="no-card-1" src="__STATICS__/phone/home/hongbao/double11.jpg"/>
+   		<img class="no-card-1" src="__STATICS__/phone/home/hongbao/double11.jpg" style="width:100%"/>
    </div>
    <div class="container">
 	<form action="{:U('Home/Index/receive_gold_card')}" method="post" name="form" onsubmit="return false;" style="background:#FFFFFF;">
@@ -27,7 +29,7 @@
         </tr>
         <tr>
         	<td>
-        		<input type="submit" value="领取红包" onclick="submitCheck(this)"/>
+				<a onclick="submitCheck(this)" class="submit-btn">领取红包</a>
         	</td>
         </tr>
     </table>            

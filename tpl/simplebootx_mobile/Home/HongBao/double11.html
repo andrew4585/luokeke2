@@ -51,7 +51,7 @@
 	function submitCheck(obj){
 		var serialize = $("form").serialize();
 		$(obj).prop('disabled', true).val("领取中...");
-		$.post("{:U('Home/HongBao/double11')}/openid/{$user.openid}",serialize,function(data){
+		$.post("{:U('Home/HongBao/double11')}/openid/{$openid}",serialize,function(data){
 			layer_alert(data.info,data.url);
 			$(obj).prop('disabled', false).val("领取红包");
 		});

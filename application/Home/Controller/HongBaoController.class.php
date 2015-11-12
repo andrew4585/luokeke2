@@ -44,7 +44,7 @@ class HongBaoController extends HomeBaseController {
                     "tel"    => $_POST['tel']
                 ));
                 if($result){
-                    $this->success("您领取的红包将于11.11日发放，请耐心等待");
+                    $this->success("您领取的红包将于12.1日发放，请耐心等待");
                 }else{
                     $this->error("系统繁忙，请稍后再试");
                 }

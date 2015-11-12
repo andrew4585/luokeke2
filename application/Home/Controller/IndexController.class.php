@@ -84,15 +84,12 @@ class IndexController extends HomeBaseController {
                 
                 if($user){
                     if($user['is_pass']==1){
-                        $info['msg'] ="您的金卡已可以使用，请尝试刷新页面";
+                        $this->layer_alert("您的金卡已可以使用，请尝试刷新页面");
                     }else{
-                        $info['msg'] ="您的会员卡资料审核中，更多请联系客服";
+                        $this->layer_alert("您的会员卡资料审核中，更多请联系客服");
                     }
-                    $info['isback']=true;
-                    $this->assign($info);
-                    $this->display(":alert");
-                    exit;
                 }
+                $this->assign("user",$user);
                 $this->display("/Card/receive_gold_card");
             }
         } catch (\Exception $e) {

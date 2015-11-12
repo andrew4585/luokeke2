@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>银卡会员信息</title>
+    <include file="./statics/phone/home/head.html" />
+    <link rel="stylesheet" type="text/css" href="__STATICS__/phone/home/css/card.css" />
+	<link rel="stylesheet" href="__STATICS__/phone/home/css/mobiscroll.css" />
+	<style>
+		.card{border-bottom:5px solid #82d7d0;height:auto;display:block;}
+		.card img{float:none}
+	</style>
+</head>
+<body>
+	<div class="card">
+   		<img class="no-card-1" src="__STATICS__/phone/home/images/silver_half.jpg"/>
+   </div>
+	<div class="container">
+	<form action="{:U('Home/Index/add_silver_card')}" method="post" name="form" onsubmit="return false;">
+    <table cellpadding="0" cellspacing="0" class="formTable form-card"  style="margin:0">
+    	<tr><td style="padding:0"><h2 id="title_write_card_info"><font><img src="__STATICS__/phone/images/member.png"/></font>填写会员卡资料</h2></td></tr>
+        <tr>
+            <td>新人姓名</td>
+        </tr>
+        <tr>
+            <td><input type="text" name="realname" /></td>
+        </tr>
+        <tr>
+            <td>手机号</td>
+        </tr>
+        <tr>
+            <td><input type="text" name="tel" /></td>
+        </tr>
+        <tr>
+            <td>预计婚期</td>
+        </tr>
+        <tr>
+            <td><input type="text" name="merry_date" /></td>
+        </tr>
+        <tr>
+        	<td>
+        		<a class="submit-btn" onclick="submitCheck(this)" >提交申请</a>
+        	</td>
+        </tr>
+    </table>            
+    </form>
+	</div>
+    
+    <div style="height:55px;">&nbsp;</div>
+   <include file="./statics/phone/home/foot.html" />
+   <script type="text/javascript" src="__STATICS__/phone/home/js/mobiscroll.js" ></script>
+   <script>
+   /*日期初始化*/
+	var currYear = (new Date()).getFullYear();	
+	var opt={};
+	opt.date = {preset : 'date'};
+	opt.datetime = {preset : 'datetime'};
+	opt.time = {preset : 'time'};
+	opt.default = {
+		theme: 'android-ics light', //皮肤样式
+		display: 'modal', //显示方式 
+		mode: 'scroller', //日期选择模式
+		dateFormat: 'yyyy-mm-dd',
+		lang: 'zh',
+		showNow: true,
+		nowText: "今天",
+		startYear: currYear - 50, //开始年份
+		endYear: currYear + 10 //结束年份
+	};
+	$("input[name='merry_date']").mobiscroll($.extend(opt['date'], opt['default']));
+   
+	function submitCheck(obj){
+		var serialize = $("form").serialize();
+		$(obj).prop('disabled', true).val("提交申请中...");
+		$.post("{:U('Home/Index/add_silver_card')}/openid/{$user.openid}",serialize,function(data){
+			if(data.status){
+				$(obj).prop('disabled', false).val("提交申请");
+				location.href="{:U('Home/Index/silver_card')}/isCreate/1/tel/"+$("input[name='tel']").val();
+			}else{
+				layer_alert(data.info,data.url);
+			}
+			
+		});
+		//form.submit();
+	}
+  
+   
+	function layer_alert(msg,url){
+		layer.open({
+		    content: msg,
+		    btn: ['OK'],
+		    shadeClose: false,
+		    yes: function(index){
+		    	if(url){
+		    		location.href=url
+		    	}else{
+			    	layer.close(index);
+		    	}
+		    }
+		});
+	}
+	
+	</script>
+</body>
+</html>

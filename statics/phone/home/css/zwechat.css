@@ -30,9 +30,13 @@ a:hover {
 { background:#fff;  margin:3px; border-radius:8px; box-shadow: 2px 2px 3px #888888;}
 #main div,p
 { line-height:30px; padding:5px;}
-
-
-
+.card{width:100%}
+.card img{float:left}
+.card .no-card-1{width:100%}
+.card .no-card-2{width:68.056%}
+.card .receive-btn{width:31.944%}
+.card .half{width:49.9%}
+.card .cardNumber{height:0;position:absolute;color:#FFFFFF}
 #tools
 { width:100%; background:#f0f0f0; position:fixed; bottom:0; height:50px; border-top:1px #ccc solid; filter:alpha(opacity=90); -moz-opacity:0.9; opacity:0.9;}
 #tools ul li
@@ -157,7 +161,7 @@ a:hover {
 { display:block; font-size:1.1em;}
 .usertools ul li.txtlink
 { width:80%;}
-
+.usertools.sep{margin-top: 5px;border-top: 5px solid #82d7d0;height: 45px;}
 #paper
 { width:100%; background:#fff; height:30px; padding-top:5px; padding-bottom:5px;}
 #paper ul li

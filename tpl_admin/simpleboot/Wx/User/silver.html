@@ -1,0 +1,75 @@
+<admintpl file="header" />
+<style>
+	.recommended,.istop{cursor:pointer;font-size:15px;}
+</style>
+<body class="J_scroll_fixed">
+<div class="wrap J_check_wrap">
+  <form class="well form-search" method="get" action="">
+    <div class="search_type cc mb10">
+      <div class="mb10"> 
+      	<input type="text" class="input length_2" name="gold_name" style="width:200px;" value="{$formget.gold_name}" placeholder="请输入金卡姓名...">
+      	<input type="text" class="input length_2" name="realname" style="width:200px;" value="{$formget.realname}" placeholder="请输入银卡姓名...">
+        <input type="text" class="input length_2" name="tel" style="width:200px;" value="{$formget.tel}" placeholder="请输入手机号...">
+        <input type="submit" class="btn" value="搜索"/>
+        </span>
+      </div>
+    </div>
+  </form>
+  <form class="J_ajaxForm" action="{:U('User/changeGroup')}" method="post">
+    <div class="table_list">
+      <table width="100%" class="table table-hover">
+        <thead>
+	          <tr>
+	            <th>金卡姓名</th>
+	            <th>银卡姓名</th>
+	            <th>电话</th>
+	            <th>预计婚期</th>
+	            <th width="120">订单状态</th>
+	          </tr>
+        </thead>
+        	<foreach name="list" item="vo">
+	        	<tr>
+		            <td>{$vo.gold_name}</td>
+		            <td>{$vo.realname}</td>
+		            <td>{$vo.tel}</td>
+		            <td>{$vo.merry_date}</td>
+		            <td align="center">
+		            	<if condition="$vo.status eq 1">
+			    		<font class="recommended" color="#1DCCAA" title="已订单" data-id="{$vo.id}">√</font>
+				    	<else/>
+				    		<font class="recommended" color="red" title="未订单" data-id="{$vo.id}">×</font>
+				    	</if>
+		            </td>
+	          	</tr>
+          </foreach>
+          </table>
+          <div class="pagination">{$Page}</div>
+    </div>
+  </form>
+</div>
+<script src="__ROOT__/statics/js/common.js"></script>
+<script type="text/javascript" src="__ROOT__/statics/js/content_addtop.js"></script>
+<script>
+$(function(){
+	$(".recommended").click(function(){
+		var obj   = $(this);
+		var id    = obj.attr("data-id");
+		var href  = "{:U('Wx/User/silver_user_status')}";
+		var color = obj.attr("color");
+		var title = color=='red'?"已订单":"未订单";
+		var status= color=='red'?"1":"0";
+		var html  = color=='red'?"√":"×";
+			color = color=='red'?"#1DCCAA":"red";
+		
+		$.post(href,{id:id,status:status},function(data){
+			if(data.status){
+				location.reload(); 
+			}else{
+				alert(data.info);
+			}
+		});
+	});
+});
+</script>
+</body>
+</html>

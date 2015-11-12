@@ -27,9 +27,172 @@ class IndexController extends HomeBaseController {
     //用户中心
     public function user(){
         $this->assign("user",$this->user);
+        $model_wx_user_gold = D("WxUserGold");
+        $user = $model_wx_user_gold->field("id,is_pass,tel")->where("openid='{$this->openid}' and is_pass=1")->find();
+        $gold_card = 1;
+        if($user) $gold_card = 2;
+        //是否有金卡，1：没有，2：有
+        $this->assign("gold_card",$gold_card);
+        $this->assign("tel",$user['tel']);
+        $this->assign("gold_id",$user['id']);
         $this->display(":user");
     }
     
+    //银卡信息
+    public function silver_card(){
+        $where = "";
+        if($_GET['tel']){
+            $where = "tel = '{$_GET['tel']}'";
+        }elseif($_GET['id']){
+            $where = "id = {$_GET['id']}";
+        }else{
+            $this->layer_alert("系统繁忙，请稍后再试或联系客服");
+        }
+        $model_silver = D("WxUserSilver");
+        $info = $model_silver->where($where)->find();
+        if(!$info) $this->layer_alert("银卡会员不存在，请联系客服");
+        $this->assign($info);
+        $this->display("/Card/silver_card");
+    }
+    
+    //领取金卡
+    public function receive_gold_card(){
+        try {
+            $model_wx_user_gold = D("WxUserGold");
+            $user = $model_wx_user_gold->field("id,is_pass")->where("openid='{$this->openid}'")->find();
+            if(IS_POST){        //提交会员卡资料信息
+                if($user) E("您已提交会员资料，如有问题请联系客服");
+                
+                if(empty($_POST['realname']))   E("请填写姓名");
+                if(empty($_POST['tel']))        E("请填写手机号");
+                if(empty($_POST['servername'])) E("请填写客服姓名");
+                if($_POST['type']==1){
+                    if(empty($_POST['zhifubao'])) E("请填写支付宝账号");
+                }else{
+                    if(empty($_POST['bank_card'])) E("请填写银行卡号");
+                    if(empty($_POST['bank_name'])) E("请填写开户行");
+                }
+                $_POST['openid'] = $this->openid;
+                $_POST['add_time'] = date("Y-m-d H:i:s");
+                $result = $model_wx_user_gold->add($_POST);
+                if($result){
+                    $this->success("您的信息已提交，请等待审查");
+                }else{
+                    E("系统繁忙，请稍后再试或联系客服");
+                }
+            }else{
+                
+                if($user){
+                    if($user['is_pass']==1){
+                        $info['msg'] ="您的金卡已可以使用，请尝试刷新页面";
+                    }else{
+                        $info['msg'] ="您的会员卡资料审核中，更多请联系客服";
+                    }
+                    $info['isback']=true;
+                    $this->assign($info);
+                    $this->display(":alert");
+                    exit;
+                }
+                $this->display("/Card/receive_gold_card");
+            }
+        } catch (\Exception $e) {
+            $this->error($e->getMessage());
+        }
+    }
+    
+    //完善金卡会员信息
+    public function gold_card_edit(){
+        try {
+            $model_gold = D("WxUserGold");
+            if(IS_POST){
+                if(empty($_POST['realname']))   E("请填写姓名");
+                if(empty($_POST['tel']))        E("请填写手机号");
+                if(empty($_POST['servername'])) E("请填写客服姓名");
+                if($_POST['type']==1){
+                    if(empty($_POST['zhifubao'])) E("请填写支付宝账号");
+                }else{
+                    if(empty($_POST['bank_card'])) E("请填写银行卡号");
+                    if(empty($_POST['bank_name'])) E("请填写开户行");
+                }
+                $data = array();
+                $result = $model_gold->where("id={$_POST['id']}")->save(array(
+                    "realname"  => $_POST['realname'],
+                    "tel"       => $_POST['tel'],
+                    "servername"=> $_POST['servername'],
+                    "zhifubao"  => $_POST['zhifubao'],
+                    "bank_card" => $_POST['bank_card'],
+                    "bank_name" => $_POST['bank_name']
+                ));
+                if($result){
+                    $this->success("操作成功");
+                }else{
+                    E("操作失败");
+                }
+            }else{
+                if(empty($_GET['gold_id'])){
+                    $this->layer_alert("参数缺失");
+                }
+                $info = $model_gold->where("id={$_GET['gold_id']}")->find();
+                $this->assign("info",$info);
+                $this->display("/Card/gold_card_edit");
+            }
+        } catch (\Exception $e) {
+            $this->error($e->getMessage());
+        }
+    }
+    
+    //添加银卡
+    public function add_silver_card(){
+        try {
+            if(IS_POST){
+                if(empty($_POST['realname'])){
+                    E("请填写新人姓名");
+                }
+                if(empty($_POST['tel'])){
+                    E("请填写电话号码");
+                }
+                if(empty($_POST['merry_date'])){
+                    E("请填写预计婚期");
+                }
+                
+                $model_gold   = D("WxUserGold");
+                $model_silver = D("WxUserSilver");
+                
+                $gold_info = $model_gold->field("id,realname")->where("openid='{$this->openid}'")->find();
+                if(!$gold_info) E("系统繁忙，请稍后再试");
+                $haveTel = $model_silver->where("tel='{$_POST['tel']}'")->find();
+                if($haveTel) E("该电话号码已经注册为银卡会员");
+                $result = $model_silver->add(array(
+                    "gold_id"   => $gold_info['id'],
+                    "gold_name" => $gold_info['realname'],
+                    "realname"  => $_POST['realname'],
+                    "tel"       => $_POST['tel'],
+                    "merry_date"=> $_POST['merry_date'],
+                    "add_time"  => date("Y-m-d H:i:s"),
+                ));
+                if($result){
+                    $model_gold->where("id={$gold_info['id']}")->setInc("silver_number",1);
+                    $this->success("添加成功",U('Index/silver_card'));
+                }else{
+                    E("系统繁忙，请稍后再试");
+                }
+            }else{
+                $this->assign("user",$this->user);
+                $this->display("/Card/add_silver_card");
+            }
+        } catch (\Exception $e) {
+            $this->error($e->getMessage());
+        }
+    }
+    
+    //银卡会员中心
+    public function silver_card_list(){
+        if(empty($_GET['gold_id'])) $this->layer_alert("参数丢失");
+        $model_silver = D("WxUserSilver");
+        $list = $model_silver->where("gold_id={$_GET['gold_id']}")->order("add_time desc")->select();
+        $this->assign("list",$list);
+        $this->display("/Card/silver_card_list");
+    }
     //积分记录
     public function record(){
         $p=I("get.p");

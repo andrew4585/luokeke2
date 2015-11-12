@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>申请会员卡</title>
+    <include file="./statics/phone/home/head.html" />
+    <link rel="stylesheet" type="text/css" href="__STATICS__/phone/home/css/card.css" />
+    <style>
+	html{background:#d3e5e9}
+	</style>
+</head>
+<body class="blue-bg">
+	<div class="container">
+	<form method="post" name="form" onsubmit="return false;">
+    <table cellpadding="0" cellspacing="0" class="formTable form-card">
+    	<tr><td style="padding:0"><h2 id="title_write_card_info"><font><img src="__STATICS__/phone/images/member.png"/></font>填写会员卡资料</h2></td></tr>
+        <tr>
+            <td>姓名</td>
+        </tr>
+        <tr>
+            <td><input type="text" name="realname" value="{$info.realname}"/></td>
+        </tr>
+        <tr>
+            <td>手机号</td>
+        </tr>
+        <tr>
+            <td><input type="text" name="tel" value="{$info.tel}"/></td>
+        </tr>
+        <tr>
+            <td>客服姓名</td>
+        </tr>
+        <tr>
+            <td><input type="text" name="servername" value="{$info.servername}"/></td>
+        </tr>
+        <tr>
+        	<td class="sep">
+        		<label class="radio"><input type="radio" name="type" value="1" <notempty name="info['zhifubao']">checked</notempty>/>支付宝</label>
+        		<label class="radio"><input type="radio" name="type" value="2" <empty name="info['zhifubao']">checked</empty>/>银行卡</label>
+        	</td>
+        </tr>
+        <tr class="zhifubao">
+            <td>支付宝账号</td>
+        </tr>
+        <tr class="zhifubao">
+            <td><input type="text" name="zhifubao" value="{$info.zhifubao}"/></td>
+        </tr>
+        <tr class="bank hidden">
+            <td>银行卡卡号</td>
+        </tr>
+        <tr class="bank hidden">
+            <td><input type="text" name="bank_card" value="{$info.bank_card}"/></td>
+        </tr>
+        <tr class="bank hidden">
+            <td>银行卡开户行</td>
+        </tr>
+        <tr class="bank hidden">
+            <td><input type="text" name="bank_name" value="{$info.bank_name}"/></td>
+        </tr>
+        <tr>
+        	<td>
+        		<a class="submit-btn" onclick="submitCheck(this)">提交申请</a>
+        	</td>
+        </tr>
+    </table> 
+    <input type="hidden" name="id" value="{$info.id}"/>           
+    </form>
+	</div>
+    
+    <div style="height:55px;">&nbsp;</div>
+   <include file="./statics/phone/home/foot.html" />
+   <script>
+   $(function(){
+	   
+	   $("input[name=type]").change(function(){
+		   var val = $(this).val();
+		   zhifuType(val);
+	   });
+	   
+	   var zhifu = $("input[name=type]:checked").val();
+	   zhifuType(zhifu);
+   });
+   
+   function zhifuType(val){
+	   if(val==1){
+		   $(".bank").addClass("hidden");
+		   $(".zhifubao").removeClass("hidden");
+	   }else{
+		   $(".zhifubao").addClass("hidden");
+		   $(".bank").removeClass("hidden");
+	   }
+   }
+   
+	function submitCheck(obj){
+		var serialize = $("form").serialize();
+		$(obj).prop('disabled', true).val("提交申请中...");
+		$.post("{:U('Home/Index/gold_card_edit')}/openid/{$user.openid}",serialize,function(data){
+			layer_alert(data.info,data.url);
+			$(obj).prop('disabled', false).val("提交申请");
+		});
+		//form.submit();
+	}
+   
+	function layer_alert(msg,url){
+		layer.open({
+		    content: msg,
+		    btn: ['OK'],
+		    shadeClose: false,
+		    yes: function(index){
+		    	if(url){
+		    		location.href=url
+		    	}else{
+			    	layer.close(index);
+		    	}
+		    }
+		});
+	}
+	
+	</script>
+</body>
+</html>

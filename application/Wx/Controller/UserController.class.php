@@ -387,5 +387,101 @@ class UserController extends IndexController {
 	        $this->error("修改失败");
 	    }
 	}
+	
+	/**
+	 * 金卡会员列表
+	 */
+	public function gold(){
+	    try {
+	        $where = "1=1";
+	        $parameter = "";
+	        if(!empty($_GET['realname'])){
+	            $where .=" and realname like '%{$_GET['realname']}%'";
+	            $parameter .="/realname/".$_GET['realname'];
+	        }
+	        if(!empty($_GET['tel'])){
+	            $where .=" and tel like '%{$_GET['tel']}%'";
+	            $parameter .="/tel/".$_GET['tel'];
+	        }
+	        $model_gold = D("WxUserGold");
+	        $count = $model_gold->where($where)->count();
+	        $page = $this->page($count, 20);
+	        $list = $model_gold->where($where)->limit($page->firstRow,$page->listRows)->select();
+	        $page->param = $parameter;
+	        $this->assign("Page",$page->show("Admin"));
+	        $this->assign("list",$list);
+	        $this->assign("formget",$_GET);
+	        $this->display();
+	    } catch (\Exception $e) {
+	        $this->error($e->getMessage());
+	    }
+	}
+	
+	/**
+	 * 修改金卡会员审核状态
+	 */
+	public function gold_user_status(){
+	    try {
+	        $model_gold = D("WxUserGold");
+	        $result = $model_gold->where("id={$_POST['id']}")->setField("is_pass",$_POST['status']);
+	        if($result){
+	            $this->success("审核通过");
+	        }else{
+	            $this->error("系统繁忙，请稍后再试");
+	        }
+	    } catch (\Exception $e) {
+	        $this->error($e->getMessage());
+	    }
+	}
+	
+	/**
+	 * 银卡会员列表
+	 */
+	public function silver(){
+	    try {
+	        $where = "1=1";
+	        $parameter = "";
+	        if(!empty($_GET['gold_name'])){
+	            $where .=" and gold_name like '%{$_GET['gold_name']}%'";
+	            $parameter.="/gold_name/".$_GET['gold_name'];
+	        }
+	        if(!empty($_GET['realname'])){
+	            $where .=" and realname like '%{$_GET['realname']}%'";
+	            $parameter .="/realname/".$_GET['realname'];
+	        }
+	        if(!empty($_GET['tel'])){
+	            $where .=" and tel like '%{$_GET['tel']}%'";
+	            $parameter .="/tel/".$_GET['tel'];
+	        }
+	        $model_gold = D("WxUserSilver");
+	        $count = $model_gold->where($where)->count();
+	        $page = $this->page($count, 20);
+	        $list = $model_gold->where($where)->limit($page->firstRow,$page->listRows)->select();
+	        $page->param = $parameter;
+	        $this->assign("Page",$page->show("Admin"));
+	        $this->assign("list",$list);
+	        $this->assign("formget",$_GET);
+	        $this->display();
+	    } catch (\Exception $e) {
+	        $this->error($e->getMessage());
+	    }
+	}
+	
+	/**
+	 * 修改银卡会员审核状态
+	 */
+	public function silver_user_status(){
+	    try {
+	        $model_gold = D("WxUserSilver");
+	        $result = $model_gold->where("id={$_POST['id']}")->setField("status",$_POST['status']);
+	        if($result){
+	            $this->success("修改成功");
+	        }else{
+	            $this->error("系统繁忙，请稍后再试");
+	        }
+	    } catch (\Exception $e) {
+	        $this->error($e->getMessage());
+	    }
+	}
 }
 

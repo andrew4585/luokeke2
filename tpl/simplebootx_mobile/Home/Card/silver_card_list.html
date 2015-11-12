@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>银卡会员信息</title>
+    <include file="./statics/phone/home/head.html" />
+    <link rel="stylesheet" type="text/css" href="__STATICS__/phone/home/css/card.css" />
+	<style>
+		.card{border-bottom:5px solid #82d7d0;height:auto;display:block;}
+		.card img{float:none}
+	</style>
+</head>
+<body>
+	<div class="card">
+   		<img class="no-card-1" src="__STATICS__/phone/home/images/silver_half.jpg"/>
+   </div>
+   <foreach name="list" item="i" key="k">
+   <div class="silver-group">
+		<div class="silver-item">
+	        <ul>
+	            <li>银卡会员<php>{++$k}：</li>
+	            <li>Y{$i.tel}</li>
+	            <li class="silver-li-img"><img src="__STATICS__/phone/images/phone-05.png" onclick="gotoinfo({$i.id})"/></li></ul>
+	    </div>
+	    <div class="silver-item">
+	        <ul>
+	            <li>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</li>
+	            <li>{$i.realname}</li></ul>
+	    </div>
+	    <div class="silver-item">
+	        <ul>
+	            <li>手&nbsp;&nbsp;机&nbsp;&nbsp;号：</li>
+	            <li>{$i.tel}</li></ul>
+	    </div>
+	    <div class="silver-item">
+	        <ul>
+	            <li>订单状态：</li>
+	            <if condition="$i['status'] eq 0">
+	            <li class="txt-default">未订单</li>
+	            <else/>
+	            <li class="txt-success">已订单</li>
+	            </if>
+	            </ul>
+	    </div>
+	</div> 
+   </foreach>
+    <div style="height:55px;">&nbsp;</div>
+   <include file="./statics/phone/home/foot.html" />
+   <script>
+   
+	function submitCheck(){
+		var real_name = $("#txtUserName1").val().trim();
+		var tel		  = $("#Text1").val().trim();
+		var address   = $("#Text2").val().trim()
+		if(real_name==''){
+			layer_alert("请填写姓名");
+			return false;
+		}else if(tel==''){
+			layer_alert("请填写联系电话");
+			return false;
+		}else if(address==''){
+			layer_alert("请填写地址");
+			return false;
+		}
+		
+		var serialize = {id:id,
+						real_name:real_name,
+						post_score:post_score,
+						tel:tel,
+						address:address};
+		$.post("{:U('Home/Index/seal')}/openid/{$user.openid}",serialize,function(data){
+			layer_alert(data.info,data.url);
+		});
+		//form.submit();
+	}
+   
+	function layer_alert(msg,url){
+		layer.open({
+		    content: msg,
+		    btn: ['OK'],
+		    shadeClose: false,
+		    yes: function(index){
+		    	if(url){
+		    		location.href=url
+		    	}else{
+			    	layer.close(index);
+		    	}
+		    }
+		});
+	}
+	
+	function gotoinfo(id){
+		var url = "{:U('Home/Index/silver_card')}/id/"+id;
+		redirect(url);
+	}
+	</script>
+</body>
+</html>

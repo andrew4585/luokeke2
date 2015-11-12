@@ -72,6 +72,18 @@
 .silver-group .silver-item li{float:left;}
 .silver-group .silver-item li:first-child{width:110px;text-align: right;}
 .silver-group .silver-item li.silver-li-img{float:right;height:35px;}
-.silver-li-img img{width:35px;}
+.silver-li-img img{width:17px;}
 .txt-success{color:#82d7d0}
 .txt-default{color:#b7b7b7}
+.submit-btn{
+  font-family: "微软雅黑";
+	display:block;
+  width: 100%;
+  color: #FFFFFF;
+  background: #82d7d0;
+  margin: 10px 0;
+  line-height: 40px;
+	text-align:center;
+  border: none;
+  border-radius: 0;
+}

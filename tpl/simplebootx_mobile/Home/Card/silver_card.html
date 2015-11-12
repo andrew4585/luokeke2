@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>我</title>
+	<include file="./statics/phone/home/head.html" />
+	<style>
+	.cardName{
+		  height: 0;
+		  position: absolute;
+		  color: #FFFFFF;
+	}
+	.usertools ul li {
+		text-align:center;width:100%;font-size:15px;
+	}
+	.share-btn{
+		display:block;
+		width:70%;
+		margin:0 auto;
+		text-align:center;
+		font-size:14px;
+		line-height:35px;
+		background:#82d7d0;
+		color:#FFFFFF;
+	}
+	.shadow {
+	  position: fixed;
+	  left: 0;
+	  top: 0;
+	  width: 100%;
+	  height: 100%;
+	  z-index: 100;
+	  background-size: 100% 100%;
+	}
+	</style>
+</head>
+<body>
+   <div class="card">
+		<img class="no-card-1" src="__STATICS__/phone/home/images/silver-card.jpg"/>
+		<div class="cardNumber"></div>
+		<div class="cardName"></div>
+   </div>
+   <!-- 
+   <table cellpadding="0" cellspacing="0" id="user_table" style="  border-top: #ccc solid 10px;">
+        <tr>
+            <td id="user_img">
+                <img alt="头像" src="{$user.headimgurl}" class="header_img" />
+            </td>
+            <td id="uesr_name">
+                {$user.nick_name}<p>可用积分:<b>{$user.score}</b></p>
+            </td>
+        </tr>
+    </table> -->
+    <notempty name="_GET['isCreate']">
+    <div class="usertools sep">
+        <ul>
+            <li>银卡创建成功</li>
+		</ul>
+    </div>
+    </notempty>
+    <div style="height:40px;clear:both"></div>
+   <div class="share-btn" onclick="share()">分享给推荐的客人</div>
+    <div class="shadow hidden"></div>
+    <include file="./statics/phone/home/foot.html" />
+    <script>
+    var cardNumber = 'Y{$tel}';
+    var cardName = "{$gold_name}";
+    var width 	= $(window).width();
+	$(function(){
+		infoPositoin();
+	});
+	
+	$(window).resize(function(){
+		width 	= $(window).width();
+		infoPositoin();
+	});
+	
+	function infoPositoin(){
+		$(".card .cardNumber").html(cardNumber);
+		var numberWidth = $(".card .cardNumber").width();
+		$(".card .cardNumber").css("top",290*width/750);
+		$(".card .cardNumber").css("left",604*width/750-numberWidth);
+		
+		$(".card .cardName").html(cardName);
+		var nameWidth = $(".card .cardName").width();
+		$(".card .cardName").css("top",290*width/750);
+		$(".card .cardName").css("left",134*width/750);
+	}
+	 function share(){
+     	$(".shadow").removeClass("hidden");
+   		$(".shadow").css("background-image","url(__STATICS__/phone/images/share.png)");
+     }
+	 $(function(){
+     	$(".shadow").click(function(){
+     		$(this).addClass("hidden");
+     	});
+     });
+    </script>
+</body>
+</html>

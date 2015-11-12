@@ -224,7 +224,7 @@ class IndexController extends HomeBaseController {
      */
     protected function getMenuData(){
     	$model_nav	= D("Nav");
-    	$data		= $model_nav->relation(true)->where("cid=$this->siteId and parentid=0")->select();
+    	$data		= $model_nav->relation(true)->where("cid=$this->siteId and parentid=0")->order("listorder")->select();
 		$this->assign("menuData",$data);
 		
  	

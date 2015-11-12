@@ -68,17 +68,20 @@
 	};
 	$("input[name='merry_date']").mobiscroll($.extend(opt['date'], opt['default']));
    
+	var formStatus = 1;
 	function submitCheck(obj){
+		if(formStatus==2) return false;
 		var serialize = $("form").serialize();
-		$(obj).prop('disabled', true).val("提交申请中...");
+		$(obj).html("提交申请中...");
+		formStatus = 2;
 		$.post("{:U('Home/Index/add_silver_card')}/openid/{$user.openid}",serialize,function(data){
+			formStatus=1;
 			if(data.status){
-				$(obj).prop('disabled', false).val("提交申请");
+				$(obj).html("提交申请");
 				location.href="{:U('Home/Index/silver_card')}/isCreate/1/tel/"+$("input[name='tel']").val();
 			}else{
 				layer_alert(data.info,data.url);
 			}
-			
 		});
 		//form.submit();
 	}

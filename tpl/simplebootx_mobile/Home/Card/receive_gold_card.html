@@ -79,13 +79,16 @@
 		   }
 	   });
    });
-   
+   var formStatus = 1;
 	function submitCheck(obj){
+		if(formStatus==2) return false;
 		var serialize = $("form").serialize();
-		$(obj).prop('disabled', true).val("提交申请中...");
+		$(obj).html("提交申请中...");
+		formStatus = 2;
 		$.post("{:U('Home/Index/receive_gold_card')}/openid/{$user.openid}",serialize,function(data){
 			layer_alert(data.info,data.url);
-			$(obj).prop('disabled', false).val("提交申请");
+			formStatus=1;
+			$(obj).html("提交申请");
 		});
 		//form.submit();
 	}

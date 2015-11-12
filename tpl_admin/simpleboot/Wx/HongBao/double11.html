@@ -62,7 +62,7 @@ $(function(){
 		
 		$.post(href,{id:id,status:status},function(data){
 			if(data.status){
-				location.reload(); 
+				//location.reload(); 
 			}else{
 				alert(data.info);
 			}

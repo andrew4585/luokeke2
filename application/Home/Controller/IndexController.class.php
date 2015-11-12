@@ -89,7 +89,7 @@ class IndexController extends HomeBaseController {
                         $this->layer_alert("您的会员卡资料审核中，更多请联系客服");
                     }
                 }
-                $this->assign("user",$user);
+                $this->assign("user",$this->user);
                 $this->display("/Card/receive_gold_card");
             }
         } catch (\Exception $e) {

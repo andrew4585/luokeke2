@@ -62,7 +62,9 @@ $(function(){
 		
 		$.post(href,{id:id,status:status},function(data){
 			if(data.status){
-				//location.reload(); 
+				obj.attr("color",color);
+				obj.attr("title",title);
+				obj.html(html);
 			}else{
 				alert(data.info);
 			}

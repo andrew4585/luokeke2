@@ -78,7 +78,7 @@ class IndexController extends HomeBaseController {
         }
         $model_silver = D("WxUserSilver");
         $info = $model_silver->where($where)->find();
-        if(!$info) $this->layer_alert("银卡会员不存在，请联系客服");
+        if(!$info) $this->layer_alert("银卡会员不存在，请联系客服",false,U("Home/Index/gold"));
         $this->assign($info);
         $this->display("/Card/silver_card");
     }
@@ -112,9 +112,9 @@ class IndexController extends HomeBaseController {
                 
                 if($user){
                     if($user['is_pass']==1){
-                        $this->layer_alert("您的金卡已可以使用，请尝试刷新页面");
+                        $this->layer_alert("您的金卡已可以使用，请尝试刷新页面",false,U("Home/Index/gold"));
                     }else{
-                        $this->layer_alert("您的会员卡资料审核中，更多请联系客服");
+                        $this->layer_alert("您的会员卡资料审核中，更多请联系客服",false,U("Home/Index/gold"));
                     }
                 }
                 $this->assign("user",$this->user);
@@ -155,7 +155,7 @@ class IndexController extends HomeBaseController {
                 }
             }else{
                 if(empty($_GET['gold_id'])){
-                    $this->layer_alert("参数缺失");
+                    $this->layer_alert("参数缺失",false,U("Home/Index/gold"));
                 }
                 $info = $model_gold->where("id={$_GET['gold_id']}")->find();
                 $this->assign("info",$info);
@@ -212,7 +212,7 @@ class IndexController extends HomeBaseController {
     
     //银卡会员中心
     public function silver_card_list(){
-        if(empty($_GET['gold_id'])) $this->layer_alert("参数丢失");
+        if(empty($_GET['gold_id'])) $this->layer_alert("参数丢失",false,U("Home/Index/gold"));
         $model_silver = D("WxUserSilver");
         $list = $model_silver->where("gold_id={$_GET['gold_id']}")->order("add_time desc")->select();
         $this->assign("list",$list);

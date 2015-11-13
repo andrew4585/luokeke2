@@ -398,7 +398,6 @@ class IndexController extends HomeBaseController {
                 $this->user['uid']  = D("Users")->where("openid='$this->openid'")->getField("id");
                 $fullUrl  = 'http://'.$_SERVER['SERVER_NAME'].':'.$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
                 list($a,$b) = explode("?", $fullUrl);
-                header("location:".$a);
             }
         } catch (\Exception $e) {
             $this->layer_alert($e->getMessage());

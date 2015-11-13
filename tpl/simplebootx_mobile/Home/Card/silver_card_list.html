@@ -3,6 +3,7 @@
 <head>
     <title>银卡会员列表</title>
     <include file="./statics/phone/home/head.html" />
+    <include file="./statics/phone/home/user_foot.html" />
     <link rel="stylesheet" type="text/css" href="__STATICS__/phone/home/css/card.css" />
 	<style>
 		.card{border-bottom:5px solid #82d7d0;height:auto;display:block;}
@@ -44,7 +45,6 @@
 	</div> 
    </foreach>
     <div style="height:55px;">&nbsp;</div>
-    <include file="./statics/phone/home/user_foot.html" />
    <script>
    
 	function submitCheck(){
@@ -73,21 +73,6 @@
 		//form.submit();
 	}
    
-	function layer_alert(msg,url){
-		layer.open({
-		    content: msg,
-		    btn: ['OK'],
-		    shadeClose: false,
-		    yes: function(index){
-		    	if(url){
-		    		location.href=url
-		    	}else{
-			    	layer.close(index);
-		    	}
-		    }
-		});
-	}
-	
 	function gotoinfo(id){
 		var url = "{:U('Home/Index/silver_card')}/id/"+id;
 		redirect(url);

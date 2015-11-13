@@ -3,6 +3,7 @@
 <head>
     <title>申请会员卡</title>
     <include file="./statics/phone/home/head.html" />
+    <include file="./statics/phone/home/user_foot.html" />
     <link rel="stylesheet" type="text/css" href="__STATICS__/phone/home/css/card.css" />
     <style>
 	html{background:#d3e5e9}
@@ -65,7 +66,6 @@
 	</div>
     
     <div style="height:55px;">&nbsp;</div>
-    <include file="./statics/phone/home/user_foot.html" />
    <script>
    $(function(){
 	   $("input[name=type]").change(function(){
@@ -92,22 +92,6 @@
 		});
 		//form.submit();
 	}
-   
-	function layer_alert(msg,url){
-		layer.open({
-		    content: msg,
-		    btn: ['OK'],
-		    shadeClose: false,
-		    yes: function(index){
-		    	if(url){
-		    		location.href=url
-		    	}else{
-			    	layer.close(index);
-		    	}
-		    }
-		});
-	}
-	
 	</script>
 </body>
 </html>

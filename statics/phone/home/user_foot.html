@@ -1,0 +1,39 @@
+<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script>
+wx.config({
+ //debug: true,
+  appId: '{$signPackage.appId}',
+  timestamp: {$signPackage.timestamp},
+  nonceStr: '{$signPackage.nonceStr}',
+  signature: '{$signPackage.signature}',
+  jsApiList: [
+      // 所有要调用的 API 都要加到这个列表中
+	  'onMenuShareTimeline',
+	  'onMenuShareAppMessage',
+	  'hideOptionMenu'
+  ]
+});
+
+wx.ready(function () {
+	wx.checkJsApi({
+		jsApiList: ['onMenuShareTimeline'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
+		success: function(res) {
+			if(res.checkResult.onMenuShareTimeline==false){
+				layer_alert("您的微信客户端版本过低，为了不影响您的使用，请更新您的微信客户端。\n更新方式：我->设置->关于微信->检查新版本");
+			}
+		}
+	}),
+	wx.hideOptionMenu()
+});
+
+
+function layer_alert(msg){
+	layer.open({
+	    content: msg,
+	    btn: ['OK'],
+	    shadeClose: false,
+	    yes: function(index){layer.close(index);}
+	});
+}
+</script>
+			 

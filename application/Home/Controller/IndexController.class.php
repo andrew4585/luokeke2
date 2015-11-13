@@ -9,12 +9,21 @@ class IndexController extends HomeBaseController {
     public $openid;
     public $user;
     
+    //微信js类
+    public $jssdk;
+    //微信帮助类
+    public $thinkWechat;
+    
+    protected $appid;
+    
+    protected $appsecret;
+    
     public function __construct(){
         parent::__construct();
         header("Content-Type: text/html; charset=utf-8");
         $this->setModelConfig();
         $this->setModelUser();
-//         $this->openid = 'ox1QntxmnsVy0UYOxIDOGUfPCgqE';
+        //$this->openid = 'ox1QntxmnsVy0UYOxIDOGUfPCgqE';
         if($_GET['openid']&&IS_AJAX){
             $this->openid       = $_GET['openid'];
             $this->user			= $this->model_user->where("openid='$this->openid' and is_subscribe=1")->find();
@@ -22,6 +31,11 @@ class IndexController extends HomeBaseController {
             $this->user['uid']  = D("Users")->where("openid='$this->openid'")->getField("id");
         }else{
             $this->Oauth();
+            //初始化jssdk信息
+            import("Think.WX.jssdk");
+            $this->jssdk= new \JSSDK($this->getAppid(), $this->getAppsecret());
+            $signPackage = $this->jssdk->GetSignPackage();
+            $this->assign("signPackage",$signPackage);
         }
     }
     //用户中心
@@ -408,6 +422,50 @@ class IndexController extends HomeBaseController {
         if(!$this->model_user){
             $this->model_user = D("Wx/WxUser");
         }
+    }
+    
+    
+    /**
+     * 获取微信js类
+     */
+    function getJssdk(){
+        if(!$this->jssdk){
+            import("Think.WX.jssdk");
+            $this->jssdk= new \JSSDK($this->getAppid(), $this->getAppsecret());
+        }
+    }
+    
+    /**
+     * 获取微信帮助类
+     */
+    function getThinkWechat(){
+        if(!$this->thinkWechat){
+            import("Think.WX.ThinkWechat");
+            $this->thinkWechat = new \ThinkWechat($this->getAppid(),$this->getAppsecret());
+        }
+    }
+    
+    function getAppid(){
+        if(!$this->appid)
+            $this->appid = $this->getConfigValue("appid");
+        return $this->appid;
+    }
+    
+    function getAppsecret(){
+        if(!$this->appsecret)
+            $this->appsecret = $this->getConfigValue("appsecret");
+        return $this->appsecret;
+    }
+    
+    /**
+     * 获取配置信息
+     * @param string $key 键
+     */
+    function getConfigValue($key){
+        if(!$this->model_config)
+            $this->setModelConfig();
+    
+        return $this->model_config->val($key);
     }
     
     public function __destruct(){

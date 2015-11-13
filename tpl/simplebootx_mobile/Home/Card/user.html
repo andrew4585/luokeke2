@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>金卡会员</title>
+	<include file="./statics/phone/home/head.html" />
+</head>
+<body>
+   <div class="card">
+   		<if condition="$gold_card eq 1">
+	   		<img class="no-card-1" src="__STATICS__/phone/home/images/card1.png"/>
+	   		<img class="no-card-2" src="__STATICS__/phone/home/images/card2.png"/>
+	   		<img class="receive-btn" src="__STATICS__/phone/home/images/receive-btn.png" onclick="redirect('{:U('Index/receive_gold_card')}')"/>
+   		<elseif condition="$gold_card eq 2" />
+   			<img class="no-card-1" src="__STATICS__/phone/home/images/card3.jpg"/>
+   			<img class="half" src="__STATICS__/phone/home/images/create-silver-btn.jpg" onclick="redirect('{:U('Index/add_silver_card')}')"/>
+   			<img class="half" src="__STATICS__/phone/home/images/silver-info.png" onclick="redirect('{:U('Index/silver_card_list')}/gold_id/{$gold_id}')"/>
+   			<div class="cardNumber"></div>
+   		</if>
+   </div>
+   <!-- 
+   <table cellpadding="0" cellspacing="0" id="user_table" style="  border-top: #ccc solid 10px;">
+        <tr>
+            <td id="user_img">
+                <img alt="头像" src="{$user.headimgurl}" class="header_img" />
+            </td>
+            <td id="uesr_name">
+                {$user.nick_name}<p>可用积分:<b>{$user.score}</b></p>
+            </td>
+        </tr>
+    </table> -->
+    <if condition="$gold_card eq 2">
+    <div class="usertools">
+        <ul>
+            <li><a href="{:U('Home/Index/gold_card_edit')}">
+                <img src="__STATICS__/phone/home/images/edit.png" /></a></li>
+            <li class="txtlink"><a href="{:U('Home/Index/gold_card_edit')}/gold_id/{$gold_id}">完善会员卡资料</a></li></ul>
+    </div>
+    </if>
+    <div class="usertools sep">
+        <ul>
+            <li><a href="{:U('Home/Index/exchange')}">
+                <img src="__STATICS__/phone/home/images/tel.png" /></a></li>
+            <li class="txtlink"><a href="tel:4000-999-136">4000-999-136</a></li></ul>
+    </div>
+    <div class="usertools">
+        <ul>
+            <li><a href="{:U('Home/Index/exchange')}">
+                <img src="__STATICS__/phone/home/images/position.png" /></a></li>
+            <li class="txtlink"><a href="#">大连市中山区友好路117号</a></li></ul>
+    </div>
+    <script>
+    var cardNumber = '<empty name="tel"><else/>G{$tel}</empty>';
+    var width 	= $(window).width();
+	$(function(){
+		cardNumberPositoin();
+	});
+	
+	$(window).resize(function(){
+		width 	= $(window).width();
+		cardNumberPositoin();
+	});
+	
+	function cardNumberPositoin(){
+		$(".card .cardNumber").html(cardNumber);
+		var numberWidth = $(".card .cardNumber").width();
+		$(".card .cardNumber").css("top",290*width/750);
+		$(".card .cardNumber").css("left",604*width/750-numberWidth);
+		
+	}
+    </script>
+</body>
+</html>

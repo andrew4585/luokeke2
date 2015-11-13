@@ -38,6 +38,20 @@ class IndexController extends HomeBaseController {
         $this->display(":user");
     }
     
+    //金卡会员
+    public function gold(){
+        $this->assign("user",$this->user);
+        $model_wx_user_gold = D("WxUserGold");
+        $user = $model_wx_user_gold->field("id,is_pass,tel")->where("openid='{$this->openid}' and is_pass=1")->find();
+        $gold_card = 1;
+        if($user) $gold_card = 2;
+        //是否有金卡，1：没有，2：有
+        $this->assign("gold_card",$gold_card);
+        $this->assign("tel",$user['tel']);
+        $this->assign("gold_id",$user['id']);
+        $this->display("/Card/user");
+    }
+    
     //银卡信息
     public function silver_card(){
         $where = "";

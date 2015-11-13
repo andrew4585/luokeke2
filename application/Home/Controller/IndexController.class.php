@@ -365,7 +365,12 @@ class IndexController extends HomeBaseController {
         $harr = json_decode ( $httpstr, true );
     
         if(empty($harr['access_token'])){
-            if ($i>5) E("获取access_token失败");
+            if ($i>5){
+                $fullurl = 'http://'.$_SERVER['SERVER_NAME'].':'.$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
+                list($a,$b) = explode("?", $fullurl);
+                header("location:".$a);exit;
+                E("获取access_token失败");
+            }
             $i++;
             $this->access_token($appid,$code,$i);
         }

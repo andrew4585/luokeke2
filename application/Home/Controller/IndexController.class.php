@@ -292,7 +292,7 @@ class IndexController extends HomeBaseController {
         if(empty($goods_id))$this->layer_alert("数据丢失");
         $goods=$model_goods->field("id,post_title,post_score,post_price")->where("id=$goods_id")->find();
         if(!$goods)$this->layer_alert("获取商品信息失败");
-        if($this->user['score']<$goods['post_score'])$this->layer_alert("您的积分不足，无法兑换该商品");
+        if($this->user['score']<$goods['post_score'])$this->layer_alert("您的积分不足，无法兑换该商品",false,U('Home/Index/exchangeview')."/goods_id/".$goods_id);
         $this->assign("goods",$goods);
         $this->assign("user",$this->user);
         $this->display(":exchange2");

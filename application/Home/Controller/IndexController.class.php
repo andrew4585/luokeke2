@@ -377,7 +377,7 @@ class IndexController extends HomeBaseController {
      */
     public function Oauth(){
         try {
-            $this->user = cookie("weixin_user");
+            $this->user = session("weixin_user");
             
             if(empty($this->user)){
                 $appid = $this->model_config->val("appid");
@@ -471,6 +471,6 @@ class IndexController extends HomeBaseController {
     
     public function __destruct(){
         if(!$this->user)   
-            cookie("weixin_user",$this->user);
+            session("weixin_user",$this->user);
     }
 }

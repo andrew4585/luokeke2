@@ -404,6 +404,7 @@ class UserController extends IndexController {
 	            $parameter .="/tel/".$_GET['tel'];
 	        }
 	        $model_gold = D("WxUserGold");
+	        $goldTotal = $model_gold->where("is_pass=1")->count();
 	        $count = $model_gold->where($where)->count();
 	        $page = $this->page($count, 20);
 	        $list = $model_gold->where($where)->limit($page->firstRow,$page->listRows)->select();
@@ -411,6 +412,8 @@ class UserController extends IndexController {
 	        $this->assign("Page",$page->show("Admin"));
 	        $this->assign("list",$list);
 	        $this->assign("formget",$_GET);
+	        $goldTotal = empty($goldTotal)?0:$goldTotal;
+	        $this->assign("goldTotal",$goldTotal);
 	        $this->display();
 	    } catch (\Exception $e) {
 	        $this->error($e->getMessage());

@@ -396,8 +396,7 @@ class IndexController extends HomeBaseController {
                 if(!$this->user)	E("请关注我们");
                 $this->user['score']= D("Users")->where("openid='$this->openid'")->getField("score");
                 $this->user['uid']  = D("Users")->where("openid='$this->openid'")->getField("id");
-                $fullUrl  = 'http://'.$_SERVER['SERVER_NAME'].':'.$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
-                list($a,$b) = explode("?", $fullUrl);
+                
             }
         } catch (\Exception $e) {
             $this->layer_alert($e->getMessage());
@@ -472,6 +471,6 @@ class IndexController extends HomeBaseController {
     
     public function __destruct(){
         if(!$this->user)   
-            cookie("weixin_user");
+            cookie("weixin_user",$this->user);
     }
 }

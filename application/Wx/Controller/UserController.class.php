@@ -483,5 +483,26 @@ class UserController extends IndexController {
 	        $this->error($e->getMessage());
 	    }
 	}
+	
+	/**
+	 * 修改银卡会员返现状态
+	 */
+	public function fanxian_status(){
+	    try {
+	        $model_silver = D("WxUserSilver");
+	        $result = $model_silver->where("id={$_POST['id']}")->setField("fanxian_status",$_POST['status']);
+	        if($result){
+	            $model_gold = D("WxUserGold");
+	            $gold_id = $model_silver->where("id={$_POST['id']}")->getField("gold_id");
+	            $handle = $_POST['status']==1?"setInc":"setDec";
+	            $model_gold->where("id=$gold_id")->$handle("fanxian_number",1);
+	            $this->success("修改成功");
+	        }else{
+	            $this->error("系统繁忙，请稍后再试");
+	        }
+	    } catch (\Exception $e) {
+	        $this->error($e->getMessage());
+	    }
+	}
 }
 

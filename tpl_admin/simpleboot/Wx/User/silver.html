@@ -25,6 +25,7 @@
 	            <th>电话</th>
 	            <th>预计婚期</th>
 	            <th width="120">订单状态</th>
+	            <th width="120">返现状态</th>
 	          </tr>
         </thead>
         	<foreach name="list" item="vo">
@@ -38,6 +39,13 @@
 			    		<font class="recommended" color="#1DCCAA" title="已订单" data-id="{$vo.id}">√</font>
 				    	<else/>
 				    		<font class="recommended" color="red" title="未订单" data-id="{$vo.id}">×</font>
+				    	</if>
+		            </td>
+		            <td align="center">
+		            	<if condition="$vo.fanxian_status eq 1">
+			    		<font class="fanxian" color="#1DCCAA" title="已返现" data-id="{$vo.id}">√</font>
+				    	<else/>
+				    		<font class="fanxian" color="red" title="未返现" data-id="{$vo.id}">×</font>
 				    	</if>
 		            </td>
 	          	</tr>
@@ -57,6 +65,25 @@ $(function(){
 		var href  = "{:U('Wx/User/silver_user_status')}";
 		var color = obj.attr("color");
 		var title = color=='red'?"已订单":"未订单";
+		var status= color=='red'?"1":"0";
+		var html  = color=='red'?"√":"×";
+			color = color=='red'?"#1DCCAA":"red";
+		
+		$.post(href,{id:id,status:status},function(data){
+			if(data.status){
+				location.reload(); 
+			}else{
+				alert(data.info);
+			}
+		});
+	});
+	
+	$(".fanxian").click(function(){
+		var obj   = $(this);
+		var id    = obj.attr("data-id");
+		var href  = "{:U('Wx/User/fanxian_status')}";
+		var color = obj.attr("color");
+		var title = color=='red'?"已返现":"未返现";
 		var status= color=='red'?"1":"0";
 		var html  = color=='red'?"√":"×";
 			color = color=='red'?"#1DCCAA":"red";

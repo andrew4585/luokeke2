@@ -26,6 +26,7 @@
 	            <th>银行卡</th>
 	            <th>银行卡开户行</th>
 	            <th>银卡数量</th>
+	            <th>银卡返现数量</th>
 	            <th>申请时间</th>
 	            <th width="120">审核状态</th>
 	          </tr>
@@ -39,6 +40,7 @@
 		            <td>{$vo.bank_card}</td>
 		            <td>{$vo.bank_name}</td>
 		            <td>{$vo.silver_number}</td>
+		            <td>{$vo.fanxian_number}</td>
 		            <td>{$vo.add_time}</td>
 		            <td align="center">
 		            	<if condition="$vo.is_pass eq 1">

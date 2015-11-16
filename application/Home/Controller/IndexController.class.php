@@ -149,7 +149,7 @@ class IndexController extends HomeBaseController {
                     "bank_name" => $_POST['bank_name']
                 ));
                 if($result){
-                    $this->success("操作成功");
+                    $this->success("编辑成功");
                 }else{
                     E("操作失败");
                 }

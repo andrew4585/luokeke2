@@ -24,6 +24,7 @@
 	            <th>银卡姓名</th>
 	            <th>电话</th>
 	            <th>预计婚期</th>
+	            <th>创建时间</th>
 	            <th width="120">订单状态</th>
 	            <th width="120">返现状态</th>
 	          </tr>
@@ -34,6 +35,7 @@
 		            <td>{$vo.realname}</td>
 		            <td>{$vo.tel}</td>
 		            <td>{$vo.merry_date}</td>
+		            <td>{$vo.add_time}</td>
 		            <td align="center">
 		            	<if condition="$vo.status eq 1">
 			    		<font class="recommended" color="#1DCCAA" title="已订单" data-id="{$vo.id}">√</font>

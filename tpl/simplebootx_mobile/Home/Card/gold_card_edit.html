@@ -7,6 +7,8 @@
     <link rel="stylesheet" type="text/css" href="__STATICS__/phone/home/css/card.css" />
     <style>
 	html{background:#d3e5e9}
+	.attn{font-size:12px;}
+	.red{color:red;}
 	</style>
 </head>
 <body class="blue-bg">
@@ -39,13 +41,13 @@
         	</td>
         </tr>
         <tr class="zhifubao">
-            <td>支付宝账号</td>
+            <td>支付宝账号<br/><span class="attn red">*</span><span class="attn">支付宝账号用户返现，请认真填写</span></td>
         </tr>
         <tr class="zhifubao">
             <td><input type="text" name="zhifubao" value="{$info.zhifubao}"/></td>
         </tr>
         <tr class="bank hidden">
-            <td>银行卡卡号</td>
+            <td>银行卡卡号<br/><span class="attn red">*</span><span class="attn">卡号用于返现，请与姓名一致，请认真填写</span></td>
         </tr>
         <tr class="bank hidden">
             <td><input type="text" name="bank_card" value="{$info.bank_card}"/></td>

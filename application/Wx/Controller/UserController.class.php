@@ -407,7 +407,7 @@ class UserController extends IndexController {
 	        $goldTotal = $model_gold->where("is_pass=1")->count();
 	        $count = $model_gold->where($where)->count();
 	        $page = $this->page($count, 20);
-	        $list = $model_gold->where($where)->limit($page->firstRow,$page->listRows)->select();
+	        $list = $model_gold->where($where)->order("add_time desc")->limit($page->firstRow,$page->listRows)->select();
 	        $page->param = $parameter;
 	        $this->assign("Page",$page->show("Admin"));
 	        $this->assign("list",$list);
@@ -459,7 +459,7 @@ class UserController extends IndexController {
 	        $model_gold = D("WxUserSilver");
 	        $count = $model_gold->where($where)->count();
 	        $page = $this->page($count, 20);
-	        $list = $model_gold->where($where)->limit($page->firstRow,$page->listRows)->select();
+	        $list = $model_gold->where($where)->order("add_time desc")->limit($page->firstRow,$page->listRows)->select();
 	        $page->param = $parameter;
 	        $this->assign("Page",$page->show("Admin"));
 	        $this->assign("list",$list);

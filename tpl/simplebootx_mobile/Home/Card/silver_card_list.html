@@ -8,6 +8,7 @@
 	<style>
 		.card{border-bottom:5px solid #82d7d0;height:auto;display:block;}
 		.card img{float:none}
+		.silver-li-img a{display:block;background:#92CCDC;color:#FFFFFF;font-size:12px;line-height:25px;padding:0 10px;margin-top:5px;border-radius:4px;}
 	</style>
 </head>
 <body>
@@ -20,7 +21,7 @@
 	        <ul>
 	            <li>银卡会员<php>{++$k}：</li>
 	            <li>Y{$i.tel}</li>
-	            <li class="silver-li-img"><img src="__STATICS__/phone/images/phone-05.png" onclick="gotoinfo({$i.id})"/></li></ul>
+	            <li class="silver-li-img"><a href="#" onclick="gotoinfo({$i.id})">分享给好友</a></li></ul>
 	    </div>
 	    <div class="silver-item">
 	        <ul>
@@ -32,16 +33,14 @@
 	            <li>手&nbsp;&nbsp;机&nbsp;&nbsp;号：</li>
 	            <li>{$i.tel}</li></ul>
 	    </div>
+	    <if condition="$i['status'] neq 0">
 	    <div class="silver-item">
 	        <ul>
 	            <li>订单状态：</li>
-	            <if condition="$i['status'] eq 0">
-	            <li class="txt-default">未订单</li>
-	            <else/>
 	            <li class="txt-success">已订单</li>
-	            </if>
-	            </ul>
+            </ul>
 	    </div>
+	    </if>
 	</div> 
    </foreach>
     <div style="height:55px;">&nbsp;</div>

@@ -16,6 +16,9 @@ class DressController extends IndexController {
 	 * 首页
 	 */
 	public function index(){
+	    if(sp_is_mobile()){
+	        header("location:".U("Dress/lists"));exit;
+	    }
 		//banner
 		$this->assign("home_head",$this->_getAd("banner_dress"));
 		//最新广告推荐

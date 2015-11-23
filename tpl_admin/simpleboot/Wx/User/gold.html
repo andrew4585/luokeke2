@@ -7,7 +7,8 @@
   <form class="well form-search" method="get" action="">
     <div class="search_type cc mb10">
       <div class="mb10"> 
-      	<input type="text" class="input length_2" name="realname" style="width:200px;" value="{$formget.realname}" placeholder="请输入姓名...">
+      	<input type="text" class="input length_2" name="realname" style="width:200px;" value="{$formget.realname}" placeholder="请输入新郎姓名...">
+      	<input type="text" class="input length_2" name="bride" style="width:200px;" value="{$formget.bride}" placeholder="请输入新娘姓名...">
         <input type="text" class="input length_2" name="tel" style="width:200px;" value="{$formget.tel}" placeholder="请输入手机号...">
         <input type="submit" class="btn" value="搜索"/>
         <div style="float:right;line-height:35px;font-size:15px">金卡总数（审核通过）:<font style="font-weight:bold;font-size:20px;color:#1abc9c">{$goldTotal}</font></div>
@@ -20,7 +21,8 @@
         <thead>
 	          <tr>
 	            <th>手机号</th>
-	            <th>姓名</th>
+	            <th>新郎姓名</th>
+	            <th>新娘姓名</th>
 	            <th>客服姓名</th>
 	            <th>支付宝</th>
 	            <th>银行卡</th>
@@ -35,6 +37,7 @@
 	        	<tr>
 		            <td>{$vo.tel}</td>
 		            <td>{$vo.realname}</td>
+		            <td>{$vo.bride}</td>
 		            <td>{$vo.servername}</td>
 		            <td>{$vo.zhifubao}</td>
 		            <td>{$vo.bank_card}</td>

@@ -399,6 +399,10 @@ class UserController extends IndexController {
 	            $where .=" and realname like '%{$_GET['realname']}%'";
 	            $parameter .="/realname/".$_GET['realname'];
 	        }
+	        if(!empty($_GET['bride'])){
+	            $where .=" and bride like '%{$_GET['bride']}%'";
+	            $parameter .="/bride/".$_GET['bride'];
+	        }
 	        if(!empty($_GET['tel'])){
 	            $where .=" and tel like '%{$_GET['tel']}%'";
 	            $parameter .="/tel/".$_GET['tel'];

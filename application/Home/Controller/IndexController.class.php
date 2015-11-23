@@ -91,7 +91,8 @@ class IndexController extends HomeBaseController {
             if(IS_POST){        //提交会员卡资料信息
                 if($user) E("您已提交会员资料，如有问题请联系客服");
                 
-                if(empty($_POST['realname']))   E("请填写姓名");
+                if(empty($_POST['realname']))   E("请填写新郎姓名");
+                if(empty($_POST['bride']))      E("请填写新娘姓名");
                 if(empty($_POST['tel']))        E("请填写手机号");
                 if(empty($_POST['servername'])) E("请填写客服姓名");
                 if($_POST['type']==1){
@@ -130,7 +131,8 @@ class IndexController extends HomeBaseController {
         try {
             $model_gold = D("WxUserGold");
             if(IS_POST){
-                if(empty($_POST['realname']))   E("请填写姓名");
+                if(empty($_POST['realname']))   E("请填写新郎姓名");
+                if(empty($_POST['bride']))      E("请填写新娘姓名");
                 if(empty($_POST['tel']))        E("请填写手机号");
                 if(empty($_POST['servername'])) E("请填写客服姓名");
                 if($_POST['type']==1){
@@ -142,6 +144,7 @@ class IndexController extends HomeBaseController {
                 $data = array();
                 $result = $model_gold->where("id={$_POST['id']}")->save(array(
                     "realname"  => $_POST['realname'],
+                    "bride"     => $_POST['bride'],
                     "tel"       => $_POST['tel'],
                     "servername"=> $_POST['servername'],
                     "zhifubao"  => $_POST['zhifubao'],

@@ -23,14 +23,13 @@
 			});
 			banner_init();
 		});
-		banner_init();
 		function banner_init(){
-			//var width = $(window).width();
-			//var height		 = width/1920*750;
-			$(".flexslider").css("width","100%");
-			//$(".flexslider").css("height",height);
+			var width = $(window).width();
+			var height		 = width/1920*750;
+			//$(".flexslider").css("width","100%");
+			$(".flexslider").css("height",height);
 			$(".flexslider img").css("width","100%");
-			var height = $(".flexslider img").height();
+			//var height = $(".flexslider img").height();
 			$(".flexslider").css("height",height);
 			//alert(width);
 		}

@@ -14,11 +14,14 @@
 	<!--flexslider end-->
 	<script type="text/javascript" src="__STATICS__js/slider.js"></script>
 	<script type="text/javascript">
-		$('#demo01').flexslider({
-			animation: "slide",
-			direction: "horizontal",
-			slideshowSpeed:6000,
-			easing: "swing"
+		$(function() {
+			$('#demo01').flexslider({
+				animation: "slide",
+				direction: "horizontal",
+				slideshowSpeed:6000,
+				easing: "swing"
+			});
+			
 		});
 		banner_init();
 		function banner_init(){

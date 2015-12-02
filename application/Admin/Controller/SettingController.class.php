@@ -89,7 +89,7 @@ class SettingController extends AdminbaseController{
 			if(empty($_POST['password'])){
 				$this->error("新密码不能为空！");
 			}
-			$user_obj = D("Common/Users");
+			$user_obj = D("AdminUser");
 			$uid=get_current_admin_id();
 			$admin=$user_obj->where(array("id"=>$uid))->find();
 			$old_password=$_POST['old_password'];
@@ -103,7 +103,8 @@ class SettingController extends AdminbaseController{
 						$data['id']=$uid;
 						$r=$user_obj->save($data);
 						if ($r!==false) {
-							$this->success("修改成功！");
+						    session('ADMIN_ID',null);
+							$this->success("修改成功！",U('Admin/Public/login'));
 						} else {
 							$this->error("修改失败！");
 						}

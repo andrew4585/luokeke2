@@ -25,7 +25,11 @@
 		});
 		function banner_init(){
 			var width = $(window).width();
+			<if condition="$index eq 'index'">
 			var height		 = width/1920*750;
+			<else/>
+			var height		 = width/1920*600;
+			</if>
 			//$(".flexslider").css("width","100%");
 			$(".flexslider").css("height",height);
 			$(".flexslider img").css("width","100%");
